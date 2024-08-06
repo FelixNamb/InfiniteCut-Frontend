@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import ConnectionScreen from "./screens/ConnectionScreen";
 import DatePicker from "./screens/DatePicker";
 import SignUpScreen from "./screens/SignUpScreen";

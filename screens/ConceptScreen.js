@@ -1,4 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, View, Text } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function ConceptScreen() {
   return (
@@ -9,11 +11,9 @@ export default function ConceptScreen() {
         <Text style={styles.text}>Beau et soigné quand vous voulez</Text>
         <Text style={styles.soustext}>
           Réservez vos séances facilement et gérez vos rendez-vous en toute
-          tranquillité.
-       
-        Faites des économies, chaque mois
-
-        Profitez d'abonnements avantageux pour des services de qualité</Text>
+          tranquillité. {"\n"}
+         Faites des économies, chaque mois {"\n"}
+       Profitez d'abonnements avantageux pour des services de qualité</Text>
         <MaterialCommunityIcons
           name="chevron-double-down"
           size={50}
