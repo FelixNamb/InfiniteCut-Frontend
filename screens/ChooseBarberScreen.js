@@ -4,7 +4,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import Header from "../components/Header";
 
-export default function ChooseBarberScreen() {
+export default function ChooseBarberScreen({navigation}) {
     const [lieu, setLieu] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -39,7 +39,7 @@ export default function ChooseBarberScreen() {
                         <Octicons name="heart-fill" size={30} color={isLiked ? "#C6AC8F" : "#22333B"} onPress={() => setIsLiked(!isLiked)} />
                     </View>
                 </ScrollView>
-                <MaterialCommunityIcons name="chevron-double-down" size={30} color="#C6AC8F" />
+                <MaterialCommunityIcons name="chevron-double-down" size={30} color="#C6AC8F" onPress={() => navigation.navigate("Pay")}/>
             </View>
             <View style={styles.bottomContainer}>
 

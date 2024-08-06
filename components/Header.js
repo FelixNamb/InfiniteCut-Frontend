@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:32,
-        letterSpacing: "2px",
         fontWeight: "600",
     }
 })
