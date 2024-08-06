@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#5E503F",
-    fontSize: "40",
+    fontSize: 40,
     flexWrap: "wrap",
   },
   titleContainer: {
