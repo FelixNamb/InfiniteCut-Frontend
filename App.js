@@ -5,6 +5,9 @@ import SignUpScreen from "./screens/SignUpScreen";
 import SignUpProScreen from "./screens/SignUpProScreen";
 import FormuleScreen from "./screens/FormuleScreen";
 import MesRDVScreen from "./screens/MesRDVScreen";
+import ChooseBarberScreen from "./screens/ChooseBarberScreen";
+import PayScreen from "./screens/PayScreen";
+import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -20,6 +23,8 @@ export default function App() {
         <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
         <Stack.Screen name="Formules" component={FormuleScreen} />
         <Stack.Screen name="RDVs" component={MesRDVScreen} />
+        <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen}/>
+        <Stack.Screen name="Payzone" component={PayScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
