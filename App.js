@@ -36,7 +36,7 @@ import HomeScreen from "./screens/HomeScreen";
 // }
 
 export default function App() {
-  return <SignUpScreen />;
+  return <HomeScreen/>;
 }
 
 const styles = StyleSheet.create({
