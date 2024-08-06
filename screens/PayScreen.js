@@ -66,7 +66,7 @@ export default function PayScreen({ navigation }) {
       </SafeAreaView>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("MesRdv")}
+        onPress={() => navigation.navigate("RDVs")}
       >
         <Text style={styles.textButton}>Payer</Text>
       </TouchableOpacity>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 200,
-    borderRadius: 20,
+    borderRadius: 50,
     resizeMode: "cover",
     justifyContent: "flex-start",
     alignItems: "flex-start",

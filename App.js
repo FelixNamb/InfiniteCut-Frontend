@@ -7,8 +7,8 @@ import MesRDVScreen from "./screens/MesRDVScreen";
 import ChooseBarberScreen from "./screens/ChooseBarberScreen";
 import HomeScreen from "./screens/HomeScreen";
 import PayScreen from "./screens/PayScreen";
-import HomeScreen from "./screens/HomeScreen";
-import { StyleSheet, View } from "react-native";
+import ConceptScreen from "./screens/ConceptScreen";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -19,6 +19,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Concept" component={ConceptScreen} />
         <Stack.Screen name="Connection" component={ConnectionScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="DatePicker" component={DatePicker} />
