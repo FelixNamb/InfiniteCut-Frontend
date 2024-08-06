@@ -4,9 +4,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  TextInput,
 } from "react-native";
+import { useState } from "react";
 
-export default function ConnectionScreen() {
+export default function ConnectionScreen({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleContainer}>
@@ -15,13 +20,21 @@ export default function ConnectionScreen() {
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Email</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Mot de passe</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ConnectedButton}>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoComplete="email"
+          onChangeText={(value) => setEmail(value)}
+          value={email}
+        ></TextInput>
+        <TextInput style={styles.input}></TextInput>
+        <TouchableOpacity
+          style={styles.ConnectedButton}
+          onPress={() => navigation.navigate("DatePicker")}
+        >
           <Text style={styles.textButton}>Se connecter</Text>
         </TouchableOpacity>
       </View>
@@ -30,7 +43,10 @@ export default function ConnectionScreen() {
           Nouveau sur Infinite Cut ? {"\n"}Créer votre compte
         </Text>
       </View>
-      <TouchableOpacity style={styles.lastButton}>
+      <TouchableOpacity
+        style={styles.lastButton}
+        onPress={() => navigation.navigate("SignUp")}
+      >
         <Text style={styles.lastTextButton}>
           Proposez votre {"\n"}établissement
         </Text>
@@ -50,7 +66,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  button: {
+  input: {
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
@@ -58,11 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textButton: {
-    color: "white",
-    height: 30,
-    fontSize: 18,
-  },
+
   title: {
     color: "#5E503F",
     fontSize: 40,
@@ -116,5 +128,10 @@ const styles = StyleSheet.create({
     height: 250,
     justifyContent: "space-around",
     alignItems: "center",
+  },
+  textButton: {
+    color: "white",
+    height: 30,
+    fontSize: 18,
   },
 });
