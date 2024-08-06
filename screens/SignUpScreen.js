@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 130,
+    textAlign: "center",
   },
   inputPassword: {
     height: 70,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 110,
+    textAlign: "center",
   },
   inputConfirmPassword: {
     height: 70,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 70,
+    textAlign: "center",
   },
   title: {
     color: "#5E503F",

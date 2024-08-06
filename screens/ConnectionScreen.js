@@ -32,7 +32,7 @@ export default function ConnectionScreen({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <SafeAreaView
-        style={styles.AreaView}
+        style={styles.areaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleContainer}>
@@ -94,7 +94,7 @@ export default function ConnectionScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  AreaView: {
+  areaView: {
     backgroundColor: "#EAE0D5",
     flex: 1,
     height: "100%",
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 130,
+    textAlign: "center",
   },
   inputPassword: {
     height: 70,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 100,
+    textAlign: "center",
   },
   title: {
     flex: 1,

@@ -1,29 +1,38 @@
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <ImageBackground
       style={styles.backgroundImage}
       source={require("../assets/background_home.jpg")}
     >
-      <View styles={styles.container}>
+      <SafeAreaView styles={styles.container}>
         <LinearGradient
           colors={["#EAE0D5", "#C6AC8F"]}
           style={styles.gradient}
         />
-        
-        <View style={styles.bottomPage}>
-            <Text style={styles.text}>Découvrez notre concept</Text>
-            <MaterialCommunityIcons
-                
-                name="chevron-double-down"
-                size={50}
-                color="white"
-            />
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>INFINITE CUT</Text>
         </View>
-      </View>
+        <View style={styles.bottomPage}>
+          <Text style={styles.text}>Découvrez notre {"\n"} concept ...</Text>
+          <MaterialCommunityIcons
+            name="chevron-double-down"
+            size={50}
+            color="#C6AC8F"
+            margin="10"
+            onPress={() => navigation.navigate("Concept")}
+          />
+        </View>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
@@ -35,10 +44,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  bottomPage : {
-    justifyContent:'center',
-    alignItems: 'center',
-  },  
+  bottomPage: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 370,
+    margin: 20,
+  },
   background: {
     position: "absolute",
     left: 0,
@@ -50,13 +61,27 @@ const styles = StyleSheet.create({
     height: "90%",
     width: "100%",
     paddingBottom: 20,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
-
   text: {
-    backgroundColor: "transparent",
-    fontSize: 15,
+    fontSize: 40,
     color: "#C6AC8F",
+    letterSpacing: 5,
+    textAlign: "justify",
+    marginBottom: 0,
+  },
+  titleContainer: {
+    width: 360,
+    flex: 1,
+    alignItems: "center",
+    marginTop: 50,
+    marginLeft: 30,
+  },
+  title: {
+    color: "white",
+    fontSize: 50,
+    color: "#C6AC8F",
+    letterSpacing: 5,
   },
 });
