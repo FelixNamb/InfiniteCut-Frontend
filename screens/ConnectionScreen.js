@@ -27,11 +27,13 @@ export default function ConnectionScreen() {
       </View>
       <View style={styles.newUser}>
         <Text style={styles.textNewUser}>
-          Nouveau sur Infinite Cut ? Créer votre compte
+          Nouveau sur Infinite Cut ? {"\n"}Créer votre compte
         </Text>
       </View>
       <TouchableOpacity style={styles.lastButton}>
-        <Text style={styles.lastTextButton}>Proposez votre établissement</Text>
+        <Text style={styles.lastTextButton}>
+          Proposez votre {"\n"}établissement
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -86,13 +88,8 @@ const styles = StyleSheet.create({
   },
   lastTextButton: {
     color: "#5E503F",
-    height: 40,
-    width: 180,
     fontWeight: "600",
     fontSize: 20,
-    flex: 1,
-    flexWrap: "wrap",
-    textAlign: "justify",
   },
 
   ConnectedButton: {
