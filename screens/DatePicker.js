@@ -1,13 +1,17 @@
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import RNDateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { useState } from "react";
 // import Header from "./Header"
 
 export default function DatePicker() {
+    const [dateTaken, setDateTaken] = useState(new Date());
+    const [selectDatePicker, setSelectDatePicker] = useState(false);
     return(
         <View style={styles.container}>
             <View style={styles.upperView}>
                 <Text style={styles.title}>Votre rendez-vous</Text>
                 <Text style={styles.subtitle}>Choisissez une date</Text>
-                {/* <Calendar></Calendar> */}
+                <RNDateTimePicker style={styles.datePicker} mode="date" display="default" value={new Date()} maximumDate={new Date(2030, 10, 20)}/>
             </View>
             <View style={styles.bottomView}>
                 <Text style={styles.subtitle}>Choisissez une demi journée</Text>
