@@ -3,7 +3,7 @@ import RNDateTimePicker, { DateTimePickerAndroid } from '@react-native-community
 import { useState } from "react";
 // import Header from "./Header"
 
-export default function DatePicker() {
+export default function DatePicker( {navigation}) {
     const [dateTaken, setDateTaken] = useState(null);
     const [selectDatePicker, setSelectDatePicker] = useState(false);
     const [morningButton, setMorningButton] = useState(false);
@@ -69,7 +69,7 @@ export default function DatePicker() {
                     </TouchableOpacity>
                 </View>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChooseBarber")}>
                 <Text style={styles.textButton}>Confirmer</Text>
             </TouchableOpacity>
         </View>

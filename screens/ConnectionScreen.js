@@ -3,43 +3,102 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
 } from "react-native";
+import { useState } from "react";
+import { Link } from "@react-navigation/native";
 
-export default function ConnectionScreen() {
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export default function ConnectionScreen({ navigation }) {
+  const [signUpMotDePasse, setSignUpMotDePasse] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const handleSubmit = () => {
+    if (EMAIL_REGEX.test(email)) {
+      // dispatch(updateEmail(email));
+      navigation.navigate("DatePicker");
+    } else {
+      setEmailError(true);
+    }
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>
-          Maintenant que vous savez tout, rejoignez nous.
-        </Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Email</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Mot de passe</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ConnectedButton}>
-          <Text style={styles.textButton}>Se connecter</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.newUser}>
-        <Text style={styles.textNewUser}>
-          Nouveau sur Infinite Cut ? {"\n"}Créer votre compte
-        </Text>
-      </View>
-      <TouchableOpacity style={styles.lastButton}>
-        <Text style={styles.lastTextButton}>
-          Proposez votre {"\n"}établissement
-        </Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <KeyboardAvoidingView style={styles.container}>
+      <SafeAreaView
+        style={styles.AreaView}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            Maintenant que vous savez tout,{"\n"} rejoignez nous.
+          </Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="white"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            autoComplete="email"
+            onChangeText={(value) => setEmail(value)}
+            value={email}
+          ></TextInput>
+          {emailError && <Text style={styles.error}>Aucun compte trouvé</Text>}
+          <TextInput
+            style={styles.inputPassword}
+            secureTextEntry={true}
+            placeholder="Mot de passe"
+            placeholderTextColor="white"
+            autoCorrect={false}
+            autoCapitalize="none"
+            onChangeText={(value) => setSignUpMotDePasse(value)}
+            value={signUpMotDePasse}
+          ></TextInput>
+          <TouchableOpacity
+            style={styles.ConnectedButton}
+            onPress={() => handleSubmit()}
+          >
+            <Text style={styles.textButton}>Se connecter</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomPage}>
+          <View style={styles.newUser}>
+            <Text style={styles.textNewUser}>
+              Nouveau sur Infinite Cut ? {"\n"}
+              <Link to={{ screen: "SignUp", params: { id: "SignUp" } }}>
+                <Text style={styles.createAccount}>Créer votre compte</Text>
+              </Link>
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.lastButton}
+            onPress={() => navigation.navigate("SignUpPro")}
+          >
+            <Text style={styles.lastTextButton}>
+              Proposez votre {"\n"}établissement
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  AreaView: {
+    backgroundColor: "#EAE0D5",
+    flex: 1,
+    height: "100%",
+  },
   container: {
     flex: 1,
     backgroundColor: "#EAE0D5",
@@ -50,29 +109,35 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  button: {
+  input: {
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    paddingLeft: 130,
   },
-  textButton: {
-    color: "white",
-    height: 30,
-    fontSize: 18,
+  inputPassword: {
+    height: 70,
+    width: 300,
+    backgroundColor: "#5E503F",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 100,
   },
   title: {
+    flex: 1,
     color: "#5E503F",
     fontSize: 40,
-    flexWrap: "wrap",
   },
   titleContainer: {
-    height: 150,
-    width: 300,
+    height: "25%",
+    width: "90%",
     alignItems: "center",
     justifyContent: "center",
+    margin: 10,
   },
   lastButton: {
     backgroundColor: "transparent",
@@ -116,5 +181,26 @@ const styles = StyleSheet.create({
     height: 250,
     justifyContent: "space-around",
     alignItems: "center",
+  },
+  textButton: {
+    color: "white",
+    height: 30,
+    fontSize: 18,
+  },
+  error: {
+    marginTop: 10,
+    color: "red",
+  },
+  bottomPage: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 70,
+  },
+  createAccount: {
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#C6AC8F",
   },
 });
