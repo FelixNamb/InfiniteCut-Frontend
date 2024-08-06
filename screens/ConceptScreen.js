@@ -9,11 +9,9 @@ export default function ConceptScreen() {
         <Text style={styles.text}>Beau et soigné quand vous voulez</Text>
         <Text style={styles.soustext}>
           Réservez vos séances facilement et gérez vos rendez-vous en toute
-          tranquillité.
-       
-        Faites des économies, chaque mois
-
-        Profitez d'abonnements avantageux pour des services de qualité</Text>
+          tranquilité. Faites des économies, chaque mois Profitez d'abonnements
+          avantageux pour des services de qualité
+        </Text>
         <MaterialCommunityIcons
           name="chevron-double-down"
           size={50}
@@ -25,18 +23,16 @@ export default function ConceptScreen() {
 }
 
 const styles = StyleSheet.create({
-container : {
+  container: {},
 
-},
-
-text: {
+  text: {
     backgroundColor: "transparent",
     fontSize: 25,
     color: "#C6AC8F",
-},
-soustext: {
+  },
+  soustext: {
     backgroundColor: "transparent",
     fontSize: 15,
     color: "#C6AC8F",
-}
-})
+  },
+});
