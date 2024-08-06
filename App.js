@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
-// import ConnectionScreen from "./screens/ConnectionScreen";
+import ConnectionScreen from "./screens/ConnectionScreen";
 import DatePicker from "./screens/DatePicker";
+import ChooseBarberScreen from "./screens/ChooseBarberScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -9,10 +10,11 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Connection" component={ConnectionScreen} />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Connection" component={ConnectionScreen}/>
         {/* <Stack.Screen name="SignUp" component={SignUpScreen} /> */}
         <Stack.Screen name="DatePicker" component={DatePicker} />
+        <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
