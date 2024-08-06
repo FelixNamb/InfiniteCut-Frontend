@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 
-export default function SignUpScreen({ navigation }) {
+export default function SignUpProScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -50,21 +50,19 @@ export default function SignUpScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Nouveau sur {"\n"}Infinite Cut ?</Text>
+          <Text style={styles.title}>Envie de {"\n"}nous rejoindre ?</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Email"
+            placeholder="Prénom"
             placeholderTextColor="white"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoComplete="email"
           ></TextInput>
-          {emailError && (
-            <Text style={styles.error}>Adresse mail invalide</Text>
-          )}
+          <TextInput
+            style={styles.input}
+            placeholder="Nom"
+            placeholderTextColor="white"
+          ></TextInput>
           <TextInput
             style={styles.input}
             placeholder="Mobile"
@@ -72,25 +70,26 @@ export default function SignUpScreen({ navigation }) {
             autoCapitalize="none"
           ></TextInput>
           <TextInput
-            style={styles.inputPassword}
-            secureTextEntry={true}
-            placeholder="Mot de passe"
+            style={styles.input}
+            placeholder="Code Postal"
             placeholderTextColor="white"
-            autoCorrect={false}
-            autoCapitalize="none"
-          ></TextInput>
-          <TextInput
-            style={styles.inputConfirmPassword}
-            secureTextEntry={true}
-            placeholder="Confirmation mot de passe"
-            placeholderTextColor="white"
-            autoCorrect={false}
-            autoCapitalize="none"
           ></TextInput>
         </View>
+        <View style={styles.containerBottom}>
+          <TextInput
+            style={styles.inputEmail}
+            placeholder="Email"
+            placeholderTextColor="white"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            autoComplete="email"
+          ></TextInput>
+        </View>
+        {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
         <View style={styles.bottomPage}>
           <TouchableOpacity style={styles.lastButton}>
-            <Text style={styles.lastTextButton}>Créer son compte</Text>
+            <Text style={styles.lastTextButton}>Déposer votre demande</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  input: {
+  inputEmail: {
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
@@ -122,6 +121,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 130,
+  },
+  input: {
+    height: 70,
+    width: 150,
+    backgroundColor: "#5E503F",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 50,
+    marginBottom: 30,
   },
   inputPassword: {
     height: 70,
@@ -148,11 +157,10 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     height: "25%",
-    width: "90%",
+    width: "80%",
     alignItems: "center",
     justifyContent: "center",
-    margin: 10,
-    flexWrap: "wrap",
+    marginLeft: 60,
   },
   lastButton: {
     backgroundColor: "transparent",
@@ -172,11 +180,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonContainer: {
-    width: 300,
-    height: 350,
+    width: 380,
+    height: 250,
+    flexWrap: "wrap",
+    flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
   },
+
   error: {
     marginTop: 10,
     color: "red",
@@ -186,5 +196,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 130,
+  },
+  containerBottom: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
