@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   button: {
-    height: 60,
+    height: 70,
     width: 300,
     backgroundColor: "#5E503F",
     borderRadius: 50,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   lastButton: {
     backgroundColor: "transparent",
-    height: 60,
+    height: 70,
     width: 300,
     fontWeight: "600",
     fontSize: 16,
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
   },
-
   ConnectedButton: {
     height: 60,
     width: 200,
