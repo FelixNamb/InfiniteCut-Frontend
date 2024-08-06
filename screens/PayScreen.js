@@ -27,13 +27,13 @@ export default function PayScreen({ navigation }) {
         <Text style={styles.nameFormula}>ESSENTIEL</Text>
       </ImageBackground>
       <Text>39,99€</Text>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safeArea}>
         <View style={styles.icon}>
-          <FontAwesome name="cc-visa" size={24} color="black" />
-          <FontAwesome name="cc-mastercard" size={24} color="black" />
+          <FontAwesome name="cc-visa" size={20} color="black" />
+          <FontAwesome name="cc-mastercard" size={20} color="black" />
         </View>
         <View style={styles.creditCard}>
-          <AntDesign name="creditcard" size={24} color="black" />
+          <AntDesign name="creditcard" size={20} color="black" />
           <TextInput
             placeholder="0123 4567 8901 2345"
             onChangeText={(value) => setCreditCard(value)}
@@ -79,14 +79,13 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     padding: 0,
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: "#EAE0D5",
   },
   title: {
     fontSize: 24,
     fontWeight: "300",
-    letterSpacing: "2px",
   },
   image: {
     width: 300,
@@ -99,7 +98,17 @@ const styles = StyleSheet.create({
   nameFormula: {
     fontSize: 20,
     fontWeight: "500",
-    letterSpacing: "1px",
+    color: "white",
+    margin: 10,
+  },
+  safeArea: {
+    borderWidth: 2,
+    height: 200,
+    width: 300,
+    padding: 10,
+    justifyContent: "space-around",
+    borderColor: "black",
+    borderRadius: 20,
   },
   icon: {
     flexDirection: "row",
@@ -109,12 +118,12 @@ const styles = StyleSheet.create({
   },
   creditCard: {
     backgroundColor: "white",
-    width: 300,
-    height: 25,
+    width: 200,
+    height: 40,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 10,
-    margin: 10,
   },
   cvcAndExpiration: {
     flexDirection: "row",
@@ -125,6 +134,9 @@ const styles = StyleSheet.create({
   expiration: {
     backgroundColor: "white",
     height: 25,
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
   mois: {
     borderBottomWidth: 1,

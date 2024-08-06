@@ -30,8 +30,8 @@ export default function ChooseBarberScreen({ navigation }) {
   return (
     <View style={styles.container}>
       {/* <View style={styles.header}>
-                <Header />
-            </View> */}
+        <Header />
+    </View> */}
       <View style={styles.upperContainer}>
         <View style={styles.inputContainer}>
           <TextInput
@@ -66,7 +66,7 @@ export default function ChooseBarberScreen({ navigation }) {
           name="chevron-double-down"
           size={30}
           color="#C6AC8F"
-          onPress={() => handleSubmit()}
+          onPress={() => navigation.navigate("Pay")}
         />
       </View>
       <View style={styles.bottomContainer}></View>
