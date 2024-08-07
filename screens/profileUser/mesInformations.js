@@ -1,7 +1,7 @@
 import { TextInput } from "react-native";
 import Header from "../../components/Header";
 import { TextInput, View } from "react-native";
-//import { useState } from "react";
+// import { useState } from "react";
 export default function mesInformations (){
     return(
         <View style={styles.container}>

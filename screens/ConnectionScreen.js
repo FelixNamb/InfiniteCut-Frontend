@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { Link } from "@react-navigation/native";
+import Header from '../components/Header';
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,11 +32,12 @@ export default function ConnectionScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
+       <Header title='INFINITE CUT' colorUser={false} colorScissors={false} navigation={navigation}/>
       <SafeAreaView
         style={styles.areaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={styles.titleContainer}>
+               <View style={styles.titleContainer}>
           <Text style={styles.title}>
             Maintenant que vous savez tout,{"\n"} rejoignez nous.
           </Text>
