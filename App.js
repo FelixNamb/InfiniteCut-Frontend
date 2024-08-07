@@ -11,6 +11,7 @@ import FinRDVScreen from "./screens/FinRDVScreen";
 import CompareFormulesScreen from "./screens/CompareFormulesScreen";
 import { StyleSheet, View } from "react-native";
 import ConceptScreen from "./screens/ConceptScreen";
+import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -35,6 +36,7 @@ export default function App() {
         <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="Pay" component={PayScreen} />
         <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
+        <Stack.Screen name="MyAgenda" component={MyAgenda} />
       </Stack.Navigator>
     </NavigationContainer>
   );

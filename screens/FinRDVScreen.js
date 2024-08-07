@@ -4,6 +4,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useState } from "react";
+import Header from "../components/Header";
 
 export default function FinRDVScreen ({navigation}) {
     const [commentaire, setCommentaire] = useState(null);
@@ -14,17 +15,7 @@ export default function FinRDVScreen ({navigation}) {
     }
     return(
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.dispositionHeader}>
-                    <TouchableOpacity >
-                        <FontAwesome6 name="scissors" size={32} color="#C6AC8F" />
-                    </TouchableOpacity>
-                    <Text style={styles.title}>INFINITE CUT</Text>
-                    <TouchableOpacity >
-                        <FontAwesome name="user-circle" size={32} color="#C6AC8F" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <Header title='INFINITY CUT' colorScissors={false} colorUser={false} navigation={navigation}/>
             <View style={styles.containerPage}>
                 <Text style={styles.titlePage}>Fin de rendez-vous</Text>
                 <View style={styles.note}>
