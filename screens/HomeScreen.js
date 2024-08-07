@@ -31,7 +31,6 @@ export default function HomeScreen({ navigation }) {
             size={50}
             color="#C6AC8F"
             margin="10"
-            onPress={() => navigation.navigate("Concept")}
           />
         </View>
       </SafeAreaView>
@@ -41,7 +40,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
   },

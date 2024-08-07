@@ -1,173 +1,209 @@
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
+  TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import Header from "../components/Header";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function FormuleScreen({ navigation }) {
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <SafeAreaView
-        style={styles.AreaView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <Header />
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Nos Formules</Text>
+    <SafeAreaView style={styles.container}>
+      <Header
+        title="INFINITE CUT"
+        colorScissors={false}
+        colorUser={false}
+        navigation={navigation}
+      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Nos Formules</Text>
+      </View>
+      <View style={styles.cardsContainer}>
+        <View style={styles.cardEssentielContainer}>
+          <ImageBackground
+            source={require("../assets/formule_essentiel.jpg")}
+            style={styles.cardEssentiel}
+            imageStyle={{ borderRadius: 20 }}
+          >
+            <View style={styles.cardEssentielView}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  color: "white",
+                  letterSpacing: 10,
+                  margin: 10,
+                  fontWeight: "bold",
+                }}
+              >
+                ESSENTIEL
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.buttonContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Prénom"
-            placeholderTextColor="white"
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Nom"
-            placeholderTextColor="white"
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Mobile"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Code Postal"
-            placeholderTextColor="white"
-          ></TextInput>
+        <View style={styles.cardEssentielContainer}>
+          <ImageBackground
+            source={require("../assets/formule_premium.jpg")}
+            style={styles.cardEssentiel}
+            imageStyle={{ borderRadius: 20 }}
+          >
+            <View style={styles.cardEssentielView}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  color: "white",
+                  letterSpacing: 10,
+                  margin: 10,
+                  fontWeight: "bold",
+                }}
+              >
+                PREMIUM
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.containerBottom}>
-          <TextInput
-            style={styles.inputEmail}
-            placeholder="Email"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoComplete="email"
-          ></TextInput>
+        <View style={styles.cardEssentielContainer}>
+          <ImageBackground
+            source={require("../assets/formule_exclusif.jpg")}
+            style={styles.cardEssentiel}
+            imageStyle={{ borderRadius: 20 }}
+          >
+            <View style={styles.cardEssentielView}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  color: "white",
+                  letterSpacing: 10,
+                  margin: 10,
+                  fontWeight: "bold",
+                }}
+              >
+                EXCLUSIF
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.bottomPage}>
-          <TouchableOpacity style={styles.lastButton}>
-            <Text style={styles.lastTextButton}>Déposer votre demande</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </View>
+      <View style={styles.bottomPage}>
+        <MaterialCommunityIcons
+          name="chevron-double-down"
+          size={30}
+          color="#C6AC8F"
+          onPress={() => navigation.navigate("CompareFormules")}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
-  AreaView: {
-    backgroundColor: "#EAE0D5",
-    flex: 1,
-    height: "100%",
-  },
   container: {
     flex: 1,
     backgroundColor: "#EAE0D5",
-    alignItems: "center",
-    justifyContent: "space-around",
-    margin: 0,
-    padding: 0,
-    width: "100%",
-    height: "100%",
-  },
-  inputEmail: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 130,
-  },
-  input: {
-    height: 70,
-    width: 150,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 50,
-    marginBottom: 30,
-  },
-  inputPassword: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 110,
-  },
-  inputConfirmPassword: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 70,
   },
   title: {
     color: "#5E503F",
     fontSize: 40,
-    flex: 1,
   },
   titleContainer: {
-    height: "25%",
-    width: "80%",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 60,
+    margin: 20,
   },
-  lastButton: {
-    backgroundColor: "transparent",
-    height: 70,
+  cardsContainer: {
+    flexDirection: "column",
+    height: "70%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cardEssentielContainer: {
+    width: "100%",
+    height: "33%",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
+  },
+  cardEssentiel: {
+    height: "100%",
     width: 300,
-    fontWeight: "600",
-    fontSize: 16,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#5E503F",
   },
-  lastTextButton: {
-    color: "#5E503F",
-    fontWeight: "600",
-    fontSize: 20,
+  background: {
+    backgroundColor: "green",
+    borderRadius: 20,
+    resizeMode: "cover",
+    borderColor: "black",
+    borderWidth: 3,
   },
-  buttonContainer: {
-    width: 380,
-    height: 250,
-    flexWrap: "wrap",
+  cardPremiumContainer: {
+    width: "100%",
+    height: "33%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    margin: 5,
+  },
+  cardPremium: {
+    height: "100%",
+    width: "80%",
+    borderRadius: 20,
+    margin: 5,
+  },
+  cardExclusifContainer: {
+    width: "100%",
+    height: "33%",
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 5,
+  },
+  cardExclusif: {
+    height: "100%",
+    width: "80%",
+    borderRadius: 20,
+    margin: 5,
   },
 
-  error: {
-    marginTop: 10,
-    color: "red",
-  },
-  bottomPage: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 130,
-  },
-  containerBottom: {
-    flex: 1,
+  button: {
     justifyContent: "center",
     alignItems: "center",
+    width: 150,
+    height: 50,
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderRadius: 50,
+    borderWidth: 2,
+    margin: 10,
+  },
+  textButton: {
+    color: "white",
+    letterSpacing: 5,
+  },
+  cardEssentielView: {
+    height: "100%",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  bottomPage: {
+    alignItems: "center",
+    margin: 30,
   },
 });
