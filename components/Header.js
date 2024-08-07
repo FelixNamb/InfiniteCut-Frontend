@@ -2,16 +2,25 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-export default function Header () {
+export default function Header ( props) {
     return(
         <View style={styles.header}>
-            <TouchableOpacity >
-                <FontAwesome6 name="scissors" size={24} color="#C6AC8F" />
-            </TouchableOpacity>
-            <Text style={styles.title}>INFINITE CUT</Text>
-            <TouchableOpacity >
-                <FontAwesome name="user-circle" size={24} color="#C6AC8F" />
-            </TouchableOpacity>
+            <View style={styles.dispositionHeader}>
+                <TouchableOpacity >
+                    <FontAwesome6 
+                    name="scissors" 
+                    size={32} 
+                    color={props.colorScissors ? "#22333B" : "#C6AC8F"}
+                    onPress={() => props.navigation.navigate("ChooseBarber")} />
+                </TouchableOpacity>
+                <Text style={styles.title}>{props.title}</Text>
+                <TouchableOpacity >
+                    <FontAwesome 
+                    name="user-circle" 
+                    size={32} 
+                    color={props.colorUser ? "#22333B" : "#C6AC8F"} />
+                </TouchableOpacity>
+            </View>
         </View>
     )
 };
@@ -21,13 +30,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         display:'flex',
         flexDirection:'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems:'center',
         width:"100%",
-        height: 200,
+        height: 100,
+    },
+    dispositionHeader: {
+        display:'flex',
+        flexDirection:'row',
+        justifyContent: 'space-between',
+        alignItems:'center',
+        width:"90%",
     },
     title:{
         fontSize:32,
         fontWeight: "600",
+        color: 'white',
     }
 })
