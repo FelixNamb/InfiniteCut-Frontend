@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Header from "../components/Header";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -19,6 +20,7 @@ export default function HomeScreen({ navigation }) {
           colors={["#EAE0D5", "#C6AC8F"]}
           style={styles.gradient}
         />
+        <Header title="" colorScissors={false} colorUser={false} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>INFINITE CUT</Text>
         </View>
@@ -39,8 +41,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    width: "100%",
-    height: "100%",
+    flex:1,
     alignItems: "center",
     justifyContent: "flex-end",
   },

@@ -8,6 +8,7 @@ import {
   Platform,
   TextInput,
 } from "react-native";
+import Header from "../components/Header";
 
 export default function FormuleScreen({ navigation }) {
   return (
@@ -16,6 +17,7 @@ export default function FormuleScreen({ navigation }) {
         style={styles.AreaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
+        <Header />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Nos Formules</Text>
         </View>

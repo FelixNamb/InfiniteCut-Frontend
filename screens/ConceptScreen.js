@@ -1,9 +1,11 @@
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Header from '../components/Header'
 
 export default function ConceptScreen({ navigation }) {
   return (
     <SafeAreaView styles={styles.container}>
+      <Header title='INFINITE CUT' colorUser={false} colorScissors={false} navigation={navigation}/>
       <View style={styles.upper}>
         <Text style={styles.title}>Beau et soigné quand vous voulez.</Text>
         <Text style={styles.subTitle}>

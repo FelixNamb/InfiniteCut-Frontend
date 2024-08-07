@@ -29,17 +29,7 @@ export default function ChooseBarberScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.dispositionHeader}>
-                    <TouchableOpacity >
-                        <FontAwesome6 name="scissors" size={32} color="#C6AC8F" />
-                    </TouchableOpacity>
-                    <Text style={styles.title}>INFINITE CUT</Text>
-                    <TouchableOpacity >
-                        <FontAwesome name="user-circle" size={32} color="#C6AC8F" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <Header title="INFINITE CUT" colorScissors={false} colorUser={false} navigation={navigation}/>
             <View style={styles.upperContainer}>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.input} placeholder="Où souhaitez-vous aller ?" value={lieu} onChangeText={(value) => setLieu(value)} />
@@ -61,7 +51,7 @@ export default function ChooseBarberScreen({ navigation }) {
                         <Octicons name="heart-fill" size={30} color={isLiked ? "#C6AC8F" : "#22333B"} onPress={() => setIsLiked(!isLiked)} />
                     </View>
                 </ScrollView>
-                <MaterialCommunityIcons name="chevron-double-down" size={30} color="#C6AC8F" onPress={() => navigation.navigate("Pay")}/>
+                <MaterialCommunityIcons name="chevron-double-down" size={30} color="#C6AC8F" onPress={() => navigation.navigate("Formules")}/>
             </View>
             <View style={styles.bottomContainer}>
 
@@ -74,27 +64,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#EAE0D5",
-    },
-    header: {
-        backgroundColor: '#000',
-        display:'flex',
-        flexDirection:'row',
-        justifyContent: 'center',
-        alignItems:'center',
-        width:"100%",
-        height: 100,
-    },
-    dispositionHeader: {
-        display:'flex',
-        flexDirection:'row',
-        justifyContent: 'space-between',
-        alignItems:'center',
-        width:"90%",
-    },
-    title:{
-        fontSize:32,
-        fontWeight: "600",
-        color: 'white'
     },
     upperContainer: {
         marginTop: 50,

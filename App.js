@@ -26,8 +26,9 @@ export default function App() {
         <Stack.Screen name="Connection" component={ConnectionScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-        <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
+        <Stack.Screen name="Formules" component={FormuleScreen} />
+        <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="Pay" component={PayScreen} />
         <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
       </Stack.Navigator>
