@@ -53,7 +53,6 @@ export default function FormuleScreen({ navigation }) {
             autoComplete="email"
           ></TextInput>
         </View>
-        {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
         <View style={styles.bottomPage}>
           <TouchableOpacity style={styles.lastButton}>
             <Text style={styles.lastTextButton}>Déposer votre demande</Text>
