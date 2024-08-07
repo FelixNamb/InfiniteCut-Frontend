@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import RNDateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { useState } from "react";
-// import Header from "./Header"
+import Header from "../components/Header"
 
 export default function DatePicker( {navigation}) {
     const [dateTaken, setDateTaken] = useState(null);
@@ -37,6 +37,7 @@ export default function DatePicker( {navigation}) {
 
     return(
         <View style={styles.container}>
+            <Header title='INFINITE CUT' colorScissors={false} colorUser={false} navigation={navigation} />
             <View style={styles.upperView}>
                 <Text style={styles.title}>Votre rendez-vous</Text>
                 <Text style={styles.subtitle}>Choisissez une date</Text>

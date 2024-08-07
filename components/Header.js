@@ -1,10 +1,10 @@
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function Header ( props) {
     return(
-        <View style={styles.header}>
+        <SafeAreaView style={styles.header}>
             <View style={styles.dispositionHeader}>
                 <TouchableOpacity >
                     <FontAwesome6 
@@ -21,7 +21,7 @@ export default function Header ( props) {
                     color={props.colorUser ? "#22333B" : "#C6AC8F"} />
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     )
 };
 

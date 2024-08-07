@@ -10,6 +10,7 @@ import {
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
+import Header from "../components/Header";
 
 export default function PayScreen({ navigation }) {
   const [creditCard, setCreditCard] = useState(null);
@@ -19,9 +20,11 @@ export default function PayScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Header title='INFINITE CUT' colorScissors={false} colorUser={false} navigation={navigation} />
       <Text style={styles.title}>Zone de Paiement</Text>
       <ImageBackground
         style={styles.image}
+        imageStyle={{ borderRadius: 20}}
         source={require("../assets/Formule1.jpg")}
       >
         <Text style={styles.nameFormula}>ESSENTIEL</Text>
