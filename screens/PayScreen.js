@@ -11,12 +11,25 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import Header from "../components/Header";
+import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 export default function PayScreen({ navigation }) {
-  const [creditCard, setCreditCard] = useState(null);
-  const [cvc, setCvc] = useState(null);
-  const [moisExpiration, setMoisExpiration] = useState(null);
-  const [anneeExpiration, setAnneeExpiration] = useState(null);
+  const [creditCard, setCreditCard] = useState('');
+  const [cvc, setCvc] = useState('');
+  const [expiration, setExpiration] = useState('');
+
+  const handleOnChange = async (form) => {
+    console.log(form);
+    if(form.status.cvc === 'valid'){
+      await setCvc(form.values.cvc);
+    };
+    if(form.status.number === 'valid'){
+      await setCreditCard(form.values.number);
+    };
+    if(form.status.expiry === 'valid'){
+      await setExpiration(form.values.expiry);
+    };
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,7 +64,9 @@ export default function PayScreen({ navigation }) {
       <View style={styles.priceContainer}>
         <Text>39,99€</Text>
       </View>
-      <View style={styles.safeArea}>
+      <CreditCardInput style={styles.safeArea} onChange={(form) => handleOnChange(form)}/>
+      
+      {/* <View style={styles.safeArea}>
         <View style={styles.icon}>
           <FontAwesome name="cc-visa" size={20} color="black" />
           <FontAwesome name="cc-mastercard" size={20} color="black" />
@@ -79,7 +94,7 @@ export default function PayScreen({ navigation }) {
             value={cvc}
           />
         </View>
-      </View>
+      </View> */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("RDVs")}
@@ -93,12 +108,15 @@ export default function PayScreen({ navigation }) {
 const styles = StyleSheet.create({
   page: {
     flex:1,
+    backgroundColor: "#EAE0D5",
   },
   container: {
+    flex:1,
     backgroundColor:"#EAE0D5",
     height: 680,
-    justifyContent: "space_between",
+    justifyContent: "space-between",
     alignItems: "center",
+    paddingBottom: 30,
   },
   title: {
     color: "#5E503F",
@@ -135,19 +153,8 @@ const styles = StyleSheet.create({
   safeArea: {
     height: 200,
     width: 300,
-    padding: 10,
-    justifyContent: "space-around",
-    alignItems: "center",
     borderRadius: 20,
     backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
   icon: {
     flexDirection: "row",

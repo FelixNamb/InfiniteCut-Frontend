@@ -28,8 +28,13 @@ export default function ChooseBarberScreen({ navigation }) {
     setModalVisible(false);
   };
 
-    return (
-      <View style={styles.container}>
+  const handleNavigation = () => {
+    setModalVisible(false);
+    navigation.navigate("Formules");
+  }
+
+  return (
+    <View style={styles.container}>
       <Modal visible={modalVisible} animationType="fade" transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -45,7 +50,18 @@ export default function ChooseBarberScreen({ navigation }) {
                 <View style={styles.noteModal}>
                   <View style={styles.starsModal}>{stars}</View>
                 </View>
-                <Text>Abonnements :</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => handleClose()}
+                style={styles.button}
+                activeOpacity={0.8}
+              >
+                <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomModal}>
+              <View style={styles.abonnement}>
+                <Text>Abonnements disponibles:</Text>
                 <View style={styles.allFormulas}>
                   <TouchableOpacity style={styles.buttonFormula}>
                     <Text style={styles.textFormula}>Essentiel</Text>
@@ -56,21 +72,14 @@ export default function ChooseBarberScreen({ navigation }) {
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => handleClose()}
-                style={styles.button}
-                activeOpacity={0.8}
+                style={styles.buttonToFormulas}
+                onPress={() => handleNavigation()}
               >
-                <Entypo name="squared-cross" size={30} color="#EAE0D5" />
+                <Text style={styles.textButtonToFormula}>
+                  Découvrez nos formules{"\n"}d'abonnement
+                </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.buttonToFormulas}
-              onPress={() => navigation.navigate("Pay")}
-            >
-              <Text style={styles.textButtonToFormula}>
-                Découvrez nos formules{"\n"}d'abonnement
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -177,9 +186,20 @@ const styles = StyleSheet.create({
   starsModal: {
     flexDirection: "row",
   },
+  bottomModal: {
+    justifyContent: "space-around",
+    alignItems: 'center',
+    height: 175,
+    width: '80%',
+  },
+  abonnement:{
+    justifyContent: "center",
+    alignItems:'center',
+    height: 40,
+  },
   allFormulas: {
     flexDirection: "row",
-    width: "100%",
+    
   },
   buttonFormula: {
     marginTop: 20,
