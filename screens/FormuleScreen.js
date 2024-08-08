@@ -8,17 +8,17 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useState } from "react";
+import CardFlip from "react-native-card-flip";
 
 export default function FormuleScreen({ navigation }) {
-  const [isButtonClickedEssentiel, setIsButtonClickedEssentiel] =
-    useState(false);
-  const [isButtonClickedPremium, setIsButtonClickedPremium] = useState(false);
-  const [isButtonClickedExclusif, setIsButtonClickedExclusif] = useState(false);
+  // const [isButtonClickedEssentiel, setIsButtonClickedEssentiel] =
+  //   useState(false);
+  // const [isButtonClickedPremium, setIsButtonClickedPremium] = useState(false);
+  // const [isButtonClickedExclusif, setIsButtonClickedExclusif] = useState(false);
 
-  const buttonClickedEssentiel = () => {
-    setIsButtonClickedEssentiel(!isButtonClickedEssentiel);
-  };
+  // const buttonClickedEssentiel = () => {
+  //   setIsButtonClickedEssentiel(!isButtonClickedEssentiel);
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,7 +31,76 @@ export default function FormuleScreen({ navigation }) {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Nos Formules</Text>
       </View>
-      <View style={styles.cardsContainer}>
+      <CardFlip
+        style={styles.cardsContainer}
+        ref={(card) => (this.card = card)}
+      >
+        <TouchableOpacity
+          style={styles.cardEssentielContainer}
+          onPress={() => this.card.flip()}
+        >
+          <View style={styles.cardEssentielContainer}>
+            <ImageBackground
+              source={require("../assets/formule_essentiel.jpg")}
+              style={styles.cardEssentiel}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.cardEssentielView}>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color: "white",
+                    letterSpacing: 10,
+                    margin: 10,
+                    fontWeight: "bold",
+                  }}
+                >
+                  ESSENTIEL
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate("Pay")}
+                >
+                  <Text style={styles.textButton}>VOIR PLUS</Text>
+                </TouchableOpacity>
+              </View>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.cardVerso}
+          onPress={() => this.card.flip()}
+        >
+          <View style={styles.cardEssentielContainer}>
+            <ImageBackground
+              source={require("../assets/formule_essentiel.jpg")}
+              style={styles.cardEssentiel}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.cardEssentielView}>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color: "white",
+                    letterSpacing: 10,
+                    margin: 10,
+                    fontWeight: "bold",
+                  }}
+                >
+                  ESSENTIEL
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate("Pay")}
+                >
+                  <Text style={styles.textButton}>CHOISIR</Text>
+                </TouchableOpacity>
+              </View>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
+      </CardFlip>
+      {/* <View style={styles.cardsContainer}>
         <View style={styles.cardEssentielContainer}>
           <ImageBackground
             source={require("../assets/formule_essentiel.jpg")}
@@ -113,7 +182,7 @@ export default function FormuleScreen({ navigation }) {
             </View>
           </ImageBackground>
         </View>
-      </View>
+      </View> */}
       <View style={styles.bottomPage}>
         <MaterialCommunityIcons
           name="chevron-double-down"
@@ -128,12 +197,15 @@ export default function FormuleScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center",
     backgroundColor: "#EAE0D5",
   },
   title: {
     color: "#5E503F",
     fontSize: 40,
   },
+
   titleContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -154,9 +226,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   cardEssentiel: {
-    // backgroundColor : isButtonClicked ? "white",
-    borderColor: "black",
-    borderWidth: 2,
     height: "100%",
     width: 300,
   },
