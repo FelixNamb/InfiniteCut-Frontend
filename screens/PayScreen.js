@@ -4,33 +4,53 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  ImageBackground,
-  TextInput,
+  Image,
 } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import Header from "../components/Header";
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 export default function PayScreen({ navigation }) {
-  const [creditCard, setCreditCard] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [expiration, setExpiration] = useState('');
+  const [creditCard, setCreditCard] = useState('**** **** **** ****');
+  const [cvc, setCvc] = useState('CVC');
+  const [expiration, setExpiration] = useState('MM/YY');
+  const [visa, setVisa] = useState(false);
+  const [masterCard, setMasterCard] = useState(false);
+  const [error, setError] = useState(false);
+
+
+  const whatIcon = () => {
+    setVisa(false);
+    setMasterCard(false);
+    if(creditCard.charAt(0) === '4' && creditCard?.charAt(1) === '2'){
+      setVisa(true)
+    };
+    if(creditCard.charAt(0) === '5' && creditCard?.charAt(1) === '5'){
+      setMasterCard(true);
+    };
+  }
+
+  const handleNavigation = () => {
+    if((visa || masterCard) && creditCard.length === 19 && cvc.length === 3 && expiration.length === 5){
+      navigation.navigate("RDVs");
+    } else {
+      setError(true);
+    }
+  }
 
   const handleOnChange = async (form) => {
-    console.log(form);
-    if(form.status.cvc === 'valid'){
+    setError(false);
+    if(form.values.cvc !== ""){
       await setCvc(form.values.cvc);
     };
-    if(form.status.number === 'valid'){
+    if (form.values.number !== ""){
       await setCreditCard(form.values.number);
     };
-    if(form.status.expiry === 'valid'){
+    if(form.values.expiry !== ""){
       await setExpiration(form.values.expiry);
-    };
+    }
+    await whatIcon();
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -40,64 +60,37 @@ export default function PayScreen({ navigation }) {
         navigation={navigation}
       />
       <Text style={styles.title}>Confirmer votre {"\n"}abonnement</Text>
-      <View style={styles.cardEssentielContainer}>
-        <ImageBackground
-          source={require("../assets/formule_essentiel.jpg")}
-          style={styles.cardEssentiel}
-          imageStyle={{ borderRadius: 20 }}
-        >
-          <View style={styles.cardEssentielView}>
-            <Text
-              style={{
-                fontSize: 30,
-                color: "white",
-                letterSpacing: 10,
-                margin: 10,
-                fontWeight: "bold",
-              }}
-            >
-              ESSENTIEL
-            </Text>
-          </View>
-        </ImageBackground>
-      </View>
-      <View style={styles.priceContainer}>
-        <Text>39,99€</Text>
-      </View>
-      <CreditCardInput style={styles.safeArea} onChange={(form) => handleOnChange(form)}/>
-      
-      {/* <View style={styles.safeArea}>
-        <View style={styles.icon}>
-          <FontAwesome name="cc-visa" size={20} color="black" />
-          <FontAwesome name="cc-mastercard" size={20} color="black" />
+      <View style={styles.card}>
+        <View style={styles.viewIcon}>
+          {visa ? (
+            <Image 
+              source={require('../assets/Visa.png')}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          ) : (<View></View>)}
+          {masterCard ? (<Image 
+              source={require('../assets/masterCard.png')}
+              style={styles.image}
+            />
+          ) : (<View></View>)}
         </View>
         <View style={styles.creditCard}>
-          <AntDesign name="creditcard" size={20} color="black" />
-          <TextInput
-            placeholder="0123 4567 8901 2345"
-            onChangeText={(value) => setCreditCard(value)}
-            value={creditCard}
-          />
+          <Text style={{
+            color: 'white',
+            fontSize: 20
+          }}>{creditCard}</Text>
         </View>
         <View style={styles.cvcAndExpiration}>
-          <View style={styles.expiration}>
-            <TextInput
-              placeholder="0123 4567 8901 2345"
-              onChangeText={(value) => setCreditCard(value)}
-              value={creditCard}
-            />
-          </View>
-          <TextInput
-            style={styles.inputCvc}
-            placeholder="123"
-            onChangeText={(value) => setCvc(value)}
-            value={cvc}
-          />
+          <Text style={{color: 'white'}}>{expiration}</Text>
+          <Text style={{color: 'white'}}>{cvc}</Text>
         </View>
-      </View> */}
+      </View>
+      {error ? (<Text style={{color: 'red'}}>Erreur sur la saisie de votre carte.</Text>) : (<></>)}
+      <CreditCardInput style={styles.safeArea} onChange={(form) => handleOnChange(form)}/>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("RDVs")}
+        onPress={() => handleNavigation()}
       >
         <Text style={styles.textButton}>Payer</Text>
       </TouchableOpacity>
@@ -118,37 +111,39 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 30,
   },
+  card: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  }, 
+  viewIcon : {
+    width: '90%',
+    flexDirection : 'row',
+    justifyContent:'flex-end',
+    alignItems: 'center',
+  },
+  image: {
+    width: 30,
+    height: 30
+  },
+  cvcAndExpiration : {
+    width: '90%',
+    flexDirection: "row",
+    justifyContent:"space-between",
+    alignItems:'center'
+  },
   title: {
     color: "#5E503F",
     fontSize: 40,
     textAlign: "center",
   },
-  cardEssentielContainer: {
-    width: "100%",
+  card: {
+    width: "80%",
     height: "25%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     margin: 10,
-  },
-  cardEssentiel: {
-    height: "100%",
-    width: 300,
-  },
-  cardEssentielView: {
-    height: "100%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  priceContainer: {
-    height: 40,
-    width: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-    borderColor: "#5E503F",
-    borderWidth: 1,
+    backgroundColor:'#A9A9A9',
+    borderRadius: 20,
   },
   safeArea: {
     height: 200,
@@ -161,15 +156,6 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: "space-around",
     alignItems: "center",
-  },
-  creditCard: {
-    backgroundColor: "white",
-    width: 200,
-    height: 40,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
   },
   cvcAndExpiration: {
     flexDirection: "row",

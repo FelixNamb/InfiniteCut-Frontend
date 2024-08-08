@@ -20,6 +20,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Formules" component={FormuleScreen} />
         <Stack.Screen name="DatePicker" component={DatePicker} />
@@ -28,7 +29,6 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
         <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
-        <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="Pay" component={PayScreen} />
         <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
         <Stack.Screen name="MyAgenda" component={MyAgenda} />
