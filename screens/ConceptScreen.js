@@ -18,7 +18,7 @@ export default function ConceptScreen({ navigation }) {
           <Text style={styles.title}>Beau et soigné quand vous voulez.</Text>
           <Text style={styles.subTitle}>
             Réservez vos séances facilement et gérez vos rendez-vous en toute
-            tranquilité. {"\n"}
+            tranquillité. {"\n"}
             {"\n"}Faites des économies, chaque mois.{"\n"}
             {"\n"}Profitez d'abonnements avantageux pour des services de qualité
           </Text>

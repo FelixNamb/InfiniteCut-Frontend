@@ -21,12 +21,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen
           name="CompareFormules"
           component={CompareFormulesScreen}
         />
         <Stack.Screen name="Formules" component={FormuleScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="DatePicker" component={DatePicker} />
         <Stack.Screen name="Concept" component={ConceptScreen} />
         <Stack.Screen name="Connection" component={ConnectionScreen} />
