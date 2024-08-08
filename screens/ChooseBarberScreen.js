@@ -28,8 +28,8 @@ export default function ChooseBarberScreen({ navigation }) {
     setModalVisible(false);
   };
 
-  return (
-    <View style={styles.container}>
+    return (
+      <View style={styles.container}>
       <Modal visible={modalVisible} animationType="fade" transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>

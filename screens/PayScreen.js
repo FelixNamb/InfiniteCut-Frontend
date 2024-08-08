@@ -67,17 +67,9 @@ export default function PayScreen({ navigation }) {
         <View style={styles.cvcAndExpiration}>
           <View style={styles.expiration}>
             <TextInput
-              style={styles.mois}
-              placeholder="01"
-              onChangeText={(value) => setMoisExpiration(value)}
-              value={moisExpiration}
-            />
-            <Text>/</Text>
-            <TextInput
-              style={styles.annee}
-              placeholder="01"
-              onChangeText={(value) => setAnneeExpiration(value)}
-              value={anneeExpiration}
+              placeholder="0123 4567 8901 2345"
+              onChangeText={(value) => setCreditCard(value)}
+              value={creditCard}
             />
           </View>
           <TextInput
@@ -99,13 +91,14 @@ export default function PayScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  page: {
+    flex:1,
+  },
   container: {
-    flex: 1,
-    margin: 0,
-    padding: 0,
-    justifyContent: "space-around",
+    backgroundColor:"#EAE0D5",
+    height: 680,
+    justifyContent: "space_between",
     alignItems: "center",
-    backgroundColor: "#EAE0D5",
   },
   title: {
     color: "#5E503F",
@@ -181,14 +174,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 25,
     flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-  },
-  mois: {
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-  },
-  annee: {
     borderBottomWidth: 1,
     borderBottomColor: "black",
   },

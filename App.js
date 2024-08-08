@@ -20,18 +20,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Concept" component={ConceptScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Pay" component={PayScreen} />
-        <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
-        <Stack.Screen name="Connection" component={ConnectionScreen} />
-        <Stack.Screen name="Formules" component={FormuleScreen} />
-        <Stack.Screen name="DatePicker" component={DatePicker} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-        <Stack.Screen name="RDVs" component={MesRDVScreen} />
-        <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
-        <Stack.Screen name="MyAgenda" component={MyAgenda} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Formules" component={FormuleScreen} />
+          <Stack.Screen name="DatePicker" component={DatePicker} />
+          <Stack.Screen name="Concept" component={ConceptScreen} />
+          <Stack.Screen name="Connection" component={ConnectionScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
+          <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
+          <Stack.Screen name="RDVs" component={MesRDVScreen} />
+          <Stack.Screen name="Pay" component={PayScreen} />
+          <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
+          <Stack.Screen name="MyAgenda" component={MyAgenda} />
       </Stack.Navigator>
     </NavigationContainer>
   );
