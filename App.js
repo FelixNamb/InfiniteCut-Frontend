@@ -13,6 +13,7 @@ import ConceptScreen from "./screens/ConceptScreen";
 import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import MesInformations from "./screens/profileUser/MesInformations";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="MesInformations" component={MesInformations} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Formules" component={FormuleScreen} />
         <Stack.Screen name="DatePicker" component={DatePicker} />
