@@ -7,13 +7,12 @@ export default function ConceptScreen({ navigation }) {
   return (
     <View styles={styles.container}>
       <Header
-          title="INFINITE CUT"
-          colorUser={false}
-          colorScissors={false}
-          navigation={navigation}
-        />
-      <LinearGradient colors={["#EAE0D5", "#C6AC8F"]} >
-        
+        title="INFINITE CUT"
+        colorUser={false}
+        colorScissors={false}
+        navigation={navigation}
+      />
+      <LinearGradient colors={["#EAE0D5", "#C6AC8F"]}>
         <View style={styles.upper}>
           <Text style={styles.title}>Beau et soigné quand vous voulez.</Text>
           <Text style={styles.subTitle}>
@@ -23,15 +22,15 @@ export default function ConceptScreen({ navigation }) {
             {"\n"}Profitez d'abonnements avantageux pour des services de qualité
           </Text>
         </View>
-<View style={styles.bottompage}>
+      </LinearGradient>
+      <View style={styles.bottomPage}>
         <MaterialCommunityIcons
           name="chevron-double-down"
           size={50}
           color="#2233B"
           onPress={() => navigation.navigate("Connection")}
         />
-        </View>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -40,10 +39,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center" 
+    alignItems: "center",
   },
   upper: {
-    height: 450,
+    width: "100%",
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
@@ -58,11 +57,11 @@ const styles = StyleSheet.create({
     color: "#5E503F",
     padding: 15,
   },
-  bottompage: {
+  bottomPage: {
     alignItems: "center",
-    width: 130,
-    margin: 120,
-    justifyContent: "center"
-  }
-  
+    width: "100%",
+    height: "10%",
+    justifyContent: "flex-end",
+    backgroundColor: "blue",
+  },
 });

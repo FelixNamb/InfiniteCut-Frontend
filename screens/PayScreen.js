@@ -19,18 +19,39 @@ export default function PayScreen({ navigation }) {
   const [anneeExpiration, setAnneeExpiration] = useState(null);
 
   return (
-    <View style={styles.container}>
-      <Header title='INFINITE CUT' colorScissors={false} colorUser={false} navigation={navigation} />
-      <Text style={styles.title}>Zone de Paiement</Text>
-      <ImageBackground
-        style={styles.image}
-        imageStyle={{ borderRadius: 20}}
-        source={require("../assets/Formule1.jpg")}
-      >
-        <Text style={styles.nameFormula}>ESSENTIEL</Text>
-      </ImageBackground>
-      <Text>39,99€</Text>
-      <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.container}>
+      <Header
+        title="INFINITE CUT"
+        colorScissors={false}
+        colorUser={false}
+        navigation={navigation}
+      />
+      <Text style={styles.title}>Confirmer votre {"\n"}abonnement</Text>
+      <View style={styles.cardEssentielContainer}>
+        <ImageBackground
+          source={require("../assets/formule_essentiel.jpg")}
+          style={styles.cardEssentiel}
+          imageStyle={{ borderRadius: 20 }}
+        >
+          <View style={styles.cardEssentielView}>
+            <Text
+              style={{
+                fontSize: 30,
+                color: "white",
+                letterSpacing: 10,
+                margin: 10,
+                fontWeight: "bold",
+              }}
+            >
+              ESSENTIEL
+            </Text>
+          </View>
+        </ImageBackground>
+      </View>
+      <View style={styles.priceContainer}>
+        <Text>39,99€</Text>
+      </View>
+      <View style={styles.safeArea}>
         <View style={styles.icon}>
           <FontAwesome name="cc-visa" size={20} color="black" />
           <FontAwesome name="cc-mastercard" size={20} color="black" />
@@ -66,14 +87,14 @@ export default function PayScreen({ navigation }) {
             value={cvc}
           />
         </View>
-      </SafeAreaView>
+      </View>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("RDVs")}
       >
         <Text style={styles.textButton}>Payer</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -87,31 +108,53 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAE0D5",
   },
   title: {
-    fontSize: 24,
-    fontWeight: "300",
+    color: "#5E503F",
+    fontSize: 40,
+    textAlign: "center",
   },
-  image: {
-    width: 300,
-    height: 200,
-    borderRadius: 50,
-    resizeMode: "cover",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-  },
-  nameFormula: {
-    fontSize: 20,
-    fontWeight: "500",
-    color: "white",
+  cardEssentielContainer: {
+    width: "100%",
+    height: "25%",
+    alignItems: "center",
+    justifyContent: "center",
     margin: 10,
   },
+  cardEssentiel: {
+    height: "100%",
+    width: 300,
+  },
+  cardEssentielView: {
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  priceContainer: {
+    height: 40,
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    borderColor: "#5E503F",
+    borderWidth: 1,
+  },
   safeArea: {
-    borderWidth: 2,
     height: 200,
     width: 300,
     padding: 10,
     justifyContent: "space-around",
-    borderColor: "black",
+    alignItems: "center",
     borderRadius: 20,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   icon: {
     flexDirection: "row",

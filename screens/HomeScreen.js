@@ -1,44 +1,27 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Header from "../components/Header";
 
 export default function HomeScreen({ navigation }) {
   return (
-          <ImageBackground
-        style={styles.backgroundImage}
-        source={require("../assets/background_home.jpg")}
-      >
-        <LinearGradient
-          colors={["#EAE0D5", "#C6AC8F"]}
-          style={styles.gradient}
-        />
-        <Header
-          style={styles.header}
-          title=""
-          colorScissors={false}
-          colorUser={false}
-        />
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>INFINITE CUT</Text>
-        </View>
-        <View style={styles.bottomPage}>
-          <Text style={styles.text}>Découvrez notre {"\n"} concept ...</Text>
+    <ImageBackground
+      style={styles.backgroundImage}
+      source={require("../assets/background_home.jpg")}
+    >
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>INFINITE {"\n"}CUT</Text>
+      </View>
+      <View style={styles.bottomPage}>
+        <Text style={styles.text}>Découvrez{"\n"} notre concept ...</Text>
+        <View style={styles.iconContainer}>
           <MaterialCommunityIcons
             name="chevron-double-down"
             size={50}
             color="#C6AC8F"
-            margin="10"
+            onPress={() => navigation.navigate("Concept")}
           />
         </View>
-      </ImageBackground>
-    
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -49,12 +32,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   bottomPage: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  iconContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: 370,
-    margin: 20,
+    marginTop: 50,
+    marginBottom: 10,
   },
- 
   background: {
     position: "absolute",
     left: 0,
@@ -71,22 +58,20 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     color: "#C6AC8F",
-    letterSpacing: 5,
-    textAlign: "justify",
-    marginBottom: 0,
+    letterSpacing: 6,
+    textAlign: "center",
   },
   titleContainer: {
-    width: 360,
     flex: 1,
     alignItems: "center",
-    marginTop: 50,
-    marginLeft: 30,
+    marginTop: 70,
   },
   title: {
     color: "white",
     fontSize: 50,
     color: "#C6AC8F",
-    letterSpacing: 5,
+    letterSpacing: 15,
+    textAlign: "center",
   },
   header: {
     width: "100%",

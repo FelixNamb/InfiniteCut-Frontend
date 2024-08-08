@@ -8,8 +8,18 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useState } from "react";
 
 export default function FormuleScreen({ navigation }) {
+  const [isButtonClickedEssentiel, setIsButtonClickedEssentiel] =
+    useState(false);
+  const [isButtonClickedPremium, setIsButtonClickedPremium] = useState(false);
+  const [isButtonClickedExclusif, setIsButtonClickedExclusif] = useState(false);
+
+  const buttonClickedEssentiel = () => {
+    setIsButtonClickedEssentiel(!isButtonClickedEssentiel);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -44,7 +54,7 @@ export default function FormuleScreen({ navigation }) {
                 style={styles.button}
                 onPress={() => navigation.navigate("Pay")}
               >
-                <Text style={styles.textButton}>CHOISIR</Text>
+                <Text style={styles.textButton}>VOIR PLUS</Text>
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -71,7 +81,7 @@ export default function FormuleScreen({ navigation }) {
                 style={styles.button}
                 onPress={() => navigation.navigate("Pay")}
               >
-                <Text style={styles.textButton}>CHOISIR</Text>
+                <Text style={styles.textButton}>VOIR PLUS</Text>
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -98,7 +108,7 @@ export default function FormuleScreen({ navigation }) {
                 style={styles.button}
                 onPress={() => navigation.navigate("Pay")}
               >
-                <Text style={styles.textButton}>CHOISIR</Text>
+                <Text style={styles.textButton}>VOIR PLUS</Text>
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -127,7 +137,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
     justifyContent: "center",
-    margin: 20,
+    marginBottom: 30,
   },
   cardsContainer: {
     flexDirection: "column",
@@ -144,6 +154,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   cardEssentiel: {
+    // backgroundColor : isButtonClicked ? "white",
+    borderColor: "black",
+    borderWidth: 2,
     height: "100%",
     width: 300,
   },
@@ -199,7 +212,7 @@ const styles = StyleSheet.create({
   cardEssentielView: {
     height: "100%",
     width: "100%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   bottomPage: {

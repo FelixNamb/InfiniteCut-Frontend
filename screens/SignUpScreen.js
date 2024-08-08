@@ -90,7 +90,7 @@ export default function SignUpScreen({ navigation }) {
         </View>
         <View style={styles.bottomPage}>
           <TouchableOpacity style={styles.lastButton}>
-            <Text style={styles.lastTextButton}>Créer son compte</Text>
+            <Text style={styles.lastTextButton}>Créer son {"\n"}compte</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -145,14 +145,12 @@ const styles = StyleSheet.create({
     color: "#5E503F",
     fontSize: 40,
     flex: 1,
+    textAlign: "center",
   },
   titleContainer: {
-    height: "25%",
-    width: "90%",
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    margin: 10,
-    flexWrap: "wrap",
   },
   lastButton: {
     backgroundColor: "transparent",
@@ -170,6 +168,8 @@ const styles = StyleSheet.create({
     color: "#5E503F",
     fontWeight: "600",
     fontSize: 20,
+    textAlign: "center",
+    letterSpacing: 2,
   },
   buttonContainer: {
     width: 300,
