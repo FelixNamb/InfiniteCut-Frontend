@@ -19,72 +19,75 @@ export default function PayScreen({ navigation }) {
   const [anneeExpiration, setAnneeExpiration] = useState(null);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.page}>
       <Header title='INFINITE CUT' colorScissors={false} colorUser={false} navigation={navigation} />
-      <Text style={styles.title}>Zone de Paiement</Text>
-      <ImageBackground
-        style={styles.image}
-        imageStyle={{ borderRadius: 20}}
-        source={require("../assets/Formule1.jpg")}
-      >
-        <Text style={styles.nameFormula}>ESSENTIEL</Text>
-      </ImageBackground>
-      <Text>39,99€</Text>
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.icon}>
-          <FontAwesome name="cc-visa" size={20} color="black" />
-          <FontAwesome name="cc-mastercard" size={20} color="black" />
-        </View>
-        <View style={styles.creditCard}>
-          <AntDesign name="creditcard" size={20} color="black" />
-          <TextInput
-            placeholder="0123 4567 8901 2345"
-            onChangeText={(value) => setCreditCard(value)}
-            value={creditCard}
-          />
-        </View>
-        <View style={styles.cvcAndExpiration}>
-          <View style={styles.expiration}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Zone de Paiement</Text>
+        <ImageBackground
+          style={styles.image}
+          imageStyle={{ borderRadius: 20}}
+          source={require("../assets/Formule1.jpg")}
+        >
+          <Text style={styles.nameFormula}>ESSENTIEL</Text>
+        </ImageBackground>
+        <Text>39,99€</Text>
+        <SafeAreaView style={styles.safeArea}>
+          <View style={styles.icon}>
+            <FontAwesome name="cc-visa" size={20} color="black" />
+            <FontAwesome name="cc-mastercard" size={20} color="black" />
+          </View>
+          <View style={styles.creditCard}>
+            <AntDesign name="creditcard" size={20} color="black" />
             <TextInput
-              style={styles.mois}
-              placeholder="01"
-              onChangeText={(value) => setMoisExpiration(value)}
-              value={moisExpiration}
-            />
-            <Text>/</Text>
-            <TextInput
-              style={styles.annee}
-              placeholder="01"
-              onChangeText={(value) => setAnneeExpiration(value)}
-              value={anneeExpiration}
+              placeholder="0123 4567 8901 2345"
+              onChangeText={(value) => setCreditCard(value)}
+              value={creditCard}
             />
           </View>
-          <TextInput
-            style={styles.inputCvc}
-            placeholder="123"
-            onChangeText={(value) => setCvc(value)}
-            value={cvc}
-          />
-        </View>
-      </SafeAreaView>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("RDVs")}
-      >
-        <Text style={styles.textButton}>Payer</Text>
-      </TouchableOpacity>
+          <View style={styles.cvcAndExpiration}>
+            <View style={styles.expiration}>
+              <TextInput
+                style={styles.mois}
+                placeholder="01"
+                onChangeText={(value) => setMoisExpiration(value)}
+                value={moisExpiration}
+              />
+              <Text>/</Text>
+              <TextInput
+                style={styles.annee}
+                placeholder="01"
+                onChangeText={(value) => setAnneeExpiration(value)}
+                value={anneeExpiration}
+              />
+            </View>
+            <TextInput
+              style={styles.inputCvc}
+              placeholder="123"
+              onChangeText={(value) => setCvc(value)}
+              value={cvc}
+            />
+          </View>
+        </SafeAreaView>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("RDVs")}
+        >
+          <Text style={styles.textButton}>Payer</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  page: {
+    flex:1,
+  },
   container: {
-    flex: 1,
-    margin: 0,
-    padding: 0,
-    justifyContent: "space-around",
+    backgroundColor:"#EAE0D5",
+    height: 680,
+    justifyContent: "space_between",
     alignItems: "center",
-    backgroundColor: "#EAE0D5",
   },
   title: {
     fontSize: 24,
@@ -95,11 +98,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 50,
     resizeMode: "cover",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   nameFormula: {
-    fontSize: 20,
+    fontSize: 32,
     fontWeight: "500",
     color: "white",
     margin: 10,
@@ -138,14 +141,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 25,
     flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-  },
-  mois: {
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-  },
-  annee: {
     borderBottomWidth: 1,
     borderBottomColor: "black",
   },

@@ -36,55 +36,57 @@ export default function DatePicker( {navigation}) {
     }
 
     return(
-        <View style={styles.container}>
+        <View style={styles.page}>
             <Header title='INFINITE CUT' colorScissors={false} colorUser={false} navigation={navigation} />
-            <View style={styles.upperView}>
-                <Text style={styles.title}>Votre rendez-vous</Text>
-                <Text style={styles.subtitle}>Choisissez une date</Text>
-                <TouchableOpacity style={styles.buttonDate} onPress={() => setSelectDatePicker(true)}>
-                    <Text style={styles.textDate}>{dateTaken ? dateTaken: "Sélectionner une date"}</Text>
-                </TouchableOpacity>
-                {selectDatePicker && 
-                <RNDateTimePicker 
-                mode="date" 
-                display="default" 
-                value={new Date()} 
-                maximumDate={new Date(2030, 10, 20)} 
-                onChange={(value) => onChangeDate(value)}
-                />}
-            </View>
-            <View style={styles.bottomView}>
-                <Text style={styles.subtitle}>Choisissez une demi journée</Text>
-                <View style={styles.ButtonSection}>
-                    <TouchableOpacity 
-                    style={morningButton ? styleButton : styles.button} 
-                    onPress={() => {setMorningButton(true), setEveningButton(false)}}
-                    >
-                        <Text style={morningButton ? styleTextButton : styles.textButton}>Matin</Text>
+            <View style={styles.container}>
+                <View style={styles.upperView}>
+                    <Text style={styles.title}>Votre rendez-vous</Text>
+                    <Text style={styles.subtitle}>Choisissez une date</Text>
+                    <TouchableOpacity style={styles.buttonDate} onPress={() => setSelectDatePicker(true)}>
+                        <Text style={styles.textDate}>{dateTaken ? dateTaken: "Sélectionner une date"}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
-                    style={eveningButton ? styleButton : styles.button} 
-                    onPress={() => {setEveningButton(true), setMorningButton(false)}}
-                    >
-                        <Text style={eveningButton ? styleTextButton : styles.textButton}>Après-midi</Text>
-                    </TouchableOpacity>
+                    {selectDatePicker && 
+                    <RNDateTimePicker 
+                    mode="date" 
+                    display="default" 
+                    value={new Date()} 
+                    maximumDate={new Date(2030, 10, 20)} 
+                    onChange={(value) => onChangeDate(value)}
+                    />}
                 </View>
+                <View style={styles.bottomView}>
+                    <Text style={styles.subtitle}>Choisissez une demi journée</Text>
+                    <View style={styles.ButtonSection}>
+                        <TouchableOpacity 
+                        style={morningButton ? styleButton : styles.button} 
+                        onPress={() => {setMorningButton(true), setEveningButton(false)}}
+                        >
+                            <Text style={morningButton ? styleTextButton : styles.textButton}>Matin</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        style={eveningButton ? styleButton : styles.button} 
+                        onPress={() => {setEveningButton(true), setMorningButton(false)}}
+                        >
+                            <Text style={eveningButton ? styleTextButton : styles.textButton}>Après-midi</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChooseBarber")}>
+                    <Text style={styles.textButton}>Confirmer</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChooseBarber")}>
-                <Text style={styles.textButton}>Confirmer</Text>
-            </TouchableOpacity>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    container : {
+    page: {
         flex: 1,
-        backgroundColor: '#EAE0D5',
-        padding: 0,
-        margin: 0,
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        backgroundColor: "#EAE0D5",
+    },
+    container: {
+        justifyContent: "space-evenly",
+        alignItems: "center",
     },
     title: {
         fontSize: 32,

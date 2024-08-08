@@ -35,6 +35,7 @@ export default function HomeScreen({ navigation }) {
             size={50}
             color="#C6AC8F"
             margin="10"
+            onPress={() => navigation.navigate("Concept")}
           />
         </View>
       </ImageBackground>

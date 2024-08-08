@@ -65,7 +65,7 @@ export default function ChooseBarberScreen({ navigation }) {
                             <Entypo name="squared-cross" size={24} color="red" />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.buttonToFormulas} onPress={() => navigation.navigate("Pay")}>
+                    <TouchableOpacity style={styles.buttonToFormulas} onPress={() => navigation.navigate("Formules")}>
                         <Text style={styles.textButtonToFormula}>Découvrer nos formules</Text>
                         <Text style={styles.textButtonToFormula}>d'abonnement</Text>
                     </TouchableOpacity>
