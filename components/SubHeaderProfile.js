@@ -4,11 +4,19 @@ export default function SubHeaderProfile(props) {
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={() => props.navigation.navigate("MesRdvs")}>
-                <Text style={styles.text}>{props.firstText}</Text>
+                <Text style={{
+        color: '#22333B',
+        fontSize: 18,
+        fontWeight: props?.styleFirstText,
+    }}>{props.firstText}</Text>
             </TouchableOpacity>
             <View style={styles.divider}></View>
             <TouchableOpacity onPress={() => props.navigation.navigate("MonCompte")}>
-                <Text style={styles.text}>{props.secondText}</Text>
+                <Text style={{
+        color: '#22333B',
+        fontSize: 18,
+        fontWeight: props?.styleSecondText,
+    }}>{props.secondText}</Text>
             </TouchableOpacity>
         </View>
     )
