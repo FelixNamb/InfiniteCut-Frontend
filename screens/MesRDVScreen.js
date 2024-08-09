@@ -8,63 +8,221 @@ import {
   Platform,
   Image,
   TextInput,
+  ScrollView,
 } from "react-native";
 import Header from "../components/Header";
 import SubHeaderProfile from "../components/SubHeaderProfile";
 import Entypo from '@expo/vector-icons/Entypo';
+import Octicons from "@expo/vector-icons/Octicons";
+import Feather from '@expo/vector-icons/Feather';
+import { useState } from "react";
 
 export default function FormuleScreen({ navigation }) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const stars = [];
+  for (let i = 0; i < 5; i++) {
+    stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
+  }
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <SafeAreaView
-        style={styles.AreaView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
+    <SafeAreaView style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <View style={styles.header}>
         <Header title="INFINITE CUT" colorScissors={false} colorUser={true} navigation={navigation} />
         <SubHeaderProfile firstText="Mes RDV" secondText="Mon Compte" navigation={navigation} />
-        <Text style={styles.title}>Mon prochain rendez-vous</Text>
+      </View>
+      <View style={styles.page}>
+        <Text style={styles.title}>Mon prochain RDV</Text>
+      <View style={styles.upContainer}>
         <View style={styles.rdvCard}>
           <View style={styles.informations}>
             <Text style={styles.date}>Vendredi 16 Août, 16h00</Text>
             <View style={styles.imageName}>
               <Image 
               style={styles.img} 
-              source={require('../assets/background_home.jpg')}/>
+              source={require('../assets/background_home.jpg')}
+              resizeMode="contain"/>
               <Text style={styles.name}>Lucie Saint Clair</Text>
             </View>
-            <View style={styles.location}>
+            <View style={styles.allIcons}>
+              <View style={styles.location}>
                 <Entypo name="location-pin" size={24} color="black" />
-                <Text>Adresse du salon</Text>
-            </View>
-            <View style={styles.prestation}>
+                <Text> Adresse du salon</Text>
+              </View>
+              <View style={styles.prestation}>
                 <Entypo name="scissors" size={24} color="black" />
-                <Text>N° formule</Text>
-            </View>
-            <View style={styles.tempsMoyen}>
+                <Text> N° formule</Text>
+              </View>
+              <View style={styles.tempsMoyen}>
                 <Entypo name="clock" size={24} color="black" />
-                <Text>20 minutes</Text>
+                <Text> 20 minutes</Text>
+              </View>
             </View>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DatePicker")}>
-            <Text>Déplacer le RDV</Text>
+            <Text style={styles.textButton}>Déplacer le RDV</Text>
           </TouchableOpacity>
+          <View style={styles.calendarAndDelete}>
+            <TouchableOpacity style={styles.addToCalendar}>
+              <Entypo name="calendar" size={24} color="black" />
+              <Text> Ajouter à mon calendrier</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteRdv}>
+              <Feather name="trash" size={24} color="black" />
+              <Text> Annuler le rdv</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </View>
+        <Text style={styles.title}>Historique de RDV</Text>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.barber}>
+          <View style={styles.leftCard}>
+            <Image
+              style={styles.img}
+              source={require("../assets/background_home.jpg")}
+            />
+            <View style={styles.nameAndNote}>
+              <Text>Lucie Saint Clair</Text>
+              <View style={styles.star}>{stars}</View>
+            </View>
+          </View>
+          <Octicons
+            name="heart-fill"
+            size={30}
+            color={isLiked ? "#C6AC8F" : "#22333B"}
+            onPress={() => setIsLiked(!isLiked)}
+          />
+        </View>
+      </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor: "#EAE0D5"
-  },
-  AreaView: {
-    backgroundColor: "#EAE0D5",
+  container: {
     flex: 1,
+    backgroundColor: "#EAE0D5",
+    alignItems: "center",
   },
-  image:{
-    width: 50,
-    height: 50,
-  }
+  page: {
+    justifyContent: "space-around",
+    alignItems: "flex-start",
+  },
+  header: {
+    width: '100%',
+  },
+  upContainer: {
+    width: '100%',
+    height: '50%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  title: {
+    width: "100%",
+    fontSize: 26,
+    letterSpacing: 6
+  },
+  rdvCard:{
+    marginTop: 10,
+    height: '90%',
+    backgroundColor:"white",
+    width: 320,
+    justifyContent:'space-between',
+    alignItems: "center",
+    borderRadius: 20,
+    borderWidth:2,
+    borderColor:"#22333B",
+    padding: 10,
+  },
+  informations:{
+    width: "90%",
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+  },
+  date:{
+    fontWeight: "500",
+  },
+  imageName:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "flex-start",
+    width: "100%",
+  },
+  img: {
+    width: 85,
+    height: 85,
+    borderRadius:20,
+  },
+  prestation:{
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    margin:5
+  },
+  location :{
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  }, prestation:{
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  }, tempsMoyen :{
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  },
+  addToCalendar:{
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  },
+  deleteRdv:{
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  },
+  button: {
+    width: 120,
+    backgroundColor: "#5E503F",
+    borderRadius: 20,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textButton:{
+    color:"#EAE0D5"
+  },
+  barber: {
+    width: 300,
+    height: 100,
+    backgroundColor: "white",
+    borderRadius: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    margin: 10,
+    borderWidth:2,
+    borderColor: "#22333B"
+  },
+  leftCard: {
+    flexDirection: "row",
+    height: 85,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  nameAndNote: {
+    flexDirection: "column",
+  },
+  star: {
+    flexDirection: "row",
+  },
+  img: {
+    height: 85,
+    width: 85,
+    borderRadius: 20,
+    marginRight: 5,
+  },
 });
