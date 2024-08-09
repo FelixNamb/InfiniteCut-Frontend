@@ -29,73 +29,109 @@ export default function FormuleScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={styles.header}>
         <Header title="INFINITE CUT" colorScissors={false} colorUser={true} navigation={navigation} />
-        <SubHeaderProfile firstText="Mes RDV" secondText="Mon Compte" navigation={navigation} />
+        <SubHeaderProfile firstText="Mes RDV" secondText="Mon Compte" navigation={navigation} styleFirstText="500" />
       </View>
-      <View style={styles.page}>
+      <ScrollView style={styles.page} contentContainerStyle={{alignItems: "center", justifyContent:"space-around"}}>
         <Text style={styles.title}>Mon prochain RDV</Text>
-      <View style={styles.upContainer}>
-        <View style={styles.rdvCard}>
-          <View style={styles.informations}>
-            <Text style={styles.date}>Vendredi 16 Août, 16h00</Text>
-            <View style={styles.imageName}>
-              <Image 
-              style={styles.img} 
-              source={require('../assets/background_home.jpg')}
-              resizeMode="contain"/>
-              <Text style={styles.name}>Lucie Saint Clair</Text>
+        <View style={styles.upContainer}>
+          <View style={styles.rdvCard}>
+            <View style={styles.informations}>
+              <Text style={styles.date}>Vendredi 16 Août, 16h00</Text>
+              <View style={styles.imageName}>
+                <Image
+                  style={styles.img}
+                  source={require('../assets/background_home.jpg')}
+                />
+                <Text style={styles.name}>Lucie Saint Clair</Text>
+              </View>
+              <View style={styles.allIcons}>
+                <View style={styles.location}>
+                  <Entypo name="location-pin" size={24} color="black" />
+                  <Text> Adresse du salon</Text>
+                </View>
+                <View style={styles.prestation}>
+                  <Entypo name="scissors" size={24} color="black" />
+                  <Text> N° formule</Text>
+                </View>
+                <View style={styles.tempsMoyen}>
+                  <Entypo name="clock" size={24} color="black" />
+                  <Text> 20 minutes</Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.allIcons}>
-              <View style={styles.location}>
-                <Entypo name="location-pin" size={24} color="black" />
-                <Text> Adresse du salon</Text>
-              </View>
-              <View style={styles.prestation}>
-                <Entypo name="scissors" size={24} color="black" />
-                <Text> N° formule</Text>
-              </View>
-              <View style={styles.tempsMoyen}>
-                <Entypo name="clock" size={24} color="black" />
-                <Text> 20 minutes</Text>
-              </View>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("DatePicker")}>
+              <Text style={styles.textButton}>Déplacer le RDV</Text>
+            </TouchableOpacity>
+            <View style={styles.calendarAndDelete}>
+              <TouchableOpacity style={styles.addToCalendar}>
+                <Entypo name="calendar" size={24} color="black" />
+                <Text> Ajouter à mon calendrier</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.deleteRdv}>
+                <Feather name="trash" size={24} color="black" />
+                <Text> Annuler le rdv</Text>
+              </TouchableOpacity>
             </View>
-          </View>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DatePicker")}>
-            <Text style={styles.textButton}>Déplacer le RDV</Text>
-          </TouchableOpacity>
-          <View style={styles.calendarAndDelete}>
-            <TouchableOpacity style={styles.addToCalendar}>
-              <Entypo name="calendar" size={24} color="black" />
-              <Text> Ajouter à mon calendrier</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteRdv}>
-              <Feather name="trash" size={24} color="black" />
-              <Text> Annuler le rdv</Text>
-            </TouchableOpacity>
           </View>
         </View>
-      </View>
         <Text style={styles.title}>Historique de RDV</Text>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.barber}>
-          <View style={styles.leftCard}>
-            <Image
-              style={styles.img}
-              source={require("../assets/background_home.jpg")}
-            />
-            <View style={styles.nameAndNote}>
-              <Text>Lucie Saint Clair</Text>
-              <View style={styles.star}>{stars}</View>
+        <View style={styles.scrollView}>
+          <View style={styles.barber}>
+            <View style={styles.leftCard}>
+              <Image
+                style={styles.img}
+                source={require("../assets/background_home.jpg")}
+              />
+              <View style={styles.nameAndNote}>
+                <Text>Lucie Saint Clair</Text>
+                <View style={styles.star}>{stars}</View>
+              </View>
             </View>
+            <Octicons
+              name="heart-fill"
+              size={30}
+              color={isLiked ? "#C6AC8F" : "#22333B"}
+              onPress={() => setIsLiked(!isLiked)}
+            />
           </View>
-          <Octicons
-            name="heart-fill"
-            size={30}
-            color={isLiked ? "#C6AC8F" : "#22333B"}
-            onPress={() => setIsLiked(!isLiked)}
-          />
+          <View style={styles.barber}>
+            <View style={styles.leftCard}>
+              <Image
+                style={styles.img}
+                source={require("../assets/background_home.jpg")}
+              />
+              <View style={styles.nameAndNote}>
+                <Text>Lucie Saint Clair</Text>
+                <View style={styles.star}>{stars}</View>
+              </View>
+            </View>
+            <Octicons
+              name="heart-fill"
+              size={30}
+              color={isLiked ? "#C6AC8F" : "#22333B"}
+              onPress={() => setIsLiked(!isLiked)}
+            />
+          </View>
+          <View style={styles.barber}>
+            <View style={styles.leftCard}>
+              <Image
+                style={styles.img}
+                source={require("../assets/background_home.jpg")}
+              />
+              <View style={styles.nameAndNote}>
+                <Text>Lucie Saint Clair</Text>
+                <View style={styles.star}>{stars}</View>
+              </View>
+            </View>
+            <Octicons
+              name="heart-fill"
+              size={30}
+              color={isLiked ? "#C6AC8F" : "#22333B"}
+              onPress={() => setIsLiked(!isLiked)}
+            />
+          </View>
         </View>
       </ScrollView>
-      </View>
     </SafeAreaView>
   );
 }
@@ -106,9 +142,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAE0D5",
     alignItems: "center",
   },
-  page: {
-    justifyContent: "space-around",
-    alignItems: "flex-start",
+  page:{
+    minHeight: "100vh"
   },
   header: {
     width: '100%',
@@ -118,33 +153,37 @@ const styles = StyleSheet.create({
     height: '50%',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    marginTop: 30,
   },
   title: {
     width: "100%",
     fontSize: 26,
-    letterSpacing: 6
+    letterSpacing: 6,
+    marginTop: 30,
+    marginBottom: 20,
   },
-  rdvCard:{
+  rdvCard: {
     marginTop: 10,
     height: '90%',
-    backgroundColor:"white",
+    backgroundColor: "white",
     width: 320,
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: "center",
     borderRadius: 20,
-    borderWidth:2,
-    borderColor:"#22333B",
-    padding: 10,
+    borderWidth: 2,
+    borderColor: "#22333B",
+    paddingBottom: 30,
   },
-  informations:{
+  informations: {
     width: "90%",
     justifyContent: 'space-around',
     alignItems: 'flex-start',
+    height: "60%",
   },
-  date:{
+  date: {
     fontWeight: "500",
   },
-  imageName:{
+  imageName: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: "flex-start",
@@ -153,33 +192,37 @@ const styles = StyleSheet.create({
   img: {
     width: 85,
     height: 85,
-    borderRadius:20,
+    borderRadius: 20,
   },
-  prestation:{
+  prestation: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    margin:5
+    margin: 5
   },
-  location :{
-    flexDirection:"row",
+  location: {
+    flexDirection: "row",
     alignItems: 'center',
     justifyContent: "flex-start",
-  }, prestation:{
-    flexDirection:"row",
+  }, prestation: {
+    flexDirection: "row",
     alignItems: 'center',
     justifyContent: "flex-start",
-  }, tempsMoyen :{
-    flexDirection:"row",
-    alignItems: 'center',
-    justifyContent: "flex-start",
-  },
-  addToCalendar:{
-    flexDirection:"row",
+  }, tempsMoyen: {
+    flexDirection: "row",
     alignItems: 'center',
     justifyContent: "flex-start",
   },
-  deleteRdv:{
-    flexDirection:"row",
+  calendarAndDelete: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  addToCalendar: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "flex-start",
+  },
+  deleteRdv: {
+    flexDirection: "row",
     alignItems: 'center',
     justifyContent: "flex-start",
   },
@@ -191,8 +234,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textButton:{
-    color:"#EAE0D5"
+  textButton: {
+    color: "#EAE0D5"
   },
   barber: {
     width: 300,
@@ -204,7 +247,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     margin: 10,
-    borderWidth:2,
+    borderWidth: 2,
     borderColor: "#22333B"
   },
   leftCard: {
@@ -225,4 +268,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 5,
   },
+  scrollView: {
+    marginBottom: 20,
+    marginTop:15,
+  }
 });
