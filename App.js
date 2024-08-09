@@ -21,8 +21,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Formules" component={FormulesScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Formules" component={FormulesScreen} />
         <Stack.Screen name="MesInformations" component={MesInformations} />
         <Stack.Screen name="RDVs" component={MesRDVScreen} />
         <Stack.Screen name="DatePicker" component={DatePicker} />
