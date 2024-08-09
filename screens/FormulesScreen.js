@@ -8,8 +8,13 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import CardFlip from "react-native-card-flip";
+import React, { useRef } from "react";
 
 export default function FormulesScreen({ navigation }) {
+  const cardEssentielRef = useRef(null);
+  const cardPremiumRef = useRef(null);
+  const cardExclusifRef = useRef(null);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -21,33 +26,11 @@ export default function FormulesScreen({ navigation }) {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Nos Formules</Text>
       </View>
-      <CardFlip
-        style={styles.cardsContainer}
-        ref={(card) => (this.cardEssentiel = card)}
-      >
-        <TouchableOpacity
-          style={styles.cardEssentielContainer}
-          onPress={() => {
-            this.cardEssentiel.flip();
-          }}
-        >
-          <View style={styles.contentCardVerso}>
-            <Text style={styles.textContentCardverso}>
-              Fréquence : 3 {"\n"} Engagement : 6 mois minimum {"\n"}
-              Prestations : shampooing - coupe - coiffage
-            </Text>
-            <Text style={styles.price}>39.99 €</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Pay")}
-            >
-              <Text style={styles.textButton}>CHOISIR</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
+
+      <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => this.cardEssentiel.flip()}
+          onPress={() => cardEssentielRef.current.flip()} // Utilisation correcte de la référence
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
@@ -69,9 +52,7 @@ export default function FormulesScreen({ navigation }) {
                 </Text>
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => {
-                    this.cardEssentiel.flip();
-                  }}
+                  onPress={() => cardEssentielRef.current.flip()}
                 >
                   <Text style={styles.textButton}>VOIR PLUS</Text>
                 </TouchableOpacity>
@@ -79,24 +60,17 @@ export default function FormulesScreen({ navigation }) {
             </ImageBackground>
           </View>
         </TouchableOpacity>
-      </CardFlip>
-      <CardFlip
-        style={styles.cardsContainer}
-        ref={(card) => (this.cardPremium = card)}
-      >
+
         <TouchableOpacity
           style={styles.cardEssentielContainer}
-          onPress={() => {
-            this.cardPremium.flip();
-            console.log(this.card);
-          }}
+          onPress={() => cardEssentielRef.current.flip()}
         >
           <View style={styles.contentCardVerso}>
             <Text style={styles.textContentCardverso}>
-              Fréquence : 4 {"\n"} Engagement : aucun {"\n"}Prestations :
-              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe
+              Fréquence : 3 {"\n"} Engagement : 6 mois minimum {"\n"}
+              Prestations : shampooing - coupe - coiffage
             </Text>
-            <Text style={styles.price}>49.99 €</Text>
+            <Text style={styles.price}>39.99 €</Text>
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate("Pay")}
@@ -105,9 +79,12 @@ export default function FormulesScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
+      </CardFlip>
+
+      <CardFlip style={styles.cardsContainer} ref={cardPremiumRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => this.cardPremium.flip()}
+          onPress={() => cardPremiumRef.current.flip()} // Utilisation correcte de la référence
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
@@ -129,9 +106,7 @@ export default function FormulesScreen({ navigation }) {
                 </Text>
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => {
-                    this.cardPremium.flip();
-                  }}
+                  onPress={() => cardPremiumRef.current.flip()}
                 >
                   <Text style={styles.textButton}>VOIR PLUS</Text>
                 </TouchableOpacity>
@@ -139,24 +114,17 @@ export default function FormulesScreen({ navigation }) {
             </ImageBackground>
           </View>
         </TouchableOpacity>
-      </CardFlip>
-      <CardFlip
-        style={styles.cardsContainer}
-        ref={(card) => (this.cardExclusif = card)}
-      >
+
         <TouchableOpacity
           style={styles.cardEssentielContainer}
-          onPress={() => {
-            this.cardExclusif.flip();
-          }}
+          onPress={() => cardPremiumRef.current.flip()}
         >
           <View style={styles.contentCardVerso}>
             <Text style={styles.textContentCardverso}>
               Fréquence : 4 {"\n"} Engagement : aucun {"\n"}Prestations :
-              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe -
-              soin du visage {"\n"} épilation (nez, oreilles)
+              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe
             </Text>
-            <Text style={styles.price}>54.99 €</Text>
+            <Text style={styles.price}>49.99 €</Text>
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate("Pay")}
@@ -165,9 +133,12 @@ export default function FormulesScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
+      </CardFlip>
+
+      <CardFlip style={styles.cardsContainer} ref={cardExclusifRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => this.cardExclusif.flip()}
+          onPress={() => cardExclusifRef.current.flip()} // Utilisation correcte de la référence
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
@@ -189,14 +160,32 @@ export default function FormulesScreen({ navigation }) {
                 </Text>
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => {
-                    this.cardExclusif.flip();
-                  }}
+                  onPress={() => cardExclusifRef.current.flip()}
                 >
                   <Text style={styles.textButton}>VOIR PLUS</Text>
                 </TouchableOpacity>
               </View>
             </ImageBackground>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.cardEssentielContainer}
+          onPress={() => cardExclusifRef.current.flip()}
+        >
+          <View style={styles.contentCardVerso}>
+            <Text style={styles.textContentCardverso}>
+              Fréquence : 4 {"\n"} Engagement : aucun {"\n"}Prestations :
+              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe -
+              soin du visage {"\n"} épilation (nez, oreilles)
+            </Text>
+            <Text style={styles.price}>54.99 €</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Pay")}
+            >
+              <Text style={styles.textButton}>CHOISIR</Text>
+            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </CardFlip>
@@ -206,10 +195,11 @@ export default function FormulesScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "#EAE0D5",
   },
+
   title: {
     color: "#5E503F",
     fontSize: 40,
@@ -217,7 +207,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 80,
+    marginBottom: 10,
     marginTop: 10,
   },
   cardsContainer: {
@@ -229,9 +219,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6AC8F",
     borderColor: "#5E503F",
     borderWidth: 1,
+    marginTop: 20,
   },
   cardEssentiel: {
-    height: 200,
+    height: "100%",
     width: "100%",
   },
   cardPremiumContainer: {
@@ -242,7 +233,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   cardPremium: {
-    height: 200,
+    height: "100%",
     width: "100%",
   },
   cardExclusifContainer: {
@@ -253,7 +244,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   cardExclusif: {
-    height: 200,
+    height: "100%",
     width: "100%",
   },
   button: {
@@ -265,6 +256,7 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderRadius: 50,
     borderWidth: 2,
+    marginBottom: 15,
   },
   textButton: {
     color: "white",
