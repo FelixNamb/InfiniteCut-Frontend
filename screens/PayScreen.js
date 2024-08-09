@@ -5,6 +5,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import Header from "../components/Header";
@@ -52,7 +53,7 @@ export default function PayScreen({ navigation }) {
     await whatIcon();
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Header
         title="INFINITE CUT"
         colorScissors={false}
@@ -60,6 +61,7 @@ export default function PayScreen({ navigation }) {
         navigation={navigation}
       />
       <Text style={styles.title}>Confirmer votre {"\n"}abonnement</Text>
+      <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.card}>
         <View style={styles.viewIcon}>
           {visa ? (
@@ -94,7 +96,8 @@ export default function PayScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Payer</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -111,9 +114,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 30,
   },
+  safeAreaView:{
+    justifyContent:"center",
+    alignItems:"center",
+    width: "80%",
+    marginBottom: 70
+  },
   card: {
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 200
   }, 
   viewIcon : {
     width: '90%',
@@ -122,8 +132,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 30,
-    height: 30
+    width: 40,
+    height: 40
   },
   cvcAndExpiration : {
     width: '90%',
@@ -133,23 +143,23 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#5E503F",
-    fontSize: 40,
+    fontSize: 32,
     textAlign: "center",
   },
   card: {
     width: "80%",
-    height: "25%",
+    height: "35%",
     alignItems: "center",
     justifyContent: "space-evenly",
-    margin: 10,
     backgroundColor:'#A9A9A9',
     borderRadius: 20,
   },
   safeArea: {
-    height: 200,
+    height: 170,
     width: 300,
     borderRadius: 20,
     backgroundColor: "white",
+    margin: 10,
   },
   icon: {
     flexDirection: "row",
