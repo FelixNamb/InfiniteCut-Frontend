@@ -15,27 +15,51 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
 
+//Rajout des reducers
+
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from "react-redux";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-community/async-storage';
+import user from "./reducers/user";
+import formules from "./reducers/formules";
+
+const reducers = combineReducers({ user, formules });
+const persistConfig = { key: 'faceup', storage: AsyncStorage };
+
+const store = configureStore({
+  reducer: persistReducer(persistConfig, reducers),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+});
+
+const persistor = persistStore(store);
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Formules" component={FormulesScreen} />
-        <Stack.Screen name="MesInformations" component={MesInformations} />
-        <Stack.Screen name="RDVs" component={MesRDVScreen} />
-        <Stack.Screen name="DatePicker" component={DatePicker} />
-        <Stack.Screen name="Concept" component={ConceptScreen} />
-        <Stack.Screen name="Connection" component={ConnectionScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-        <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
-        <Stack.Screen name="Pay" component={PayScreen} />
-        <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
-        <Stack.Screen name="MyAgenda" component={MyAgenda} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Formules" component={FormulesScreen} />
+            <Stack.Screen name="MesInformations" component={MesInformations} />
+            <Stack.Screen name="RDVs" component={MesRDVScreen} />
+            <Stack.Screen name="DatePicker" component={DatePicker} />
+            <Stack.Screen name="Concept" component={ConceptScreen} />
+            <Stack.Screen name="Connection" component={ConnectionScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
+            <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
+            <Stack.Screen name="Pay" component={PayScreen} />
+            <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
+            <Stack.Screen name="MyAgenda" component={MyAgenda} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 

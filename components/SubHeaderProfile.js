@@ -25,7 +25,7 @@ export default function SubHeaderProfile(props) {
 const styles = StyleSheet.create({
     container :{
         width: '100%',
-        height: 75,
+        height: 50,
         backgroundColor: 'white',
         borderBottomColor: "#22333B",
         borderBottomWidth: 1,
