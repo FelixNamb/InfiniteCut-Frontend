@@ -17,20 +17,21 @@ import MesInformations from "./screens/profileUser/mesInformations";
 
 //Rajout des reducers
 
-import { persistStore, persistReducer } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-community/async-storage';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-community/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
 
 const reducers = combineReducers({ user, formules });
-const persistConfig = { key: 'faceup', storage: AsyncStorage };
+const persistConfig = { key: "faceup", storage: AsyncStorage };
 
 const store = configureStore({
   reducer: persistReducer(persistConfig, reducers),
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 const persistor = persistStore(store);
