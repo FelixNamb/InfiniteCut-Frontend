@@ -11,8 +11,15 @@ import {
 import { useState } from "react";
 
 export default function SignUpScreen({ navigation }) {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpMobile, setSignUpMobile] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
   const handleConnection = () => {
     fetch("http://localhost:3000/users/signup", {
@@ -43,6 +50,35 @@ export default function SignUpScreen({ navigation }) {
         }
       });
   };
+
+  const handleSignUp = () => {
+    fetch("http://10.0.2.78:3000/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: signUpEmail,
+        mobile: signUpMobile,
+        password: signUpPassword,
+        ConfirmPassword: signUpConfirmPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(
+            login({
+              email: signUpEmail,
+              token: data.token,
+              mobile: signUpMobile,
+            })
+          );
+          setSignUpEmail("");
+          setSignUpPassword("");
+          setSignUpMobile("");
+          setSignUpConfirmPassword;
+        }
+      });
+  };
   return (
     <KeyboardAvoidingView style={styles.container}>
       <SafeAreaView
@@ -61,6 +97,8 @@ export default function SignUpScreen({ navigation }) {
             keyboardType="email-address"
             textContentType="emailAddress"
             autoComplete="email"
+            onChange={(e) => setSignUpEmail(e.target.value)}
+            value={signUpEmail}
           ></TextInput>
           {emailError && (
             <Text style={styles.error}>Adresse mail invalide</Text>
@@ -70,6 +108,8 @@ export default function SignUpScreen({ navigation }) {
             placeholder="Mobile"
             placeholderTextColor="white"
             autoCapitalize="none"
+            onChange={(e) => setSignUpMobile(e.target.value)}
+            value={signUpMobile}
           ></TextInput>
           <TextInput
             style={styles.inputPassword}
@@ -78,6 +118,8 @@ export default function SignUpScreen({ navigation }) {
             placeholderTextColor="white"
             autoCorrect={false}
             autoCapitalize="none"
+            onChange={(e) => setSignUpPassword(e.target.value)}
+            value={signUpPassword}
           ></TextInput>
           <TextInput
             style={styles.inputConfirmPassword}
@@ -86,10 +128,15 @@ export default function SignUpScreen({ navigation }) {
             placeholderTextColor="white"
             autoCorrect={false}
             autoCapitalize="none"
+            onChange={(e) => setSignUpConfirmPassword(e.target.value)}
+            value={signUpConfirmPassword}
           ></TextInput>
         </View>
         <View style={styles.bottomPage}>
-          <TouchableOpacity style={styles.lastButton}>
+          <TouchableOpacity
+            style={styles.lastButton}
+            onPress={() => handleSignUp()}
+          >
             <Text style={styles.lastTextButton}>Créer son {"\n"}compte</Text>
           </TouchableOpacity>
         </View>
