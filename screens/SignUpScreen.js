@@ -9,82 +9,54 @@ import {
   TextInput,
 } from "react-native";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function SignUpScreen({ navigation }) {
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
 
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpMobile, setSignUpMobile] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
-  const handleConnection = () => {
-    fetch("http://localhost:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application.json" },
-      body: JSON.stringify({
-        email: signUpEmail,
-        mobile: signUpMobile,
-        motDePasse: signUpMotDePasse,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(
-            login({
-              email: signUpEmail,
-              token: data.token,
-              mobile: signUpMobile,
-              motDePasse: signUpMotDePasse,
-            })
-          );
-          navigation.navigate("DatePicker");
-          setSignUpEmail("");
-          setSignUpMobile("");
-          setSignUpMotDePasse("");
-          setSignUpConfirmMotDePasse("");
-        }
-      });
+  const handleSignUp = () => {
+    if (signUpPassword === signUpConfirmPassword) {
+      fetch("http://10.0.2.78:3000/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: signUpEmail,
+          mobile: signUpMobile,
+          motDePasse: signUpPassword,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result) {
+            dispatch(
+              login({
+                email: email,
+                token: data.token,
+                mobile: mobile,
+              })
+            );
+            navigation.navigate("DatePicker");
+            setSignUpEmail("");
+            setSignUpPassword("");
+            setSignUpMobile("");
+            setSignUpConfirmPassword("");
+          }
+        });
+    }
   };
 
-  const handleSignUp = () => {
-    fetch("http://10.0.2.78:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signUpEmail,
-        mobile: signUpMobile,
-        password: signUpPassword,
-        ConfirmPassword: signUpConfirmPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(
-            login({
-              email: signUpEmail,
-              token: data.token,
-              mobile: signUpMobile,
-            })
-          );
-          setSignUpEmail("");
-          setSignUpPassword("");
-          setSignUpMobile("");
-          setSignUpConfirmPassword;
-        }
-      });
-  };
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <SafeAreaView
-        style={styles.AreaView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView style={styles.AreaView}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Nouveau sur {"\n"}Infinite Cut ?</Text>
         </View>
@@ -97,20 +69,17 @@ export default function SignUpScreen({ navigation }) {
             keyboardType="email-address"
             textContentType="emailAddress"
             autoComplete="email"
-            onChange={(e) => setSignUpEmail(e.target.value)}
+            onChangeText={(value) => setSignUpEmail(value)}
             value={signUpEmail}
-          ></TextInput>
-          {emailError && (
-            <Text style={styles.error}>Adresse mail invalide</Text>
-          )}
+          />
           <TextInput
             style={styles.input}
             placeholder="Mobile"
             placeholderTextColor="white"
             autoCapitalize="none"
-            onChange={(e) => setSignUpMobile(e.target.value)}
+            onChangeText={(value) => setSignUpMobile(value)}
             value={signUpMobile}
-          ></TextInput>
+          />
           <TextInput
             style={styles.inputPassword}
             secureTextEntry={true}
@@ -118,9 +87,9 @@ export default function SignUpScreen({ navigation }) {
             placeholderTextColor="white"
             autoCorrect={false}
             autoCapitalize="none"
-            onChange={(e) => setSignUpPassword(e.target.value)}
+            onChangeText={(value) => setSignUpPassword(value)}
             value={signUpPassword}
-          ></TextInput>
+          />
           <TextInput
             style={styles.inputConfirmPassword}
             secureTextEntry={true}
@@ -128,9 +97,9 @@ export default function SignUpScreen({ navigation }) {
             placeholderTextColor="white"
             autoCorrect={false}
             autoCapitalize="none"
-            onChange={(e) => setSignUpConfirmPassword(e.target.value)}
+            onChangeText={(value) => setSignUpConfirmPassword(value)}
             value={signUpConfirmPassword}
-          ></TextInput>
+          />
         </View>
         <View style={styles.bottomPage}>
           <TouchableOpacity
@@ -169,6 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    color: "white", // Ajout de cette ligne pour que le texte soit visible
   },
   inputPassword: {
     height: 70,
@@ -178,6 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    color: "white", // Ajout de cette ligne pour que le texte soit visible
   },
   inputConfirmPassword: {
     height: 70,
@@ -187,6 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    color: "white", // Ajout de cette ligne pour que le texte soit visible
   },
   title: {
     color: "#5E503F",
