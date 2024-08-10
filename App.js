@@ -14,7 +14,6 @@ import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
-require("dotenv").config();
 
 //Rajout des reducers
 
@@ -48,7 +47,6 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />
             <Stack.Screen name="MesInformations" component={MesInformations} />
             <Stack.Screen name="RDVs" component={MesRDVScreen} />
