@@ -14,7 +14,6 @@ import { Link } from "@react-navigation/native";
 import Header from "../components/Header";
 import { login } from "../reducers/user";
 import { URL_BACKEND } from "@env";
-import { URL_BACKEND } from "@env";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -98,7 +97,6 @@ export default function ConnectionScreen({ navigation }) {
             onChangeText={(value) => setSignInPassword(value)}
             value={signInPassword}
           ></TextInput>
-          <SignIn />
           <TouchableOpacity
             style={styles.ConnectedButton}
             onPress={() => handleSignIn()}
@@ -162,6 +160,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    color: "white",
   },
   title: {
     flex: 1,
