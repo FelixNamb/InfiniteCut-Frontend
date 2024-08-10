@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useDispatch } from "react-redux";
+import { URL_BACKEND } from "@env";
+
 
 export default function SignUpScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -20,64 +21,37 @@ export default function SignUpScreen({ navigation }) {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
-  const handleConnection = () => {
-    fetch("http://localhost:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application.json" },
-      body: JSON.stringify({
-        email: signUpEmail,
-        mobile: signUpMobile,
-        motDePasse: signUpMotDePasse,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(
-            login({
-              email: signUpEmail,
-              token: data.token,
-              mobile: signUpMobile,
-              motDePasse: signUpMotDePasse,
-            })
-          );
-          navigation.navigate("DatePicker");
-          setSignUpEmail("");
-          setSignUpMobile("");
-          setSignUpMotDePasse("");
-          setSignUpConfirmMotDePasse("");
-        }
-      });
-  };
 
   const handleSignUp = () => {
-    fetch("http://10.0.2.78:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signUpEmail,
-        mobile: signUpMobile,
-        password: signUpPassword,
-        ConfirmPassword: signUpConfirmPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(
-            login({
-              email: signUpEmail,
-              token: data.token,
-              mobile: signUpMobile,
-            })
-          );
-          setSignUpEmail("");
-          setSignUpPassword("");
-          setSignUpMobile("");
-          setSignUpConfirmPassword;
-        }
-      });
-  };
+    if (signUpPassword === signUpConfirmPassword) {
+      fetch(`${URL_BACKEND}/users/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: signUpEmail,
+          mobile: signUpMobile,
+          motDePasse: signUpPassword,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(
+              login({
+                email: signUpEmail,
+                token: data.token,
+                mobile: signUpMobile,
+              })
+            );
+            navigation.navigate("DatePicker");
+            setSignUpEmail("");
+            setSignUpPassword("");
+            setSignUpMobile("");
+            setSignUpConfirmPassword("");
+          }
+        });
+    };
+  }
 
   return (
     <KeyboardAvoidingView
