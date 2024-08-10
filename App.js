@@ -14,7 +14,7 @@ import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
-require("dotenv").config();
+// require("dotenv").config();
 
 //Rajout des reducers
 

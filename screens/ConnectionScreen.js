@@ -244,4 +244,4 @@ export default function ConnectionScreen({ navigation }) {
       color: "#C6AC8F",
     },
   });
-}
+
