@@ -9,14 +9,17 @@ import {
   TextInput,
 } from "react-native";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {URL_BACKEND} from "@env";
+
 
 export default function SignUpProScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const dispatch = useDispatch();
 
   const handleConnection = () => {
-    fetch("http://localhost:3000/users/signup", {
+    fetch(`${URL_BACKEND}/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application.json" },
       body: JSON.stringify({
