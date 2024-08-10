@@ -46,6 +46,7 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />

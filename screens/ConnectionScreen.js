@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "@react-navigation/native";
 import Header from "../components/Header";
+import { login } from "../reducers/user";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -26,21 +27,22 @@ export default function ConnectionScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const handleSignIn = () => {
-    if (EMAIL_REGEX.test(email)) {
-      fetch("http://10.0.2.81:3000/users/signin", {
+    if (EMAIL_REGEX.test(signInEmail)) {
+      fetch("http://10.0.2.78:3000/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: signInEmail,
-          password: signInPassword,
+          motDePasse: signInPassword,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           if (data.result) {
             dispatch(
               login({
-                email: signInEmail,
+                email: email,
                 token: data.token,
               })
             );
@@ -96,6 +98,7 @@ export default function ConnectionScreen({ navigation }) {
               onChangeText={(value) => setSignInPassword(value)}
               value={signInPassword}
             ></TextInput>
+            <SignIn />
             <TouchableOpacity
               style={styles.ConnectedButton}
               onPress={() => handleSignIn()}
@@ -123,7 +126,8 @@ export default function ConnectionScreen({ navigation }) {
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
-    )};
+    );
+  };
 
   const styles = StyleSheet.create({
     areaView: {
@@ -240,3 +244,4 @@ export default function ConnectionScreen({ navigation }) {
       color: "#C6AC8F",
     },
   });
+}
