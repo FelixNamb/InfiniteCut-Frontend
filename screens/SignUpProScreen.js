@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function SignUpProScreen({ navigation }) {
   const [email, setEmail] = useState("");

@@ -27,7 +27,7 @@ export default function ConnectionScreen({ navigation }) {
 
   const handleSignIn = () => {
     if (EMAIL_REGEX.test(email)) {
-      fetch("http://10.0.2.78:3000/users/signin", {
+      fetch("http://10.0.2.81:3000/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -52,6 +52,7 @@ export default function ConnectionScreen({ navigation }) {
     } else {
       setEmailError(true);
     }
+  };
 
     return (
       <KeyboardAvoidingView style={styles.container}>
@@ -95,7 +96,6 @@ export default function ConnectionScreen({ navigation }) {
               onChangeText={(value) => setSignInPassword(value)}
               value={signInPassword}
             ></TextInput>
-            <SignIn />
             <TouchableOpacity
               style={styles.ConnectedButton}
               onPress={() => handleSignIn()}
@@ -123,8 +123,7 @@ export default function ConnectionScreen({ navigation }) {
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
-    );
-  };
+    )};
 
   const styles = StyleSheet.create({
     areaView: {
@@ -241,4 +240,3 @@ export default function ConnectionScreen({ navigation }) {
       color: "#C6AC8F",
     },
   });
-}

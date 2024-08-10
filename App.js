@@ -14,6 +14,7 @@ import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
+require("dotenv").config();
 
 //Rajout des reducers
 
@@ -21,11 +22,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
+import userPro from "./reducers/userPro";
 
-const reducers = combineReducers({ user, formules });
+const reducers = combineReducers({ user, formules, userPro });
 const persistConfig = { key: "faceup", storage: AsyncStorage };
 
 const store = configureStore({
