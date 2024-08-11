@@ -14,6 +14,7 @@ import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
+import MoyenDePaiement from "./screens/MoyenDePaiement";
 
 //Rajout des reducers
 
@@ -45,6 +46,7 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />
