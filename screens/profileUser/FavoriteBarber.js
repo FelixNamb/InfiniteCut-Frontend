@@ -5,7 +5,6 @@ import {
   Platform,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   Image,
 } from "react-native";
 import Header from "../../components/Header";

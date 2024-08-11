@@ -21,7 +21,7 @@ export default function MesInformations({ navigation }) {
   const handleModifier = () => {
     setIsModified(true);
   };
-  
+
   return (
     <SafeAreaView style={styles.total}>
       <Header
@@ -31,78 +31,61 @@ export default function MesInformations({ navigation }) {
         colorScissors={false}
         colorUser={true}
       />
-      <SubHeaderProfile 
-        firstText="Mes RDV" 
-        secondText="Mon compte" 
+      <SubHeaderProfile
+        firstText="Mes RDV"
+        secondText="Mon compte"
         styleSecondText="600"
       />
       <KeyboardAvoidingView style={styles.keyboard}>
-        <View style={styles.upperContainer}>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Mon compte</Text>
-          </View>
-          <View style={styles.AllInput}>
-            {isModified ? (
-              <View>
-                <View>
-                  <Text>Email</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="  Email :"
-                  />
-                </View>
-                <View>
-                  <Text>Adresse</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="  Adresse :"
-                  />
-                </View>
-                <View>
-                  <Text>Mobile</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="  Mobile :"
-                  />
-                </View>
-              </View>
-            ) : (
-              <View style={styles.globalInput}>
-                <Text style={styles.sousText}>Mes informations</Text> 
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(value) => setEmail(value)}
-                  placeholder="  Email :"
-                  placeholderTextColor="#000000"
-                  value={email}
-                />
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(value) => setAdresse(value)}
-                  placeholder="  Adresse :"
-                  placeholderTextColor="#000000"
-                  value={adresse}
-                />
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(value) => setMobile(value)}
-                  placeholder="  Mobile :"
-                  placeholderTextColor="#000000"
-                  value={mobile}
-                />
-              </View>
-            )}
-          </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>Mon compte</Text>
+        </View>
+        <View style={styles.globalInput}>
+          <Text style={styles.sousText}>Mes informations</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setPrenom(value)}
+            placeholderTextColor="#000000"
+            value={prenom}
+            placeholder="  Prénom :"
+          />
 
-          <View style={styles.bottomPage}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => handleModifier()}
-            >
-              <Text>Modifier</Text>
-            </TouchableOpacity>
-          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setNom(value)}
+            placeholder="  Nom :"
+            placeholderTextColor="#000000"
+            value={nom}
+          />
 
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setEmail(value)}
+            placeholder="  Email :"
+            placeholderTextColor="#000000"
+            value={email}
+          />
+
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setAdresse(value)}
+            placeholder="  Adresse :"
+            placeholderTextColor="#000000"
+            value={adresse}
+          />
+
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setMobile(value)}
+            placeholder="  Mobile :"
+            placeholderTextColor="#000000"
+            value={mobile}
+          />
+        </View>
+        <View style={styles.bottomPage}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.final}>M o d i f i e r</Text>
+          </TouchableOpacity>
           <MaterialCommunityIcons
             name="chevron-double-down"
             size={50}
@@ -116,12 +99,11 @@ export default function MesInformations({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  
-  AllInput:{
+  AllInput: {
     width: "80%",
     height: "40%",
     justifyContent: "space-evenly",
-    alignItems:"flex-start"
+    alignItems: "flex-start",
   },
   textContainer: {
     width: "100%",
@@ -133,6 +115,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignItems: "center",
+    // backgroundColor: "red",
     justifyContent: "space-evenly",
   },
   globalInput: {
@@ -159,6 +142,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "green",
     marginBottom: 30,
   },
   button: {
@@ -187,11 +171,6 @@ const styles = StyleSheet.create({
   total: {
     width: "100%",
     height: "100%",
+    //backgroundColor: "orange",
   },
-  upperContainer: {
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
-  }
 });

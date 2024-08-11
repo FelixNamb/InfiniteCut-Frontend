@@ -11,12 +11,11 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {URL_BACKEND} from "@env";
-import { loginUserPro } from "../reducers/userPro";
+import { URL_BACKEND } from "@env";
+import { loginUserPro } from "../../reducers/userPro";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 
 export default function SignUpProScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -28,11 +27,9 @@ export default function SignUpProScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
-
-
   const handleSignUp = () => {
     console.log(EMAIL_REGEX.test(email));
-    if(EMAIL_REGEX.test(email)){
+    if (EMAIL_REGEX.test(email)) {
       fetch(`${URL_BACKEND}/userpros/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,32 +48,37 @@ export default function SignUpProScreen({ navigation }) {
             setModalVisible(true);
           }
         });
-  } else {
-    setEmailError(true);
-  }
-}
-
+    } else {
+      setEmailError(true);
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Modal 
-      visible={modalVisible} 
-      animationType="fade" 
-      transparent={true}
-      onRequestClose={() => setModalVisible(false)}>
+      <Modal
+        visible={modalVisible}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.globalView}>
-              <Text style={styles.textModal}>Nous accusons bonne réception de votre formulaire.</Text>
-              <Text style={styles.textModal}>Notre équipe commercial reviendra vers vous dès
-                que possible par téléphone afin de convenir
-                d'un premier échange.
+              <Text style={styles.textModal}>
+                Nous accusons bonne réception de votre formulaire.
+              </Text>
+              <Text style={styles.textModal}>
+                Notre équipe commercial reviendra vers vous dès que possible par
+                téléphone afin de convenir d'un premier échange.
               </Text>
               <Text style={styles.textModal}>Merci pour votre confiance.</Text>
-                <Text style={styles.textTitle}>INFINITE CUT</Text>
-                <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("Home")}>
-                  <Text style={styles.lastTextButton}>Retourner au menu</Text>
-                </TouchableOpacity>
+              <Text style={styles.textTitle}>INFINITE CUT</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Home")}
+              >
+                <Text style={styles.lastTextButton}>Retourner au menu</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -85,59 +87,62 @@ export default function SignUpProScreen({ navigation }) {
         style={styles.AreaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Envie de {"\n"}nous rejoindre ?</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Prénom"
-              placeholderTextColor="white"
-              onChangeText={(value) => setPrenom(value)}
-              value={prenom}
-            ></TextInput>
-            <TextInput
-              style={styles.input}
-              placeholder="Nom"
-              placeholderTextColor="white"
-              onChangeText={(value) => setNom(value)}
-              value={nom}
-            ></TextInput>
-            <TextInput
-              style={styles.input}
-              placeholder="Mobile"
-              placeholderTextColor="white"
-              autoCapitalize="none"
-              onChangeText={(value) => setMobile(value)}
-              value={mobile}
-            ></TextInput>
-            <TextInput
-              style={styles.input}
-              placeholder="Code Postal"
-              placeholderTextColor="white"
-              onChangeText={(value) => setCodePostal(value)}
-              value={codePostal}
-            ></TextInput>
-          </View>
-          <View style={styles.containerBottom}>
-            <TextInput
-              style={styles.inputEmail}
-              placeholder="Email"
-              placeholderTextColor="white"
-              autoCapitalize="none"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              autoComplete="email"
-              onChangeText={(value) => setEmail(value)}
-              value={email}
-            ></TextInput>
-          </View>
-          {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
-          <View style={styles.bottomPage}>
-            <TouchableOpacity style={styles.lastButton} onPress={() => handleSignUp()}>
-              <Text style={styles.lastTextButton}>Déposer votre demande</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Envie de {"\n"}nous rejoindre ?</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Prénom"
+            placeholderTextColor="white"
+            onChangeText={(value) => setPrenom(value)}
+            value={prenom}
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="Nom"
+            placeholderTextColor="white"
+            onChangeText={(value) => setNom(value)}
+            value={nom}
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="Mobile"
+            placeholderTextColor="white"
+            autoCapitalize="none"
+            onChangeText={(value) => setMobile(value)}
+            value={mobile}
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="Code Postal"
+            placeholderTextColor="white"
+            onChangeText={(value) => setCodePostal(value)}
+            value={codePostal}
+          ></TextInput>
+        </View>
+        <View style={styles.containerBottom}>
+          <TextInput
+            style={styles.inputEmail}
+            placeholder="Email"
+            placeholderTextColor="white"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            autoComplete="email"
+            onChangeText={(value) => setEmail(value)}
+            value={email}
+          ></TextInput>
+        </View>
+        {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
+        <View style={styles.bottomPage}>
+          <TouchableOpacity
+            style={styles.lastButton}
+            onPress={() => handleSignUp()}
+          >
+            <Text style={styles.lastTextButton}>Déposer votre demande</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -176,28 +181,28 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,}
+      height: 2,
+    },
   },
-  globalView:{
-    justifyContent: 'space-around',
-    alignItems:'center',
+  globalView: {
+    justifyContent: "space-around",
+    alignItems: "center",
     height: "95%",
     widht: "100%",
   },
   textModal: {
-    textAlign:'center',
+    textAlign: "center",
   },
-  textTitle:{
-    fontSize:20,
+  textTitle: {
+    fontSize: 20,
     fontWeight: "600",
   },
-  bottomModal:{
-    flexDirection: 'row',
+  bottomModal: {
+    flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-
   },
-  button:{
+  button: {
     backgroundColor: "transparent",
     height: 50,
     width: 200,
@@ -286,7 +291,7 @@ const styles = StyleSheet.create({
   error: {
     marginTop: 10,
     color: "red",
-    textAlign: 'center',
+    textAlign: "center",
   },
   bottomPage: {
     flex: 1,
