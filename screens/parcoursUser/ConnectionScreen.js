@@ -18,7 +18,7 @@ import { URL_BACKEND } from "@env";
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export default function ConnectionScreen({ navigation }) {
+export default function ConnectionScreen(props) {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -47,7 +47,7 @@ export default function ConnectionScreen({ navigation }) {
                 token: data.token,
               })
             );
-            navigation.navigate("DatePicker");
+            props.navigation.navigate("DatePicker");
             setSignInEmail("");
             setSignInPassword("");
           }
@@ -59,12 +59,6 @@ export default function ConnectionScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Header
-        title="INFINITE CUT"
-        colorUser={false}
-        colorScissors={false}
-        navigation={navigation}
-      />
       <SafeAreaView
         style={styles.areaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -115,7 +109,7 @@ export default function ConnectionScreen({ navigation }) {
           </View>
           <TouchableOpacity
             style={styles.lastButton}
-            onPress={() => navigation.navigate("SignUpPro")}
+            onPress={() => props.navigation.navigate("SignUpPro")}
           >
             <Text style={styles.lastTextButton}>
               Proposez votre {"\n"}établissement
@@ -128,20 +122,12 @@ export default function ConnectionScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  areaView: {
-    backgroundColor: "#EAE0D5",
-    flex: 1,
-    height: "100%",
-  },
   container: {
-    flex: 1,
-    backgroundColor: "#EAE0D5",
     alignItems: "center",
     justifyContent: "space-around",
     margin: 0,
     padding: 0,
     width: "100%",
-    height: "100%",
   },
   input: {
     height: 70,
@@ -164,7 +150,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   title: {
-    flex: 1,
     color: "#5E503F",
     fontSize: 40,
     textAlign: "center",
@@ -241,6 +226,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     justifyContent: "center",
     alignItems: "center",
-    color: "#C6AC8F",
+    color: "white",
+    borderBottomWidth: 1,
+    borderBottomColor:"white",
   },
 });
