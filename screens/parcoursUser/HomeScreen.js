@@ -5,7 +5,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <ImageBackground
       style={styles.backgroundImage}
-      source={require("../assets/background_home.jpg")}
+      source={require("../../assets/background_home.jpg")}
     >
       <View style={styles.titleContainer}>
         <Text style={styles.title}>INFINITE {"\n"}CUT</Text>

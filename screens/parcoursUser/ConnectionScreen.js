@@ -11,8 +11,8 @@ import {
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "@react-navigation/native";
-import Header from "../components/Header";
-import { login } from "../reducers/user";
+import Header from "../../components/Header";
+import { login } from "../../reducers/user";
 import { URL_BACKEND } from "@env";
 
 const EMAIL_REGEX =
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    color: "white",
   },
   inputPassword: {
     height: 70,

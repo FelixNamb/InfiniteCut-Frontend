@@ -8,10 +8,10 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import Entypo from "@expo/vector-icons/Entypo";
 
 export default function ChooseBarberScreen({ navigation }) {
@@ -31,7 +31,7 @@ export default function ChooseBarberScreen({ navigation }) {
   const handleNavigation = () => {
     setModalVisible(false);
     navigation.navigate("Formules");
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -40,7 +40,7 @@ export default function ChooseBarberScreen({ navigation }) {
           <View style={styles.modalView}>
             <View style={styles.informationsAndImage}>
               <Image
-                source={require("../assets/background_home.jpg")}
+                source={require("../../assets/background_home.jpg")}
                 style={styles.image}
               />
               <View style={styles.informations}>
@@ -105,7 +105,7 @@ export default function ChooseBarberScreen({ navigation }) {
               <View style={styles.leftCard}>
                 <Image
                   style={styles.img}
-                  source={require("../assets/background_home.jpg")}
+                  source={require("../../assets/background_home.jpg")}
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
@@ -188,18 +188,17 @@ const styles = StyleSheet.create({
   },
   bottomModal: {
     justifyContent: "space-around",
-    alignItems: 'center',
+    alignItems: "center",
     height: 175,
-    width: '80%',
+    width: "80%",
   },
-  abonnement:{
+  abonnement: {
     justifyContent: "center",
-    alignItems:'center',
+    alignItems: "center",
     height: 40,
   },
   allFormulas: {
     flexDirection: "row",
-    
   },
   buttonFormula: {
     marginTop: 20,

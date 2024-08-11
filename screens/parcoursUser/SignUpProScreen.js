@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {URL_BACKEND} from "@env";
-
+import { URL_BACKEND } from "@env";
 
 export default function SignUpProScreen({ navigation }) {
   const [email, setEmail] = useState("");

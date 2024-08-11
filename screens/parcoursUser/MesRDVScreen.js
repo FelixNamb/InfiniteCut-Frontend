@@ -10,11 +10,11 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import Header from "../components/Header";
-import SubHeaderProfile from "../components/SubHeaderProfile";
-import Entypo from '@expo/vector-icons/Entypo';
+import Header from "../../components/Header";
+import SubHeaderProfile from "../../components/SubHeaderProfile";
+import Entypo from "@expo/vector-icons/Entypo";
 import Octicons from "@expo/vector-icons/Octicons";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
 import { useState } from "react";
 
 export default function FormuleScreen({ navigation }) {
@@ -25,13 +25,31 @@ export default function FormuleScreen({ navigation }) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
   }
   return (
-    <SafeAreaView style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <SafeAreaView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View style={styles.header}>
-        <Header title="INFINITE CUT" colorScissors={false} colorUser={true} navigation={navigation} />
-        <SubHeaderProfile firstText="Mes RDV" secondText="Mon Compte" navigation={navigation} styleFirstText="500" />
+        <Header
+          title="INFINITE CUT"
+          colorScissors={false}
+          colorUser={true}
+          navigation={navigation}
+        />
+        <SubHeaderProfile
+          firstText="Mes RDV"
+          secondText="Mon Compte"
+          navigation={navigation}
+          styleFirstText="500"
+        />
       </View>
-      <ScrollView style={styles.page} contentContainerStyle={{alignItems: "center", justifyContent:"space-around"}}>
+      <ScrollView
+        style={styles.page}
+        contentContainerStyle={{
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
         <Text style={styles.title}>Mon prochain RDV</Text>
         <View style={styles.upContainer}>
           <View style={styles.rdvCard}>
@@ -40,7 +58,7 @@ export default function FormuleScreen({ navigation }) {
               <View style={styles.imageName}>
                 <Image
                   style={styles.img}
-                  source={require('../assets/background_home.jpg')}
+                  source={require("../../assets/background_home.jpg")}
                 />
                 <Text style={styles.name}>Lucie Saint Clair</Text>
               </View>
@@ -59,8 +77,11 @@ export default function FormuleScreen({ navigation }) {
                 </View>
               </View>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("DatePicker")}>
-              <Text style={styles.textButton}>Déplacer le RDV</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("DatePicker")}
+            >
+              <Text style={styles.textButton}>Changer de RDV</Text>
             </TouchableOpacity>
             <View style={styles.calendarAndDelete}>
               <TouchableOpacity style={styles.addToCalendar}>
@@ -80,7 +101,7 @@ export default function FormuleScreen({ navigation }) {
             <View style={styles.leftCard}>
               <Image
                 style={styles.img}
-                source={require("../assets/background_home.jpg")}
+                source={require("../../assets/background_home.jpg")}
               />
               <View style={styles.nameAndNote}>
                 <Text>Lucie Saint Clair</Text>
@@ -98,7 +119,7 @@ export default function FormuleScreen({ navigation }) {
             <View style={styles.leftCard}>
               <Image
                 style={styles.img}
-                source={require("../assets/background_home.jpg")}
+                source={require("../../assets/background_home.jpg")}
               />
               <View style={styles.nameAndNote}>
                 <Text>Lucie Saint Clair</Text>
@@ -116,7 +137,7 @@ export default function FormuleScreen({ navigation }) {
             <View style={styles.leftCard}>
               <Image
                 style={styles.img}
-                source={require("../assets/background_home.jpg")}
+                source={require("../../assets/background_home.jpg")}
               />
               <View style={styles.nameAndNote}>
                 <Text>Lucie Saint Clair</Text>
@@ -142,17 +163,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAE0D5",
     alignItems: "center",
   },
-  page:{
-    minHeight: "100vh"
+  page: {
+    minHeight: "100vh",
   },
   header: {
-    width: '100%',
+    width: "100%",
   },
   upContainer: {
-    width: '100%',
-    height: '50%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    width: "100%",
+    height: "50%",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     marginTop: 30,
   },
   title: {
@@ -164,10 +185,10 @@ const styles = StyleSheet.create({
   },
   rdvCard: {
     marginTop: 10,
-    height: '90%',
+    height: "90%",
     backgroundColor: "white",
     width: 320,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     borderRadius: 20,
     borderWidth: 2,
@@ -176,16 +197,16 @@ const styles = StyleSheet.create({
   },
   informations: {
     width: "90%",
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
+    justifyContent: "space-around",
+    alignItems: "flex-start",
     height: "60%",
   },
   date: {
     fontWeight: "500",
   },
   imageName: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
   },
@@ -197,33 +218,35 @@ const styles = StyleSheet.create({
   prestation: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    margin: 5
+    margin: 5,
   },
   location: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "flex-start",
-  }, prestation: {
+  },
+  prestation: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "flex-start",
-  }, tempsMoyen: {
+  },
+  tempsMoyen: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "flex-start",
   },
   calendarAndDelete: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   addToCalendar: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "flex-start",
   },
   deleteRdv: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "flex-start",
   },
   button: {
@@ -235,7 +258,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textButton: {
-    color: "#EAE0D5"
+    color: "#EAE0D5",
   },
   barber: {
     width: 300,
@@ -248,7 +271,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderWidth: 2,
-    borderColor: "#22333B"
+    borderColor: "#22333B",
   },
   leftCard: {
     flexDirection: "row",
@@ -270,6 +293,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginBottom: 20,
-    marginTop:15,
-  }
+    marginTop: 15,
+  },
 });

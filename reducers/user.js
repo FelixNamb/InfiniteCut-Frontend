@@ -9,6 +9,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      console.log(action.payload);
       state.value.token = action.payload.token;
       state.value.email = action.payload.email;
     },

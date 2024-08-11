@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import CardFlip from "react-native-card-flip";
 import React, { useRef } from "react";
 
@@ -34,7 +34,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
-              source={require("../assets/formule_essentiel.jpg")}
+              source={require("../../assets/formule_essentiel.jpg")}
               style={styles.cardEssentiel}
               imageStyle={{ borderRadius: 20 }}
             >
@@ -88,7 +88,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
-              source={require("../assets/formule_premium.jpg")}
+              source={require("../../assets/formule_premium.jpg")}
               style={styles.cardPremium}
               imageStyle={{ borderRadius: 20 }}
             >
@@ -142,7 +142,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
-              source={require("../assets/formule_exclusif.jpg")}
+              source={require("../../assets/formule_exclusif.jpg")}
               style={styles.cardExclusif}
               imageStyle={{ borderRadius: 20 }}
             >

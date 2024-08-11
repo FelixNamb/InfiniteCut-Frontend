@@ -1,8 +1,7 @@
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { LinearGradient } from "expo-linear-gradient";
-
 
 export default function ConceptScreen({ navigation }) {
   return (
