@@ -10,7 +10,6 @@ export const userProSlice = createSlice({
   reducers: {
     loginUserPro: (state, action) => {
       state.value.token = action.payload.token;
-      state.value.email = action.payload.email;
     },
     logoutUserPro: (state) => {
       state.value.token = null;
