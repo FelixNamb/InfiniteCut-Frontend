@@ -30,7 +30,7 @@ export default function FormulesScreen({ navigation }) {
       <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => cardEssentielRef.current.flip()} // Utilisation correcte de la référence
+          onPress={() => cardEssentielRef.current.flip()}
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
@@ -84,7 +84,7 @@ export default function FormulesScreen({ navigation }) {
       <CardFlip style={styles.cardsContainer} ref={cardPremiumRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => cardPremiumRef.current.flip()} // Utilisation correcte de la référence
+          onPress={() => cardPremiumRef.current.flip()}
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground
@@ -138,7 +138,7 @@ export default function FormulesScreen({ navigation }) {
       <CardFlip style={styles.cardsContainer} ref={cardExclusifRef}>
         <TouchableOpacity
           style={styles.cardVerso}
-          onPress={() => cardExclusifRef.current.flip()} // Utilisation correcte de la référence
+          onPress={() => cardExclusifRef.current.flip()}
         >
           <View style={styles.cardEssentielContainer}>
             <ImageBackground

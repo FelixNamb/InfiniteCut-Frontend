@@ -19,14 +19,14 @@ export default function MesInformations({ navigation }) {
   const [mobile, setMobile] = useState("");
 
   return (
-      <SafeAreaView style={styles.total}>
-            <Header
-          style={styles.header}
-          title="INFINITE CUT"
-          navigation={navigation}
-          colorScissors={false}
-          colorUser={true}
-        />
+    <SafeAreaView style={styles.total}>
+      <Header
+        style={styles.header}
+        title="INFINITE CUT"
+        navigation={navigation}
+        colorScissors={false}
+        colorUser={true}
+      />
       <KeyboardAvoidingView style={styles.keyboard}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Mon compte</Text>
@@ -47,7 +47,7 @@ export default function MesInformations({ navigation }) {
             placeholder="  Nom :"
             placeholderTextColor="#000000"
             value={nom}
-            />
+          />
 
           <TextInput
             style={styles.input}
@@ -74,19 +74,18 @@ export default function MesInformations({ navigation }) {
           />
         </View>
         <View style={styles.bottomPage}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.final}>M o d i f i e r</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.final}>M o d i f i e r</Text>
+          </TouchableOpacity>
           <MaterialCommunityIcons
             name="chevron-double-down"
             size={50}
             color="#C6AC8F"
             onPress={() => navigation.navigate("Connection")}
-            />
+          />
         </View>
       </KeyboardAvoidingView>
-   
-</SafeAreaView>
+    </SafeAreaView>
   );
 }
 
@@ -102,9 +101,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignItems: "center",
-   // backgroundColor: "red",
-    justifyContent: "space-evenly"
-      },
+    // backgroundColor: "red",
+    justifyContent: "space-evenly",
+  },
   globalInput: {
     height: "50%",
     width: "80%",
@@ -128,11 +127,11 @@ const styles = StyleSheet.create({
   },
 
   bottomPage: {
-        width: "100%",
-            justifyContent:"center",
-        alignItems:"center",
-       // backgroundColor: "green",
-        marginBottom: 30
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "green",
+    marginBottom: 30,
   },
   button: {
     height: 60,
@@ -147,7 +146,6 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 36,
-
     color: "#5E503F",
   },
 
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
 
   total: {
     width: "100%",
-height: "100%",
+    height: "100%",
     //backgroundColor: "orange",
   },
 });

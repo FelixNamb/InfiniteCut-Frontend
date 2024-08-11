@@ -8,14 +8,16 @@ import ChooseBarberScreen from "./screens/parcoursUser/ChooseBarberScreen";
 import HomeScreen from "./screens/parcoursUser/HomeScreen";
 import PayScreen from "./screens/parcoursUser/PayScreen";
 import FinRDVScreen from "./screens/parcoursUser/FinRDVScreen";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import ConceptScreen from "./screens/parcoursUser/ConceptScreen";
 import MyAgenda from "./screens/profilePro/MyAgenda";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MesInformations from "./screens/profileUser/mesInformations";
-
-//Rajout des reducers
+import MoyenDePaiement from "./screens/profileUser/MoyenDePaiement";
+import UserFormule from "./screens/profileUser/UserFormule";
+import FavoriteBarber from "./screens/profileUser/FavoriteBarber";
+import MesChiffres from "./screens/profilePro/MesChiffres";
 
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
@@ -45,19 +47,23 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="MesChiffres" component={MesChiffres} />
+            <Stack.Screen name="MyAgenda" component={MyAgenda} />
+            <Stack.Screen name="RDVs" component={MesRDVScreen} />
+            <Stack.Screen name="UserFormule" component={UserFormule} />
+            <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
+            <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />
             <Stack.Screen name="MesInformations" component={MesInformations} />
-            <Stack.Screen name="RDVs" component={MesRDVScreen} />
             <Stack.Screen name="DatePicker" component={DatePicker} />
             <Stack.Screen name="Concept" component={ConceptScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
             <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
             <Stack.Screen name="Pay" component={PayScreen} />
-            <Stack.Screen name="FinRdvs" component={FinRDVScreen} />
-            <Stack.Screen name="MyAgenda" component={MyAgenda} />
+            <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

@@ -4,23 +4,37 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  Modal,
+  KeyboardAvoidingView,
 } from "react-native";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Octicons from "@expo/vector-icons/Octicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useState } from "react";
 import Header from "../../components/Header";
 
 export default function FinRDVScreen({ navigation }) {
   const [commentaire, setCommentaire] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const handleSubmit = () => {
+    if (commentaire !== null) {
+      setModalVisible(true);
+      setTimeout(() => {
+        setModalVisible(false);
+        navigation.navigate("DatePicker");
+      }, 3000);
+    } else {
+      setFormError(true);
+    }
+  };
 
   const stars = [];
   for (let i = 0; i < 5; i++) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
   }
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Header
         title="INFINITY CUT"
         colorScissors={false}
@@ -35,24 +49,35 @@ export default function FinRDVScreen({ navigation }) {
         </View>
         <TextInput
           style={styles.input}
-          placeholder="Mettez un commentaire"
+          placeholder="Qu'en avez vous pensé ?"
+          placeholderTextColor="#5E503F"
+          autoCapitalize="none"
           onChangeText={(value) => setCommentaire(value)}
           value={commentaire}
           maxLength={280}
         />
-        <TouchableOpacity style={styles.button}>
+        {formError && <Text style={styles.error}>Le champ est vide.</Text>}
+
+        <Modal visible={modalVisible} animationType="fade" transparent>
+          <View style={styles.centeredCardView}>
+            <View style={styles.modalCardView}>
+              <Text style={styles.textCardModal}>
+                Merci pour votre retour. On réserve le prochain rendez-vous ?
+              </Text>
+            </View>
+          </View>
+        </Modal>
+        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
           <Text style={styles.textButton}>Soumettre</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 0,
-    padding: 0,
     backgroundColor: "#EAE0D5",
   },
   header: {
@@ -83,8 +108,11 @@ const styles = StyleSheet.create({
     height: "90%",
   },
   titlePage: {
-    fontSize: 24,
-    fontWeight: "500",
+    color: "#5E503F",
+    fontSize: 35,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    margin: 10,
   },
   note: {
     flexDirection: "row",
@@ -94,11 +122,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textNote: {
-    fontWeight: "semibold",
-    fontSize: 18,
+    color: "#5E503F",
+    fontSize: 25,
+    fontFamily: "Montserrat_500Medium",
+    margin: 10,
   },
   star: {
     flexDirection: "row",
+    margin: 10,
   },
   input: {
     backgroundColor: "white",
@@ -109,13 +140,51 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#5E503F",
-    width: 148.62,
-    height: 50,
-    borderRadius: 20,
+    width: 200,
+    height: 70,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+    margin: 20,
   },
   textButton: {
     color: "white",
+    letterSpacing: 2,
+    fontSize: 18,
+    textAlign: "center",
+  },
+  centeredCardView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalCardView: {
+    backgroundColor: "#C6AC8F",
+    borderRadius: 20,
+    borderColor: "#22333B",
+    padding: 5,
+    width: 300,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "space-around",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textCardModal: {
+    color: "#5E503F",
+    fontSize: 15,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    margin: 10,
+  },
+  error: {
+    marginTop: 10,
+    color: "red",
   },
 });

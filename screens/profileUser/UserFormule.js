@@ -6,12 +6,38 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  Modal,
 } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
+import { useState } from "react";
 import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function UserFormule({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalDeleteFormuleVisible, setModalDeleteFormuleVisible] =
+    useState(false);
+
+  const handleClose = () => {
+    setModalVisible(false);
+  };
+
+  const handleDeleteCard = () => {
+    setModalVisible(true);
+  };
+
+  const handleDeleteFormule = () => {
+    setModalVisible(false);
+    setModalDeleteFormuleVisible(true);
+    setTimeout(() => {
+      setModalDeleteFormuleVisible(false);
+    }, 2400);
+    setTimeout(() => {
+      navigation.navigate("DatePicker");
+    }, 2500);
+  };
+
   return (
     <SafeAreaView
       style={styles.container}
@@ -53,10 +79,54 @@ export default function UserFormule({ navigation }) {
           </ImageBackground>
         </View>
         <View style={styles.ButtonSection}>
-          <TouchableOpacity style={styles.Button}>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => navigation.navigate("Formules")}
+          >
             <Text style={styles.textButton}>Changer d'abonnement</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.Button}>
+
+          <Modal visible={modalVisible} animationType="fade" transparent>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <TouchableOpacity
+                  onPress={() => handleClose()}
+                  style={styles.iconContainer}
+                  activeOpacity={0.8}
+                >
+                  <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+                </TouchableOpacity>
+                <Text style={styles.textModal}>
+                  Vous êtes sur le point de supprimer la formule d'abonnement de
+                  votre compte.
+                </Text>
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={() => handleDeleteFormule()}
+                >
+                  <Text style={styles.confirmButtonText}>Confirmer</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          <Modal
+            visible={modalDeleteFormuleVisible}
+            animationType="fade"
+            transparent
+          >
+            <View style={styles.centeredCardView}>
+              <View style={styles.modalCardView}>
+                <Text style={styles.textCardModal}>
+                  Votre formule a bien été supprimée. {"\n"}Et si on prenait un
+                  rendez-vous ?
+                </Text>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => handleDeleteCard()}
+          >
             <Text style={styles.textButton}>Résilier abonnement</Text>
           </TouchableOpacity>
         </View>
@@ -88,7 +158,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: "80%",
     height: "40%",
-    backgroundColor: "red",
     borderRadius: 20,
     margin: 40,
   },
@@ -121,5 +190,87 @@ const styles = StyleSheet.create({
   bottomPage: {
     alignItems: "center",
     margin: 30,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    borderColor: "#22333B",
+    padding: 5,
+    width: 300,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "space-around",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textModal: {
+    color: "#5E503F",
+    fontSize: 15,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    margin: 10,
+  },
+  confirmButton: {
+    width: 200,
+    height: 70,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20,
+    borderWidth: 2,
+    borderColor: "#C6AC8F",
+  },
+  confirmButtonText: {
+    color: "#C6AC8F",
+    letterSpacing: 2,
+    fontSize: 15,
+    textAlign: "center",
+  },
+  centeredCardView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalCardView: {
+    backgroundColor: "#C6AC8F",
+    borderRadius: 20,
+    borderColor: "#22333B",
+    padding: 5,
+    width: 300,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "space-around",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textCardModal: {
+    color: "white",
+    fontSize: 25,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    margin: 10,
+  },
+  iconContainer: {
+    width: "100%",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    marginLeft: 10,
   },
 });
