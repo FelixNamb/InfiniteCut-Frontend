@@ -150,13 +150,11 @@ export default function SignUpProScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   AreaView: {
-    backgroundColor: "#EAE0D5",
     flex: 1,
     height: "100%",
   },
   container: {
     flex: 1,
-    backgroundColor: "#EAE0D5",
     alignItems: "center",
     justifyContent: "space-around",
     margin: 0,

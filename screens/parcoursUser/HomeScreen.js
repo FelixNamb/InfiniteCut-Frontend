@@ -1,38 +1,64 @@
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, ScrollView, Dimensions, SafeAreaView } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import ConceptScreen from "./ConceptScreen";
+import ConnectionScreen from "./ConnectionScreen";
+import { LinearGradient } from "expo-linear-gradient";
+
+
+const screenHeight = Dimensions.get('window').height;
 
 export default function HomeScreen({ navigation }) {
   return (
-    <ImageBackground
-      style={styles.backgroundImage}
-      source={require("../../assets/background_home.jpg")}
-    >
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>INFINITE {"\n"}CUT</Text>
-      </View>
-      <View style={styles.bottomPage}>
-        <Text style={styles.text}>Découvrez{"\n"} notre concept ...</Text>
-        <View style={styles.iconContainer}>
-          <MaterialCommunityIcons
-            name="chevron-double-down"
-            size={50}
-            color="#C6AC8F"
-            onPress={() => navigation.navigate("Concept")}
-          />
-        </View>
-      </View>
-    </ImageBackground>
+    <SafeAreaView>
+      <ScrollView 
+      contentContainerStyle={styles.contentContainerStyle}
+      showsVerticalScrollIndicator={false}>
+        <ImageBackground
+          style={[styles.backgroundImage, {height: screenHeight}]}
+          source={require("../../assets/background_home.jpg")}
+        >
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>INFINITE {"\n"}CUT</Text>
+          </View>
+          <View style={styles.bottomPage}>
+            <Text style={styles.text}>Découvrez{"\n"} notre concept ...</Text>
+          </View>
+        </ImageBackground>
+        <LinearGradient style={styles.gradient} colors={["#000000","#EAE0D5", "#C6AC8F"]}>
+          <View style={styles.sectionContainer}>
+            <ConceptScreen navigation={navigation} />
+          </View>
+          <View style={styles.sectionContainer}>
+            <ConnectionScreen navigation={navigation} />
+          </View>
+        </LinearGradient>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  contentContainerStyle: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent:'space-between',
+  },
+  gradient: {
+    flex:1,
+    width: "100%",
+  },
+  sectionContainer: {
+    marginTop: 20,
     flex: 1,
+    width: "100%", // S'assure que les sections occupent la largeur complète
+    marginBottom: 20,
+  },
+  backgroundImage: {
+    width: "100%",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   bottomPage: {
-    flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -42,19 +68,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 10,
   },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 300,
-  },
-  container: {
-    height: "90%",
-    width: "100%",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
   text: {
     fontSize: 40,
     color: "#C6AC8F",
@@ -62,20 +75,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   titleContainer: {
-    flex: 1,
     alignItems: "center",
     marginTop: 70,
   },
   title: {
-    color: "white",
     fontSize: 50,
     color: "#C6AC8F",
     letterSpacing: 15,
     textAlign: "center",
-  },
-  header: {
-    width: "100%",
-    height: "10%",
-    marginTop: 250,
   },
 });
