@@ -43,7 +43,8 @@ export default function FormulesScreen({ navigation }) {
                   style={{
                     fontSize: 30,
                     color: "white",
-                    letterSpacing: 10,
+                    letterSpacing: 15,
+                    fontFamily: "Montserrat_500Medium",
                     margin: 10,
                     fontWeight: "bold",
                   }}
@@ -67,7 +68,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.contentCardVerso}>
             <Text style={styles.textContentCardverso}>
-              Fréquence : 3 {"\n"} Engagement : 6 mois minimum {"\n"}
+              Fréquence : 3 / mois {"\n"} Engagement : 6 mois minimum {"\n"}
               Prestations : shampooing - coupe - coiffage
             </Text>
             <Text style={styles.price}>39.99 €</Text>
@@ -97,7 +98,8 @@ export default function FormulesScreen({ navigation }) {
                   style={{
                     fontSize: 30,
                     color: "white",
-                    letterSpacing: 10,
+                    letterSpacing: 15,
+                    fontFamily: "Montserrat_500Medium",
                     margin: 10,
                     fontWeight: "bold",
                   }}
@@ -121,7 +123,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.contentCardVerso}>
             <Text style={styles.textContentCardverso}>
-              Fréquence : 4 {"\n"} Engagement : aucun {"\n"}Prestations :
+              Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations :
               shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe
             </Text>
             <Text style={styles.price}>49.99 €</Text>
@@ -151,6 +153,8 @@ export default function FormulesScreen({ navigation }) {
                   style={{
                     fontSize: 30,
                     color: "white",
+                    letterSpacing: 15,
+                    fontFamily: "Montserrat_500Medium",
                     letterSpacing: 10,
                     margin: 10,
                     fontWeight: "bold",
@@ -175,7 +179,7 @@ export default function FormulesScreen({ navigation }) {
         >
           <View style={styles.contentCardVerso}>
             <Text style={styles.textContentCardverso}>
-              Fréquence : 4 {"\n"} Engagement : aucun {"\n"}Prestations :
+              Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations :
               shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe -
               soin du visage {"\n"} épilation (nez, oreilles)
             </Text>
@@ -203,6 +207,9 @@ const styles = StyleSheet.create({
   title: {
     color: "#5E503F",
     fontSize: 40,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   titleContainer: {
     alignItems: "center",
@@ -261,6 +268,7 @@ const styles = StyleSheet.create({
   textButton: {
     color: "white",
     letterSpacing: 5,
+    fontFamily: "Montserrat_500Medium",
   },
   cardEssentielView: {
     height: "100%",
@@ -293,10 +301,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
+    fontFamily: "Montserrat_500Medium",
   },
   textContentCardverso: {
     color: "white",
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
 });

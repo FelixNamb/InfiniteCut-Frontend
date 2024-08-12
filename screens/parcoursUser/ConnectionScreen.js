@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "@react-navigation/native";
-import Header from "../../components/Header";
 import { login } from "../../reducers/user";
 import { URL_BACKEND } from "@env";
 
@@ -63,11 +62,8 @@ export default function ConnectionScreen(props) {
         style={styles.areaView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>
-            Maintenant que vous savez tout,{"\n"} rejoignez nous.
-          </Text>
-        </View>
+        <Text style={styles.title}>On commence ?</Text>
+
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
@@ -80,7 +76,6 @@ export default function ConnectionScreen(props) {
             onChangeText={(value) => setSignInEmail(value)}
             value={signInEmail}
           ></TextInput>
-          {emailError && <Text style={styles.error}>Aucun compte trouvé</Text>}
           <TextInput
             style={styles.inputPassword}
             secureTextEntry={true}
@@ -91,6 +86,7 @@ export default function ConnectionScreen(props) {
             onChangeText={(value) => setSignInPassword(value)}
             value={signInPassword}
           ></TextInput>
+          {emailError && <Text style={styles.error}>Aucun compte trouvé</Text>}
           <TouchableOpacity
             style={styles.ConnectedButton}
             onPress={() => handleSignIn()}
@@ -123,17 +119,16 @@ export default function ConnectionScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
-    justifyContent: "space-around",
-    margin: 0,
-    padding: 0,
-    width: "100%",
+    justifyContent: "center",
+    backgroundColor: "#EAE0D5",
   },
   input: {
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
-    borderRadius: 50,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -143,7 +138,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
-    borderRadius: 50,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -153,14 +148,12 @@ const styles = StyleSheet.create({
     color: "#5E503F",
     fontSize: 40,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
+    marginBottom: 50,
+    marginTop: 20,
   },
-  titleContainer: {
-    height: "25%",
-    width: "90%",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-  },
+
   lastButton: {
     backgroundColor: "transparent",
     height: 70,
@@ -178,11 +171,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
     textAlign: "center",
-    letterSpacing: 2,
+    letterSpacing: 5,
+    fontFamily: "Montserrat_500Medium",
   },
   ConnectedButton: {
-    height: 60,
-    width: 200,
+    height: 70,
+    width: 300,
     backgroundColor: "#C6AC8F",
     borderRadius: 50,
     justifyContent: "center",
@@ -194,6 +188,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flexWrap: "wrap",
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   newUser: {
     justifyContent: "center",
@@ -202,8 +197,8 @@ const styles = StyleSheet.create({
     width: 300,
   },
   buttonContainer: {
-    width: 300,
-    height: 250,
+    width: "90%",
+    height: "40%",
     justifyContent: "space-around",
     alignItems: "center",
   },
@@ -211,23 +206,24 @@ const styles = StyleSheet.create({
     color: "white",
     height: 30,
     fontSize: 18,
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 2,
   },
   error: {
     marginTop: 10,
     color: "red",
+    fontFamily: "Montserrat_500Medium",
   },
   bottomPage: {
-    flex: 1,
-    justifyContent: "space-between",
+    marginTop: 20,
+    height: "38%",
+    justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 70,
   },
   createAccount: {
     fontWeight: "bold",
     justifyContent: "center",
     alignItems: "center",
-    color: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "white",
+    color: "#C6AC8F",
   },
 });

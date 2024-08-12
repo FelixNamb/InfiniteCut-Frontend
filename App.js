@@ -1,4 +1,3 @@
-import ConnectionScreen from "./screens/parcoursUser/ConnectionScreen";
 import DatePicker from "./screens/parcoursUser/DatePicker";
 import SignUpScreen from "./screens/parcoursUser/SignUpScreen";
 import SignUpProScreen from "./screens/parcoursUser/SignUpProScreen";
@@ -16,7 +15,7 @@ import UserFormule from "./screens/profileUser/UserFormule";
 import FavoriteBarber from "./screens/profileUser/FavoriteBarber";
 import MesChiffres from "./screens/profilePro/MesChiffres";
 import MesInformationsPro from "./screens/profilePro/MesInformationsPro";
-import ConceptScreen from "./screens/parcoursUser/ConceptScreen";
+import ConnectionScreen from "./screens/parcoursUser/ConnectionScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";
@@ -76,12 +75,20 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="RDVs" component={MesRDVScreen} />
-              <Stack.Screen name="DatePicker" component={DatePicker} />
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="MesChiffres" component={MesChiffres} />
+              <Stack.Screen name="Connection" component={ConnectionScreen} />
               <Stack.Screen name="Pay" component={PayScreen} />
+              <Stack.Screen name="RDVs" component={MesRDVScreen} />
+              <Stack.Screen name="Formules" component={FormulesScreen} />
+              <Stack.Screen
+                name="ChooseBarber"
+                component={ChooseBarberScreen}
+              />
+              <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
+              <Stack.Screen name="DatePicker" component={DatePicker} />
               <Stack.Screen name="SignUp" component={SignUpScreen} />
               <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-              <Stack.Screen name="MesChiffres" component={MesChiffres} />
               <Stack.Screen
                 name="MesInformationsPro"
                 component={MesInformationsPro}
@@ -96,16 +103,7 @@ export default function App() {
               />
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
-              <Stack.Screen name="Connection" component={ConnectionScreen} />
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Formules" component={FormulesScreen} />
-              <Stack.Screen name="Concept" component={ConceptScreen} />
-              <Stack.Screen
-                name="ChooseBarber"
-                component={ChooseBarberScreen}
-              />
               <Stack.Screen name="ConceptPro" component={ConceptPro} />
-              <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
               <Stack.Screen name="MyAgenda" component={MyAgenda} />
             </Stack.Navigator>
           </NavigationContainer>

@@ -42,7 +42,7 @@ export default function FinRDVScreen({ navigation }) {
         navigation={navigation}
       />
       <View style={styles.containerPage}>
-        <Text style={styles.titlePage}>Fin de rendez-vous</Text>
+        <Text style={styles.titlePage}>Fin de {"\n"}rendez-vous</Text>
         <View style={styles.note}>
           <Text style={styles.textNote}>Note</Text>
           <View style={styles.star}>{stars}</View>
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
   },
   titlePage: {
     color: "#5E503F",
-    fontSize: 35,
+    fontSize: 40,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
-    margin: 10,
+    letterSpacing: 5,
   },
   note: {
     flexDirection: "row",
@@ -152,6 +152,8 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 18,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   centeredCardView: {
     flex: 1,
@@ -177,7 +179,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   textCardModal: {
-    color: "#5E503F",
+    color: "white",
     fontSize: 15,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
@@ -186,5 +188,6 @@ const styles = StyleSheet.create({
   error: {
     marginTop: 10,
     color: "red",
+    fontFamily: "Montserrat_500Medium",
   },
 });

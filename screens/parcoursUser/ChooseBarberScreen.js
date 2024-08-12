@@ -45,7 +45,9 @@ export default function ChooseBarberScreen({ navigation }) {
               />
               <View style={styles.informations}>
                 <View style={styles.name}>
-                  <Text>Le Barbier de {"\n"}Lyon 7ème</Text>
+                  <Text style={styles.barberName}>
+                    Le Barbier de {"\n"}Lyon 7ème
+                  </Text>
                 </View>
                 <View style={styles.noteModal}>
                   <View style={styles.starsModal}>{stars}</View>
@@ -61,7 +63,9 @@ export default function ChooseBarberScreen({ navigation }) {
             </View>
             <View style={styles.bottomModal}>
               <View style={styles.abonnement}>
-                <Text>Abonnements disponibles:</Text>
+                <Text style={styles.textAbonnement}>
+                  Abonnements disponibles:
+                </Text>
                 <View style={styles.allFormulas}>
                   <TouchableOpacity style={styles.buttonFormula}>
                     <Text style={styles.textFormula}>Essentiel</Text>
@@ -108,7 +112,7 @@ export default function ChooseBarberScreen({ navigation }) {
                   source={require("../../assets/background_home.jpg")}
                 />
                 <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
+                  <Text style={styles.barberName}>Lucie Coiffure</Text>
                   <View style={styles.star}>{stars}</View>
                 </View>
               </View>
@@ -121,11 +125,6 @@ export default function ChooseBarberScreen({ navigation }) {
             </View>
           </TouchableOpacity>
         </ScrollView>
-        <MaterialCommunityIcons
-          name="chevron-double-down"
-          size={50}
-          color="#C6AC8F"
-        />
       </View>
       <View style={styles.bottomContainer}></View>
     </View>
@@ -165,6 +164,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "flex-start",
     flex: 1,
+  },
+  barberName: {
+    fontFamily: "Montserrat_500Medium",
+    fontSize: 20,
+  },
+  textAbonnement: {
+    fontFamily: "Montserrat_500Medium",
   },
   image: {
     width: 85,
@@ -225,11 +231,13 @@ const styles = StyleSheet.create({
   },
   textFormula: {
     color: "white",
-    letterSpacing: 2,
+    letterSpacing: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   textFormulaPremium: {
     color: "#5E503F",
-    letterSpacing: 2,
+    letterSpacing: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   buttonToFormulas: {
     width: 250,
@@ -244,7 +252,8 @@ const styles = StyleSheet.create({
   textButtonToFormula: {
     color: "#5E503F",
     textAlign: "center",
-    letterSpacing: 2,
+    letterSpacing: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   upperContainer: {
     marginTop: 50,

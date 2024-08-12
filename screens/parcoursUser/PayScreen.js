@@ -131,7 +131,7 @@ export default function PayScreen({ navigation }) {
           style={styles.button}
           onPress={() => handleNavigation()}
         >
-          <Text style={styles.textButton}>Payer</Text>
+          <Text style={styles.textButton}>Valider</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
@@ -245,5 +245,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Montserrat_500Medium",
     letterSpacing: 5,
+    fontSize: 20,
   },
 });

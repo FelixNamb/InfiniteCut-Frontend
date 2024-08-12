@@ -47,7 +47,7 @@ export default function FormuleScreen({ navigation }) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
   }
   return (
-    <SafeAreaView
+    <View
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
@@ -145,8 +145,8 @@ export default function FormuleScreen({ navigation }) {
                   <View style={styles.centeredCardView}>
                     <View style={styles.modalCardView}>
                       <Text style={styles.textCardModal}>
-                        Votre RDV a bien été supprimé. {"\n"}Et si on prenait un
-                        autre rendez-vous ?
+                        Votre rendez-vous a bien été supprimé. {"\n"} {"\n"}Et
+                        si on en prenait un autre ?
                       </Text>
                     </View>
                   </View>
@@ -168,13 +168,11 @@ export default function FormuleScreen({ navigation }) {
                     style={styles.img}
                     source={require("../../assets/background_home.jpg")}
                   />
-                  <Text style={styles.name}>Lucie Saint Clair</Text>
+                  <Text style={styles.name}>
+                    Lucie Saint Clair{"\n"}Adresse du salon
+                  </Text>
                 </View>
                 <View style={styles.allIcons}>
-                  <View style={styles.location}>
-                    <Entypo name="location-pin" size={24} color="#5E503F" />
-                    <Text> Adresse du salon</Text>
-                  </View>
                   <View style={styles.prestation}>
                     <Entypo name="scissors" size={24} color="#5E503F" />
                     <Text> N° formule</Text>
@@ -233,8 +231,8 @@ export default function FormuleScreen({ navigation }) {
                   <View style={styles.centeredCardView}>
                     <View style={styles.modalCardView}>
                       <Text style={styles.textCardModal}>
-                        Votre rendez-vous a bien été supprimé.{"\n"}
-                        {"\n"}Et si on prenait un autre rendez-vous ?
+                        Votre rendez-vous a bien été supprimé. {"\n"} {"\n"}Et
+                        si on en prenait un autre ?
                       </Text>
                     </View>
                   </View>
@@ -292,7 +290,7 @@ export default function FormuleScreen({ navigation }) {
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
