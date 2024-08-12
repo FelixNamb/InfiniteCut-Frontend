@@ -29,6 +29,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
+import StatScreen from "./screens/profilePro/StatScreen";
 
 const reducers = combineReducers({ user, formules, userPro });
 const persistConfig = { key: "faceup", storage: AsyncStorage };
@@ -49,6 +50,8 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="StatScreen" component={StatScreen} />
+            <Stack.Screen name="ConceptPro" component={ConceptPro} />
             <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
             <Stack.Screen name="MesInformations" component={MesInformations} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -62,7 +65,6 @@ export default function App() {
             <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
             <Stack.Screen name="Pay" component={PayScreen} />
             <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
-            <Stack.Screen name="ConceptPro" component={ConceptPro} />
             <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
             <Stack.Screen name="MyAgenda" component={MyAgenda} />
             <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
