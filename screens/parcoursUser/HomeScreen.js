@@ -21,6 +21,7 @@ export default function HomeScreen({ navigation }) {
         <ImageBackground
           style={[styles.backgroundImage, { height: screenHeight }]}
           source={require("../../assets/background_home.jpg")}
+          alt="photo salon"
         >
           <View style={styles.titleContainer}>
             <Text style={styles.title}>INFINITE {"\n"}CUT</Text>

@@ -41,6 +41,7 @@ export default function ChooseBarberScreen({ navigation }) {
             <View style={styles.informationsAndImage}>
               <Image
                 source={require("../../assets/background_home.jpg")}
+                alt="photo salon"
                 style={styles.image}
               />
               <View style={styles.informations}>
@@ -110,6 +111,7 @@ export default function ChooseBarberScreen({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo salon"
                 />
                 <View style={styles.nameAndNote}>
                   <Text style={styles.barberName}>Lucie Coiffure</Text>

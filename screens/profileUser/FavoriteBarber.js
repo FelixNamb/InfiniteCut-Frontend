@@ -51,6 +51,7 @@ export default function FavoriteBarber({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo du salon de coiffure"
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
@@ -69,6 +70,7 @@ export default function FavoriteBarber({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo du salon de coiffure"
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
@@ -87,6 +89,7 @@ export default function FavoriteBarber({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo du salon de coiffure"
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
@@ -105,6 +108,7 @@ export default function FavoriteBarber({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo du salon de coiffure"
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
@@ -123,6 +127,7 @@ export default function FavoriteBarber({ navigation }) {
                 <Image
                   style={styles.img}
                   source={require("../../assets/background_home.jpg")}
+                  alt="photo du salon de coiffure"
                 />
                 <View style={styles.nameAndNote}>
                   <Text>Lucie Saint Clair</Text>
