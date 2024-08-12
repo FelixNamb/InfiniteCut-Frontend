@@ -144,16 +144,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#5E503F",
-    fontSize: 35,
+    fontSize: 40,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
-    margin: 10,
+    marginTop: 15,
+    letterSpacing: 5,
+    marginBottom: 15,
   },
   subTitle: {
     color: "#5E503F",
     fontSize: 25,
     fontFamily: "Montserrat_500Medium",
-    margin: 20,
+    margin: 10,
   },
   creditCard: {
     backgroundColor: "white",
@@ -168,6 +170,7 @@ const styles = StyleSheet.create({
   creditCardNumber: {
     letterSpacing: 8,
     margin: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   upperContainer: {
     flexDirection: "column",
@@ -177,6 +180,7 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     fontSize: 15,
+    fontFamily: "Montserrat_500Medium",
   },
   buttonAdd: {
     backgroundColor: "#5E503F",
@@ -192,6 +196,7 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   buttonDelete: {
     width: 200,
@@ -208,6 +213,7 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   bottomPage: {
     alignItems: "center",
@@ -318,5 +324,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
 });

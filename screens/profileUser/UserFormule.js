@@ -69,9 +69,9 @@ export default function UserFormule({ navigation }) {
               style={{
                 fontSize: 30,
                 color: "white",
-                letterSpacing: 10,
+                letterSpacing: 12,
                 margin: 10,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               ESSENTIEL
@@ -117,8 +117,8 @@ export default function UserFormule({ navigation }) {
             <View style={styles.centeredCardView}>
               <View style={styles.modalCardView}>
                 <Text style={styles.textCardModal}>
-                  Votre formule a bien été supprimée. {"\n"}Et si on prenait un
-                  rendez-vous ?
+                  Votre formule a bien été supprimée. {"\n"} {"\n"}Et si on
+                  prenait un rendez-vous ?
                 </Text>
               </View>
             </View>
@@ -129,14 +129,6 @@ export default function UserFormule({ navigation }) {
           >
             <Text style={styles.textButton}>Résilier abonnement</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.bottomPage}>
-          <MaterialCommunityIcons
-            name="chevron-double-down"
-            size={50}
-            color="#C6AC8F"
-            onPress={() => navigation.navigate("FavoriteBarber")}
-          />
         </View>
       </View>
     </SafeAreaView>
@@ -154,6 +146,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
+    marginTop: 15,
+    letterSpacing: 5,
   },
   cardContainer: {
     width: "80%",
@@ -181,15 +175,12 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 18,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   ButtonSection: {
     flexDirection: "row",
     justifyContent: "space-between",
     margin: 10,
-  },
-  bottomPage: {
-    alignItems: "center",
-    margin: 30,
   },
   centeredView: {
     flex: 1,
@@ -236,6 +227,7 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   centeredCardView: {
     flex: 1,
