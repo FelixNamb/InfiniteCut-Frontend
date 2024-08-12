@@ -24,21 +24,21 @@ export default function MesInformations({ navigation }) {
 
   return (
     <SafeAreaView style={styles.total}>
-      <View style={styles.header}>
-        <Header
-          style={styles.header}
-          title="INFINITE CUT"
-          navigation={navigation}
-          colorScissors={false}
-          colorUser={true}
-        />
-        <SubHeaderProfile
-          firstText="Mes RDV"
-          secondText="Mon compte"
-          styleSecondText="600"
-        />
-      </View>
       <KeyboardAvoidingView style={styles.keyboard}>
+        <View style={styles.header}>
+          <Header
+            style={styles.header}
+            title="INFINITE CUT"
+            navigation={navigation}
+            colorScissors={false}
+            colorUser={true}
+          />
+          <SubHeaderProfile
+            firstText="Mes RDV"
+            secondText="Mon compte"
+            styleSecondText="600"
+          />
+        </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Mon compte</Text>
         </View>
