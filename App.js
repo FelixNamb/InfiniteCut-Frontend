@@ -49,15 +49,16 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-            <Stack.Screen name="MesInformations" component={MesInformations} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="DatePicker" component={DatePicker} />
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="MyAgenda" component={MyAgenda} />
             <Stack.Screen
               name="MesInformationsPro"
               component={MesInformationsPro}
             />
+            <Stack.Screen name="MesInformations" component={MesInformations} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="DatePicker" component={DatePicker} />
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />
             <Stack.Screen name="RDVs" component={MesRDVScreen} />
@@ -67,7 +68,6 @@ export default function App() {
             <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
             <Stack.Screen name="ConceptPro" component={ConceptPro} />
             <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
-            <Stack.Screen name="MyAgenda" component={MyAgenda} />
             <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
             <Stack.Screen name="UserFormule" component={UserFormule} />
             <Stack.Screen name="MesChiffres" component={MesChiffres} />
