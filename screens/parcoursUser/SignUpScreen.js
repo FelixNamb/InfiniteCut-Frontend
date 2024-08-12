@@ -60,7 +60,7 @@ export default function SignUpScreen({ navigation }) {
     >
       <SafeAreaView style={styles.AreaView}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Nouveau sur {"\n"}Infinite Cut ?</Text>
+          <Text style={styles.title}>Nouveau sur Infinite Cut ?</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TextInput
@@ -108,7 +108,7 @@ export default function SignUpScreen({ navigation }) {
             style={styles.lastButton}
             onPress={() => handleSignUp()}
           >
-            <Text style={styles.lastTextButton}>Créer son {"\n"}compte</Text>
+            <Text style={styles.lastTextButton}>Créer son compte</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
-    borderRadius: 50,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -146,33 +146,33 @@ const styles = StyleSheet.create({
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
-    borderRadius: 50,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    color: "white", // Ajout de cette ligne pour que le texte soit visible
+    color: "white",
   },
   inputConfirmPassword: {
     height: 70,
     width: 300,
     backgroundColor: "#5E503F",
-    borderRadius: 50,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    color: "white", // Ajout de cette ligne pour que le texte soit visible
+    color: "white",
   },
   title: {
     color: "#5E503F",
     fontSize: 40,
-    flex: 1,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   titleContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 15,
+    marginBottom: 15,
+    width: "100%",
   },
   lastButton: {
     backgroundColor: "transparent",
@@ -191,22 +191,24 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
     textAlign: "center",
-    letterSpacing: 2,
+    letterSpacing: 5,
+    fontFamily: "Montserrat_500Medium",
   },
   buttonContainer: {
-    width: 300,
-    height: 350,
+    width: "90%",
+    height: "60%",
     justifyContent: "space-around",
     alignItems: "center",
+    margin: 20,
   },
   error: {
     marginTop: 10,
     color: "red",
+    fontFamily: "Montserrat_500Medium",
   },
   bottomPage: {
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 130,
   },
 });

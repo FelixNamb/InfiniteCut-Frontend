@@ -67,7 +67,9 @@ export default function PayScreen({ navigation }) {
         colorUser={false}
         navigation={navigation}
       />
-      <Text style={styles.title}>Confirmer votre {"\n"}abonnement</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Confirmer votre abonnement</Text>
+      </View>
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.card}>
           <View style={styles.viewIcon}>
@@ -93,6 +95,8 @@ export default function PayScreen({ navigation }) {
             <Text
               style={{
                 color: "white",
+                fontFamily: "Montserrat_500Medium",
+
                 fontSize: 20,
               }}
             >
@@ -100,12 +104,20 @@ export default function PayScreen({ navigation }) {
             </Text>
           </View>
           <View style={styles.cvcAndExpiration}>
-            <Text style={{ color: "white" }}>{expiration}</Text>
-            <Text style={{ color: "white" }}>{cvc}</Text>
+            <Text
+              style={{ color: "white", fontFamily: "Montserrat_500Medium" }}
+            >
+              {expiration}
+            </Text>
+            <Text
+              style={{ color: "white", fontFamily: "Montserrat_500Medium" }}
+            >
+              {cvc}
+            </Text>
           </View>
         </View>
         {error ? (
-          <Text style={{ color: "red" }}>
+          <Text style={{ color: "red", fontFamily: "Montserrat_500Medium" }}>
             Erreur sur la saisie de votre carte.
           </Text>
         ) : (
@@ -166,25 +178,35 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  titleContainer: {
+    marginTop: 10,
+    width: "100%",
+  },
   title: {
     color: "#5E503F",
-    fontSize: 32,
+    fontSize: 40,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   card: {
-    width: "80%",
+    width: "100%",
     height: "35%",
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: "#A9A9A9",
     borderRadius: 20,
+    marginBottom: 10,
   },
   safeArea: {
-    height: 170,
-    width: 300,
+    height: "35%",
+    width: "100%",
     borderRadius: 20,
     backgroundColor: "white",
     margin: 10,
+    borderColor: "#5E503F",
+    borderWidth: 1,
+    marginBottom: 15,
   },
   icon: {
     flexDirection: "row",
@@ -213,13 +235,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#5E503F",
-    width: 148.62,
+    width: 200,
     height: 50,
-    borderRadius: 20,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
   },
   textButton: {
     color: "white",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
 });

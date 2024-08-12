@@ -17,10 +17,9 @@ import FavoriteBarber from "./screens/profileUser/FavoriteBarber";
 import MesChiffres from "./screens/profilePro/MesChiffres";
 import MesInformationsPro from "./screens/profilePro/MesInformationsPro";
 import ConceptScreen from "./screens/parcoursUser/ConceptScreen";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { View } from "react-native";
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
@@ -29,6 +28,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
+
+import {
+  useFonts,
+  Montserrat_100Thin,
+  Montserrat_200ExtraLight,
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+  Montserrat_800ExtraBold,
+  Montserrat_900Black,
+} from "@expo-google-fonts/montserrat";
 
 const reducers = combineReducers({ user, formules, userPro });
 const persistConfig = { key: "faceup", storage: AsyncStorage };
@@ -44,44 +56,61 @@ const persistor = persistStore(store);
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-            <Stack.Screen name="MesInformations" component={MesInformations} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="DatePicker" component={DatePicker} />
-            <Stack.Screen
-              name="MesInformationsPro"
-              component={MesInformationsPro}
-            />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Connection" component={ConnectionScreen} />
-            <Stack.Screen name="Formules" component={FormulesScreen} />
-            <Stack.Screen name="RDVs" component={MesRDVScreen} />
-            <Stack.Screen name="Concept" component={ConceptScreen} />
-            <Stack.Screen name="ChooseBarber" component={ChooseBarberScreen} />
-            <Stack.Screen name="Pay" component={PayScreen} />
-            <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
-            <Stack.Screen name="ConceptPro" component={ConceptPro} />
-            <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
-            <Stack.Screen name="MyAgenda" component={MyAgenda} />
-            <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
-            <Stack.Screen name="UserFormule" component={UserFormule} />
-            <Stack.Screen name="MesChiffres" component={MesChiffres} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
-  );
-}
+  let [fontsLoaded] = useFonts({
+    Montserrat_100Thin,
+    Montserrat_200ExtraLight,
+    Montserrat_300Light,
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 0,
-    padding: 0,
-  },
-});
+  if (!fontsLoaded) {
+    return <View></View>;
+  } else {
+    return (
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="RDVs" component={MesRDVScreen} />
+              <Stack.Screen name="DatePicker" component={DatePicker} />
+              <Stack.Screen name="Pay" component={PayScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+              <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
+              <Stack.Screen name="MesChiffres" component={MesChiffres} />
+              <Stack.Screen
+                name="MesInformationsPro"
+                component={MesInformationsPro}
+              />
+              <Stack.Screen
+                name="MoyenDePaiement"
+                component={MoyenDePaiement}
+              />
+              <Stack.Screen
+                name="MesInformations"
+                component={MesInformations}
+              />
+              <Stack.Screen name="UserFormule" component={UserFormule} />
+              <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
+              <Stack.Screen name="Connection" component={ConnectionScreen} />
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Formules" component={FormulesScreen} />
+              <Stack.Screen name="Concept" component={ConceptScreen} />
+              <Stack.Screen
+                name="ChooseBarber"
+                component={ChooseBarberScreen}
+              />
+              <Stack.Screen name="ConceptPro" component={ConceptPro} />
+              <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
+              <Stack.Screen name="MyAgenda" component={MyAgenda} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
+    );
+  }
+}

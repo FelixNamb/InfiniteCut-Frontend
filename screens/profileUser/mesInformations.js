@@ -51,7 +51,6 @@ export default function MesInformations({ navigation }) {
             placeholderTextColor="#000000"
             value={email}
           />
-
           <TextInput
             style={styles.input}
             onChangeText={(value) => setAdresse(value)}
@@ -59,7 +58,6 @@ export default function MesInformations({ navigation }) {
             placeholderTextColor="#000000"
             value={adresse}
           />
-
           <TextInput
             style={styles.input}
             onChangeText={(value) => setMobile(value)}
@@ -69,8 +67,10 @@ export default function MesInformations({ navigation }) {
           />
         </View>
         <View style={styles.bottomPage}>
-          <TouchableOpacity style={styles.button}
-          onPress={() => handleModifier}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleModifier}
+          >
             <Text style={styles.final}>Modifier</Text>
           </TouchableOpacity>
         </View>
@@ -81,11 +81,11 @@ export default function MesInformations({ navigation }) {
 
 const styles = StyleSheet.create({
   total: {
-    flex:1,
+    flex: 1,
     backgroundColor: "#EAE0D5",
   },
   keyboard: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -97,23 +97,24 @@ const styles = StyleSheet.create({
     height: "40%",
     justifyContent: "space-evenly",
     alignItems: "flex-start",
+    backgroundColor: "blue",
   },
   textContainer: {
     width: "100%",
-    justifyContent:"center",
-    alignItems:"center",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10,
   },
   globalInput: {
     width: "90%",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   input: {
     height: "16%",
     width: "85%",
     backgroundColor: "#C6AC8F",
-    borderRadius: 50,
+    borderRadius: 20,
     marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -124,37 +125,41 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   bottomPage: {
-    width: "100%",
-    justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "green",
-    marginBottom: 30,
+    width: "100%",
+    marginBottom: 3,
   },
   button: {
     height: "30%",
     borderWidth: 1,
-    width: 150,
-    borderRadius: 30,
+    width: 200,
+    borderRadius: 50,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     borderColor: "#5E503F",
   },
   text: {
-    fontSize: 36,
     color: "#5E503F",
+    fontSize: 40,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    marginTop: 15,
+    letterSpacing: 5,
   },
   sousText: {
     fontSize: 24,
     color: "#5E503F",
     alignSelf: "flex-start",
+    fontFamily: "Montserrat_500Medium",
   },
   line: {
     color: "#5E503F",
   },
   final: {
-    color:"#5E503F",
-    fontSize:20,
+    color: "#5E503F",
+    fontSize: 20,
     letterSpacing: 4,
-  }
+    fontFamily: "Montserrat_500Medium",
+  },
 });

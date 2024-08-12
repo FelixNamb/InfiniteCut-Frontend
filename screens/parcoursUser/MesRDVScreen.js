@@ -71,7 +71,7 @@ export default function FormuleScreen({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Text style={styles.title}>Mon prochain RDV</Text>
+        <Text style={styles.title}>Mon prochain Rendez-vous</Text>
         <View style={styles.upContainer}>
           <ScrollView style={styles.scrollView} horizontal={true}>
             <View style={styles.rdvCard}>
@@ -82,13 +82,11 @@ export default function FormuleScreen({ navigation }) {
                     style={styles.img}
                     source={require("../../assets/background_home.jpg")}
                   />
-                  <Text style={styles.name}>Lucie Saint Clair</Text>
+                  <Text style={styles.name}>
+                    Lucie Saint Clair{"\n"}Adresse du salon
+                  </Text>
                 </View>
                 <View style={styles.allIcons}>
-                  <View style={styles.location}>
-                    <Entypo name="location-pin" size={24} color="#5E503F" />
-                    <Text> Adresse du salon</Text>
-                  </View>
                   <View style={styles.prestation}>
                     <Entypo name="scissors" size={24} color="#5E503F" />
                     <Text> N° formule</Text>
@@ -235,8 +233,8 @@ export default function FormuleScreen({ navigation }) {
                   <View style={styles.centeredCardView}>
                     <View style={styles.modalCardView}>
                       <Text style={styles.textCardModal}>
-                        Votre RDV a bien été supprimé. {"\n"}Et si on prenait un
-                        autre rendez-vous ?
+                        Votre rendez-vous a bien été supprimé.{"\n"}
+                        {"\n"}Et si on prenait un autre rendez-vous ?
                       </Text>
                     </View>
                   </View>
@@ -252,7 +250,7 @@ export default function FormuleScreen({ navigation }) {
             </View>
           </ScrollView>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Historique de RDV</Text>
+            <Text style={styles.title}>Historique de rendez-vous</Text>
           </View>
         </View>
         <ScrollView style={styles.scrollView}>
@@ -319,15 +317,15 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   title: {
-    width: "100%",
-    fontSize: 26,
-    letterSpacing: 6,
-    marginLeft: 40,
+    color: "#5E503F",
+    fontSize: 40,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   titleContainer: {
-    width: "100%",
-    fontSize: 26,
-    letterSpacing: 6,
+    height: 100,
+    marginLeft: 20,
   },
   rdvCard: {
     height: "85%",
@@ -345,21 +343,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "flex-start",
     height: "60%",
+    fontFamily: "Montserrat_500Medium",
   },
   date: {
     fontWeight: "500",
     margin: 15,
+    fontFamily: "Montserrat_500Medium",
+    padding: 5,
   },
   imageName: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
-    margin: 10,
+    paddingBottom: 20,
   },
   name: {
     fontWeight: "bold",
     margin: 10,
+    fontFamily: "Montserrat_500Medium",
+    fontSize: 15,
   },
   img: {
     width: 85,
@@ -369,12 +372,6 @@ const styles = StyleSheet.create({
   prestation: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-  },
-  location: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingTop: 15,
   },
   prestation: {
     flexDirection: "row",
@@ -397,7 +394,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: 10,
   },
   deleteRdv: {
     flexDirection: "row",
@@ -415,6 +411,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: "#EAE0D5",
+    fontFamily: "Montserrat_500Medium",
   },
   barber: {
     width: 300,
@@ -490,9 +487,10 @@ const styles = StyleSheet.create({
   },
   confirmButtonText: {
     color: "#C6AC8F",
-    letterSpacing: 2,
+    letterSpacing: 5,
     fontSize: 15,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   centeredCardView: {
     flex: 1,
@@ -529,5 +527,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     marginLeft: 10,
+  },
+  allIcons: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
   },
 });

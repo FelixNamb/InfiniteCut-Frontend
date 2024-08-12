@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { URL_BACKEND } from "@env";
 import { loginUserPro } from "../../reducers/userPro";
+import Header from "../../components/Header";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -46,6 +47,10 @@ export default function SignUpProScreen({ navigation }) {
           console.log(data);
           if (data.result) {
             setModalVisible(true);
+            setTimeout(() => {
+              setModalVisible(false);
+              navigation.navigate("Home");
+            }, 3000);
           }
         });
     } else {
@@ -65,20 +70,15 @@ export default function SignUpProScreen({ navigation }) {
           <View style={styles.modalView}>
             <View style={styles.globalView}>
               <Text style={styles.textModal}>
-                Nous accusons bonne réception de votre formulaire.
+                Merci pour votre intêret. {"\n"} {"\n"}Nous accusons bonne
+                réception de votre demande.
               </Text>
               <Text style={styles.textModal}>
-                Notre équipe commercial reviendra vers vous dès que possible par
-                téléphone afin de convenir d'un premier échange.
+                Notre équipe commercial reviendra vers vous par téléphone afin
+                de convenir d'un premier échange.
               </Text>
               <Text style={styles.textModal}>Merci pour votre confiance.</Text>
               <Text style={styles.textTitle}>INFINITE CUT</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("Home")}
-              >
-                <Text style={styles.lastTextButton}>Retourner au menu</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -88,27 +88,27 @@ export default function SignUpProScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Envie de {"\n"}nous rejoindre ?</Text>
+          <Text style={styles.title}>Envie de nous rejoindre ?</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
             placeholder="Prénom"
-            placeholderTextColor="white"
+            placeholderTextColor="#5E503F"
             onChangeText={(value) => setPrenom(value)}
             value={prenom}
           ></TextInput>
           <TextInput
             style={styles.input}
             placeholder="Nom"
-            placeholderTextColor="white"
+            placeholderTextColor="#5E503F"
             onChangeText={(value) => setNom(value)}
             value={nom}
           ></TextInput>
           <TextInput
             style={styles.input}
             placeholder="Mobile"
-            placeholderTextColor="white"
+            placeholderTextColor="#5E503F"
             autoCapitalize="none"
             onChangeText={(value) => setMobile(value)}
             value={mobile}
@@ -116,16 +116,14 @@ export default function SignUpProScreen({ navigation }) {
           <TextInput
             style={styles.input}
             placeholder="Code Postal"
-            placeholderTextColor="white"
+            placeholderTextColor="#5E503F"
             onChangeText={(value) => setCodePostal(value)}
             value={codePostal}
           ></TextInput>
-        </View>
-        <View style={styles.containerBottom}>
           <TextInput
-            style={styles.inputEmail}
+            style={styles.input}
             placeholder="Email"
-            placeholderTextColor="white"
+            placeholderTextColor="#5E503F"
             autoCapitalize="none"
             keyboardType="email-address"
             textContentType="emailAddress"
@@ -134,6 +132,7 @@ export default function SignUpProScreen({ navigation }) {
             value={email}
           ></TextInput>
         </View>
+
         {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
         <View style={styles.bottomPage}>
           <TouchableOpacity
@@ -157,10 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
-    margin: 0,
-    padding: 0,
-    width: "100%",
-    height: "100%",
+    backgroundColor: "#EAE0D5",
   },
   centeredView: {
     flex: 1,
@@ -190,79 +186,46 @@ const styles = StyleSheet.create({
   },
   textModal: {
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "600",
+    color: "#EAE0D5",
+    letterSpacing: 5,
+    fontFamily: "Montserrat_500Medium",
   },
   bottomModal: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
   },
-  button: {
+  input: {
     backgroundColor: "transparent",
-    height: 50,
-    width: 200,
+    height: 70,
+    width: 300,
     fontWeight: "600",
     fontSize: 16,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: "#5E503F",
-  },
-  inputEmail: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  input: {
-    height: 70,
-    width: 150,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    marginBottom: 30,
-  },
-  inputPassword: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  inputConfirmPassword: {
-    height: 70,
-    width: 300,
-    backgroundColor: "#5E503F",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    padding: 10,
   },
   title: {
     color: "#5E503F",
     fontSize: 40,
-    flex: 1,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    marginTop: 15,
+    letterSpacing: 5,
   },
   titleContainer: {
-    height: "25%",
-    width: "80%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 60,
+    flex: 1,
+    marginTop: 15,
+    marginBottom: 15,
   },
   lastButton: {
-    backgroundColor: "transparent",
+    backgroundColor: "#5E503F",
     height: 70,
     width: 300,
     fontWeight: "600",
@@ -274,32 +237,26 @@ const styles = StyleSheet.create({
     borderColor: "#5E503F",
   },
   lastTextButton: {
-    color: "#5E503F",
+    color: "white",
     fontWeight: "600",
     fontSize: 20,
+    fontFamily: "Montserrat_500Medium",
   },
   buttonContainer: {
-    width: 380,
-    height: 250,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "space-around",
+    alignItems: "center",
+    height: "60%",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
-
   error: {
     marginTop: 10,
     color: "red",
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
   },
   bottomPage: {
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 130,
-  },
-  containerBottom: {
-    flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
 });
