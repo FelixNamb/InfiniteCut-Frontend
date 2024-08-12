@@ -79,7 +79,7 @@ export default function MesChiffres({ navigation }) {
             firstText="Mes informations"
             secondText="Mes chiffres"
             navigation={navigation}
-            styleFirstText="500"
+            styleSecondText="500"
           />
         </View>
         <View style={styles.page}>

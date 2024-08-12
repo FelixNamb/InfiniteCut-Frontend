@@ -5,7 +5,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useState } from "react";
 
-export default function MesInformationsPro () {
+export default function MesInformationsPro ({navigation}) {
     const [isModalVisible, setIsModalIvisible] = useState(false);
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -15,47 +15,58 @@ export default function MesInformationsPro () {
     const changeFormules = () =>{
         setIsModalIvisible(true);
     }
+
+    const handleChoisir = () => {
+        setIsModalIvisible(false);
+    }
     return(
         <SafeAreaView style={styles.page}>
             <Modal visible={isModalVisible} animationType="fade" transparent>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <View syle={styles.upperModal}>
-                        <Text style={styles.subtitle}>Quels sont vos choix ?</Text>
                         <TouchableOpacity
                             onPress={() => setIsModalIvisible(false)}
-                            style={styles.button}
                             activeOpacity={0.8}
+                            style={{marginBottom: "10%"}}
                         >
                             <Entypo name="squared-cross" size={30} color="#C6AC8F" />
                         </TouchableOpacity>
                     </View>
-                    <ScrollView style={styles.allFormules} horizontal={true}>
-                        <ImageBackground style={styles.backgroundImage}
-                        source={require("../../assets/formule_essentiel.jpg")}>
-                            <TouchableOpacity style={styles.modalButton}>
-                                <Text style={styles.textModalButton}>Choisir</Text>
-                            </TouchableOpacity>
-                        </ImageBackground>
-                        <ImageBackground style={styles.backgroundImage}
-                        source={require("../../assets/formule_essentiel.jpg")}>
-                            <TouchableOpacity style={styles.modalButton}>
-                                <Text style={styles.textModalButton}>Choisir</Text>
-                            </TouchableOpacity>
-                        </ImageBackground>
-                        <ImageBackground style={styles.backgroundImage}
-                        source={require("../../assets/formule_essentiel.jpg")}>
-                            <TouchableOpacity style={styles.modalButton}>
-                                <Text style={styles.textModalButton}>Choisir</Text>
-                            </TouchableOpacity>
-                        </ImageBackground>
+                    <Text style={styles.subtitle}>Quels sont vos choix ?</Text>
+                    <ScrollView 
+                    style={styles.allFormules} 
+                    horizontal={true} 
+                    >
+                            <ImageBackground style={styles.backgroundImage}
+                            source={require("../../assets/formule_essentiel.jpg")}>
+                                <Text style={styles.textModal}>ESSENTIEL</Text>
+                                <TouchableOpacity style={styles.modalButton}
+                                onPress={() => handleChoisir()}>
+                                    <Text style={styles.textModalButton}>Choisir</Text>
+                                </TouchableOpacity>
+                            </ImageBackground>
+                            <ImageBackground style={styles.backgroundImage}
+                            source={require("../../assets/formule_premium.jpg")}>
+                                <Text style={styles.textModal}>PREMIUM</Text>
+                                <TouchableOpacity style={styles.modalButton}>
+                                    <Text style={styles.textModalButton}>Choisir</Text>
+                                </TouchableOpacity>
+                            </ImageBackground>
+                            <ImageBackground style={styles.backgroundImage}
+                            source={require("../../assets/formule_exclusif.jpg")}>
+                                <Text style={styles.textModal}>EXCLUSIF</Text>
+                                <TouchableOpacity style={styles.modalButton}>
+                                    <Text style={styles.textModalButton}>Choisir</Text>
+                                </TouchableOpacity>
+                            </ImageBackground>
                     </ScrollView>
                 </View>
             </View>
             </Modal>
             <View style={styles.header}>
-                <Header title="INFINITE CUT" colorScissors={true} colorUser={false} />
-                <SubHeaderProfile firstText="Mes informations" secondText="Mes chiffres" styleFirstText="600" />
+                <Header title="INFINITE CUT" colorScissors={true} colorUser={false} navigation={navigation}/>
+                <SubHeaderProfile firstText="Mes informations" secondText="Mes chiffres" styleFirstText="600" navigation={navigation}/>
             </View>
             <View style={styles.container}>
                 <View style={styles.upperContainer}>
@@ -113,8 +124,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: "#22333B",
         padding: 5,
-        width: 300,
-        height: 300,
+        width: 350,
+        height: 400,
         alignItems: "center",
         justifyContent: "space-around",
         shadowColor: "#000",
@@ -125,6 +136,41 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+    },
+    upperModal:{
+        flexDirection: "row",
+        width: "100%",
+        justifyContent:"flex-end",
+        alignItems:"flex-end",
+    },
+    backgroundImage:{
+        marginTop: "5%",
+        width: 290,
+        height: 300,
+        marginLeft: 25,
+        borderRadius: 20,
+        justifyContent: "space-evenly",
+        alignItems:"center",
+    },
+    textModal:{
+        color: "white",
+        fontSize: 24,
+        letterSpacing:5,
+    },
+    modalButton:{
+        width: 150,
+        borderColor: "white",
+        borderWidth: 2,
+        height: "15%",
+        borderRadius:20,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    textModalButton:{
+        fontSize:20,
+        color:"white",
+        letterSpacing:4,
+        textAlign:"center",
     },
     container:{
         justifyContent: "space-between",

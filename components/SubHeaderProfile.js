@@ -1,9 +1,25 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function SubHeaderProfile(props) {
+
+    const handleNavigationLeft = () => {
+        if(props.firstText === "Mes informations"){
+            props.navigation.navigate("MyAgenda");
+        } else {
+            props.navigation.navigate("RDVs")
+        };
+    }
+
+    const handleNavigationRight = () => {
+        if(props.secondText === "Mes chiffres"){
+            props.navigation.navigate("MesChiffres");
+        } else {
+            props.navigation.navigate("MesInformations")
+        }
+    }
     return(
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("MesRdvs")}>
+            <TouchableOpacity onPress={() => handleNavigationLeft()}>
                 <Text style={{
         color: '#22333B',
         fontSize: 18,
@@ -11,7 +27,7 @@ export default function SubHeaderProfile(props) {
     }}>{props.firstText}</Text>
             </TouchableOpacity>
             <View style={styles.divider}></View>
-            <TouchableOpacity onPress={() => props.navigation.navigate("MonCompte")}>
+            <TouchableOpacity onPress={() => handleNavigationRight()}>
                 <Text style={{
         color: '#22333B',
         fontSize: 18,

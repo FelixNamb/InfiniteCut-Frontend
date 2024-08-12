@@ -57,6 +57,7 @@ export default function App() {
               name="MesInformationsPro"
               component={MesInformationsPro}
             />
+            <Stack.Screen name="MyAgenda" component={MyAgenda} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Connection" component={ConnectionScreen} />
             <Stack.Screen name="Formules" component={FormulesScreen} />
@@ -67,7 +68,6 @@ export default function App() {
             <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
             <Stack.Screen name="ConceptPro" component={ConceptPro} />
             <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
-            <Stack.Screen name="MyAgenda" component={MyAgenda} />
             <Stack.Screen name="MoyenDePaiement" component={MoyenDePaiement} />
             <Stack.Screen name="UserFormule" component={UserFormule} />
             <Stack.Screen name="MesChiffres" component={MesChiffres} />

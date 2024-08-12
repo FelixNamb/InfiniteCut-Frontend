@@ -6,15 +6,17 @@ export default function Header ( props) {
     return(
         <SafeAreaView style={styles.header}>
             <View style={styles.dispositionHeader}>
-                <TouchableOpacity >
+                <TouchableOpacity 
+                onPress={() => props.navigation.navigate("MyAgenda")} >
                     <FontAwesome6 
                     name="scissors" 
                     size={32} 
                     color={props.colorScissors ? "#22333B" : "#C6AC8F"}
-                    onPress={() => props.navigation.navigate("ChooseBarber")} />
+                    />
                 </TouchableOpacity>
                 <Text style={styles.title}>{props.title}</Text>
-                <TouchableOpacity >
+                <TouchableOpacity 
+                onPress={() => props.navigation.navigate("MesInformations")} >
                     <FontAwesome 
                     name="user-circle" 
                     size={32} 
