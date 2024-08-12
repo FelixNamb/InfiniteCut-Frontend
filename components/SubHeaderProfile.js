@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 export default function SubHeaderProfile(props) {
   const handleNavigationLeft = () => {
     if (props.firstText === "Mes informations") {
-      props.navigation.navigate("MyAgenda");
+      props.navigation.navigate("MesInformationsPro");
     } else {
       props.navigation.navigate("RDVs");
     }

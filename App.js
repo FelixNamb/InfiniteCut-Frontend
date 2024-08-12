@@ -75,6 +75,7 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="MyAgenda" component={MyAgenda} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="MesChiffres" component={MesChiffres} />
               <Stack.Screen name="Connection" component={ConnectionScreen} />
@@ -104,7 +105,6 @@ export default function App() {
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
               <Stack.Screen name="ConceptPro" component={ConceptPro} />
-              <Stack.Screen name="MyAgenda" component={MyAgenda} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

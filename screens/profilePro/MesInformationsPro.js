@@ -15,11 +15,15 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useState } from "react";
 
-export default function MesInformationsPro() {
+export default function MesInformationsPro({navigation}) {
   const [isModalVisible, setIsModalIvisible] = useState(false);
   const stars = [];
   for (let i = 0; i < 5; i++) {
-    stars.push(<Octicons key={i} name="star-fill" size={32} color="#22333B" />);
+    if(i < 4){
+      stars.push(<Octicons key={i} name="star-fill" size={32} color="#C6AC8F" />)
+    }else {
+      stars.push(<Octicons key={i} name="star-fill" size={32} color="#22333B" />);
+    }
   }
 
   const changeFormules = () => {
@@ -70,11 +74,12 @@ export default function MesInformationsPro() {
         </View>
       </Modal>
       <View style={styles.header}>
-        <Header title="INFINITE CUT" colorScissors={true} colorUser={false} />
+        <Header title="INFINITE CUT" colorScissors={true} colorUser={false} navigation={navigation} />
         <SubHeaderProfile
           firstText="Mes informations"
           secondText="Mes chiffres"
           styleFirstText="600"
+          navigation={navigation}
         />
       </View>
       <View style={styles.container}>
