@@ -9,6 +9,7 @@ import {
 import Header from "../../components/Header";
 import CardFlip from "react-native-card-flip";
 import React, { useRef } from "react";
+import { StatusBar } from "expo-status-bar";
 
 export default function FormulesScreen({ navigation }) {
   const cardEssentielRef = useRef(null);
@@ -16,184 +17,190 @@ export default function FormulesScreen({ navigation }) {
   const cardExclusifRef = useRef(null);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <Header
         title="INFINITE CUT"
         colorScissors={false}
         colorUser={false}
         navigation={navigation}
       />
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Nos Formules</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Nos Formules</Text>
+        </View>
+        <StatusBar style="light" />
+        <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
+          <TouchableOpacity
+            style={styles.cardVerso}
+            onPress={() => cardEssentielRef.current.flip()}
+          >
+            <View style={styles.cardEssentielContainer}>
+              <ImageBackground
+                source={require("../../assets/formule_essentiel.jpg")}
+                alt="formule essentiel"
+                style={styles.cardEssentiel}
+                imageStyle={{ borderRadius: 20 }}
+              >
+                <View style={styles.cardEssentielView}>
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      color: "white",
+                      letterSpacing: 15,
+                      fontFamily: "Montserrat_500Medium",
+                      margin: 10,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ESSENTIEL
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => cardEssentielRef.current.flip()}
+                  >
+                    <Text style={styles.textButton}>VOIR PLUS</Text>
+                  </TouchableOpacity>
+                </View>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
 
-      <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
-        <TouchableOpacity
-          style={styles.cardVerso}
-          onPress={() => cardEssentielRef.current.flip()}
-        >
-          <View style={styles.cardEssentielContainer}>
-            <ImageBackground
-              source={require("../../assets/formule_essentiel.jpg")}
-              style={styles.cardEssentiel}
-              imageStyle={{ borderRadius: 20 }}
-            >
-              <View style={styles.cardEssentielView}>
-                <Text
-                  style={{
-                    fontSize: 30,
-                    color: "white",
-                    letterSpacing: 15,
-                    fontFamily: "Montserrat_500Medium",
-                    margin: 10,
-                    fontWeight: "bold",
-                  }}
-                >
-                  ESSENTIEL
-                </Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => cardEssentielRef.current.flip()}
-                >
-                  <Text style={styles.textButton}>VOIR PLUS</Text>
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cardEssentielContainer}
+            onPress={() => cardEssentielRef.current.flip()}
+          >
+            <View style={styles.contentCardVerso}>
+              <Text style={styles.textContentCardverso}>
+                Fréquence : 3 / mois {"\n"} Engagement : 6 mois minimum {"\n"}
+                Prestations : shampooing - coupe - coiffage
+              </Text>
+              <Text style={styles.price}>39.99 €</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </CardFlip>
 
-        <TouchableOpacity
-          style={styles.cardEssentielContainer}
-          onPress={() => cardEssentielRef.current.flip()}
-        >
-          <View style={styles.contentCardVerso}>
-            <Text style={styles.textContentCardverso}>
-              Fréquence : 3 / mois {"\n"} Engagement : 6 mois minimum {"\n"}
-              Prestations : shampooing - coupe - coiffage
-            </Text>
-            <Text style={styles.price}>39.99 €</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Pay")}
-            >
-              <Text style={styles.textButton}>CHOISIR</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </CardFlip>
+        <CardFlip style={styles.cardsContainer} ref={cardPremiumRef}>
+          <TouchableOpacity
+            style={styles.cardVerso}
+            onPress={() => cardPremiumRef.current.flip()}
+          >
+            <View style={styles.cardEssentielContainer}>
+              <ImageBackground
+                source={require("../../assets/formule_premium.jpg")}
+                alt="formule premium"
+                style={styles.cardPremium}
+                imageStyle={{ borderRadius: 20 }}
+              >
+                <View style={styles.cardPremiumView}>
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      color: "white",
+                      letterSpacing: 15,
+                      fontFamily: "Montserrat_500Medium",
+                      margin: 10,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    PREMIUM
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => cardPremiumRef.current.flip()}
+                  >
+                    <Text style={styles.textButton}>VOIR PLUS</Text>
+                  </TouchableOpacity>
+                </View>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
 
-      <CardFlip style={styles.cardsContainer} ref={cardPremiumRef}>
-        <TouchableOpacity
-          style={styles.cardVerso}
-          onPress={() => cardPremiumRef.current.flip()}
-        >
-          <View style={styles.cardEssentielContainer}>
-            <ImageBackground
-              source={require("../../assets/formule_premium.jpg")}
-              style={styles.cardPremium}
-              imageStyle={{ borderRadius: 20 }}
-            >
-              <View style={styles.cardPremiumView}>
-                <Text
-                  style={{
-                    fontSize: 30,
-                    color: "white",
-                    letterSpacing: 15,
-                    fontFamily: "Montserrat_500Medium",
-                    margin: 10,
-                    fontWeight: "bold",
-                  }}
-                >
-                  PREMIUM
-                </Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => cardPremiumRef.current.flip()}
-                >
-                  <Text style={styles.textButton}>VOIR PLUS</Text>
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cardEssentielContainer}
+            onPress={() => cardPremiumRef.current.flip()}
+          >
+            <View style={styles.contentCardVerso}>
+              <Text style={styles.textContentCardverso}>
+                Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations
+                : shampooing - coupe - coiffage {"\n"}massage cuir chevelu -
+                barbe
+              </Text>
+              <Text style={styles.price}>49.99 €</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </CardFlip>
 
-        <TouchableOpacity
-          style={styles.cardEssentielContainer}
-          onPress={() => cardPremiumRef.current.flip()}
-        >
-          <View style={styles.contentCardVerso}>
-            <Text style={styles.textContentCardverso}>
-              Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations :
-              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe
-            </Text>
-            <Text style={styles.price}>49.99 €</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Pay")}
-            >
-              <Text style={styles.textButton}>CHOISIR</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </CardFlip>
+        <CardFlip style={styles.cardsContainer} ref={cardExclusifRef}>
+          <TouchableOpacity
+            style={styles.cardVerso}
+            onPress={() => cardExclusifRef.current.flip()}
+          >
+            <View style={styles.cardEssentielContainer}>
+              <ImageBackground
+                source={require("../../assets/formule_exclusif.jpg")}
+                alt="formule exclusif"
+                style={styles.cardExclusif}
+                imageStyle={{ borderRadius: 20 }}
+              >
+                <View style={styles.cardExclusifView}>
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      color: "white",
+                      letterSpacing: 15,
+                      fontFamily: "Montserrat_500Medium",
+                      letterSpacing: 10,
+                      margin: 10,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    EXCLUSIF
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => cardExclusifRef.current.flip()}
+                  >
+                    <Text style={styles.textButton}>VOIR PLUS</Text>
+                  </TouchableOpacity>
+                </View>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
 
-      <CardFlip style={styles.cardsContainer} ref={cardExclusifRef}>
-        <TouchableOpacity
-          style={styles.cardVerso}
-          onPress={() => cardExclusifRef.current.flip()}
-        >
-          <View style={styles.cardEssentielContainer}>
-            <ImageBackground
-              source={require("../../assets/formule_exclusif.jpg")}
-              style={styles.cardExclusif}
-              imageStyle={{ borderRadius: 20 }}
-            >
-              <View style={styles.cardExclusifView}>
-                <Text
-                  style={{
-                    fontSize: 30,
-                    color: "white",
-                    letterSpacing: 15,
-                    fontFamily: "Montserrat_500Medium",
-                    letterSpacing: 10,
-                    margin: 10,
-                    fontWeight: "bold",
-                  }}
-                >
-                  EXCLUSIF
-                </Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => cardExclusifRef.current.flip()}
-                >
-                  <Text style={styles.textButton}>VOIR PLUS</Text>
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.cardEssentielContainer}
-          onPress={() => cardExclusifRef.current.flip()}
-        >
-          <View style={styles.contentCardVerso}>
-            <Text style={styles.textContentCardverso}>
-              Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations :
-              shampooing - coupe - coiffage {"\n"}massage cuir chevelu - barbe -
-              soin du visage {"\n"} épilation (nez, oreilles)
-            </Text>
-            <Text style={styles.price}>54.99 €</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Pay")}
-            >
-              <Text style={styles.textButton}>CHOISIR</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </CardFlip>
-    </SafeAreaView>
+          <TouchableOpacity
+            style={styles.cardEssentielContainer}
+            onPress={() => cardExclusifRef.current.flip()}
+          >
+            <View style={styles.contentCardVerso}>
+              <Text style={styles.textContentCardverso}>
+                Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations
+                : shampooing - coupe - coiffage {"\n"}massage cuir chevelu -
+                barbe - soin du visage {"\n"} épilation (nez, oreilles)
+              </Text>
+              <Text style={styles.price}>54.99 €</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Pay")}
+              >
+                <Text style={styles.textButton}>CHOISIR</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </CardFlip>
+      </SafeAreaView>
+    </>
   );
 }
 const styles = StyleSheet.create({
@@ -203,7 +210,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#EAE0D5",
   },
-
   title: {
     color: "#5E503F",
     fontSize: 40,
@@ -226,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6AC8F",
     borderColor: "#5E503F",
     borderWidth: 1,
-    marginTop: 20,
+    marginTop: 10,
   },
   cardEssentiel: {
     height: "100%",

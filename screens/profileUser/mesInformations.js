@@ -53,21 +53,21 @@ export default function MesInformations({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.total}>
-        <View style={styles.header}>
-          <Header
-            style={styles.header}
-            title="INFINITE CUT"
-            navigation={navigation}
-            colorScissors={false}
-            colorUser={true}
-          />
-          <SubHeaderProfile
-            firstText="Mes RDV"
-            secondText="Mon compte"
-            styleSecondText="600"
-          />
-        </View>
+    <View style={styles.total}>
+      <View style={styles.header}>
+        <Header
+          style={styles.header}
+          title="INFINITE CUT"
+          navigation={navigation}
+          colorScissors={false}
+          colorUser={true}
+        />
+        <SubHeaderProfile
+          firstText="Mes RDV"
+          secondText="Mon compte"
+          styleSecondText="600"
+        />
+      </View>
       <KeyboardAvoidingView style={styles.keyboard}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Mon compte</Text>
@@ -103,13 +103,13 @@ export default function MesInformations({ navigation }) {
             </View>
             <View style={styles.bottomPageModifie}>
               <TouchableOpacity
-                style={styles.button}
+                style={styles.buttonModifie}
                 onPress={() => handleEnregister()}
               >
                 <Text style={styles.final}>Enregistrer</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.button}
+                style={styles.buttonModifie}
                 onPress={() => handleAnnuler()}
               >
                 <Text style={styles.final}>Annuler</Text>
@@ -141,7 +141,7 @@ export default function MesInformations({ navigation }) {
           </View>
         )}
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   modifieView: {
     height: "16%",
-    width: "85%",
+    width: 300,
     backgroundColor: "#C6AC8F",
     borderRadius: 50,
     marginTop: 10,
@@ -187,6 +187,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#5E503F",
     flexDirection: "row",
+  },
+  buttonModifie: {
+    height: "30%",
+    borderWidth: 1,
+    width: 150,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "#5E503F",
   },
   globalInput: {
     width: "90%",
@@ -217,14 +226,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-evenly",
-    height: "30%"
+    height: "30%",
   },
   button: {
     height: "30%",
     borderWidth: 1,
-    width: 150,
+    width: 300,
     borderRadius: 50,
-    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     borderColor: "#5E503F",

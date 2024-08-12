@@ -81,6 +81,7 @@ export default function FormuleScreen({ navigation }) {
                   <Image
                     style={styles.img}
                     source={require("../../assets/background_home.jpg")}
+                    alt="photo salon"
                   />
                   <Text style={styles.name}>
                     Lucie Saint Clair{"\n"}Adresse du salon
@@ -167,6 +168,7 @@ export default function FormuleScreen({ navigation }) {
                   <Image
                     style={styles.img}
                     source={require("../../assets/background_home.jpg")}
+                    alt="photo salon"
                   />
                   <Text style={styles.name}>
                     Lucie Saint Clair{"\n"}Adresse du salon
@@ -257,6 +259,7 @@ export default function FormuleScreen({ navigation }) {
               <Image
                 style={styles.img}
                 source={require("../../assets/background_home.jpg")}
+                alt="photo salon"
               />
               <View style={styles.nameAndNote}>
                 <Text>Lucie Saint Clair</Text>
@@ -275,6 +278,7 @@ export default function FormuleScreen({ navigation }) {
               <Image
                 style={styles.img}
                 source={require("../../assets/background_home.jpg")}
+                alt="photo salon"
               />
               <View style={styles.nameAndNote}>
                 <Text>Lucie Saint Clair</Text>

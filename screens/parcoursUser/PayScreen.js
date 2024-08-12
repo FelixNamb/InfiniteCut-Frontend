@@ -77,6 +77,7 @@ export default function PayScreen({ navigation }) {
               <Image
                 source={require("../../assets/Visa.png")}
                 style={styles.image}
+                alt="visa"
                 resizeMode="contain"
               />
             ) : (
@@ -86,6 +87,8 @@ export default function PayScreen({ navigation }) {
               <Image
                 source={require("../../assets/masterCard.png")}
                 style={styles.image}
+                alt="mastercard"
+                resizeMode="contain"
               />
             ) : (
               <View></View>

@@ -62,6 +62,7 @@ export default function UserFormule({ navigation }) {
         <View style={styles.cardContainer}>
           <ImageBackground
             source={require("../../assets/formule_essentiel.jpg")}
+            alt="formule essentiel"
             style={styles.cardFormule}
             imageStyle={{ borderRadius: 20 }}
           >

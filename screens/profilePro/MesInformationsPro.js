@@ -15,14 +15,18 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useState } from "react";
 
-export default function MesInformationsPro({navigation}) {
+export default function MesInformationsPro({ navigation }) {
   const [isModalVisible, setIsModalIvisible] = useState(false);
   const stars = [];
   for (let i = 0; i < 5; i++) {
-    if(i < 4){
-      stars.push(<Octicons key={i} name="star-fill" size={32} color="#C6AC8F" />)
-    }else {
-      stars.push(<Octicons key={i} name="star-fill" size={32} color="#22333B" />);
+    if (i < 4) {
+      stars.push(
+        <Octicons key={i} name="star-fill" size={32} color="#C6AC8F" />
+      );
+    } else {
+      stars.push(
+        <Octicons key={i} name="star-fill" size={32} color="#22333B" />
+      );
     }
   }
 
@@ -30,18 +34,18 @@ export default function MesInformationsPro({navigation}) {
     setIsModalIvisible(true);
   };
   return (
-    <SafeAreaView style={styles.page}>
+    <View style={styles.page}>
       <Modal visible={isModalVisible} animationType="fade" transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-              <View style={styles.cross}>
-                <TouchableOpacity
-                  onPress={() => setIsModalIvisible(false)}
-                  activeOpacity={0.8}
-                >
-                  <Entypo name="squared-cross" size={30} color="#C6AC8F" />
-                </TouchableOpacity>
-              </View>
+            <View style={styles.cross}>
+              <TouchableOpacity
+                onPress={() => setIsModalIvisible(false)}
+                activeOpacity={0.8}
+              >
+                <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+              </TouchableOpacity>
+            </View>
             <View syle={styles.upperModal}>
               <Text style={styles.subtitle}>Quels sont vos choix ?</Text>
             </View>
@@ -80,7 +84,12 @@ export default function MesInformationsPro({navigation}) {
         </View>
       </Modal>
       <View style={styles.header}>
-        <Header title="INFINITE CUT" colorScissors={true} colorUser={false} navigation={navigation} />
+        <Header
+          title="INFINITE CUT"
+          colorScissors={true}
+          colorUser={false}
+          navigation={navigation}
+        />
         <SubHeaderProfile
           firstText="Mes informations"
           secondText="Mes chiffres"
@@ -97,7 +106,7 @@ export default function MesInformationsPro({navigation}) {
           />
           <View style={styles.informations}>
             <Text style={styles.subtitle}> Le Barbier de Lyon 7ème</Text>
-            <Text style={{fontFamily: "Montserrat_400Regular"}}>
+            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
               {"\n"}35 rue de Marseille, 69007 Lyon{"\n"}
               {"\n"}04 01 02 03 05{"\n"}
               {"\n"}Du mardi au dimanche, de 9h à 19h{"\n"}
@@ -125,7 +134,7 @@ export default function MesInformationsPro({navigation}) {
           <Text style={styles.textButton}>Tous les avis</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -144,7 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "#22333B",
     padding: 5,
-    width: '90%',
+    width: "90%",
     height: 330,
     alignItems: "center",
     justifyContent: "space-around",
@@ -157,39 +166,39 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  formules:{
-    flexDirection:"row",
+  formules: {
+    flexDirection: "row",
   },
-  cross:{
+  cross: {
     width: "90%",
-    alignItems:"flex-end",
-    justifyContent:"center",
+    alignItems: "flex-end",
+    justifyContent: "center",
   },
-  backgroundImage:{
-    width:300,
-    height:250,
+  backgroundImage: {
+    width: 300,
+    height: 250,
     margin: 10,
-    justifyContent:"space-around",
+    justifyContent: "space-around",
     alignItems: "center",
   },
-  textModal:{
-    color:"white",
-    fontSize:32,
-    fontFamily:"Montserrat_600SemiBold",
-    letterSpacing:5,
+  textModal: {
+    color: "white",
+    fontSize: 32,
+    fontFamily: "Montserrat_600SemiBold",
+    letterSpacing: 5,
   },
-  modalButton:{
+  modalButton: {
     width: 150,
     height: 50,
-    borderWidth:2,
-    borderColor:"white",
-    borderRadius:20,
+    borderWidth: 2,
+    borderColor: "white",
+    borderRadius: 20,
     justifyContent: "center",
-    alignItems:'center',
+    alignItems: "center",
   },
-  textModalButton:{
+  textModalButton: {
     color: "white",
-    fontSize:20,
+    fontSize: 20,
     fontFamily: "Montserrat_500Medium",
     letterSpacing: 4,
   },
@@ -214,9 +223,9 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   subtitle: {
-    fontFamily:"Montserrat_600SemiBold",
+    fontFamily: "Montserrat_600SemiBold",
     textAlign: "center",
-    letterSpacing:2,
+    letterSpacing: 2,
   },
   formules: {
     flexDirection: "row",
@@ -236,7 +245,7 @@ const styles = StyleSheet.create({
   textNomFormule: {
     color: "white",
     letterSpacing: 3,
-    fontFamily:"Montserrat_700Bold",
+    fontFamily: "Montserrat_700Bold",
   },
   nomFormulePremium: {
     justifyContent: "center",
@@ -250,7 +259,7 @@ const styles = StyleSheet.create({
   textNomFormulePremium: {
     color: "#C6AC8F",
     letterSpacing: 3,
-    fontFamily:"Montserrat_700Bold",
+    fontFamily: "Montserrat_700Bold",
   },
   button: {
     backgroundColor: "#5E503F",
@@ -264,7 +273,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: "#EAE0D5",
-    fontFamily:"Montserrat_600SemiBold"
+    fontFamily: "Montserrat_600SemiBold",
   },
   stars: {
     flexDirection: "row",
