@@ -12,10 +12,12 @@ export default function ConceptPro({ navigation }) {
       />
       <View style={styles.upperContent}>
         <Text style={styles.title}>Votre assistant au quotidien.</Text>
-        <Text style={styles.subtitle}>
-          Boostez votre activité de coiffeur indépendant avec
-        </Text>
-        <Text style={styles.capital}>INFINITE CUT !</Text>
+        <View style={styles.secondTitle}>
+          <Text style={styles.subtitle}>
+            Boostez votre activité de coiffeur indépendant avec
+          </Text>
+          <Text style={styles.capital}>INFINITE CUT !</Text>
+        </View>
       </View>
       <View style={styles.underContent}>
         <Text style={styles.info}>
@@ -31,35 +33,53 @@ export default function ConceptPro({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    content : {
-       
-        backgroundColor:"#EAE0D5",
-        
-    },
+  content: {
+    backgroundColor: "#EAE0D5",
+    height: "100%",
+    width: "100%",
+  },
   upperContent: {
-    justifyContent: "center",
+    height: "30%",
+    justifyContent: "space-around",
     alignItems: "center",
-    textAlign: "center"
+    textAlign: "center",
+  },
+  secondTitle: {
+    textAlign: "center",
+    alignItems: "center",
+    width: "80%",
   },
   title: {
     fontSize: 32,
     color: "#5E503F",
+    textAlign: "center",
   },
   subtitle: {
+    textAlign: "center",
+    width: "85%",
     fontSize: 18,
     color: "#000000",
   },
-  capital : {
-    fontWeight: "bold"
+  capital: {
+    fontWeight: "bold",
   },
   underContent: {
+    height: "17%",
+    width: "90%",
     color: "#000000",
-    fontSize: 18,
+    alignItems: "center",
+    justifyContent: "space-between",
+    textAlign:"center",
+    marginLeft:10
   },
-  info: {},
+  info: {
+    fontSize: 18,
+    justifyContent:"flex-start"
+  },
   otherInfo: {
-    justifyContent:"center",
-    alignItems:"center",
-    fontWeight:"bold"
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });
