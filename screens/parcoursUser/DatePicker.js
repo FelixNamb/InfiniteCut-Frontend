@@ -48,7 +48,7 @@ export default function DatePicker({ navigation }) {
       />
       <View style={styles.container}>
         <View style={styles.upperView}>
-          <Text style={styles.title}>Votre rendez-vous</Text>
+          <Text style={styles.title}>Votre {"\n"}rendez-vous</Text>
           <Text style={styles.subtitle}>Choisissez une date</Text>
           <TouchableOpacity
             style={styles.buttonDate}
@@ -94,10 +94,10 @@ export default function DatePicker({ navigation }) {
           </View>
         </View>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.lastButton}
           onPress={() => navigation.navigate("ChooseBarber")}
         >
-          <Text style={styles.textButton}>Confirmer</Text>
+          <Text style={styles.textLastButton}>Confirmer</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -114,9 +114,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 32,
-    letterSpacing: 0.3,
-    marginBottom: 60,
+    color: "#5E503F",
+    fontSize: 40,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 5,
   },
   upperView: {
     height: "50%",
@@ -125,19 +127,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#5E503F",
-    width: 148.62,
-    height: 50,
+    height: 70,
+    width: 150,
+    fontWeight: "600",
+    fontSize: 16,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#5E503F",
   },
   subtitle: {
-    fontSize: 20,
-    marginBottom: 30,
+    textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   textButton: {
-    color: "white",
+    color: "#5E503F",
+    fontFamily: "Montserrat_500Medium",
   },
   bottomView: {
     justifyContent: "center",
@@ -148,10 +156,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "90%",
+    margin: 15,
+    padding: 10,
   },
   buttonDate: {
-    width: "80%",
-    height: 75,
+    width: 300,
+    height: 70,
     backgroundColor: "#C6AC8F",
     justifyContent: "center",
     alignItems: "center",
@@ -161,5 +171,24 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     fontWeight: "600",
+    fontFamily: "Montserrat_500Medium",
+  },
+  lastButton: {
+    backgroundColor: "#5E503F",
+    height: 70,
+    width: 300,
+    fontWeight: "600",
+    fontSize: 16,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#5E503F",
+  },
+  textLastButton: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 20,
+    fontFamily: "Montserrat_500Medium",
   },
 });

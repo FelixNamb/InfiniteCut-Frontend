@@ -94,9 +94,11 @@ export default function MesChiffres({ navigation }) {
               style={styles.DropDownPicker}
               textStyle={{
                 fontSize: 15,
+                fontFamily: "Montserrat_500Medium",
               }}
               labelStyle={{
                 fontWeight: "bold",
+                fontFamily: "Montserrat_500Medium",
               }}
               disabledStyle={{
                 opacity: 0.5,
@@ -105,6 +107,7 @@ export default function MesChiffres({ navigation }) {
               placeholderStyle={{
                 color: "#5E503F",
                 fontWeight: "bold",
+                fontFamily: "Montserrat_500Medium",
               }}
               dropDownContainerStyle={{
                 backgroundColor: "#5E503F",
@@ -152,6 +155,7 @@ const styles = StyleSheet.create({
   textChiffres: {
     fontSize: 20,
     color: "white",
+    fontFamily: "Montserrat_500Medium",
   },
   DropDownPicker: {
     width: "100%",

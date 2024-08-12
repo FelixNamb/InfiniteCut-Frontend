@@ -41,7 +41,9 @@ export default function FavoriteBarber({ navigation }) {
             styleFirstText="500"
           />
         </View>
-        <Text style={styles.title}>Mes salons de coiffure favoris</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Mes salons favoris</Text>
+        </View>
         <View style={styles.scrollContainer}>
           <ScrollView>
             <View style={styles.card}>
@@ -136,14 +138,6 @@ export default function FavoriteBarber({ navigation }) {
             </View>
           </ScrollView>
         </View>
-        <View style={styles.bottomPage}>
-          <MaterialCommunityIcons
-            name="chevron-double-down"
-            size={50}
-            color="#C6AC8F"
-            onPress={() => navigation.navigate("FavoriteBarber")}
-          />
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -155,15 +149,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAE0D5",
     flexDirection: "column",
   },
+
+  titleContainer: {
+    marginTop: 15,
+    width: "100%",
+  },
+
   title: {
     color: "#5E503F",
     fontSize: 40,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
-  },
-  bottomPage: {
-    alignItems: "center",
-    margin: 30,
+    letterSpacing: 5,
   },
   card: {
     width: 300,
@@ -175,6 +172,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     margin: 5,
+    marginTop: 15,
   },
   leftCard: {
     flexDirection: "row",
