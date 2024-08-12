@@ -83,6 +83,10 @@ export default function App() {
               <Stack.Screen name="RDVs" component={MesRDVScreen} />
               <Stack.Screen name="Formules" component={FormulesScreen} />
               <Stack.Screen
+                name="MesInformations"
+                component={MesInformations}
+              />
+              <Stack.Screen
                 name="ChooseBarber"
                 component={ChooseBarberScreen}
               />
@@ -97,10 +101,6 @@ export default function App() {
               <Stack.Screen
                 name="MoyenDePaiement"
                 component={MoyenDePaiement}
-              />
-              <Stack.Screen
-                name="MesInformations"
-                component={MesInformations}
               />
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
