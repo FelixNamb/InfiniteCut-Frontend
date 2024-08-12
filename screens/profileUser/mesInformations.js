@@ -54,7 +54,6 @@ export default function MesInformations({ navigation }) {
 
   return (
     <SafeAreaView style={styles.total}>
-      <KeyboardAvoidingView style={styles.keyboard}>
         <View style={styles.header}>
           <Header
             style={styles.header}
@@ -69,6 +68,7 @@ export default function MesInformations({ navigation }) {
             styleSecondText="600"
           />
         </View>
+      <KeyboardAvoidingView style={styles.keyboard}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Mon compte</Text>
         </View>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   keyboard: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   header: {
     width: "100%",
@@ -211,19 +211,18 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "green",
-    marginBottom: 30,
   },
   bottomPageModifie: {
     width: "100%",
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-evenly",
+    height: "30%"
   },
   button: {
-    height: "40%",
+    height: "30%",
     borderWidth: 1,
-    width: 200,
+    width: 150,
     borderRadius: 50,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
@@ -250,7 +249,7 @@ const styles = StyleSheet.create({
   final: {
     color: "#5E503F",
     fontSize: 20,
-    letterSpacing: 4,
+    letterSpacing: 2,
     fontFamily: "Montserrat_500Medium",
   },
 });

@@ -34,41 +34,47 @@ export default function MesInformationsPro({navigation}) {
       <Modal visible={isModalVisible} animationType="fade" transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+              <View style={styles.cross}>
+                <TouchableOpacity
+                  onPress={() => setIsModalIvisible(false)}
+                  activeOpacity={0.8}
+                >
+                  <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+                </TouchableOpacity>
+              </View>
             <View syle={styles.upperModal}>
               <Text style={styles.subtitle}>Quels sont vos choix ?</Text>
-              <TouchableOpacity
-                onPress={() => setIsModalIvisible(false)}
-                style={styles.button}
-                activeOpacity={0.8}
-              >
-                <Entypo name="squared-cross" size={30} color="#C6AC8F" />
-              </TouchableOpacity>
             </View>
             <ScrollView style={styles.allFormules} horizontal={true}>
-              <ImageBackground
-                style={styles.backgroundImage}
-                source={require("../../assets/formule_essentiel.jpg")}
-              >
-                <TouchableOpacity style={styles.modalButton}>
-                  <Text style={styles.textModalButton}>Choisir</Text>
-                </TouchableOpacity>
-              </ImageBackground>
-              <ImageBackground
-                style={styles.backgroundImage}
-                source={require("../../assets/formule_essentiel.jpg")}
-              >
-                <TouchableOpacity style={styles.modalButton}>
-                  <Text style={styles.textModalButton}>Choisir</Text>
-                </TouchableOpacity>
-              </ImageBackground>
-              <ImageBackground
-                style={styles.backgroundImage}
-                source={require("../../assets/formule_essentiel.jpg")}
-              >
-                <TouchableOpacity style={styles.modalButton}>
-                  <Text style={styles.textModalButton}>Choisir</Text>
-                </TouchableOpacity>
-              </ImageBackground>
+              <View style={styles.formules}>
+                <ImageBackground
+                  style={styles.backgroundImage}
+                  source={require("../../assets/formule_essentiel.jpg")}
+                >
+                  <Text style={styles.textModal}>ESSENTIEL</Text>
+                  <TouchableOpacity style={styles.modalButton}>
+                    <Text style={styles.textModalButton}>Choisir</Text>
+                  </TouchableOpacity>
+                </ImageBackground>
+                <ImageBackground
+                  style={styles.backgroundImage}
+                  source={require("../../assets/formule_premium.jpg")}
+                >
+                  <Text style={styles.textModal}>PREMIUM</Text>
+                  <TouchableOpacity style={styles.modalButton}>
+                    <Text style={styles.textModalButton}>Choisir</Text>
+                  </TouchableOpacity>
+                </ImageBackground>
+                <ImageBackground
+                  style={styles.backgroundImage}
+                  source={require("../../assets/formule_exclusif.jpg")}
+                >
+                  <Text style={styles.textModal}>EXCLUSIF</Text>
+                  <TouchableOpacity style={styles.modalButton}>
+                    <Text style={styles.textModalButton}>Choisir</Text>
+                  </TouchableOpacity>
+                </ImageBackground>
+              </View>
             </ScrollView>
           </View>
         </View>
@@ -91,7 +97,7 @@ export default function MesInformationsPro({navigation}) {
           />
           <View style={styles.informations}>
             <Text style={styles.subtitle}> Le Barbier de Lyon 7ème</Text>
-            <Text>
+            <Text style={{fontFamily: "Montserrat_400Regular"}}>
               {"\n"}35 rue de Marseille, 69007 Lyon{"\n"}
               {"\n"}04 01 02 03 05{"\n"}
               {"\n"}Du mardi au dimanche, de 9h à 19h{"\n"}
@@ -138,8 +144,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "#22333B",
     padding: 5,
-    width: 300,
-    height: 300,
+    width: '90%',
+    height: 330,
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
@@ -150,6 +156,42 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  formules:{
+    flexDirection:"row",
+  },
+  cross:{
+    width: "90%",
+    alignItems:"flex-end",
+    justifyContent:"center",
+  },
+  backgroundImage:{
+    width:300,
+    height:250,
+    margin: 10,
+    justifyContent:"space-around",
+    alignItems: "center",
+  },
+  textModal:{
+    color:"white",
+    fontSize:32,
+    fontFamily:"Montserrat_600SemiBold",
+    letterSpacing:5,
+  },
+  modalButton:{
+    width: 150,
+    height: 50,
+    borderWidth:2,
+    borderColor:"white",
+    borderRadius:20,
+    justifyContent: "center",
+    alignItems:'center',
+  },
+  textModalButton:{
+    color: "white",
+    fontSize:20,
+    fontFamily: "Montserrat_500Medium",
+    letterSpacing: 4,
   },
   container: {
     justifyContent: "space-between",
@@ -172,8 +214,9 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   subtitle: {
-    fontWeight: "500",
+    fontFamily:"Montserrat_600SemiBold",
     textAlign: "center",
+    letterSpacing:2,
   },
   formules: {
     flexDirection: "row",
@@ -193,7 +236,7 @@ const styles = StyleSheet.create({
   textNomFormule: {
     color: "white",
     letterSpacing: 3,
-    fontWeight: "700",
+    fontFamily:"Montserrat_700Bold",
   },
   nomFormulePremium: {
     justifyContent: "center",
@@ -207,7 +250,7 @@ const styles = StyleSheet.create({
   textNomFormulePremium: {
     color: "#C6AC8F",
     letterSpacing: 3,
-    fontWeight: "700",
+    fontFamily:"Montserrat_700Bold",
   },
   button: {
     backgroundColor: "#5E503F",
@@ -221,6 +264,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: "#EAE0D5",
+    fontFamily:"Montserrat_600SemiBold"
   },
   stars: {
     flexDirection: "row",

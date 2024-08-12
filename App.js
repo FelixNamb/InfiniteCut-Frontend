@@ -76,6 +76,10 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen
+                name="MesInformations"
+                component={MesInformations}
+              />
               <Stack.Screen name="RDVs" component={MesRDVScreen} />
               <Stack.Screen name="DatePicker" component={DatePicker} />
               <Stack.Screen name="Pay" component={PayScreen} />
@@ -89,10 +93,6 @@ export default function App() {
               <Stack.Screen
                 name="MoyenDePaiement"
                 component={MoyenDePaiement}
-              />
-              <Stack.Screen
-                name="MesInformations"
-                component={MesInformations}
               />
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
