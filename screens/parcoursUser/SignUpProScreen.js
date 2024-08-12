@@ -27,10 +27,10 @@ export default function SignUpProScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     console.log(EMAIL_REGEX.test(email));
     if (EMAIL_REGEX.test(email)) {
-      fetch(`${URL_BACKEND}/userpros/signup`, {
+      await fetch(`http://10.0.2.78:3000/userpros/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

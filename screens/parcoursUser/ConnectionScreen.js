@@ -228,6 +228,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "white",
     borderBottomWidth: 1,
-    borderBottomColor:"white",
+    borderBottomColor: "white",
   },
 });
