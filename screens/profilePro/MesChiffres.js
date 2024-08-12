@@ -71,8 +71,8 @@ export default function MesChiffres({ navigation }) {
         <View style={styles.header}>
           <Header
             title="INFINITE CUT"
-            colorScissors={false}
-            colorUser={true}
+            colorScissors={true}
+            colorUser={false}
             navigation={navigation}
           />
           <SubHeaderProfile

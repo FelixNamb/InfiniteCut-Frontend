@@ -66,6 +66,7 @@ export default function MesInformations({ navigation }) {
           firstText="Mes RDV"
           secondText="Mon compte"
           styleSecondText="600"
+          navigation={navigation}
         />
       </View>
       <KeyboardAvoidingView style={styles.keyboard}>
