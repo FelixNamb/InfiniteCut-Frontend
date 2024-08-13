@@ -27,6 +27,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
+import StatScreen from "./screens/profilePro/StatScreen";
 
 import {
   useFonts,
@@ -75,6 +76,7 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="StatScreen" component={StatScreen} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Formules" component={FormulesScreen} />
               <Stack.Screen name="MyAgenda" component={MyAgenda} />
