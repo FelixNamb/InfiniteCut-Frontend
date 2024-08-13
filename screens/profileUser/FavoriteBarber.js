@@ -12,6 +12,7 @@ import SubHeaderProfile from "../../components/SubHeaderProfile";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 
 const stars = [];
 for (let i = 0; i < 5; i++) {
@@ -22,129 +23,131 @@ export default function FavoriteBarber({ navigation }) {
   const [isLiked, setIsLiked] = useState(true);
 
   return (
-    <SafeAreaView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Header
-            title="INFINITE CUT"
-            colorScissors={false}
-            colorUser={true}
-            navigation={navigation}
-          />
-          <SubHeaderProfile
-            firstText="Mes RDV"
-            secondText="Mon Compte"
-            navigation={navigation}
-            styleFirstText="500"
-          />
+    <>
+      <Header
+        title="INFINITE CUT"
+        colorScissors={false}
+        colorUser={true}
+        navigation={navigation}
+      />
+      <SubHeaderProfile
+        firstText="Mes RDV"
+        secondText="Mon Compte"
+        navigation={navigation}
+        styleFirstText="500"
+      />
+      <SafeAreaView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <StatusBar style="light" />
+        <View style={styles.container}>
+          <View style={styles.header}></View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Mes salons favoris</Text>
+          </View>
+          <View style={styles.scrollContainer}>
+            <ScrollView>
+              <View style={styles.card}>
+                <View style={styles.leftCard}>
+                  <Image
+                    style={styles.img}
+                    source={require("../../assets/background_home.jpg")}
+                    alt="photo du salon de coiffure"
+                  />
+                  <View style={styles.nameAndNote}>
+                    <Text>Lucie Saint Clair</Text>
+                    <View style={styles.star}>{stars}</View>
+                  </View>
+                </View>
+                <Octicons
+                  name="heart-fill"
+                  size={30}
+                  color={isLiked ? "#C6AC8F" : "#22333B"}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              </View>
+              <View style={styles.card}>
+                <View style={styles.leftCard}>
+                  <Image
+                    style={styles.img}
+                    source={require("../../assets/background_home.jpg")}
+                    alt="photo du salon de coiffure"
+                  />
+                  <View style={styles.nameAndNote}>
+                    <Text>Lucie Saint Clair</Text>
+                    <View style={styles.star}>{stars}</View>
+                  </View>
+                </View>
+                <Octicons
+                  name="heart-fill"
+                  size={30}
+                  color={isLiked ? "#C6AC8F" : "#22333B"}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              </View>
+              <View style={styles.card}>
+                <View style={styles.leftCard}>
+                  <Image
+                    style={styles.img}
+                    source={require("../../assets/background_home.jpg")}
+                    alt="photo du salon de coiffure"
+                  />
+                  <View style={styles.nameAndNote}>
+                    <Text>Lucie Saint Clair</Text>
+                    <View style={styles.star}>{stars}</View>
+                  </View>
+                </View>
+                <Octicons
+                  name="heart-fill"
+                  size={30}
+                  color={isLiked ? "#C6AC8F" : "#22333B"}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              </View>
+              <View style={styles.card}>
+                <View style={styles.leftCard}>
+                  <Image
+                    style={styles.img}
+                    source={require("../../assets/background_home.jpg")}
+                    alt="photo du salon de coiffure"
+                  />
+                  <View style={styles.nameAndNote}>
+                    <Text>Lucie Saint Clair</Text>
+                    <View style={styles.star}>{stars}</View>
+                  </View>
+                </View>
+                <Octicons
+                  name="heart-fill"
+                  size={30}
+                  color={isLiked ? "#C6AC8F" : "#22333B"}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              </View>
+              <View style={styles.card}>
+                <View style={styles.leftCard}>
+                  <Image
+                    style={styles.img}
+                    source={require("../../assets/background_home.jpg")}
+                    alt="photo du salon de coiffure"
+                  />
+                  <View style={styles.nameAndNote}>
+                    <Text>Lucie Saint Clair</Text>
+                    <View style={styles.star}>{stars}</View>
+                  </View>
+                </View>
+                <Octicons
+                  name="heart-fill"
+                  size={30}
+                  color={isLiked ? "#C6AC8F" : "#22333B"}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              </View>
+            </ScrollView>
+          </View>
         </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Mes salons favoris</Text>
-        </View>
-        <View style={styles.scrollContainer}>
-          <ScrollView>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo du salon de coiffure"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo du salon de coiffure"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo du salon de coiffure"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo du salon de coiffure"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo du salon de coiffure"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text>Lucie Saint Clair</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-          </ScrollView>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 

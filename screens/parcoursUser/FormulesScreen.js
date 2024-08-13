@@ -24,11 +24,11 @@ export default function FormulesScreen({ navigation }) {
         colorUser={false}
         navigation={navigation}
       />
+      <StatusBar style="light" />
       <SafeAreaView style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Nos Formules</Text>
         </View>
-        <StatusBar style="light" />
         <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
           <TouchableOpacity
             style={styles.cardVerso}

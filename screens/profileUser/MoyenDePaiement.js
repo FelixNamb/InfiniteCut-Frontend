@@ -15,6 +15,7 @@ import {
 import SubHeaderProfile from "../../components/SubHeaderProfile";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
+import { StatusBar } from "expo-status-bar";
 
 export default function MoyenDePaiement({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,39 +45,7 @@ export default function MoyenDePaiement({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.page}>
-      <Modal visible={modalVisible} animationType="fade" transparent>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TouchableOpacity
-              onPress={() => handleClose()}
-              style={styles.button}
-              activeOpacity={0.8}
-            >
-              <Entypo name="squared-cross" size={30} color="#C6AC8F" />
-            </TouchableOpacity>
-            <Text style={styles.textModal}>
-              Vous êtes sur le point de supprimer la carte bancaire de votre
-              compte.
-            </Text>
-            <TouchableOpacity
-              style={styles.confirmButton}
-              onPress={() => handleDeleteCard()}
-            >
-              <Text style={styles.confirmButtonText}>Confirmer</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-      <Modal visible={modalCardVisible} animationType="fade" transparent>
-        <View style={styles.centeredCardView}>
-          <View style={styles.modalCardView}>
-            <Text style={styles.textCardModal}>
-              Votre carte a bien été supprimée.
-            </Text>
-          </View>
-        </View>
-      </Modal>
+    <>
       <Header
         title="INFINITE CUT"
         colorUser={true}
@@ -88,52 +57,87 @@ export default function MoyenDePaiement({ navigation }) {
         secondText="Mon compte"
         styleSecondText="600"
       />
-      <View style={styles.container}>
-        <View style={styles.upperContainer}>
-          <View style={styles.informationPerso}>
-            <Text style={styles.title}>Moyen de paiement</Text>
-            <Text style={styles.subTitle}>Votre carte</Text>
-            <View style={styles.creditCard}>
-              <FontAwesome name="credit-card" size={24} color="black" />
-              <Text style={styles.creditCardNumber}>**** **** **** **67</Text>
+      <StatusBar style="light" />
+      <SafeAreaView style={styles.page}>
+        <Modal visible={modalVisible} animationType="fade" transparent>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <TouchableOpacity
+                onPress={() => handleClose()}
+                style={styles.button}
+                activeOpacity={0.8}
+              >
+                <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+              </TouchableOpacity>
+              <Text style={styles.textModal}>
+                Vous êtes sur le point de supprimer la carte bancaire de votre
+                compte.
+              </Text>
+              <TouchableOpacity
+                style={styles.confirmButton}
+                onPress={() => handleDeleteCard()}
+              >
+                <Text style={styles.confirmButtonText}>Confirmer</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.deleteCard}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.deleteCard}>Supprimer carte</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonAdd}
-            onPress={() => addCreditCard()}
-          >
-            <Text style={styles.textButton}> Ajouter carte</Text>
-          </TouchableOpacity>
-        </View>
-        <Modal
-          visible={modalDeleteAccountVisible}
-          animationType="fade"
-          transparent
-        >
-          <View style={styles.centeredCardDeleteAccountView}>
-            <View style={styles.modalCardDeleteAccountView}>
-              <Text style={styles.textCardDeleteAccountModal}>
-                La suppression de votre compte a bien été prise en compte.
+        </Modal>
+        <Modal visible={modalCardVisible} animationType="fade" transparent>
+          <View style={styles.centeredCardView}>
+            <View style={styles.modalCardView}>
+              <Text style={styles.textCardModal}>
+                Votre carte a bien été supprimée.
               </Text>
             </View>
           </View>
         </Modal>
-        <View style={styles.bottomPage}>
-          <TouchableOpacity
-            style={styles.buttonDelete}
-            onPress={() => handleDeleteAccount()}
+        <View style={styles.container}>
+          <View style={styles.upperContainer}>
+            <View style={styles.informationPerso}>
+              <Text style={styles.title}>Moyen de paiement</Text>
+              <Text style={styles.subTitle}>Votre carte</Text>
+              <View style={styles.creditCard}>
+                <FontAwesome name="credit-card" size={24} color="black" />
+                <Text style={styles.creditCardNumber}>**** **** **** **67</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              style={styles.deleteCard}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.deleteCard}>Supprimer carte</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonAdd}
+              onPress={() => addCreditCard()}
+            >
+              <Text style={styles.textButton}> Ajouter carte</Text>
+            </TouchableOpacity>
+          </View>
+          <Modal
+            visible={modalDeleteAccountVisible}
+            animationType="fade"
+            transparent
           >
-            <Text style={styles.textDeleteButton}>Supprimer compte</Text>
-          </TouchableOpacity>
+            <View style={styles.centeredCardDeleteAccountView}>
+              <View style={styles.modalCardDeleteAccountView}>
+                <Text style={styles.textCardDeleteAccountModal}>
+                  La suppression de votre compte a bien été prise en compte.
+                </Text>
+              </View>
+            </View>
+          </Modal>
+          <View style={styles.bottomPage}>
+            <TouchableOpacity
+              style={styles.buttonDelete}
+              onPress={() => handleDeleteAccount()}
+            >
+              <Text style={styles.textDeleteButton}>Supprimer compte</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: "white",
-    letterSpacing: 2,
+    letterSpacing: 5,
     fontSize: 15,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
