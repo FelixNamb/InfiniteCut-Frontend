@@ -17,16 +17,16 @@ export default function StatScreen({ navigation }) {
         <Text style={styles.dot}>.</Text>
       </View>
       <View style={styles.squareOne}>
-        <View style={styles.textOne}>+50 000</View>
+        <Text style={styles.textOne}>+50 000</Text>
       </View>
       <View style={styles.squareTwo}>
-        <View style={styles.textOne}>+ 6 milliards</View>
+        <Text style={styles.textOne}>+ 6 milliards</Text>
       </View>
       <View style={styles.squareThree}>
-        <View style={styles.textOne}>60% d’appel</View>
+        <Text style={styles.textOne}>60% d'appel</Text>
       </View>
       <View style={styles.squareFour}>
-        <View style={styles.textOne}>75</View>
+        <Text style={styles.textOne}>75</Text>
       </View>
     </SafeAreaView>
   );
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: 100,
   },
   textOne: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   squareTwo: {
     backgroundColor: "#5E503F",

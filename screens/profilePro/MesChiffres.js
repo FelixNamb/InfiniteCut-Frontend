@@ -63,61 +63,62 @@ export default function MesChiffres({ navigation }) {
   }
 
   return (
-    <SafeAreaView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Header
-            title="INFINITE CUT"
-            colorScissors={true}
-            colorUser={false}
-            navigation={navigation}
-          />
-          <SubHeaderProfile
-            firstText="Mes informations"
-            secondText="Mes chiffres"
-            navigation={navigation}
-            styleSecondText="500"
-          />
-        </View>
-        <View style={styles.page}>
-          <View style={styles.DropDownPickerContainer}>
-            <DropDownPicker
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
-              style={styles.DropDownPicker}
-              textStyle={{
-                fontSize: 15,
-                fontFamily: "Montserrat_500Medium",
-              }}
-              labelStyle={{
-                fontWeight: "bold",
-                fontFamily: "Montserrat_500Medium",
-              }}
-              disabledStyle={{
-                opacity: 0.5,
-              }}
-              placeholder="Chiffres mensuel"
-              placeholderStyle={{
-                color: "#5E503F",
-                fontWeight: "bold",
-                fontFamily: "Montserrat_500Medium",
-              }}
-              dropDownContainerStyle={{
-                backgroundColor: "#5E503F",
-              }}
-            />
+    <>
+      <Header
+        title="INFINITE CUT"
+        colorScissors={true}
+        colorUser={false}
+        navigation={navigation}
+      />
+      <SubHeaderProfile
+        firstText="Mes informations"
+        secondText="Mes chiffres"
+        navigation={navigation}
+        styleSecondText="500"
+      />
+      <SafeAreaView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={styles.container}>
+          <View style={styles.header}></View>
+          <View style={styles.page}>
+            <View style={styles.DropDownPickerContainer}>
+              <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                style={styles.DropDownPicker}
+                textStyle={{
+                  fontSize: 15,
+                  fontFamily: "Montserrat_500Medium",
+                }}
+                labelStyle={{
+                  fontWeight: "bold",
+                  fontFamily: "Montserrat_500Medium",
+                }}
+                disabledStyle={{
+                  opacity: 0.5,
+                }}
+                placeholder="Chiffres mensuel"
+                placeholderStyle={{
+                  color: "#5E503F",
+                  fontWeight: "bold",
+                  fontFamily: "Montserrat_500Medium",
+                }}
+                dropDownContainerStyle={{
+                  backgroundColor: "#5E503F",
+                }}
+              />
+            </View>
+            {renderData()}
           </View>
-          {renderData()}
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 const styles = StyleSheet.create({

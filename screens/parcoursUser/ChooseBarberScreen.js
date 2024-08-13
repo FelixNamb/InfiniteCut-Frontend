@@ -9,15 +9,17 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import Header from "../../components/Header";
 import Entypo from "@expo/vector-icons/Entypo";
+import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
 
 export default function ChooseBarberScreen({ navigation }) {
   const [lieu, setLieu] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   const stars = [];
   for (let i = 0; i < 5; i++) {
@@ -33,6 +35,80 @@ export default function ChooseBarberScreen({ navigation }) {
     navigation.navigate("Formules");
   };
 
+  const barbersData = [
+    {
+      name: "Les Hommes d'abord",
+      latitude: 45.75283162286085,
+      longitude: 4.8295569360057,
+    },
+    {
+      name: "Mens' Attitude",
+      latitude: 45.75133438288022,
+      longitude: 4.845092290034565,
+    },
+    {
+      name: "Camilia Coiffure",
+      latitude: 45.75636494996362,
+      longitude: 4.842002385365841,
+    },
+    {
+      name: "Mondial Coiff",
+      latitude: 45.756065524139295,
+      longitude: 4.841916554680598,
+    },
+    {
+      name: "Coiffure Sunna",
+      latitude: 45.75516723702644,
+      longitude: 4.841058247828174,
+    },
+    {
+      name: "Olivier Sebastane",
+      latitude: 45.755346895605804,
+      longitude: 4.84672307305417,
+    },
+    {
+      name: "La Fabrique",
+      latitude: 45.75528700947695,
+      longitude: 4.8323893486186975,
+    },
+    {
+      name: "Coiff Homme",
+      latitude: 45.75516723702644,
+      longitude: 4.8306727349138505,
+    },
+  ];
+  const barbers = barbersData.map((data) => {
+    return (
+      <TouchableOpacity
+        key={data.name}
+        onPress={() => {
+          setModalData(data);
+          setModalVisible(true);
+        }}
+      >
+        <View style={styles.card}>
+          <View style={styles.leftCard}>
+            <Image
+              style={styles.img}
+              source={require("../../assets/background_home.jpg")}
+              alt="photo salon"
+            />
+            <View style={styles.nameAndNote}>
+              <Text style={styles.barberName}>{data.name} </Text>
+              <View style={styles.star}>{stars}</View>
+            </View>
+          </View>
+          <Octicons
+            name="heart-fill"
+            size={30}
+            color={isLiked ? "#C6AC8F" : "#22333B"}
+            onPress={() => setIsLiked(!isLiked)}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  });
+
   return (
     <View style={styles.container}>
       <Modal visible={modalVisible} animationType="fade" transparent>
@@ -46,9 +122,9 @@ export default function ChooseBarberScreen({ navigation }) {
               />
               <View style={styles.informations}>
                 <View style={styles.name}>
-                  <Text style={styles.barberName}>
-                    Le Barbier de {"\n"}Lyon 7ème
-                  </Text>
+                  {modalData && (
+                    <Text style={styles.barberName}>{modalData.name}</Text>
+                  )}
                 </View>
                 <View style={styles.noteModal}>
                   <View style={styles.starsModal}>{stars}</View>
@@ -104,38 +180,38 @@ export default function ChooseBarberScreen({ navigation }) {
           />
           <Octicons name="search" size={24} color="#5E503F" />
         </View>
-        <ScrollView>
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <View style={styles.card}>
-              <View style={styles.leftCard}>
-                <Image
-                  style={styles.img}
-                  source={require("../../assets/background_home.jpg")}
-                  alt="photo salon"
-                />
-                <View style={styles.nameAndNote}>
-                  <Text style={styles.barberName}>Lucie Coiffure</Text>
-                  <View style={styles.star}>{stars}</View>
-                </View>
-              </View>
-              <Octicons
-                name="heart-fill"
-                size={30}
-                color={isLiked ? "#C6AC8F" : "#22333B"}
-                onPress={() => setIsLiked(!isLiked)}
-              />
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
+        <ScrollView>{barbers}</ScrollView>
       </View>
-      <View style={styles.bottomContainer}></View>
+      <View style={styles.bottomContainer}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 45.75,
+            longitude: 4.85,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          {barbersData.map((data, index) => (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: data.latitude,
+                longitude: data.longitude,
+              }}
+              title={data.name}
+              pinColor="red"
+            />
+          ))}
+        </MapView>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "80%",
     backgroundColor: "#EAE0D5",
   },
   centeredView: {
@@ -169,7 +245,7 @@ const styles = StyleSheet.create({
   },
   barberName: {
     fontFamily: "Montserrat_500Medium",
-    fontSize: 20,
+    fontSize: 15,
   },
   textAbonnement: {
     fontFamily: "Montserrat_500Medium",
@@ -309,7 +385,12 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   bottomContainer: {
-    flex: 1,
-    backgroundColor: "blue",
+    height: "48%",
+    borderTopColor: "#5E503F",
+    borderTopWidth: 2,
+  },
+  map: {
+    width: "100%",
+    height: "100%",
   },
 });

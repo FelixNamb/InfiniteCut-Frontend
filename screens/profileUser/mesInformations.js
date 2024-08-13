@@ -7,7 +7,6 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
-  SafeAreaView,
 } from "react-native";
 import { useState } from "react";
 import { URL_BACKEND } from "@env";

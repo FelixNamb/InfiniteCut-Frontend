@@ -12,7 +12,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { useState } from "react";
 import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { StatusBar } from "expo-status-bar";
 
 export default function UserFormule({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,100 +39,103 @@ export default function UserFormule({ navigation }) {
   };
 
   return (
-    <SafeAreaView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Header
-            title="INFINITE CUT"
-            colorScissors={false}
-            colorUser={true}
-            navigation={navigation}
-          />
-          <SubHeaderProfile
-            firstText="Mes RDV"
-            secondText="Mon Compte"
-            navigation={navigation}
-            styleFirstText="500"
-          />
-        </View>
-        <Text style={styles.title}>Ma formule</Text>
-        <View style={styles.cardContainer}>
-          <ImageBackground
-            source={require("../../assets/formule_essentiel.jpg")}
-            alt="formule essentiel"
-            style={styles.cardFormule}
-            imageStyle={{ borderRadius: 20 }}
-          >
-            <Text
-              style={{
-                fontSize: 30,
-                color: "white",
-                letterSpacing: 12,
-                margin: 10,
-                fontFamily: "Montserrat_500Medium",
-              }}
-            >
-              ESSENTIEL
-            </Text>
-          </ImageBackground>
-        </View>
-        <View style={styles.ButtonSection}>
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => navigation.navigate("Formules")}
-          >
-            <Text style={styles.textButton}>Changer d'abonnement</Text>
-          </TouchableOpacity>
+    <>
+      <Header
+        title="INFINITE CUT"
+        colorScissors={false}
+        colorUser={true}
+        navigation={navigation}
+      />
+      <SubHeaderProfile
+        firstText="Mes RDV"
+        secondText="Mon Compte"
+        navigation={navigation}
+        styleFirstText="500"
+      />
+      <StatusBar style="light" />
 
-          <Modal visible={modalVisible} animationType="fade" transparent>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <TouchableOpacity
-                  onPress={() => handleClose()}
-                  style={styles.iconContainer}
-                  activeOpacity={0.8}
-                >
-                  <Entypo name="squared-cross" size={30} color="#C6AC8F" />
-                </TouchableOpacity>
-                <Text style={styles.textModal}>
-                  Vous êtes sur le point de supprimer la formule d'abonnement de
-                  votre compte.
-                </Text>
-                <TouchableOpacity
-                  style={styles.confirmButton}
-                  onPress={() => handleDeleteFormule()}
-                >
-                  <Text style={styles.confirmButtonText}>Confirmer</Text>
-                </TouchableOpacity>
+      <SafeAreaView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={styles.container}>
+          <View style={styles.header}></View>
+          <Text style={styles.title}>Ma formule</Text>
+          <View style={styles.cardContainer}>
+            <ImageBackground
+              source={require("../../assets/formule_essentiel.jpg")}
+              alt="formule essentiel"
+              style={styles.cardFormule}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <Text
+                style={{
+                  fontSize: 30,
+                  color: "white",
+                  letterSpacing: 12,
+                  margin: 10,
+                  fontFamily: "Montserrat_500Medium",
+                }}
+              >
+                ESSENTIEL
+              </Text>
+            </ImageBackground>
+          </View>
+          <View style={styles.ButtonSection}>
+            <TouchableOpacity
+              style={styles.Button}
+              onPress={() => navigation.navigate("Formules")}
+            >
+              <Text style={styles.textButton}>Changer d'abonnement</Text>
+            </TouchableOpacity>
+
+            <Modal visible={modalVisible} animationType="fade" transparent>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <TouchableOpacity
+                    onPress={() => handleClose()}
+                    style={styles.iconContainer}
+                    activeOpacity={0.8}
+                  >
+                    <Entypo name="squared-cross" size={30} color="#C6AC8F" />
+                  </TouchableOpacity>
+                  <Text style={styles.textModal}>
+                    Vous êtes sur le point de supprimer la formule d'abonnement
+                    de votre compte.
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.confirmButton}
+                    onPress={() => handleDeleteFormule()}
+                  >
+                    <Text style={styles.confirmButtonText}>Confirmer</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          </Modal>
-          <Modal
-            visible={modalDeleteFormuleVisible}
-            animationType="fade"
-            transparent
-          >
-            <View style={styles.centeredCardView}>
-              <View style={styles.modalCardView}>
-                <Text style={styles.textCardModal}>
-                  Votre formule a bien été supprimée. {"\n"} {"\n"}Et si on
-                  prenait un rendez-vous ?
-                </Text>
+            </Modal>
+            <Modal
+              visible={modalDeleteFormuleVisible}
+              animationType="fade"
+              transparent
+            >
+              <View style={styles.centeredCardView}>
+                <View style={styles.modalCardView}>
+                  <Text style={styles.textCardModal}>
+                    Votre formule a bien été supprimée. {"\n"} {"\n"}Et si on
+                    prenait un rendez-vous ?
+                  </Text>
+                </View>
               </View>
-            </View>
-          </Modal>
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => handleDeleteCard()}
-          >
-            <Text style={styles.textButton}>Résilier abonnement</Text>
-          </TouchableOpacity>
+            </Modal>
+            <TouchableOpacity
+              style={styles.Button}
+              onPress={() => handleDeleteCard()}
+            >
+              <Text style={styles.textButton}>Résilier abonnement</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 
