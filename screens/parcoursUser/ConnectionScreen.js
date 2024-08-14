@@ -13,12 +13,13 @@ import {
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "@react-navigation/native";
-import { login } from "../../reducers/user";
+import { login, logout } from "../../reducers/user";
+import { loginUserPro, logoutUserPro } from "../../reducers/userPro";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export default function ConnectionScreen(props) {
+export default function ConnectionScreen({navigation}) {
   const dispatch = useDispatch();
   const [emailError, setEmailError] = useState("");
 
@@ -45,9 +46,32 @@ export default function ConnectionScreen(props) {
                 token: data.token,
               })
             );
-            props.navigation.navigate("DatePicker");
+            dispatch(logoutUserPro());
+            navigation.navigate("DatePicker");
             setSignInEmail("");
             setSignInPassword("");
+          }else {
+            fetch(`${urlBackend}/userpros/signin`,{
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: signInEmail,
+                motDePasse: signInPassword,
+              }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              if(data.result){
+                dispatch(loginUserPro({
+                  token: data.token,
+                }));
+                dispatch(logout());
+                navigation.navigate("MyAgenda");
+                setSignInEmail("");
+                setSignInPassword("");
+              }
+            })
           }
         });
     } else {

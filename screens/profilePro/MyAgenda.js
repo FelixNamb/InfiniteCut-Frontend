@@ -8,9 +8,40 @@ import {
 import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
 import { Agenda } from "react-native-calendars";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function MyAgenda({ navigation }) {
+  const userPro = useSelector((state) => state.userPro.value);
+  const rdvUserPro = useSelector((state) => state.rdvUserPro.value);
+  const [rdv, setRdv] = useState([]);
+  const dispatch = useDispatch();
+
+
+  let tab= [];
+  useEffect(() => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/userpros/${userPro.token}`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.result){
+        for(let elt of data.user.rdvs){
+          setRdv([...rdv, elt]);
+        }
+      }
+    })
+  });
+
+  console.log(rdv);
+  const rdvInAgenda = rdv.map((data) => {
+    console.log(data);
+    return({
+      [data.date] : [{
+        description: [data.plageHoraire],
+      }],
+    })
+  })
+
   return (
     <View style={styles.page}>
       <View style={styles.header}>

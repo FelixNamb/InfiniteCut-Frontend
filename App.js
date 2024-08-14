@@ -28,7 +28,7 @@ import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
 import rdv from "./reducers/rdv";
-import StatScreen from "./screens/profilePro/StatScreen";
+import addUserPro from "./reducers/addUserPro";
 
 import {
   useFonts,
@@ -43,7 +43,7 @@ import {
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
 
-const reducers = combineReducers({ user, formules, userPro, rdv });
+const reducers = combineReducers({ user, formules, userPro, rdv, addUserPro });
 const persistConfig = { key: "faceup", storage: AsyncStorage };
 
 const store = configureStore({
