@@ -8,19 +8,24 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Octicons from "@expo/vector-icons/Octicons";
 import Header from "../../components/Header";
 import Entypo from "@expo/vector-icons/Entypo";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../../reducers/addUserPro";
 
 export default function ChooseBarberScreen({ navigation }) {
+  const addUserPro = useSelector((state) => state.addUserPro.value);
+  const dispatch = useDispatch();
   const [lieu, setLieu] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null);
 
+  const [dataUsers, setDataUsers] = useState([]);
   const stars = [];
   for (let i = 0; i < 5; i++) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
@@ -31,56 +36,28 @@ export default function ChooseBarberScreen({ navigation }) {
   };
 
   const handleNavigation = () => {
+    dispatch(addUser(modalData))
     setModalVisible(false);
     navigation.navigate("Formules");
   };
 
-  const barbersData = [
-    {
-      name: "Les Hommes d'abord",
-      latitude: 45.75283162286085,
-      longitude: 4.8295569360057,
-    },
-    {
-      name: "Mens' Attitude",
-      latitude: 45.75133438288022,
-      longitude: 4.845092290034565,
-    },
-    {
-      name: "Camilia Coiffure",
-      latitude: 45.75636494996362,
-      longitude: 4.842002385365841,
-    },
-    {
-      name: "Mondial Coiff",
-      latitude: 45.756065524139295,
-      longitude: 4.841916554680598,
-    },
-    {
-      name: "Coiffure Sunna",
-      latitude: 45.75516723702644,
-      longitude: 4.841058247828174,
-    },
-    {
-      name: "Olivier Sebastane",
-      latitude: 45.755346895605804,
-      longitude: 4.84672307305417,
-    },
-    {
-      name: "La Fabrique",
-      latitude: 45.75528700947695,
-      longitude: 4.8323893486186975,
-    },
-    {
-      name: "Coiff Homme",
-      latitude: 45.75516723702644,
-      longitude: 4.8306727349138505,
-    },
-  ];
-  const barbers = barbersData.map((data) => {
+  
+  useEffect(() => {
+    const urlBackend= process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/userPros`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.result){
+        const newUsers = [...dataUsers, ...data.users];
+        setDataUsers(newUsers);
+      }
+    })
+  }, []);
+
+  const barbers = dataUsers.map((data, i) => {
     return (
       <TouchableOpacity
-        key={data.name}
+        key={i}
         onPress={() => {
           setModalData(data);
           setModalVisible(true);
@@ -94,7 +71,7 @@ export default function ChooseBarberScreen({ navigation }) {
               alt="photo salon"
             />
             <View style={styles.nameAndNote}>
-              <Text style={styles.barberName}>{data.name} </Text>
+              <Text style={styles.barberName}>{data.nomEnseigne} </Text>
               <View style={styles.star}>{stars}</View>
             </View>
           </View>
@@ -108,7 +85,7 @@ export default function ChooseBarberScreen({ navigation }) {
       </TouchableOpacity>
     );
   });
-
+  console.log(addUserPro);
   return (
     <View style={styles.container}>
       <Modal visible={modalVisible} animationType="fade" transparent>
@@ -123,7 +100,7 @@ export default function ChooseBarberScreen({ navigation }) {
               <View style={styles.informations}>
                 <View style={styles.name}>
                   {modalData && (
-                    <Text style={styles.barberName}>{modalData.name}</Text>
+                    <Text style={styles.barberName}>{modalData.nomEnseigne}</Text>
                   )}
                 </View>
                 <View style={styles.noteModal}>
@@ -192,14 +169,14 @@ export default function ChooseBarberScreen({ navigation }) {
             longitudeDelta: 0.0421,
           }}
         >
-          {barbersData.map((data, index) => (
+          {dataUsers.map((data, index) => (
             <Marker
               key={index}
               coordinate={{
-                latitude: data.latitude,
-                longitude: data.longitude,
+                latitude: Number(data.lat),
+                longitude: Number(data.long),
               }}
-              title={data.name}
+              title={data.nomEnseigne}
               pinColor="red"
             />
           ))}
