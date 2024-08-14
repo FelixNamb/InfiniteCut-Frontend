@@ -77,7 +77,6 @@ export default function MyAgenda({ navigation }) {
           renderItem={(item, isFirst) => (
             <TouchableOpacity
               style={styles.item}
-              onPress={() => handleDeleteItem(item)}
             >
               <Text style={styles.itemText}>{item.name}</Text>
               <Text style={styles.itemText}>{item.data}</Text>

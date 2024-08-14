@@ -8,13 +8,37 @@ import {
 } from "react-native";
 import Header from "../../components/Header";
 import CardFlip from "react-native-card-flip";
-import React, { useRef } from "react";
+import React, { useRef} from "react";
+import { useDispatch} from "react-redux";
+import { addFormule } from "../../reducers/formules";
 import { StatusBar } from "expo-status-bar";
 
 export default function FormulesScreen({ navigation }) {
   const cardEssentielRef = useRef(null);
   const cardPremiumRef = useRef(null);
   const cardExclusifRef = useRef(null);
+  const dispatch = useDispatch()
+  const essentiel = "ESSENTIEL";
+  const premium = "PREMIUM";
+  const exclusif = "EXCLUSIF";
+  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
+  const handleTakeFormula = (name) => {
+    fetch(`${urlBackend}/formules/${name}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      if(data.result) {
+        const newObj = {
+          nom : data.formule.nom,
+          prix: data.formule.prix,
+          details: data.formule.details,
+        }
+        dispatch(addFormule(newObj));
+      }
+    })
+    navigation.navigate("Pay");
+  }
 
   return (
     <>
@@ -52,7 +76,7 @@ export default function FormulesScreen({ navigation }) {
                       fontWeight: "bold",
                     }}
                   >
-                    ESSENTIEL
+                    {essentiel}
                   </Text>
                   <TouchableOpacity
                     style={styles.button}
@@ -77,7 +101,7 @@ export default function FormulesScreen({ navigation }) {
               <Text style={styles.price}>39.99 €</Text>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Pay")}
+                onPress={() => handleTakeFormula(essentiel)}
               >
                 <Text style={styles.textButton}>CHOISIR</Text>
               </TouchableOpacity>
@@ -134,7 +158,7 @@ export default function FormulesScreen({ navigation }) {
               <Text style={styles.price}>49.99 €</Text>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Pay")}
+                onPress={() => handleTakeFormula(premium)}
               >
                 <Text style={styles.textButton}>CHOISIR</Text>
               </TouchableOpacity>
@@ -192,7 +216,7 @@ export default function FormulesScreen({ navigation }) {
               <Text style={styles.price}>54.99 €</Text>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Pay")}
+                onPress={() => handleTakeFormula(exclusif)}
               >
                 <Text style={styles.textButton}>CHOISIR</Text>
               </TouchableOpacity>
