@@ -167,7 +167,7 @@ export default function ChooseBarberScreen({ navigation }) {
       <Header
         title="INFINITE CUT"
         colorScissors={false}
-        colorUser={false}
+        colorUser={true}
         navigation={navigation}
       />
       <View style={styles.upperContainer}>

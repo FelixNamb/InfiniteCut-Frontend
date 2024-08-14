@@ -16,9 +16,12 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteRdv } from "../../reducers/rdv";
 
 export default function FormuleScreen({ navigation }) {
   const [isLiked, setIsLiked] = useState(false);
+  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalDeleteRdvVisible, setModalDeleteRdvVisible] = useState(false);
@@ -27,8 +30,34 @@ export default function FormuleScreen({ navigation }) {
     setModalVisible(false);
   };
 
-  const handleDeleteCard = () => {
-    setModalVisible(true);
+  const handleDeleteRDV = () => {
+    fetch(`${urlBackend}/rdv`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: rdv.date,
+        plageHoraire: rdv.plageHoraire,
+        ObjectId: userPro.ObjectId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          const deleteObj = {
+            date: null,
+            plageHoraire: null,
+            userPro: null,
+          };
+          dispatch(deleteRdv(deleteObj));
+        }
+        setModalVisible(true);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la suppression :", error);
+      });
   };
 
   const handleDeleteFormule = () => {
@@ -154,7 +183,7 @@ export default function FormuleScreen({ navigation }) {
                 </Modal>
                 <TouchableOpacity
                   style={styles.deleteRdv}
-                  onPress={() => handleDeleteCard()}
+                  onPress={() => handleDeleteRDV()}
                 >
                   <Feather name="trash" size={24} color="red" />
                   <Text> Annuler le RDV</Text>

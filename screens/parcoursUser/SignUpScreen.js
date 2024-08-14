@@ -7,6 +7,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -52,65 +54,67 @@ export default function SignUpScreen({ navigation }) {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <SafeAreaView style={styles.AreaView}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Nouveau sur Infinite Cut ?</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoComplete="email"
-            onChangeText={(value) => setSignUpEmail(value)}
-            value={signUpEmail}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Mobile"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            onChangeText={(value) => setSignUpMobile(value)}
-            value={signUpMobile}
-          />
-          <TextInput
-            style={styles.inputPassword}
-            secureTextEntry={true}
-            placeholder="Mot de passe"
-            placeholderTextColor="white"
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={(value) => setSignUpPassword(value)}
-            value={signUpPassword}
-          />
-          <TextInput
-            style={styles.inputConfirmPassword}
-            secureTextEntry={true}
-            placeholder="Confirmation mot de passe"
-            placeholderTextColor="white"
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={(value) => setSignUpConfirmPassword(value)}
-            value={signUpConfirmPassword}
-          />
-        </View>
-        <View style={styles.bottomPage}>
-          <TouchableOpacity
-            style={styles.lastButton}
-            onPress={() => handleSignUp()}
-          >
-            <Text style={styles.lastTextButton}>Créer son compte</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <SafeAreaView style={styles.AreaView}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Nouveau sur Infinite Cut ?</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="white"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoComplete="email"
+              onChangeText={(value) => setSignUpEmail(value)}
+              value={signUpEmail}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Mobile"
+              placeholderTextColor="white"
+              autoCapitalize="none"
+              onChangeText={(value) => setSignUpMobile(value)}
+              value={signUpMobile}
+            />
+            <TextInput
+              style={styles.inputPassword}
+              secureTextEntry={true}
+              placeholder="Mot de passe"
+              placeholderTextColor="white"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(value) => setSignUpPassword(value)}
+              value={signUpPassword}
+            />
+            <TextInput
+              style={styles.inputConfirmPassword}
+              secureTextEntry={true}
+              placeholder="Confirmation mot de passe"
+              placeholderTextColor="white"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(value) => setSignUpConfirmPassword(value)}
+              value={signUpConfirmPassword}
+            />
+          </View>
+          <View style={styles.bottomPage}>
+            <TouchableOpacity
+              style={styles.lastButton}
+              onPress={() => handleSignUp()}
+            >
+              <Text style={styles.lastTextButton}>Créer son compte</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 

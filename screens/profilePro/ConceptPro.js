@@ -11,13 +11,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 export default function ConceptPro({ navigation }) {
   return (
     <>
-      <Header
-        style={styles.header}
-        title="INFINITE CUT"
-        navigation={navigation}
-        colorScissors={false}
-        colorUser={true}
-      />
       <SafeAreaView style={styles.content}>
         <View style={styles.upperContent}>
           <Text style={styles.title}>Votre assistant au quotidien.</Text>
@@ -67,7 +60,7 @@ export default function ConceptPro({ navigation }) {
           name="read-more"
           size={24}
           color="#5E503F"
-          onPress={() => navigation.navigate("StatPro")}
+          onPress={() => navigation.navigate("StatScreen")}
         />
       </SafeAreaView>
     </>

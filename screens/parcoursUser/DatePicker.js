@@ -4,13 +4,17 @@ import RNDateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import { addDateRdv, addPlageHoraireRdv,setUserStatus} from "../../reducers/rdv";
+import {
+  addDateRdv,
+  addPlageHoraireRdv,
+  setUserStatus,
+} from "../../reducers/rdv";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DatePicker({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  const rdv= useSelector((state) => state.rdv.value);
+  const rdv = useSelector((state) => state.rdv.value);
   const [dateTaken, setDateTaken] = useState(null);
   const [selectDatePicker, setSelectDatePicker] = useState(false);
   const [morningButton, setMorningButton] = useState(false);
@@ -34,17 +38,17 @@ export default function DatePicker({ navigation }) {
   useEffect(() => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/users/${user.token}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.result){
-        const newObj= {
-          email:data.user.email,
-          mobile: data.user.mobile,
-          formule: data.user.formule?.nom,
-        };
-        dispatch(setUserStatus(newObj));
-      }
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          const newObj = {
+            email: data.user.email,
+            mobile: data.user.mobile,
+            formule: data.user.formule?.nom,
+          };
+          dispatch(setUserStatus(newObj));
+        }
+      });
   }, []);
 
   const onChangeDate = (value) => {
@@ -58,13 +62,17 @@ export default function DatePicker({ navigation }) {
     setDateTaken(
       new Date(value.nativeEvent.timestamp).toLocaleDateString("fr-FR", options)
     );
-    dispatch(addDateRdv(new Date(value.nativeEvent.timestamp).toISOString().split('T')[0]));
+    dispatch(
+      addDateRdv(
+        new Date(value.nativeEvent.timestamp).toISOString().split("T")[0]
+      )
+    );
   };
   const handleMorningButton = () => {
     setMorningButton(true);
     setEveningButton(false);
     dispatch(addPlageHoraireRdv("Matin"));
-  }
+  };
 
   const handleEveningButton = () => {
     setMorningButton(false);
@@ -76,7 +84,7 @@ export default function DatePicker({ navigation }) {
       <Header
         title="INFINITE CUT"
         colorScissors={false}
-        colorUser={false}
+        colorUser={true}
         navigation={navigation}
       />
       <View style={styles.container}>

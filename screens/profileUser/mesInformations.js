@@ -7,6 +7,8 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -52,103 +54,105 @@ export default function MesInformations({ navigation }) {
   };
 
   return (
-    <View style={styles.total}>
-      <View style={styles.header}>
-        <Header
-          style={styles.header}
-          title="INFINITE CUT"
-          navigation={navigation}
-          colorScissors={false}
-          colorUser={true}
-        />
-        <SubHeaderProfile
-          firstText="Mes RDV"
-          secondText="Mon compte"
-          styleSecondText="600"
-          navigation={navigation}
-        />
-      </View>
-      <KeyboardAvoidingView style={styles.keyboard}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Mon compte</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.total}>
+        <View style={styles.header}>
+          <Header
+            style={styles.header}
+            title="INFINITE CUT"
+            navigation={navigation}
+            colorScissors={false}
+            colorUser={true}
+          />
+          <SubHeaderProfile
+            firstText="Mes RDV"
+            secondText="Mon compte"
+            styleSecondText="600"
+            navigation={navigation}
+          />
         </View>
-        {isModified ? (
-          <View style={styles.bottomContainer}>
-            <View style={styles.globalInput}>
-              <Text style={styles.sousText}>Mes informations</Text>
-              <View style={styles.modifieView}>
-                <Text>Email : </Text>
-                <TextInput
-                  placeholder="andre@touffe.com"
-                  onChangeText={(value) => setEmail(value)}
-                  value={email}
-                ></TextInput>
-              </View>
-              <View style={styles.modifieView}>
-                <Text>Adresse : </Text>
-                <TextInput
-                  placeholder="XXX rue de la chapelle, Lyon"
-                  onChangeText={(value) => setAdresse(value)}
-                  value={adresse}
-                ></TextInput>
-              </View>
-              <View style={styles.modifieView}>
-                <Text>Mobile : </Text>
-                <TextInput
-                  placeholder="06 00 00 00 00"
-                  onChangeText={(value) => setMobile(value)}
-                  value={mobile}
-                ></TextInput>
-              </View>
-            </View>
-            <View style={styles.bottomPageModifie}>
-              <TouchableOpacity
-                style={styles.buttonModifie}
-                onPress={() => handleEnregister()}
-              >
-                <Text style={styles.final}>Enregistrer</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.buttonModifie}
-                onPress={() => handleAnnuler()}
-              >
-                <Text style={styles.final}>Annuler</Text>
-              </TouchableOpacity>
-            </View>
+        <KeyboardAvoidingView style={styles.keyboard}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Mon compte</Text>
           </View>
-        ) : (
-          <View style={styles.bottomContainer}>
-            <View style={styles.globalInput}>
-              <Text style={styles.sousText}>Mes informations</Text>
-              <View style={styles.modifieView}>
-                <Text>andre@touffe.com</Text>
+          {isModified ? (
+            <View style={styles.bottomContainer}>
+              <View style={styles.globalInput}>
+                <Text style={styles.sousText}>Mes informations</Text>
+                <View style={styles.modifieView}>
+                  <Text>Email : </Text>
+                  <TextInput
+                    placeholder="andre@touffe.com"
+                    onChangeText={(value) => setEmail(value)}
+                    value={email}
+                  ></TextInput>
+                </View>
+                <View style={styles.modifieView}>
+                  <Text>Adresse : </Text>
+                  <TextInput
+                    placeholder="XXX rue de la chapelle, Lyon"
+                    onChangeText={(value) => setAdresse(value)}
+                    value={adresse}
+                  ></TextInput>
+                </View>
+                <View style={styles.modifieView}>
+                  <Text>Mobile : </Text>
+                  <TextInput
+                    placeholder="06 00 00 00 00"
+                    onChangeText={(value) => setMobile(value)}
+                    value={mobile}
+                  ></TextInput>
+                </View>
               </View>
-              <View style={styles.modifieView}>
-                <Text>XXX rue de la chapelle, Lyon</Text>
-              </View>
-              <View style={styles.modifieView}>
-                <Text>06 00 00 00 00</Text>
+              <View style={styles.bottomPageModifie}>
+                <TouchableOpacity
+                  style={styles.buttonModifie}
+                  onPress={() => handleEnregister()}
+                >
+                  <Text style={styles.final}>Enregistrer</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.buttonModifie}
+                  onPress={() => handleAnnuler()}
+                >
+                  <Text style={styles.final}>Annuler</Text>
+                </TouchableOpacity>
               </View>
             </View>
-            <View style={styles.bottomPage}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => handleModifier()}
-              >
-                <Text style={styles.final}>Modifier</Text>
-              </TouchableOpacity>
+          ) : (
+            <View style={styles.bottomContainer}>
+              <View style={styles.globalInput}>
+                <Text style={styles.sousText}>Mes informations</Text>
+                <View style={styles.modifieView}>
+                  <Text>andre@touffe.com</Text>
+                </View>
+                <View style={styles.modifieView}>
+                  <Text>XXX rue de la chapelle, Lyon</Text>
+                </View>
+                <View style={styles.modifieView}>
+                  <Text>06 00 00 00 00</Text>
+                </View>
+              </View>
+              <View style={styles.bottomPage}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => handleModifier()}
+                >
+                  <Text style={styles.final}>Modifier</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        )}
-        <MaterialIcons
-          name="read-more"
-          size={24}
-          color="#5E503F"
-          onPress={() => navigation.navigate("UserFormule")}
-          style={styles.icon}
-        />
-      </KeyboardAvoidingView>
-    </View>
+          )}
+          <MaterialIcons
+            name="read-more"
+            size={24}
+            color="#5E503F"
+            onPress={() => navigation.navigate("UserFormule")}
+            style={styles.icon}
+          />
+        </KeyboardAvoidingView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({

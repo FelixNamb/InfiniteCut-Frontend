@@ -7,6 +7,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -23,8 +25,7 @@ export default function ConnectionScreen(props) {
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
 
-
-  const urlBackend= process.env.EXPO_PUBLIC_URL_BACKEND;
+  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
   const handleSignIn = () => {
     if (EMAIL_REGEX.test(signInEmail)) {
       fetch(`${urlBackend}/users/signin`, {
@@ -55,63 +56,67 @@ export default function ConnectionScreen(props) {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <SafeAreaView
-        style={styles.areaView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <Text style={styles.title}>On commence ?</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView style={styles.container}>
+        <SafeAreaView
+          style={styles.areaView}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <Text style={styles.title}>On commence ?</Text>
 
-        <View style={styles.buttonContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoComplete="email"
-            onChangeText={(value) => setSignInEmail(value)}
-            value={signInEmail}
-          ></TextInput>
-          <TextInput
-            style={styles.inputPassword}
-            secureTextEntry={true}
-            placeholder="Mot de passe"
-            placeholderTextColor="white"
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={(value) => setSignInPassword(value)}
-            value={signInPassword}
-          ></TextInput>
-          {emailError && <Text style={styles.error}>Aucun compte trouvé</Text>}
-          <TouchableOpacity
-            style={styles.ConnectedButton}
-            onPress={() => handleSignIn()}
-          >
-            <Text style={styles.textButton}>Se connecter</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.bottomPage}>
-          <View style={styles.newUser}>
-            <Text style={styles.textNewUser}>
-              Nouveau sur Infinite Cut ? {"\n"}
-              <Link to={{ screen: "SignUp", params: { id: "SignUp" } }}>
-                <Text style={styles.createAccount}>Créer votre compte</Text>
-              </Link>
-            </Text>
+          <View style={styles.buttonContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="white"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoComplete="email"
+              onChangeText={(value) => setSignInEmail(value)}
+              value={signInEmail}
+            ></TextInput>
+            <TextInput
+              style={styles.inputPassword}
+              secureTextEntry={true}
+              placeholder="Mot de passe"
+              placeholderTextColor="white"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(value) => setSignInPassword(value)}
+              value={signInPassword}
+            ></TextInput>
+            {emailError && (
+              <Text style={styles.error}>Aucun compte trouvé</Text>
+            )}
+            <TouchableOpacity
+              style={styles.ConnectedButton}
+              onPress={() => handleSignIn()}
+            >
+              <Text style={styles.textButton}>Se connecter</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.lastButton}
-            onPress={() => props.navigation.navigate("ConceptPro")}
-          >
-            <Text style={styles.lastTextButton}>
-              Proposez votre {"\n"}établissement
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          <View style={styles.bottomPage}>
+            <View style={styles.newUser}>
+              <Text style={styles.textNewUser}>
+                Nouveau sur Infinite Cut ? {"\n"}
+                <Link to={{ screen: "SignUp", params: { id: "SignUp" } }}>
+                  <Text style={styles.createAccount}>Créer votre compte</Text>
+                </Link>
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.lastButton}
+              onPress={() => props.navigation.navigate("ConceptPro")}
+            >
+              <Text style={styles.lastTextButton}>
+                Proposez votre {"\n"}établissement
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 

@@ -8,6 +8,8 @@ import {
   Platform,
   TextInput,
   Modal,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,6 +29,7 @@ export default function SignUpProScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
   const handleSignUp = async () => {
     if (EMAIL_REGEX.test(email)) {
       await fetch(`${urlBackend}/userpros/signup`, {
@@ -56,91 +59,101 @@ export default function SignUpProScreen({ navigation }) {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <Modal
-        visible={modalVisible}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => setModalVisible(false)}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0} // Ajustez la valeur selon vos besoins
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View style={styles.globalView}>
-              <Text style={styles.textModal}>
-                Merci pour votre intêret. {"\n"} {"\n"}Nous accusons bonne
-                réception de votre demande.
-              </Text>
-              <Text style={styles.textModal}>
-                Notre équipe commercial reviendra vers vous par téléphone afin
-                de convenir d'un premier échange.
-              </Text>
-              <Text style={styles.textModal}>Merci pour votre confiance.</Text>
-              <Text style={styles.textTitle}>INFINITE CUT</Text>
+        <Modal
+          visible={modalVisible}
+          animationType="fade"
+          transparent={true}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View style={styles.globalView}>
+                <Text style={styles.textModal}>
+                  Merci pour votre intêret. {"\n"} {"\n"}Nous accusons bonne
+                  réception de votre demande.
+                </Text>
+                <Text style={styles.textModal}>
+                  Notre équipe commercial reviendra vers vous par téléphone afin
+                  de convenir d'un premier échange.
+                </Text>
+                <Text style={styles.textModal}>
+                  Merci pour votre confiance.
+                </Text>
+                <Text style={styles.textTitle}>INFINITE CUT</Text>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
-      <SafeAreaView
-        style={styles.AreaView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Envie de nous rejoindre ?</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Prénom"
-            placeholderTextColor="#5E503F"
-            onChangeText={(value) => setPrenom(value)}
-            value={prenom}
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Nom"
-            placeholderTextColor="#5E503F"
-            onChangeText={(value) => setNom(value)}
-            value={nom}
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Mobile"
-            placeholderTextColor="#5E503F"
-            autoCapitalize="none"
-            onChangeText={(value) => setMobile(value)}
-            value={mobile}
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Code Postal"
-            placeholderTextColor="#5E503F"
-            onChangeText={(value) => setCodePostal(value)}
-            value={codePostal}
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#5E503F"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoComplete="email"
-            onChangeText={(value) => setEmail(value)}
-            value={email}
-          ></TextInput>
-        </View>
+        </Modal>
+        <SafeAreaView
+          style={styles.AreaView}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Envie de nous rejoindre ?</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Prénom"
+              placeholderTextColor="#5E503F"
+              onChangeText={(value) => setPrenom(value)}
+              value={prenom}
+            ></TextInput>
+            <TextInput
+              style={styles.input}
+              placeholder="Nom"
+              placeholderTextColor="#5E503F"
+              onChangeText={(value) => setNom(value)}
+              value={nom}
+            ></TextInput>
+            <TextInput
+              style={styles.input}
+              placeholder="Mobile"
+              placeholderTextColor="#5E503F"
+              autoCapitalize="none"
+              onChangeText={(value) => setMobile(value)}
+              value={mobile}
+            ></TextInput>
+            <TextInput
+              style={styles.input}
+              placeholder="Code Postal"
+              placeholderTextColor="#5E503F"
+              onChangeText={(value) => setCodePostal(value)}
+              value={codePostal}
+            ></TextInput>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="#5E503F"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoComplete="email"
+              onChangeText={(value) => setEmail(value)}
+              value={email}
+            ></TextInput>
+          </View>
 
-        {emailError && <Text style={styles.error}>Adresse mail invalide</Text>}
-        <View style={styles.bottomPage}>
-          <TouchableOpacity
-            style={styles.lastButton}
-            onPress={() => handleSignUp()}
-          >
-            <Text style={styles.lastTextButton}>Déposer votre demande</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          {emailError && (
+            <Text style={styles.error}>Adresse mail invalide</Text>
+          )}
+          <View style={styles.bottomPage}>
+            <TouchableOpacity
+              style={styles.lastButton}
+              onPress={() => handleSignUp()}
+            >
+              <Text style={styles.lastTextButton}>Déposer votre demande</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 

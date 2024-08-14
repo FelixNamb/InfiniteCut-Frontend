@@ -6,6 +6,9 @@ import {
   TextInput,
   Modal,
   KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import Octicons from "@expo/vector-icons/Octicons";
@@ -34,44 +37,53 @@ export default function FinRDVScreen({ navigation }) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
   }
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <Header
-        title="INFINITY CUT"
-        colorScissors={false}
-        colorUser={false}
-        navigation={navigation}
-      />
-      <View style={styles.containerPage}>
-        <Text style={styles.titlePage}>Fin de {"\n"}rendez-vous</Text>
-        <View style={styles.note}>
-          <Text style={styles.textNote}>Note</Text>
-          <View style={styles.star}>{stars}</View>
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Qu'en avez vous pensé ?"
-          placeholderTextColor="#5E503F"
-          autoCapitalize="none"
-          onChangeText={(value) => setCommentaire(value)}
-          value={commentaire}
-          maxLength={280}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+      >
+        <Header
+          title="INFINITY CUT"
+          colorScissors={false}
+          colorUser={true}
+          navigation={navigation}
         />
-        {formError && <Text style={styles.error}>Le champ est vide.</Text>}
-
-        <Modal visible={modalVisible} animationType="fade" transparent>
-          <View style={styles.centeredCardView}>
-            <View style={styles.modalCardView}>
-              <Text style={styles.textCardModal}>
-                Merci pour votre retour. On réserve le prochain rendez-vous ?
-              </Text>
-            </View>
+        <View style={styles.containerPage}>
+          <Text style={styles.titlePage}>Fin de {"\n"}rendez-vous</Text>
+          <View style={styles.note}>
+            <Text style={styles.textNote}>Note</Text>
+            <View style={styles.star}>{stars}</View>
           </View>
-        </Modal>
-        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
-          <Text style={styles.textButton}>Soumettre</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+          <TextInput
+            style={styles.input}
+            placeholder="Qu'en avez vous pensé ?"
+            placeholderTextColor="#5E503F"
+            autoCapitalize="none"
+            onChangeText={(value) => setCommentaire(value)}
+            value={commentaire}
+            maxLength={280}
+          />
+          {formError && <Text style={styles.error}>Le champ est vide.</Text>}
+
+          <Modal visible={modalVisible} animationType="fade" transparent>
+            <View style={styles.centeredCardView}>
+              <View style={styles.modalCardView}>
+                <Text style={styles.textCardModal}>
+                  Merci pour votre retour. On réserve le prochain rendez-vous ?
+                </Text>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleSubmit()}
+          >
+            <Text style={styles.textButton}>Soumettre</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 
