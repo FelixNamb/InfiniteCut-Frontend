@@ -2,28 +2,50 @@ import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import RNDateTimePicker, {
   DateTimePickerAndroid,
 } from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
+import { addDateRdv, addPlageHoraireRdv,setUserStatus} from "../../reducers/rdv";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function DatePicker({ navigation }) {
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  const rdv= useSelector((state) => state.rdv.value);
   const [dateTaken, setDateTaken] = useState(null);
   const [selectDatePicker, setSelectDatePicker] = useState(false);
   const [morningButton, setMorningButton] = useState(false);
   const [eveningButton, setEveningButton] = useState(false);
-
   let styleButton = {
     backgroundColor: "white",
-    width: 148.62,
-    height: 50,
-    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
     bordeColor: "#5E503F",
+    height: 70,
+    width: 150,
+    fontWeight: "600",
+    fontSize: 16,
+    borderRadius: 20,
   };
   let styleTextButton = {
     color: "#5E503F",
   };
+  console.log(rdv);
+  useEffect(() => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/users/${user.token}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.result){
+        const newObj= {
+          email:data.user.email,
+          mobile: data.user.mobile,
+          formule: data.user.formule?.nom,
+        };
+        dispatch(setUserStatus(newObj));
+      }
+    })
+  }, []);
 
   const onChangeDate = (value) => {
     setSelectDatePicker(false);
@@ -36,8 +58,19 @@ export default function DatePicker({ navigation }) {
     setDateTaken(
       new Date(value.nativeEvent.timestamp).toLocaleDateString("fr-FR", options)
     );
+    dispatch(addDateRdv(new Date(value.nativeEvent.timestamp).toISOString().split('T')[0]));
   };
+  const handleMorningButton = () => {
+    setMorningButton(true);
+    setEveningButton(false);
+    dispatch(addPlageHoraireRdv("Matin"));
+  }
 
+  const handleEveningButton = () => {
+    setMorningButton(false);
+    setEveningButton(true);
+    dispatch(addPlageHoraireRdv("Après-midi"));
+  };
   return (
     <View style={styles.page}>
       <Header
@@ -73,9 +106,7 @@ export default function DatePicker({ navigation }) {
           <View style={styles.ButtonSection}>
             <TouchableOpacity
               style={morningButton ? styleButton : styles.button}
-              onPress={() => {
-                setMorningButton(true), setEveningButton(false);
-              }}
+              onPress={() => handleMorningButton()}
             >
               <Text style={morningButton ? styleTextButton : styles.textButton}>
                 Matin
@@ -83,9 +114,7 @@ export default function DatePicker({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={eveningButton ? styleButton : styles.button}
-              onPress={() => {
-                setEveningButton(true), setMorningButton(false);
-              }}
+              onPress={() => handleEveningButton()}
             >
               <Text style={eveningButton ? styleTextButton : styles.textButton}>
                 Après-midi
@@ -155,7 +184,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "90%",
+    width: "100%",
     margin: 15,
     padding: 10,
   },
