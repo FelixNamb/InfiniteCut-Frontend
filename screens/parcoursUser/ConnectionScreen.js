@@ -12,23 +12,22 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "@react-navigation/native";
 import { login } from "../../reducers/user";
-import { URL_BACKEND } from "@env";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export default function ConnectionScreen(props) {
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
 
+
+  const urlBackend= process.env.EXPO_PUBLIC_URL_BACKEND;
   const handleSignIn = () => {
     if (EMAIL_REGEX.test(signInEmail)) {
-      fetch(`${URL_BACKEND}/users/signin`, {
+      fetch(`${urlBackend}/users/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -38,11 +37,10 @@ export default function ConnectionScreen(props) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.result) {
             dispatch(
               login({
-                email: email,
+                email: signInEmail,
                 token: data.token,
               })
             );

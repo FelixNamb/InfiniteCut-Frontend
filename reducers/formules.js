@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: [],
+  value: {details: {}, nom : null, prix : null},
 };
 
 export const formuleSlice = createSlice({
@@ -9,7 +9,9 @@ export const formuleSlice = createSlice({
   initialState,
   reducers: {
     addFormule: (state, action) => {
-        state.value.push(action.payload);
+        state.value.details = action.payload.details;
+        state.value.nom = action.payload.nom;
+        state.value.prix = action.payload.prix;
     },
   },
 });

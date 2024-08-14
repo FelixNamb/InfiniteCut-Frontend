@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { URL_BACKEND } from "@env";
 import { loginUserPro } from "../../reducers/userPro";
 
 const EMAIL_REGEX =
@@ -27,10 +26,10 @@ export default function SignUpProScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
+  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
   const handleSignUp = async () => {
-    console.log(EMAIL_REGEX.test(email));
     if (EMAIL_REGEX.test(email)) {
-      await fetch(`http://10.0.2.78:3000/userpros/signup`, {
+      await fetch(`${urlBackend}/userpros/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -43,7 +42,6 @@ export default function SignUpProScreen({ navigation }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.result) {
             setModalVisible(true);
             setTimeout(() => {

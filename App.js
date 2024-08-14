@@ -28,6 +28,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
+import rdv from "./reducers/rdv";
+import StatScreen from "./screens/profilePro/StatScreen";
 
 import {
   useFonts,
@@ -42,7 +44,7 @@ import {
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
 
-const reducers = combineReducers({ user, formules, userPro });
+const reducers = combineReducers({ user, formules, userPro, rdv });
 const persistConfig = { key: "faceup", storage: AsyncStorage };
 
 const store = configureStore({
@@ -52,7 +54,7 @@ const store = configureStore({
 });
 
 const persistor = persistStore(store);
-
+persistor.purge();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -76,6 +78,10 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="StatScreen" component={StatScreen} />
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Formules" component={FormulesScreen} />
+              <Stack.Screen name="MyAgenda" component={MyAgenda} />
               <Stack.Screen
                 name="MesInformations"
                 component={MesInformations}
@@ -86,7 +92,10 @@ export default function App() {
                 name="MesInformationsPro"
                 component={MesInformationsPro}
               />
-              <Stack.Screen name="StatPro" component={StatScreen} />
+              <Stack.Screen name="MesChiffres" component={MesChiffres} />
+              <Stack.Screen name="Connection" component={ConnectionScreen} />
+              <Stack.Screen name="Pay" component={PayScreen} />
+              <Stack.Screen name="RDVs" component={MesRDVScreen} />
               <Stack.Screen
                 name="ChooseBarber"
                 component={ChooseBarberScreen}

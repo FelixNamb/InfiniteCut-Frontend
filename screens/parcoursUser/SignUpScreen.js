@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { URL_BACKEND } from "@env";
 import { login } from "../../reducers/user";
 
 export default function SignUpScreen({ navigation }) {
@@ -21,9 +20,10 @@ export default function SignUpScreen({ navigation }) {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
+  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
   const handleSignUp = () => {
     if (signUpPassword === signUpConfirmPassword) {
-      fetch(`${URL_BACKEND}/users/signup`, {
+      fetch(`${urlBackend}/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,7 +34,6 @@ export default function SignUpScreen({ navigation }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.result) {
             dispatch(
               login({
@@ -42,7 +41,6 @@ export default function SignUpScreen({ navigation }) {
                 token: data.token,
               })
             );
-            console.log("blabla");
             navigation.navigate("DatePicker");
             setSignUpEmail("");
             setSignUpPassword("");

@@ -8,13 +8,15 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Header from "../../components/Header";
-import {
-  CreditCardInput,
-  LiteCreditCardInput,
-} from "react-native-credit-card-input";
+import { CreditCardInput } from "react-native-credit-card-input";
+import { useSelector } from "react-redux";
 
 export default function PayScreen({ navigation }) {
+  const user = useSelector((state) => state.user.value);
+  const rdv = useSelector((state) => state.rdv.value);
+  const formule = useSelector((state) => state.formules.value);
   const [creditCard, setCreditCard] = useState("**** **** **** ****");
   const [cvc, setCvc] = useState("CVC");
   const [expiration, setExpiration] = useState("MM/YY");
@@ -32,21 +34,26 @@ export default function PayScreen({ navigation }) {
       setMasterCard(true);
     }
   };
+  console.log(user);
 
   const handleNavigation = () => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     if (
       (visa || masterCard) &&
       creditCard.length === 19 &&
       cvc.length === 3 &&
-      expiration.length === 5
+      expiration.length === 5 &&
+      cvc !== "CVC" &&
+      expiration !== "MM/YY"
     ) {
+      fetch(`${urlBackend}/`)
       navigation.navigate("RDVs");
     } else {
       setError(true);
     }
   };
 
-  const handleOnChange = async (form) => {
+  const handleOnChange = async(form) => {
     setError(false);
     if (form.values.cvc !== "") {
       await setCvc(form.values.cvc);
