@@ -105,7 +105,7 @@ export default function ConnectionScreen(props) {
           </View>
           <TouchableOpacity
             style={styles.lastButton}
-            onPress={() => props.navigation.navigate("SignUpPro")}
+            onPress={() => props.navigation.navigate("ConceptPro")}
           >
             <Text style={styles.lastTextButton}>
               Proposez votre {"\n"}établissement

@@ -13,6 +13,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
 import { StatusBar } from "expo-status-bar";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function UserFormule({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -133,6 +134,14 @@ export default function UserFormule({ navigation }) {
               <Text style={styles.textButton}>Résilier abonnement</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.bottomIconContainer}>
+          <MaterialIcons
+            name="read-more"
+            size={24}
+            color="#5E503F"
+            onPress={() => navigation.navigate("FavoriteBarber")}
+          />
         </View>
       </SafeAreaView>
     </>
@@ -268,5 +277,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     marginLeft: 10,
+  },
+  bottomIconContainer: {
+    alignItems: "center",
   },
 });

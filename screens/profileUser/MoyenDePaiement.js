@@ -16,6 +16,7 @@ import SubHeaderProfile from "../../components/SubHeaderProfile";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { StatusBar } from "expo-status-bar";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function MoyenDePaiement({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -136,6 +137,14 @@ export default function MoyenDePaiement({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.bottomIconContainer}>
+          <MaterialIcons
+            name="read-more"
+            size={24}
+            color="#5E503F"
+            onPress={() => navigation.navigate("RDVs")}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
@@ -221,7 +230,7 @@ const styles = StyleSheet.create({
   },
   bottomPage: {
     alignItems: "center",
-    margin: 100,
+    margin: 60,
   },
   centeredView: {
     flex: 1,
@@ -329,5 +338,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     fontFamily: "Montserrat_500Medium",
+  },
+  bottomIconContainer: {
+    alignItems: "center",
   },
 });

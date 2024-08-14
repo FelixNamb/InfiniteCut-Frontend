@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -146,6 +146,14 @@ export default function FavoriteBarber({ navigation }) {
             </ScrollView>
           </View>
         </View>
+        <View style={styles.bottomIconContainer}>
+          <MaterialIcons
+            name="read-more"
+            size={24}
+            color="#5E503F"
+            onPress={() => navigation.navigate("MoyenDePaiement")}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
@@ -203,7 +211,10 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: "column",
     alignItems: "center",
-    height: "50%",
+    height: "70%",
     margin: 20,
+  },
+  bottomIconContainer: {
+    alignItems: "center",
   },
 });

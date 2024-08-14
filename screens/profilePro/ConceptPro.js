@@ -7,6 +7,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 export default function ConceptPro({ navigation }) {
   return (
     <>
@@ -62,6 +63,12 @@ export default function ConceptPro({ navigation }) {
             ></ImageBackground>
           </View>
         </ScrollView>
+        <MaterialIcons
+          name="read-more"
+          size={24}
+          color="#5E503F"
+          onPress={() => navigation.navigate("StatPro")}
+        />
       </SafeAreaView>
     </>
   );

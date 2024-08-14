@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
-import { URL_BACKEND } from "@env";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -140,6 +140,13 @@ export default function MesInformations({ navigation }) {
             </View>
           </View>
         )}
+        <MaterialIcons
+          name="read-more"
+          size={24}
+          color="#5E503F"
+          onPress={() => navigation.navigate("UserFormule")}
+          style={styles.icon}
+        />
       </KeyboardAvoidingView>
     </View>
   );
@@ -259,5 +266,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 2,
     fontFamily: "Montserrat_500Medium",
+  },
+  icon: {
+    marginBottom: 40,
   },
 });
