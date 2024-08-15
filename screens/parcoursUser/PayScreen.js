@@ -131,12 +131,18 @@ export default function PayScreen({ navigation }) {
 
   const getFormuleNom = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-    fetch(`${urlBackend}/formules/${formule.nom}`)
+    fetch(`${urlBackend}/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("getFormuleNom ===== ", data);
         if (data.result) {
-          putFormuleUser(data.formule);
+          fetch(`${urlBackend}/formules/${data.user.formule.nom}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("getFormuleNom ===== ", data);
+              if (data.result) {
+                putFormuleUser(data.formule);
+              }
+            });
         }
       });
   };

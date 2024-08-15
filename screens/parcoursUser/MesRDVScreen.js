@@ -20,9 +20,9 @@ import { useEffect } from "react";
 import { deleteRdv } from "../../reducers/rdv";
 import moment from "moment";
 import UserPro from "../../reducers/userPro";
-// import Rdv from "../../reducers/rdv";
+import Rdv from "../../reducers/rdv";
 
-export default function FormuleScreen({ navigation }) {
+export default function MesRDVScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const [isLiked, setIsLiked] = useState(false);
@@ -43,26 +43,28 @@ export default function FormuleScreen({ navigation }) {
   useEffect(() => {
     const fetchData = async () => {
       const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-  
+
       const response = await fetch(`${urlBackend}/users/${user.token}`);
       const data = await response.json();
-  
+
       if (data.result) {
         setUserFormule(data.user.formule.nom);
         for (let elt of data.user.mesRDV) {
-          const rdvResponse = await fetch(`${urlBackend}/rdv/searchid/${elt._id}`);
+          const rdvResponse = await fetch(
+            `${urlBackend}/rdv/searchid/${elt._id}`
+          );
           const rdvData = await rdvResponse.json();
-  
+
           if (rdvData.result) {
             setRdvs((prevRdvs) => [...prevRdvs, rdvData.rdv]);
           }
         }
       }
     };
-  
+
     fetchData();
   }, []);
-  
+
   console.log(rdvs);
   const rdvCard = rdvs.map((data, i) => {
     //formater la date recupérée
@@ -141,7 +143,9 @@ export default function FormuleScreen({ navigation }) {
           </Modal>
           <TouchableOpacity
             style={styles.deleteRdv}
-            onPress={() => handleDeleteRDV()}
+            onPress={() =>
+              handleDeleteRDV(data.date, data.plageHoraire, data.userPro._id)
+            }
           >
             <Feather name="trash" size={24} color="red" />
             <Text> Annuler le RDV</Text>
@@ -154,34 +158,24 @@ export default function FormuleScreen({ navigation }) {
   const handleClose = () => {
     setModalVisible(false);
   };
-
-  const handleDeleteRDV = () => {
-    const rdvDate = useSelector((state) => ({
-      date: state.formule.value.date,
-      plageHoraire: state.formule.value.data.plageHoraire,
-    }));
-
-    if (!rdvDate.date || !rdvDate.plageHoraire) {
-      console.error("Date or plageHoraire is undefined");
-      return;
-    }
-
+  const handleDeleteRDV = (date, plageHoraire, id) => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/rdv`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: rdvDate.date,
-        plageHoraire: rdvDate.plageHoraire,
-        ObjectId: userPro?.ObjectId,
+        date: date,
+        ObjectId: id,
+        plageHoraire: plageHoraire,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.message) {
-          dispatch(deleteRdv());
+        if (data.result) {
+          dispatch(deleteRdv(data.rdvs));
         }
         setModalVisible(true);
       })
@@ -256,8 +250,8 @@ export default function FormuleScreen({ navigation }) {
             <Octicons
               name="heart-fill"
               size={30}
-              color={isLiked ? "#C6AC8F" : "#22333B"}
-              onPress={() => setIsLiked(!isLiked)}
+              // color={isLiked ? "#C6AC8F" : "#22333B"}
+              // onPress={() => setIsLiked(!isLiked)}
             />
           </View>
           <View style={styles.barber}>
@@ -275,8 +269,8 @@ export default function FormuleScreen({ navigation }) {
             <Octicons
               name="heart-fill"
               size={30}
-              color={isLiked ? "#C6AC8F" : "#22333B"}
-              onPress={() => setIsLiked(!isLiked)}
+              // color={isLiked ? "#C6AC8F" : "#22333B"}
+              // onPress={() => setIsLiked(!isLiked)}
             />
           </View>
         </ScrollView>
