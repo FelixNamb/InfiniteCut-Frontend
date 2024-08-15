@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function MyAgenda({ navigation }) {
   const userPro = useSelector((state) => state.userPro.value);
-  const rdvUserPro = useSelector((state) => state.rdvUserPro.value);
   const [rdv, setRdv] = useState([]);
   const dispatch = useDispatch();
 

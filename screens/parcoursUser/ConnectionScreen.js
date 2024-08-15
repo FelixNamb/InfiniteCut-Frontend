@@ -60,11 +60,11 @@ export default function ConnectionScreen({navigation}) {
               }),
             })
             .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              if(data.result){
+            .then(secondData => {
+              console.log(secondData)
+              if(secondData.result){
                 dispatch(loginUserPro({
-                  token: data.token,
+                  token: secondData.token,
                 }));
                 dispatch(logout());
                 navigation.navigate("MyAgenda");
