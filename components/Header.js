@@ -1,62 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   Text,
   View,
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-} from 'react-native';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+} from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function Header(props) {
-  const [token, setToken] = useState(null);
-  const [userType, setUserType] = useState(null); 
-  useEffect(() => {
-    const fetchedToken = 'your-valid-token'; 
-    const fetchedUserType = 'UserPro'; 
-    
-    setToken(fetchedToken);
-    setUserType(fetchedUserType);
-  }, []);
-
-  const isUserConnected = !!token; 
-  const isUserPro = userType === 'UserPro'; 
-  const isUser = userType === 'User'; 
+  const user = useSelector((state) => state.user.value);
+  const userPro = useSelector((state) => state.userPro.value);
 
   return (
     <SafeAreaView style={styles.header}>
       <View style={styles.dispositionHeader}>
-        
         <TouchableOpacity
-          onPress={() => isUserConnected && isUserPro && props.navigation.navigate("MyAgenda")}
-          disabled={!isUserConnected || !isUserPro}
+          onPress={() => !user.token && props.navigation.navigate("MyAgenda")}
         >
           <FontAwesome6
             name="scissors"
             size={32}
-            color={
-              isUserConnected && isUserPro
-                ? props.colorScissors ? "#22333B" : "#C6AC8F"
-                : "#888"
-            }
+            color={props.colorScissors ? "#22333B" : "#C6AC8F"}
           />
         </TouchableOpacity>
 
         <Text style={styles.title}>{props.title}</Text>
 
         <TouchableOpacity
-          onPress={() => isUserConnected && isUser && props.navigation.navigate("MesInformations")}
-          disabled={!isUserConnected || !isUser}
+          onPress={() =>
+            !userPro.token && props.navigation.navigate("MesInformations")
+          }
+        
         >
           <FontAwesome
             name="user-circle"
             size={32}
-            color={
-              isUserConnected && isUser
-                ? props.colorUser ? "#22333B" : "#C6AC8F"
-                : "#888" 
-            }
+            color={props.colorUser ? "#22333B" : "#C6AC8F"}
           />
         </TouchableOpacity>
       </View>
