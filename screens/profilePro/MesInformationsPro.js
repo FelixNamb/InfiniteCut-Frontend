@@ -13,10 +13,18 @@ import Header from "../../components/Header";
 import SubHeaderProfile from "../../components/SubHeaderProfile";
 import Octicons from "@expo/vector-icons/Octicons";
 import Entypo from "@expo/vector-icons/Entypo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function MesInformationsPro({ navigation }) {
-  const [isModalVisible, setIsModalIvisible] = useState(false);
+  const userPro = useSelector((state) => state.userPro.value);
+  const [isModalVisible, setIsModalvisible] = useState(false);
+  const [infoUserPro, setInfoUserPro] = useState({});
+
+  const essentiel = "ESSENTIEL";
+  const premium = "PREMIUM";
+  const exclusif = "EXCLUSIF";
+
   const stars = [];
   for (let i = 0; i < 5; i++) {
     if (i < 4) {
@@ -30,9 +38,67 @@ export default function MesInformationsPro({ navigation }) {
     }
   }
 
+  useEffect(() => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/userpros/${userPro.token}`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.result){
+        setInfoUserPro(data.user);
+      }
+    })
+  }, [])
+
+  const formules = infoUserPro["formules"]?.map((data,i) => {
+    if(data.nom === "ESSENTIEL"){
+      return (
+        <TouchableOpacity key={i} style={styles.nomFormuleEssentiel}>
+          <Text style={styles.textNomFormule}>{data.nom}</Text>
+        </TouchableOpacity>
+      )
+    } else if (data.nom === "PREMIUM"){
+      return(
+        <TouchableOpacity key={i} style={styles.nomFormulePremium}>
+          <Text style={styles.textNomFormulePremium}>{data.nom}</Text>
+        </TouchableOpacity>
+      )
+    } else {
+      return(
+        <TouchableOpacity key={i} style={styles.nomFormuleExclusif}>
+          <Text style={styles.textNomFormuleExclusif}>{data.nom}</Text>
+        </TouchableOpacity>
+      )
+    }
+  })
+  // console.log(infoUserPro["formules"]);
   const changeFormules = () => {
-    setIsModalIvisible(true);
+    setIsModalvisible(true);
   };
+
+  const handleChoisirFormule = (name) => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/formules/${name}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          fetch(`${urlBackend}/userpros`, {
+            method:'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              token: infoUserPro.token,
+              _ObjectId: data._id,
+            }),
+          })
+          .then(response => response.json())
+          .then(newData => {
+            console.log(newData);
+          })
+        }
+      });
+      setIsModalvisible(false);
+  }
+
   return (
     <View style={styles.page}>
       <Modal visible={isModalVisible} animationType="fade" transparent>
@@ -40,7 +106,7 @@ export default function MesInformationsPro({ navigation }) {
           <View style={styles.modalView}>
             <View style={styles.cross}>
               <TouchableOpacity
-                onPress={() => setIsModalIvisible(false)}
+                onPress={() => setIsModalvisible(false)}
                 activeOpacity={0.8}
               >
                 <Entypo name="squared-cross" size={30} color="#C6AC8F" />
@@ -55,8 +121,8 @@ export default function MesInformationsPro({ navigation }) {
                   style={styles.backgroundImage}
                   source={require("../../assets/formule_essentiel.jpg")}
                 >
-                  <Text style={styles.textModal}>ESSENTIEL</Text>
-                  <TouchableOpacity style={styles.modalButton}>
+                  <Text style={styles.textModal}>{essentiel}</Text>
+                  <TouchableOpacity style={styles.modalButton} onPress={() => handleChoisirFormule(essentiel)}>
                     <Text style={styles.textModalButton}>Choisir</Text>
                   </TouchableOpacity>
                 </ImageBackground>
@@ -64,8 +130,8 @@ export default function MesInformationsPro({ navigation }) {
                   style={styles.backgroundImage}
                   source={require("../../assets/formule_premium.jpg")}
                 >
-                  <Text style={styles.textModal}>PREMIUM</Text>
-                  <TouchableOpacity style={styles.modalButton}>
+                  <Text style={styles.textModal}>{premium}</Text>
+                  <TouchableOpacity style={styles.modalButton} onPress={() => handleChoisirFormule(premium)}>
                     <Text style={styles.textModalButton}>Choisir</Text>
                   </TouchableOpacity>
                 </ImageBackground>
@@ -73,8 +139,8 @@ export default function MesInformationsPro({ navigation }) {
                   style={styles.backgroundImage}
                   source={require("../../assets/formule_exclusif.jpg")}
                 >
-                  <Text style={styles.textModal}>EXCLUSIF</Text>
-                  <TouchableOpacity style={styles.modalButton}>
+                  <Text style={styles.textModal}>{exclusif}</Text>
+                  <TouchableOpacity style={styles.modalButton} onPress={() => handleChoisirFormule(exclusif)}>
                     <Text style={styles.textModalButton}>Choisir</Text>
                   </TouchableOpacity>
                 </ImageBackground>
@@ -105,22 +171,17 @@ export default function MesInformationsPro({ navigation }) {
             style={styles.img}
           />
           <View style={styles.informations}>
-            <Text style={styles.subtitle}> Le Barbier de Lyon 7ème</Text>
+            <Text style={styles.subtitle}>{infoUserPro.nomEnseigne}</Text>
             <Text style={{ fontFamily: "Montserrat_400Regular" }}>
-              {"\n"}35 rue de Marseille, 69007 Lyon{"\n"}
-              {"\n"}04 01 02 03 05{"\n"}
+              {"\n"}{infoUserPro.adresse}{"\n"}
+              {"\n"}{infoUserPro.mobile}{"\n"}
               {"\n"}Du mardi au dimanche, de 9h à 19h{"\n"}
             </Text>
           </View>
         </View>
         <Text style={styles.subtitle}>Prestations :</Text>
         <View style={styles.formules}>
-          <TouchableOpacity style={styles.nomFormuleEssentiel}>
-            <Text style={styles.textNomFormule}>ESSENTIEL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.nomFormulePremium}>
-            <Text style={styles.textNomFormulePremium}>PREMIUM</Text>
-          </TouchableOpacity>
+          {formules}
         </View>
         <TouchableOpacity
           style={styles.button}
@@ -230,6 +291,7 @@ const styles = StyleSheet.create({
   formules: {
     flexDirection: "row",
     width: "100%",
+    flexWrap: "wrap",
     justifyContent: "space-around",
     alignItems: "center",
     marginTop: 10,
@@ -241,6 +303,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 50,
     width: 150,
+    marginTop: 10,
   },
   textNomFormule: {
     color: "white",
@@ -258,6 +321,21 @@ const styles = StyleSheet.create({
   },
   textNomFormulePremium: {
     color: "#C6AC8F",
+    letterSpacing: 5,
+    fontFamily: "Montserrat_700Bold",
+  },
+  nomFormuleExclusif:{
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+    height: 50,
+    width: 150,
+    borderWidth: 2,
+    backgroundColor:"#C6AC8F",
+    borderColor: "#5E503F",
+  },
+  textNomFormuleExclusif:{
+    color: "white",
     letterSpacing: 5,
     fontFamily: "Montserrat_700Bold",
   },

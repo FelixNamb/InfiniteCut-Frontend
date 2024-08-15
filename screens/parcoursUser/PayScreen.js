@@ -19,6 +19,7 @@ export default function PayScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const rdv = useSelector((state) => state.rdv.value);
   const formule = useSelector((state) => state.formules.value);
+  const addUserPro = useSelector((state) => state.addUserPro.value);
 
   const [creditCard, setCreditCard] = useState("**** **** **** ****");
   const [cvc, setCvc] = useState("CVC");
@@ -38,8 +39,140 @@ export default function PayScreen({ navigation }) {
     }
   };
 
-  const handleNavigation = () => {
+
+  const postRdv = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/rdv`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: rdv.date,
+        ObjectId: addUserPro.userPro._id,
+        plageHoraire: rdv.data.plageHoraire,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("postRdv ===== ",data);
+        if (data.result) {
+          putRdvUserPro(data.newRdv);
+        };
+      });
+  };
+
+
+  const putRdvUserPro = (newRdv) => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/userpros/rdv`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: addUserPro.userPro.token,
+        ObjectId: newRdv._id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("putRdvUserPro ===== ",data);
+        if (data.result) {
+          putRdvUser(newRdv);
+        }
+      });
+  };
+
+
+  const putRdvUser = (newRdv) => {
+    console.log(newRdv._id)
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/users/rdv`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: user.token,
+        ObjectId: newRdv._id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result) {
+          putMycardUser();
+        } else {
+          setError(true)
+        }
+      });
+  }
+
+
+  const putMycardUser = () => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/users/myCard`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: user.token,
+        numCarte: creditCard,
+        dateExpiration: expiration,
+        cvc: cvc,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("putMyCardUser ===== ",data);
+        if (data.result) {
+          getFormuleNom()
+        }
+      })
+  }
+
+  const getFormuleNom = () => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/formules/${formule.nom}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("getFormuleNom ===== ",data);
+        if (data.result) {
+          putFormuleUser(data.formule);
+        }
+      });
+  };
+
+  const putFormuleUser = (formule) => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    fetch(`${urlBackend}/users/formule`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: user.token,
+        _ObjectId: formule._id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("putFormuleUser ==== ",data);
+        if (data.result) {
+          console.log("Commande validée !");
+          navigation.navigate("RDVs");
+        } else {
+          console.log("Erreur lors de la commande");
+          setError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la requête POST:",
+          error
+        );
+        setError(true);
+      });
+  }
+
+  const handleNavigation = () => {
     if (
       (visa || masterCard) &&
       creditCard.length === 19 &&
@@ -48,77 +181,9 @@ export default function PayScreen({ navigation }) {
       cvc !== "CVC" &&
       expiration !== "MM/YY"
     ) {
-      fetch(`${urlBackend}/rdv`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: rdv.date,
-          ObjectId: "66b0ecb8d43fe65b724e6082",
-          plageHoraire: rdv.data.plageHoraire,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.result) {
-            fetch(`${urlBackend}/users/myCard`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                token: user.token,
-                numCarte: creditCard,
-                dateExpiration: expiration,
-                cvc: cvc,
-              }),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.result) {
-                  fetch(`${urlBackend}/formules/${formule.nom}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                      if (data.result) {
-                        fetch(`${urlBackend}/users/formule`, {
-                          method: "PUT",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            token: user.token,
-                            formule: data.formule._id,
-                          }),
-                        })
-                          .then((response) => response.json())
-                          .then((data) => {
-                            if (data.result) {
-                              console.log("Commande validée !");
-                              navigation.navigate("RDVs");
-                            } else {
-                              console.log("Erreur lors de la commande");
-                              setError(true);
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(
-                              "Erreur lors de la requête POST:",
-                              error
-                            );
-                            setError(true);
-                          });
-                      }
-                    });
-                } else {
-                  setError(true);
-                }
-              });
-          }
-        });
+      postRdv();
     }
   };
-
   const handleOnChange = async (form) => {
     setError(false);
     if (form.values.cvc !== "") {
