@@ -8,8 +8,6 @@ import {
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-import { useSelector } from "react-redux";
-
 export default function Header(props) {
   const user = useSelector((state) => state.user.value);
   const userPro = useSelector((state) => state.userPro.value);
