@@ -17,7 +17,6 @@ import MesChiffres from "./screens/profilePro/MesChiffres";
 import StatScreen from "./screens/profilePro/StatScreen";
 import MesInformationsPro from "./screens/profilePro/MesInformationsPro";
 import ConnectionScreen from "./screens/parcoursUser/ConnectionScreen";
-import StatScreen from "./screens/profilePro/StatScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";

@@ -13,33 +13,41 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function MyAgenda({ navigation }) {
   const userPro = useSelector((state) => state.userPro.value);
-  const [rdv, setRdv] = useState([]);
+  const [rdv, setRdv] = useState({});
   const dispatch = useDispatch();
 
 
-  let tab= [];
+
   useEffect(() => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/userpros/${userPro.token}`)
-    .then(response => response.json())
-    .then(data => {
-      if(data.result){
-        for(let elt of data.user.rdvs){
-          setRdv([...rdv, elt]);
+      .then(response => response.json())
+      .then(data => {
+        if (data.result) {
+          fetch(`${urlBackend}/rdv/${data.user._id}`)
+          .then(response => response.json())
+          .then(finalData => {
+            setRdv(finalData.data)
+            let newObj = {};
+            for(let elt of finalData.data){
+              const date = new Date(elt.date).toISOString().split("T")[0];
+              if (!newObj[date]) {
+                newObj[date] = [];
+              }
+              
+              newObj[date].push({
+                name: elt.plageHoraire,
+                description: "30 minutes"
+              });
+            }
+            setRdv(newObj);
+          })
         }
-      }
-    })
-  });
+      });
+  },[])
+
 
   console.log(rdv);
-  const rdvInAgenda = rdv.map((data) => {
-    console.log(data);
-    return({
-      [data.date] : [{
-        description: [data.plageHoraire],
-      }],
-    })
-  })
 
   return (
     <View style={styles.page}>
@@ -62,54 +70,13 @@ export default function MyAgenda({ navigation }) {
           <Text style={styles.title}>Mon agenda</Text>
         </View>
         <Agenda
-          items={{
-            "2024-08-12": [
-              {
-                name: "Meeting 1",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-              {
-                name: "Meeting 0",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-            "2024-08-13": [
-              {
-                name: "Meeting 2",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-            "2024-08-15": [
-              {
-                name: "Meeting 3",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-            "2024-08-17": [
-              {
-                name: "Meeting 4",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-            "2024-08-18": [
-              {
-                name: "Meeting 5",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-            "2024-08-22": [
-              {
-                name: "Meeting 6",
-                data: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit.",
-              },
-            ],
-          }}
+          items={rdv}
           renderItem={(item, isFirst) => (
             <TouchableOpacity
               style={styles.item}
             >
               <Text style={styles.itemText}>{item.name}</Text>
-              <Text style={styles.itemText}>{item.data}</Text>
+              <Text style={styles.itemText}>{item.description}</Text>
             </TouchableOpacity>
           )}
         />

@@ -7,6 +7,8 @@ import {
   Modal,
   Keyboard,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -62,11 +64,11 @@ export default function MoyenDePaiement({ navigation }) {
       />
       <StatusBar style="light" />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        ></KeyboardAvoidingView>
         <SafeAreaView style={styles.page}>
+          <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          ></KeyboardAvoidingView>
           <Modal visible={modalVisible} animationType="fade" transparent>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
