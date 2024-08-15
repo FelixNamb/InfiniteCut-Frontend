@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -28,7 +29,7 @@ export default function HomeScreen({ navigation }) {
           </View>
           <View style={styles.iconContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("Connection")}>
-              <MaterialIcons name="ads-click" size={50} color="#C6AC8F" />
+              <AntDesign name="login" size={50} color="#C6AC8F" />
             </TouchableOpacity>
           </View>
         </ImageBackground>

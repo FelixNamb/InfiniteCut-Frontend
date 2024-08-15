@@ -14,12 +14,17 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 import { CreditCardInput } from "react-native-credit-card-input";
+// import { addUser } from "../../reducers/addUserPro";
+// import userPro from "../../reducers/userPro";
+// import Rdv from "../../../InfiniteCut-Backend/models/rdv";
 
 export default function PayScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const rdv = useSelector((state) => state.rdv.value);
   const formule = useSelector((state) => state.formules.value);
+
   const addUserPro = useSelector((state) => state.addUserPro.value);
+  console.log("___________", addUserPro.userPro._id);
 
   const [creditCard, setCreditCard] = useState("**** **** **** ****");
   const [cvc, setCvc] = useState("CVC");
@@ -39,7 +44,6 @@ export default function PayScreen({ navigation }) {
     }
   };
 
-
   const postRdv = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/rdv`, {
@@ -55,13 +59,12 @@ export default function PayScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("postRdv ===== ",data);
+        console.log("postRdv ===== ", data);
         if (data.result) {
           putRdvUserPro(data.newRdv);
-        };
+        }
       });
   };
-
 
   const putRdvUserPro = (newRdv) => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
@@ -73,18 +76,17 @@ export default function PayScreen({ navigation }) {
         ObjectId: newRdv._id,
       }),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log("putRdvUserPro ===== ",data);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("putRdvUserPro ===== ", data);
         if (data.result) {
           putRdvUser(newRdv);
         }
       });
   };
 
-
   const putRdvUser = (newRdv) => {
-    console.log(newRdv._id)
+    console.log(newRdv._id);
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/users/rdv`, {
       method: "PUT",
@@ -94,16 +96,15 @@ export default function PayScreen({ navigation }) {
         ObjectId: newRdv._id,
       }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.result) {
           putMycardUser();
         } else {
-          setError(true)
+          setError(true);
         }
       });
-  }
-
+  };
 
   const putMycardUser = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
@@ -121,19 +122,19 @@ export default function PayScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("putMyCardUser ===== ",data);
+        console.log("putMyCardUser ===== ", data);
         if (data.result) {
-          getFormuleNom()
+          getFormuleNom();
         }
-      })
-  }
+      });
+  };
 
   const getFormuleNom = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/formules/${formule.nom}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("getFormuleNom ===== ",data);
+        console.log("getFormuleNom ===== ", data);
         if (data.result) {
           putFormuleUser(data.formule);
         }
@@ -154,7 +155,7 @@ export default function PayScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("putFormuleUser ==== ",data);
+        console.log("putFormuleUser ==== ", data);
         if (data.result) {
           console.log("Commande validée !");
           navigation.navigate("RDVs");
@@ -164,13 +165,10 @@ export default function PayScreen({ navigation }) {
         }
       })
       .catch((error) => {
-        console.error(
-          "Erreur lors de la requête POST:",
-          error
-        );
+        console.error("Erreur lors de la requête POST:", error);
         setError(true);
       });
-  }
+  };
 
   const handleNavigation = () => {
     if (
@@ -202,7 +200,7 @@ export default function PayScreen({ navigation }) {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0} // Ajustez la valeur selon vos besoins
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
       >
         <Header
           title="INFINITE CUT"
