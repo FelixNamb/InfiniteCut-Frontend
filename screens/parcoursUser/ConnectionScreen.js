@@ -19,7 +19,7 @@ import { loginUserPro, logoutUserPro } from "../../reducers/userPro";
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export default function ConnectionScreen({navigation}) {
+export default function ConnectionScreen({ navigation }) {
   const dispatch = useDispatch();
   const [emailError, setEmailError] = useState("");
 
@@ -50,8 +50,8 @@ export default function ConnectionScreen({navigation}) {
             navigation.navigate("DatePicker");
             setSignInEmail("");
             setSignInPassword("");
-          }else {
-            fetch(`${urlBackend}/userpros/signin`,{
+          } else {
+            fetch(`${urlBackend}/userpros/signin`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -59,19 +59,21 @@ export default function ConnectionScreen({navigation}) {
                 motDePasse: signInPassword,
               }),
             })
-            .then(response => response.json())
-            .then(secondData => {
-              console.log(secondData)
-              if(secondData.result){
-                dispatch(loginUserPro({
-                  token: secondData.token,
-                }));
-                dispatch(logout());
-                navigation.navigate("MyAgenda");
-                setSignInEmail("");
-                setSignInPassword("");
-              }
-            })
+              .then((response) => response.json())
+              .then((secondData) => {
+                console.log(secondData);
+                if (secondData.result) {
+                  dispatch(
+                    loginUserPro({
+                      token: secondData.token,
+                    })
+                  );
+                  dispatch(logout());
+                  navigation.navigate("MyAgenda");
+                  setSignInEmail("");
+                  setSignInPassword("");
+                }
+              });
           }
         });
     } else {
@@ -131,7 +133,7 @@ export default function ConnectionScreen({navigation}) {
             </View>
             <TouchableOpacity
               style={styles.lastButton}
-              onPress={() => props.navigation.navigate("ConceptPro")}
+              onPress={() => navigation.navigate("ConceptPro")}
             >
               <Text style={styles.lastTextButton}>
                 Proposez votre {"\n"}établissement
