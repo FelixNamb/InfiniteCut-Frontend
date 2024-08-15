@@ -8,20 +8,32 @@ import {
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
+import { useSelector } from "react-redux";
+
 export default function Header(props) {
+  const user = useSelector((state) => state.user.value);
+  const userPro = useSelector((state) => state.userPro.value);
+
   return (
     <SafeAreaView style={styles.header}>
       <View style={styles.dispositionHeader}>
-        <TouchableOpacity onPress={() => props.navigation.navigate("MyAgenda")}>
+        <TouchableOpacity
+          onPress={() => !user.token && props.navigation.navigate("MyAgenda")}
+        >
           <FontAwesome6
             name="scissors"
             size={32}
             color={props.colorScissors ? "#22333B" : "#C6AC8F"}
           />
         </TouchableOpacity>
-        <Text style={styles.title}>{props.title}</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+          <Text style={styles.title}>{props.title}</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
-          onPress={() => props.navigation.navigate("MesInformations")}
+          onPress={() =>
+            !userPro.token && props.navigation.navigate("MesInformations")
+          }
         >
           <FontAwesome
             name="user-circle"

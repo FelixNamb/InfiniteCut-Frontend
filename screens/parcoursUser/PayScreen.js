@@ -14,11 +14,17 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 import { CreditCardInput } from "react-native-credit-card-input";
+// import { addUser } from "../../reducers/addUserPro";
+// import userPro from "../../reducers/userPro";
+// import Rdv from "../../../InfiniteCut-Backend/models/rdv";
 
 export default function PayScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const rdv = useSelector((state) => state.rdv.value);
   const formule = useSelector((state) => state.formules.value);
+
+  const addUserPro = useSelector((state) => state.addUserPro.value);
+  console.log("___________", addUserPro.userPro._id);
 
   const [creditCard, setCreditCard] = useState("**** **** **** ****");
   const [cvc, setCvc] = useState("CVC");
@@ -55,7 +61,7 @@ export default function PayScreen({ navigation }) {
         },
         body: JSON.stringify({
           date: rdv.date,
-          ObjectId: "66b0ecb8d43fe65b724e6082",
+          ObjectId: addUserPro.userPro._id,
           plageHoraire: rdv.data.plageHoraire,
         }),
       })
@@ -137,7 +143,7 @@ export default function PayScreen({ navigation }) {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0} // Ajustez la valeur selon vos besoins
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
       >
         <Header
           title="INFINITE CUT"

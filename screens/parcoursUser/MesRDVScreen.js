@@ -3,7 +3,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   Platform,
   Image,
   ScrollView,
@@ -17,16 +16,160 @@ import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { deleteRdv } from "../../reducers/rdv";
+import moment from "moment";
+import UserPro from "../../reducers/userPro";
+// import Rdv from "../../reducers/rdv";
 
 export default function FormuleScreen({ navigation }) {
+  const dispatch = useDispatch();
+
   const [isLiked, setIsLiked] = useState(false);
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalDeleteRdvVisible, setModalDeleteRdvVisible] = useState(false);
 
-  const dispatch = useDispatch();
+  const [rdvs, setRdvs] = useState([]);
+  const [error, setError] = useState(null);
+  const [userProDetails, setUserProDetails] = useState(null);
+
+  const user = useSelector((state) => state.user.value);
+  const addUserPro = useSelector((state) => state.addUserPro.value);
+
+  console.log(addUserPro);
+
+  let date = moment().format("DD MMMM YYYY, hh:mm");
+  console.log("//////", date);
+
+  useEffect(() => {
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
+    fetch(`${urlBackend}/rdv/:${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          setRdvs(data.rdvs);
+          const userProId = data.rdvs[0]?._id;
+          if (userProId) {
+            fetch(`${urlBackend}/userPro/${userProId}`)
+              .then((response) => response.json())
+              .then((data) => {
+                setUserProDetails({
+                  adresse: data.userPro.adresse,
+                  nomEnseigne: data.userPro.nomEnseigne,
+                });
+              });
+          }
+        }
+      }, []);
+
+    fetch(`${urlBackend}/rdv/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          setRdvs(data.rdvs);
+        } else {
+          setError("Erreur lors de la récupération des données.");
+        }
+      });
+  }, []);
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
+  console.log("c------", rdvs, "\n", userProDetails);
+
+  const rdvCard = rdvs.map((data, i) => {
+    //formater la date recupérée
+    return (
+      <View style={styles.rdvCard} key={i}>
+        <View style={styles.informations}>
+          <Text style={styles.date}>{data.date}</Text>
+          <View style={styles.imageName}>
+            <Image
+              style={styles.img}
+              source={require("../../assets/background_home.jpg")}
+              alt="photo salon"
+            />
+            <Text style={styles.name}>{data.nomEnseigne}</Text>
+          </View>
+          <View style={styles.allIcons}>
+            <View style={styles.prestation}>
+              <Entypo name="scissors" size={24} color="#5E503F" />
+              {/* <Text> {data.formule.nom}</Text> */}
+            </View>
+            <View style={styles.tempsMoyen}>
+              <Entypo name="clock" size={24} color="#5E503F" />
+              <Text> {data.plageHoraire}</Text>
+            </View>
+          </View>
+        </View>
+        <Modal visible={modalVisible} animationType="fade" transparent>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <TouchableOpacity
+                onPress={() => handleClose()}
+                style={styles.iconContainer}
+                activeOpacity={0.8}
+              >
+                <Entypo name="squared-cross" size={30} color="red" />
+              </TouchableOpacity>
+              <Text style={styles.textModal}>
+                Vous êtes sur le point d'annuler votre rendez-vous.
+              </Text>
+              <TouchableOpacity
+                style={styles.confirmButton}
+                onPress={() => handleDeleteFormule()}
+              >
+                <Text style={styles.confirmButtonText}>Confirmer</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("DatePicker")}
+        >
+          <Text style={styles.textButton}>Changer de RDV</Text>
+        </TouchableOpacity>
+        <View style={styles.calendarAndDelete}>
+          <TouchableOpacity
+            style={styles.addToCalendar}
+            onPress={() => navigation.navigate("DatePicker")}
+          >
+            <Ionicons name="add-circle-outline" size={24} color="#5E503F" />
+            <Text> Ajouter un {"\n"}nouveau RDV</Text>
+          </TouchableOpacity>
+          <Modal
+            visible={modalDeleteRdvVisible}
+            animationType="fade"
+            transparent
+          >
+            <View style={styles.centeredCardView}>
+              <View style={styles.modalCardView}>
+                <Text style={styles.textCardModal}>
+                  Votre rendez-vous a bien été supprimé. {"\n"} {"\n"}Et si on
+                  en prenait un autre ?
+                </Text>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity
+            style={styles.deleteRdv}
+            onPress={() => handleDeleteRDV()}
+          >
+            <Feather name="trash" size={24} color="red" />
+            <Text> Annuler le RDV</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  });
 
   const handleClose = () => {
     setModalVisible(false);
@@ -58,7 +201,7 @@ export default function FormuleScreen({ navigation }) {
       .then((data) => {
         console.log(data);
         if (data.message) {
-          spatch(deleteRdv());
+          dispatch(deleteRdv());
         }
         setModalVisible(true);
       })
@@ -101,6 +244,7 @@ export default function FormuleScreen({ navigation }) {
           styleFirstText="500"
         />
       </View>
+
       <View
         style={styles.page}
         contentContainerStyle={{
@@ -110,180 +254,7 @@ export default function FormuleScreen({ navigation }) {
         <Text style={styles.title}>Mon prochain Rendez-vous</Text>
         <View style={styles.upContainer}>
           <ScrollView style={styles.scrollView} horizontal={true}>
-            <View style={styles.rdvCard}>
-              <View style={styles.informations}>
-                <Text style={styles.date}>Vendredi 16 Août, 16h00</Text>
-                <View style={styles.imageName}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo salon"
-                  />
-                  <Text style={styles.name}>
-                    Lucie Saint Clair{"\n"}Adresse du salon
-                  </Text>
-                </View>
-                <View style={styles.allIcons}>
-                  <View style={styles.prestation}>
-                    <Entypo name="scissors" size={24} color="#5E503F" />
-                    <Text> N° formule</Text>
-                  </View>
-                  <View style={styles.tempsMoyen}>
-                    <Entypo name="clock" size={24} color="#5E503F" />
-                    <Text> 20 minutes</Text>
-                  </View>
-                </View>
-              </View>
-              <Modal visible={modalVisible} animationType="fade" transparent>
-                <View style={styles.centeredView}>
-                  <View style={styles.modalView}>
-                    <TouchableOpacity
-                      onPress={() => handleClose()}
-                      style={styles.iconContainer}
-                      activeOpacity={0.8}
-                    >
-                      <Entypo name="squared-cross" size={30} color="red" />
-                    </TouchableOpacity>
-                    <Text style={styles.textModal}>
-                      Vous êtes sur le point d'annuler votre rendez-vous.
-                    </Text>
-                    <TouchableOpacity
-                      style={styles.confirmButton}
-                      onPress={() => handleDeleteFormule()}
-                    >
-                      <Text style={styles.confirmButtonText}>Confirmer</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </Modal>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("DatePicker")}
-              >
-                <Text style={styles.textButton}>Changer de RDV</Text>
-              </TouchableOpacity>
-              <View style={styles.calendarAndDelete}>
-                <TouchableOpacity
-                  style={styles.addToCalendar}
-                  onPress={() => navigation.navigate("DatePicker")}
-                >
-                  <Ionicons
-                    name="add-circle-outline"
-                    size={24}
-                    color="#5E503F"
-                  />
-                  <Text> Ajouter un {"\n"}nouveau RDV</Text>
-                </TouchableOpacity>
-                <Modal
-                  visible={modalDeleteRdvVisible}
-                  animationType="fade"
-                  transparent
-                >
-                  <View style={styles.centeredCardView}>
-                    <View style={styles.modalCardView}>
-                      <Text style={styles.textCardModal}>
-                        Votre rendez-vous a bien été supprimé. {"\n"} {"\n"}Et
-                        si on en prenait un autre ?
-                      </Text>
-                    </View>
-                  </View>
-                </Modal>
-                <TouchableOpacity
-                  style={styles.deleteRdv}
-                  onPress={() => handleDeleteRDV()}
-                >
-                  <Feather name="trash" size={24} color="red" />
-                  <Text> Annuler le RDV</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.rdvCard}>
-              <View style={styles.informations}>
-                <Text style={styles.date}>Vendredi 16 Août, 16h00</Text>
-                <View style={styles.imageName}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo salon"
-                  />
-                  <Text style={styles.name}>
-                    Lucie Saint Clair{"\n"}Adresse du salon
-                  </Text>
-                </View>
-                <View style={styles.allIcons}>
-                  <View style={styles.prestation}>
-                    <Entypo name="scissors" size={24} color="#5E503F" />
-                    <Text> N° formule</Text>
-                  </View>
-                  <View style={styles.tempsMoyen}>
-                    <Entypo name="clock" size={24} color="#5E503F" />
-                    <Text> 20 minutes</Text>
-                  </View>
-                </View>
-              </View>
-              <Modal visible={modalVisible} animationType="fade" transparent>
-                <View style={styles.centeredView}>
-                  <View style={styles.modalView}>
-                    <TouchableOpacity
-                      onPress={() => handleClose()}
-                      style={styles.iconContainer}
-                      activeOpacity={0.8}
-                    >
-                      <Entypo name="squared-cross" size={30} color="red" />
-                    </TouchableOpacity>
-                    <Text style={styles.textModal}>
-                      Vous êtes sur le point d'annuler votre rendez-vous.
-                    </Text>
-                    <TouchableOpacity
-                      style={styles.confirmButton}
-                      onPress={() => handleDeleteFormule()}
-                    >
-                      <Text style={styles.confirmButtonText}>Confirmer</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </Modal>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("DatePicker")}
-              >
-                <Text style={styles.textButton}>Changer de RDV</Text>
-              </TouchableOpacity>
-              <View style={styles.calendarAndDelete}>
-                <TouchableOpacity
-                  style={styles.addToCalendar}
-                  onPress={() => navigation.navigate("DatePicker")}
-                >
-                  <Ionicons
-                    name="add-circle-outline"
-                    size={24}
-                    color="#5E503F"
-                  />
-                  <Text> Ajouter un {"\n"}nouveau RDV</Text>
-                </TouchableOpacity>
-                <Modal
-                  visible={modalDeleteRdvVisible}
-                  animationType="fade"
-                  transparent
-                >
-                  <View style={styles.centeredCardView}>
-                    <View style={styles.modalCardView}>
-                      <Text style={styles.textCardModal}>
-                        Votre rendez-vous a bien été supprimé. {"\n"} {"\n"}Et
-                        si on en prenait un autre ?
-                      </Text>
-                    </View>
-                  </View>
-                </Modal>
-                <TouchableOpacity
-                  style={styles.deleteRdv}
-                  onPress={() => handleDeleteCard()}
-                >
-                  <Feather name="trash" size={24} color="red" />
-                  <Text> Annuler le RDV</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            {rdvCard}
           </ScrollView>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Historique de rendez-vous</Text>
