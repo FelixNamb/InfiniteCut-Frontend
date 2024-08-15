@@ -16,7 +16,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteRdv } from "../../reducers/rdv";
 
 export default function FormuleScreen({ navigation }) {
@@ -26,32 +26,39 @@ export default function FormuleScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalDeleteRdvVisible, setModalDeleteRdvVisible] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleClose = () => {
     setModalVisible(false);
   };
 
   const handleDeleteRDV = () => {
+    const rdvDate = useSelector((state) => ({
+      date: state.formule.value.date,
+      plageHoraire: state.formule.value.data.plageHoraire,
+    }));
+
+    if (!rdvDate.date || !rdvDate.plageHoraire) {
+      console.error("Date or plageHoraire is undefined");
+      return;
+    }
+
     fetch(`${urlBackend}/rdv`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: rdv.date,
-        plageHoraire: rdv.plageHoraire,
-        ObjectId: userPro.ObjectId,
+        date: rdvDate.date,
+        plageHoraire: rdvDate.plageHoraire,
+        ObjectId: userPro?.ObjectId,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.result) {
-          const deleteObj = {
-            date: null,
-            plageHoraire: null,
-            userPro: null,
-          };
-          dispatch(deleteRdv(deleteObj));
+        if (data.message) {
+          spatch(deleteRdv());
         }
         setModalVisible(true);
       })

@@ -14,6 +14,7 @@ import MoyenDePaiement from "./screens/profileUser/MoyenDePaiement";
 import UserFormule from "./screens/profileUser/UserFormule";
 import FavoriteBarber from "./screens/profileUser/FavoriteBarber";
 import MesChiffres from "./screens/profilePro/MesChiffres";
+import StatScreen from "./screens/profilePro/StatScreen";
 import MesInformationsPro from "./screens/profilePro/MesInformationsPro";
 import ConnectionScreen from "./screens/parcoursUser/ConnectionScreen";
 import { NavigationContainer } from "@react-navigation/native";

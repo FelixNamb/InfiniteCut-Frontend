@@ -27,8 +27,12 @@ export const rdvSlice = createSlice({
       state.value.data.userMobile = action.payload.mobile;
       state.value.data.userFormule = action.payload.formule;
     },
-    deleteRdv: (state, action) => {
-      state.value.date = action.payload;
+    deleteRdv: (state) => {
+      state.value.date = null;
+      state.value.data.userEmail = null;
+      state.value.data.userMobile = null;
+      state.value.data.userFormule = null;
+      state.value.data.plageHoraire = null;
     },
   },
 });
