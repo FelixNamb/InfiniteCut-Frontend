@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import {
   Text,
   View,
@@ -28,7 +26,12 @@ export default function Header(props) {
             color={props.colorScissors ? "#22333B" : "#C6AC8F"}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+        <TouchableOpacity
+          onPress={() =>
+            (!user.token && props.navigation.navigate("MyAgenda")) ||
+            (!userPro.token && props.navigation.navigate("RDVs"))
+          }
+        >
           <Text style={styles.title}>{props.title}</Text>
         </TouchableOpacity>
 

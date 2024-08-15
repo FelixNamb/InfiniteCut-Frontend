@@ -48,6 +48,11 @@ export default function SignUpProScreen({ navigation }) {
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
+            dispatch(
+              loginUserPro({
+                token: data.token,
+              })
+            );
             setModalVisible(true);
             setTimeout(() => {
               setModalVisible(false);
@@ -65,7 +70,7 @@ export default function SignUpProScreen({ navigation }) {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0} // Ajustez la valeur selon vos besoins
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
       >
         <Modal
           visible={modalVisible}
