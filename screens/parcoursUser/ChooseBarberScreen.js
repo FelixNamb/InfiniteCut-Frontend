@@ -19,11 +19,13 @@ import { addUser } from "../../reducers/addUserPro";
 
 export default function ChooseBarberScreen({ navigation }) {
   const addUserPro = useSelector((state) => state.addUserPro.value);
+  const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const [lieu, setLieu] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [hasFormula, setHasFormula] = useState(false);
 
   const [dataUsers, setDataUsers] = useState([]);
   const stars = [];
@@ -38,7 +40,11 @@ export default function ChooseBarberScreen({ navigation }) {
   const handleNavigation = () => {
     dispatch(addUser(modalData))
     setModalVisible(false);
-    navigation.navigate("Formules");
+    if(hasFormula){
+      navigation.navigate("Pay");
+    }else {
+      navigation.navigate("Formules");
+    }
   };
 
   
@@ -50,6 +56,13 @@ export default function ChooseBarberScreen({ navigation }) {
       if(data.result){
         const newUsers = [...dataUsers, ...data.users];
         setDataUsers(newUsers);
+      }
+    });
+    fetch(`${urlBackend}/users/${user.token}`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.result) {
+        setHasFormula(true);
       }
     })
   }, []);
@@ -85,7 +98,8 @@ export default function ChooseBarberScreen({ navigation }) {
       </TouchableOpacity>
     );
   });
-  console.log(addUserPro);
+  //console.log(addUserPro);
+  console.log(user);
   return (
     <View style={styles.container}>
       <Modal visible={modalVisible} animationType="fade" transparent>
@@ -129,7 +143,8 @@ export default function ChooseBarberScreen({ navigation }) {
                   </TouchableOpacity>
                 </View>
               </View>
-              <TouchableOpacity
+              {!hasFormula ? (
+                <TouchableOpacity
                 style={styles.buttonToFormulas}
                 onPress={() => handleNavigation()}
               >
@@ -137,6 +152,16 @@ export default function ChooseBarberScreen({ navigation }) {
                   Découvrez nos formules{"\n"}d'abonnement
                 </Text>
               </TouchableOpacity>
+              ): (
+                <TouchableOpacity
+                style={styles.buttonToFormulas}
+                onPress={() => handleNavigation()}
+              >
+                <Text style={styles.textButtonToFormula}>
+                  Prendre rendez-vous
+                </Text>
+              </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>

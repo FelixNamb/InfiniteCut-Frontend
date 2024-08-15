@@ -24,7 +24,8 @@ export default function SignUpProScreen({ navigation }) {
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
   const [mobile, setMobile] = useState("");
-  const [codePostal, setCodePostal] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [monEnseigne, setMonEnseigne] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -38,9 +39,10 @@ export default function SignUpProScreen({ navigation }) {
         body: JSON.stringify({
           prenom: prenom,
           nom: nom,
-          codePostal: codePostal,
+          adresse: adresse,
           mobile: mobile,
           email: email,
+          monEnseigne: monEnseigne,
         }),
       })
         .then((response) => response.json())
@@ -98,6 +100,13 @@ export default function SignUpProScreen({ navigation }) {
             <Text style={styles.title}>Envie de nous rejoindre ?</Text>
           </View>
           <View style={styles.buttonContainer}>
+          <TextInput
+              style={styles.input}
+              placeholder="Votre Enseigne"
+              placeholderTextColor="#5E503F"
+              onChangeText={(value) => setMonEnseigne(value)}
+              value={monEnseigne}
+            ></TextInput>
             <TextInput
               style={styles.input}
               placeholder="Prénom"
@@ -122,10 +131,10 @@ export default function SignUpProScreen({ navigation }) {
             ></TextInput>
             <TextInput
               style={styles.input}
-              placeholder="Code Postal"
+              placeholder="adresse"
               placeholderTextColor="#5E503F"
-              onChangeText={(value) => setCodePostal(value)}
-              value={codePostal}
+              onChangeText={(value) => setAdresse(value)}
+              value={adresse}
             ></TextInput>
             <TextInput
               style={styles.input}
