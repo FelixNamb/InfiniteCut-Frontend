@@ -62,7 +62,9 @@ export default function ChooseBarberScreen({ navigation }) {
     .then(response => response.json())
     .then(data => {
       if(data.result) {
-        setHasFormula(true);
+        if(data.user.formule){
+          setHasFormula(true);
+        }
       }
     })
   }, []);

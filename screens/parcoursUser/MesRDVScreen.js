@@ -33,57 +33,37 @@ export default function FormuleScreen({ navigation }) {
 
   const [rdvs, setRdvs] = useState([]);
   const [error, setError] = useState(null);
-  const [userProDetails, setUserProDetails] = useState(null);
+  const [userFormule, setUserFormule] = useState(null);
 
   const user = useSelector((state) => state.user.value);
   const addUserPro = useSelector((state) => state.addUserPro.value);
 
-  console.log(addUserPro);
-
   let date = moment().format("DD MMMM YYYY, hh:mm");
-  console.log("//////", date);
 
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-
-    fetch(`${urlBackend}/rdv/:${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          setRdvs(data.rdvs);
-          const userProId = data.rdvs[0]?._id;
-          if (userProId) {
-            fetch(`${urlBackend}/userPro/${userProId}`)
-              .then((response) => response.json())
-              .then((data) => {
-                setUserProDetails({
-                  adresse: data.userPro.adresse,
-                  nomEnseigne: data.userPro.nomEnseigne,
-                });
-              });
+    const fetchData = async () => {
+      const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+  
+      const response = await fetch(`${urlBackend}/users/${user.token}`);
+      const data = await response.json();
+  
+      if (data.result) {
+        setUserFormule(data.user.formule.nom);
+        for (let elt of data.user.mesRDV) {
+          const rdvResponse = await fetch(`${urlBackend}/rdv/searchid/${elt._id}`);
+          const rdvData = await rdvResponse.json();
+  
+          if (rdvData.result) {
+            setRdvs((prevRdvs) => [...prevRdvs, rdvData.rdv]);
           }
         }
-      }, []);
-
-    fetch(`${urlBackend}/rdv/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          setRdvs(data.rdvs);
-        } else {
-          setError("Erreur lors de la récupération des données.");
-        }
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.errorText}>{error}</Text>
-      </View>
-    );
-  }
-  console.log("c------", rdvs, "\n", userProDetails);
-
+  
+  console.log(rdvs);
   const rdvCard = rdvs.map((data, i) => {
     //formater la date recupérée
     return (
@@ -96,12 +76,12 @@ export default function FormuleScreen({ navigation }) {
               source={require("../../assets/background_home.jpg")}
               alt="photo salon"
             />
-            <Text style={styles.name}>{data.nomEnseigne}</Text>
+            <Text style={styles.name}>{data.userPro.nomEnseigne}</Text>
           </View>
           <View style={styles.allIcons}>
             <View style={styles.prestation}>
               <Entypo name="scissors" size={24} color="#5E503F" />
-              {/* <Text> {data.formule.nom}</Text> */}
+              <Text> {userFormule}</Text>
             </View>
             <View style={styles.tempsMoyen}>
               <Entypo name="clock" size={24} color="#5E503F" />
