@@ -42,11 +42,12 @@ export default function SignUpProScreen({ navigation }) {
           adresse: adresse,
           mobile: mobile,
           email: email,
-          monEnseigne: monEnseigne,
+          nomEnseigne: monEnseigne,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           if (data.result) {
             dispatch(
               loginUserPro({
@@ -105,7 +106,7 @@ export default function SignUpProScreen({ navigation }) {
             <Text style={styles.title}>Envie de nous rejoindre ?</Text>
           </View>
           <View style={styles.buttonContainer}>
-          <TextInput
+            <TextInput
               style={styles.input}
               placeholder="Votre Enseigne"
               placeholderTextColor="#5E503F"

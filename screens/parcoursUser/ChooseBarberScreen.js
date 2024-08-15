@@ -38,33 +38,32 @@ export default function ChooseBarberScreen({ navigation }) {
   };
 
   const handleNavigation = () => {
-    dispatch(addUser(modalData))
+    dispatch(addUser(modalData));
     setModalVisible(false);
-    if(hasFormula){
+    if (hasFormula) {
       navigation.navigate("Pay");
-    }else {
+    } else {
       navigation.navigate("Formules");
     }
   };
 
-  
   useEffect(() => {
-    const urlBackend= process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/userPros`)
-    .then(response => response.json())
-    .then(data => {
-      if(data.result){
-        const newUsers = [...dataUsers, ...data.users];
-        setDataUsers(newUsers);
-      }
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          const newUsers = [...dataUsers, ...data.users];
+          setDataUsers(newUsers);
+        }
+      });
     fetch(`${urlBackend}/users/${user.token}`)
-    .then(response => response.json())
-    .then(data => {
-      if(data.result) {
-        setHasFormula(true);
-      }
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          setHasFormula(true);
+        }
+      });
   }, []);
 
   const barbers = dataUsers.map((data, i) => {
@@ -98,7 +97,6 @@ export default function ChooseBarberScreen({ navigation }) {
       </TouchableOpacity>
     );
   });
-  //console.log(addUserPro);
   console.log(user);
   return (
     <View style={styles.container}>
@@ -114,7 +112,9 @@ export default function ChooseBarberScreen({ navigation }) {
               <View style={styles.informations}>
                 <View style={styles.name}>
                   {modalData && (
-                    <Text style={styles.barberName}>{modalData.nomEnseigne}</Text>
+                    <Text style={styles.barberName}>
+                      {modalData.nomEnseigne}
+                    </Text>
                   )}
                 </View>
                 <View style={styles.noteModal}>
@@ -145,22 +145,22 @@ export default function ChooseBarberScreen({ navigation }) {
               </View>
               {!hasFormula ? (
                 <TouchableOpacity
-                style={styles.buttonToFormulas}
-                onPress={() => handleNavigation()}
-              >
-                <Text style={styles.textButtonToFormula}>
-                  Découvrez nos formules{"\n"}d'abonnement
-                </Text>
-              </TouchableOpacity>
-              ): (
+                  style={styles.buttonToFormulas}
+                  onPress={() => handleNavigation()}
+                >
+                  <Text style={styles.textButtonToFormula}>
+                    Découvrez nos formules{"\n"}d'abonnement
+                  </Text>
+                </TouchableOpacity>
+              ) : (
                 <TouchableOpacity
-                style={styles.buttonToFormulas}
-                onPress={() => handleNavigation()}
-              >
-                <Text style={styles.textButtonToFormula}>
-                  Prendre rendez-vous
-                </Text>
-              </TouchableOpacity>
+                  style={styles.buttonToFormulas}
+                  onPress={() => handleNavigation()}
+                >
+                  <Text style={styles.textButtonToFormula}>
+                    Prendre rendez-vous
+                  </Text>
+                </TouchableOpacity>
               )}
             </View>
           </View>

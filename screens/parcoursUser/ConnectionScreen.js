@@ -27,6 +27,7 @@ export default function ConnectionScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
   const handleSignIn = () => {
     if (EMAIL_REGEX.test(signInEmail)) {
       fetch(`${urlBackend}/users/signin`, {
@@ -72,6 +73,8 @@ export default function ConnectionScreen({ navigation }) {
                   navigation.navigate("MyAgenda");
                   setSignInEmail("");
                   setSignInPassword("");
+                } else {
+                  setEmailError(true);
                 }
               });
           }
