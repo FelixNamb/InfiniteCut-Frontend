@@ -16,6 +16,7 @@ import FavoriteBarber from "./screens/profileUser/FavoriteBarber";
 import MesChiffres from "./screens/profilePro/MesChiffres";
 import MesInformationsPro from "./screens/profilePro/MesInformationsPro";
 import ConnectionScreen from "./screens/parcoursUser/ConnectionScreen";
+import StatScreen from "./screens/profilePro/StatScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";
@@ -77,9 +78,9 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="RDVs" component={MesRDVScreen} />
               <Stack.Screen name="ConceptPro" component={ConceptPro} />
-              <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen
                 name="MesInformations"
                 component={MesInformations}
