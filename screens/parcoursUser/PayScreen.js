@@ -11,7 +11,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 import { CreditCardInput } from "react-native-credit-card-input";
-import { useSelector } from "react-redux";
 
 export default function PayScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);

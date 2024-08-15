@@ -29,7 +29,7 @@ import user from "./reducers/user";
 import formules from "./reducers/formules";
 import userPro from "./reducers/userPro";
 import rdv from "./reducers/rdv";
-import StatScreen from "./screens/profilePro/StatScreen";
+
 
 import {
   useFonts,
@@ -78,15 +78,15 @@ export default function App() {
         <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="StatScreen" component={StatScreen} />
               <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Formules" component={FormulesScreen} />
               <Stack.Screen name="MyAgenda" component={MyAgenda} />
+              <Stack.Screen name="StatScreen" component={StatScreen} />
+              <Stack.Screen name="Formules" component={FormulesScreen} />
               <Stack.Screen
                 name="MesInformations"
                 component={MesInformations}
               />
-              <Stack.Screen name="Connection" component={ConnectionScreen} />
+           
               <Stack.Screen name="ConceptPro" component={ConceptPro} />
               <Stack.Screen
                 name="MesInformationsPro"
@@ -94,8 +94,8 @@ export default function App() {
               />
               <Stack.Screen name="MesChiffres" component={MesChiffres} />
               <Stack.Screen name="Connection" component={ConnectionScreen} />
-              <Stack.Screen name="Pay" component={PayScreen} />
-              <Stack.Screen name="RDVs" component={MesRDVScreen} />
+              
+              
               <Stack.Screen
                 name="ChooseBarber"
                 component={ChooseBarberScreen}
@@ -104,8 +104,8 @@ export default function App() {
               <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
               <Stack.Screen name="DatePicker" component={DatePicker} />
               <Stack.Screen name="Pay" component={PayScreen} />
-              <Stack.Screen name="MyAgenda" component={MyAgenda} />
-              <Stack.Screen name="MesChiffres" component={MesChiffres} />
+              
+      
               <Stack.Screen
                 name="MoyenDePaiement"
                 component={MoyenDePaiement}
@@ -113,8 +113,8 @@ export default function App() {
               <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
-              <Stack.Screen name="Formules" component={FormulesScreen} />
-              <Stack.Screen name="Home" component={HomeScreen} />
+              
+              
               <Stack.Screen name="SignUp" component={SignUpScreen} />
             </Stack.Navigator>
           </NavigationContainer>
