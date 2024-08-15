@@ -80,36 +80,40 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="RDVs" component={MesRDVScreen} />
-              <Stack.Screen name="ConceptPro" component={ConceptPro} />
+              <Stack.Screen name="MyAgenda" component={MyAgenda} />
+              <Stack.Screen name="StatScreen" component={StatScreen} />
+              <Stack.Screen name="Formules" component={FormulesScreen} />
               <Stack.Screen
                 name="MesInformations"
                 component={MesInformations}
               />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-              <Stack.Screen name="SignUpPro" component={SignUpProScreen} />
-              <Stack.Screen name="FinRDVScreen" component={FinRDVScreen} />
-              <Stack.Screen name="Connection" component={ConnectionScreen} />
-              <Stack.Screen name="Pay" component={PayScreen} />
-              <Stack.Screen name="Formules" component={FormulesScreen} />
-              <Stack.Screen name="StatScreen" component={StatScreen} />
-              <Stack.Screen name="MyAgenda" component={MyAgenda} />
+           
+              <Stack.Screen name="ConceptPro" component={ConceptPro} />
               <Stack.Screen
                 name="MesInformationsPro"
                 component={MesInformationsPro}
               />
               <Stack.Screen name="MesChiffres" component={MesChiffres} />
+              <Stack.Screen name="Connection" component={ConnectionScreen} />
+              
+              
               <Stack.Screen
                 name="ChooseBarber"
                 component={ChooseBarberScreen}
               />
               <Stack.Screen name="DatePicker" component={DatePicker} />
+              <Stack.Screen name="Pay" component={PayScreen} />
+              
+      
               <Stack.Screen
                 name="MoyenDePaiement"
                 component={MoyenDePaiement}
               />
               <Stack.Screen name="UserFormule" component={UserFormule} />
               <Stack.Screen name="FavoriteBarber" component={FavoriteBarber} />
+              
+              
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

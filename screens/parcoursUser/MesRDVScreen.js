@@ -20,6 +20,65 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteRdv } from "../../reducers/rdv";
 
 export default function FormuleScreen({ navigation }) {
+
+const fakeData = [
+  {
+    "date": "2024-08-14T09:00:00Z",
+    "userPro": "66b0ec4dd43fe65b724e607b",
+    "plageHoraire": "09:00 - 10:00"
+  },
+  {
+    "date": "2024-08-15T11:00:00Z",
+    "userPro": "66b0ec92d43fe65b724e607f",
+    "plageHoraire": "11:00 - 12:00"
+  },
+  {
+    "date": "2024-08-16T14:00:00Z",
+    "userPro": "66b0ecb8d43fe65b724e6082",
+    "plageHoraire": "14:00 - 15:00"
+  },
+  {
+    "date": "2024-08-17T16:30:00Z",
+    "userPro": "66b0ec92d43fe65b724e607f",
+    "plageHoraire": "16:30 - 17:30"
+  },
+  {
+    "date": "2024-08-18T08:00:00Z",
+    "userPro": "66b0ecb8d43fe65b724e6082",
+    "plageHoraire": "08:00 - 09:00"
+  },
+  {
+    "date": "2024-08-19T10:00:00Z",
+    "userPro": "66b7e8210e01f6846651d4ca",
+    "plageHoraire": "10:00 - 11:00"
+  },
+  {
+    "date": "2024-08-20T13:00:00Z",
+    "userPro": "64d1e6b0f0e4a3a01f82e837",
+    "plageHoraire": "13:00 - 14:00"
+  },
+  {
+    "date": "2024-08-21T15:00:00Z",
+    "userPro": "66b7f0b90e01f6846651d4cd",
+    "plageHoraire": "15:00 - 16:00"
+  },
+  {
+    "date": "2024-08-22T17:00:00Z",
+    "userPro": "66b7f7a30e01f6846651d4d1",
+    "plageHoraire": "17:00 - 18:00"
+  },
+  {
+    "date": "2024-08-23T12:00:00Z",
+    "userPro": "66b80cc80e01f6846651d4d4",
+    "plageHoraire": "12:00 - 13:00"
+  }
+]
+
+
+
+
+
+
   const [isLiked, setIsLiked] = useState(false);
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
 
