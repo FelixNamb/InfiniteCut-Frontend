@@ -200,8 +200,8 @@ export default function ChooseBarberScreen({ navigation }) {
             <Marker
               key={index}
               coordinate={{
-                latitude: Number(data.lat),
-                longitude: Number(data.long),
+                latitude: parseFloat(data.lat),
+                longitude: parseFloat(data.long),
               }}
               title={data.nomEnseigne}
               pinColor="red"

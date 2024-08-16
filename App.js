@@ -31,6 +31,11 @@ import userPro from "./reducers/userPro";
 import rdv from "./reducers/rdv";
 import addUserPro from "./reducers/addUserPro";
 
+//Permet de ne pas avoir de logs jaune warning
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 import {
   useFonts,
   Montserrat_100Thin,
