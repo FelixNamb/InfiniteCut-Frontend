@@ -135,14 +135,25 @@ export default function PayScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          fetch(`${urlBackend}/formules/${data.user.formule.nom}`)
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("getFormuleNom ===== ", data);
-              if (data.result) {
-                putFormuleUser(data.formule);
-              }
-            });
+          if (data.user.formule?.nom) {
+            fetch(`${urlBackend}/formules/${data.user.formule.nom}`)
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("getFormuleNom ===== ", data);
+                if (data.result) {
+                  putFormuleUser(data.formule);
+                }
+              });
+          } else {
+            fetch(`${urlBackend}/formules/${formule.nom}`)
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("getFormuleNom ===== ", data);
+                if (data.result) {
+                  putFormuleUser(data.formule);
+                }
+              });
+          }
         }
       });
   };

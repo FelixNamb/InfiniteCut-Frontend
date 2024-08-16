@@ -86,11 +86,11 @@ export default function ConnectionScreen({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={styles.container}>
-        <SafeAreaView
-          style={styles.areaView}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+      <SafeAreaView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <KeyboardAvoidingView style={styles.areaView}>
           <Text style={styles.title}>On commence ?</Text>
 
           <View style={styles.buttonContainer}>
@@ -143,8 +143,8 @@ export default function ConnectionScreen({ navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 }
