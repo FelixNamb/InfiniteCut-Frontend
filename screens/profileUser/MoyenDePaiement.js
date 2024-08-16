@@ -61,6 +61,7 @@ export default function MoyenDePaiement({ navigation }) {
         firstText="Mes RDV"
         secondText="Mon compte"
         styleSecondText="600"
+        navigation= {navigation}
       />
       <StatusBar style="light" />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
