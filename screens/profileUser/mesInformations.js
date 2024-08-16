@@ -67,7 +67,7 @@ export default function MesInformations({ navigation }) {
           <SubHeaderProfile
             firstText="Mes RDV"
             secondText="Mon compte"
-            styleSecondText="600"
+            styleSecondText="Montserrat_600SemiBold"
             navigation={navigation}
           />
         </View>

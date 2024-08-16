@@ -34,7 +34,7 @@ export default function FavoriteBarber({ navigation }) {
         firstText="Mes RDV"
         secondText="Mon Compte"
         navigation={navigation}
-        styleFirstText="500"
+        styleFirstText="Montserrat_600SemiBold"
       />
       <SafeAreaView
         style={styles.container}

@@ -51,7 +51,7 @@ export default function UserFormule({ navigation }) {
         firstText="Mes RDV"
         secondText="Mon Compte"
         navigation={navigation}
-        styleFirstText="500"
+        styleFirstText="Montserrat_600SemiBold"
       />
       <StatusBar style="light" />
 

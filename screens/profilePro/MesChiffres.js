@@ -74,7 +74,7 @@ export default function MesChiffres({ navigation }) {
         firstText="Mes informations"
         secondText="Mes chiffres"
         navigation={navigation}
-        styleSecondText="500"
+        styleSecondText="Montserrat_600SemiBold"
       />
       <SafeAreaView
         style={styles.container}
@@ -95,10 +95,12 @@ export default function MesChiffres({ navigation }) {
                 textStyle={{
                   fontSize: 15,
                   fontFamily: "Montserrat_500Medium",
+                  color:"white",
                 }}
                 labelStyle={{
                   fontWeight: "bold",
                   fontFamily: "Montserrat_500Medium",
+                  color: "black",
                 }}
                 disabledStyle={{
                   opacity: 0.5,

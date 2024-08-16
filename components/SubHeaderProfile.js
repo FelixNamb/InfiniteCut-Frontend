@@ -23,8 +23,7 @@ export default function SubHeaderProfile(props) {
           style={{
             color: "#22333B",
             fontSize: 18,
-            fontFamily: "Montserrat_500Medium",
-            fontWeight: props?.styleFirstText,
+            fontFamily: props?.styleFirstText ? props.styleFirstText : "Montserrat_500Medium",
           }}
         >
           {props.firstText}
@@ -36,8 +35,7 @@ export default function SubHeaderProfile(props) {
           style={{
             color: "#22333B",
             fontSize: 18,
-            fontFamily: "Montserrat_500Medium",
-            fontWeight: props?.styleSecondText,
+            fontFamily: props?.styleSecondText ? props.styleSecondText : "Montserrat_500Medium",
           }}
         >
           {props.secondText}

@@ -215,7 +215,7 @@ export default function MesRDVScreen({ navigation }) {
           firstText="Mes RDV"
           secondText="Mon Compte"
           navigation={navigation}
-          styleFirstText="500"
+          styleFirstText="Montserrat_600SemiBold"
         />
       </View>
 
