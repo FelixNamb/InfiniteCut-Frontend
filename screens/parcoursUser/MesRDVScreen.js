@@ -68,10 +68,11 @@ export default function MesRDVScreen({ navigation }) {
   console.log(rdvs);
   const rdvCard = rdvs.map((data, i) => {
     //formater la date recupérée
+    const date = new Date(data.date).toISOString().split("T")[0];
     return (
       <View style={styles.rdvCard} key={i}>
         <View style={styles.informations}>
-          <Text style={styles.date}>{data.date}</Text>
+          <Text style={styles.date}>{date}</Text>
           <View style={styles.imageName}>
             <Image
               style={styles.img}
