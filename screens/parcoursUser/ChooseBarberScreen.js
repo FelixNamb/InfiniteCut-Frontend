@@ -7,74 +7,83 @@ import {
   ScrollView,
   Modal,
   TouchableOpacity,
-} from "react-native";
-import { useEffect, useState } from "react";
-import Octicons from "@expo/vector-icons/Octicons";
-import Header from "../../components/Header";
-import Entypo from "@expo/vector-icons/Entypo";
-import MapView from "react-native-maps";
-import { Marker } from "react-native-maps";
-import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../../reducers/addUserPro";
+} from "react-native"; // Import des composants de base de React Native
+import { useEffect, useState } from "react"; // Import des hooks useEffect et useState
+import Octicons from "@expo/vector-icons/Octicons"; // Import d'une icône de la librairie @expo/vector-icons
+import Header from "../../components/Header"; // Import du composant Header personnalisé
+import Entypo from "@expo/vector-icons/Entypo"; // Import d'une icône de la librairie @expo/vector-icons
+import MapView from "react-native-maps"; // Import de la carte depuis react-native-maps
+import { Marker } from "react-native-maps"; // Import des marqueurs pour la carte
+import { useDispatch, useSelector } from "react-redux"; // Import des hooks Redux pour gérer l'état global
+import { addUser } from "../../reducers/addUserPro"; // Import de l'action addUser pour mettre à jour l'état Redux
 
 export default function ChooseBarberScreen({ navigation }) {
-  const addUserPro = useSelector((state) => state.addUserPro.value);
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-  const [lieu, setLieu] = useState(null);
-  const [isLiked, setIsLiked] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalData, setModalData] = useState(null);
-  const [hasFormula, setHasFormula] = useState(false);
+  // Accès aux valeurs stockées dans le store Redux
+  const addUserPro = useSelector((state) => state.addUserPro.value); // Sélectionne la valeur de addUserPro dans le store Redux
+  const user = useSelector((state) => state.user.value); // Sélectionne la valeur de user dans le store Redux
+  const dispatch = useDispatch(); // Crée une fonction de dispatch pour envoyer des actions à Redux
 
-  const [dataUsers, setDataUsers] = useState([]);
+  // Déclaration des états locaux
+  const [lieu, setLieu] = useState(null); // État pour stocker la localisation saisie par l'utilisateur
+  const [isLiked, setIsLiked] = useState(false); // État pour gérer l'icône "j'aime"
+  const [modalVisible, setModalVisible] = useState(false); // État pour gérer la visibilité du modal de détails
+  const [modalData, setModalData] = useState(null); // État pour stocker les données du barbier sélectionné pour affichage dans le modal
+  const [hasFormula, setHasFormula] = useState(false); // État pour savoir si l'utilisateur a une formule d'abonnement
+
+  const [dataUsers, setDataUsers] = useState([]); // État pour stocker la liste des barbiers
+
+  // Génération d'une liste d'étoiles pour l'évaluation
   const stars = [];
   for (let i = 0; i < 5; i++) {
     stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
   }
 
+  // Fonction pour fermer le modal
   const handleClose = () => {
     setModalVisible(false);
   };
 
+  // Fonction pour gérer la navigation lorsque l'utilisateur sélectionne un barbier
   const handleNavigation = () => {
-    dispatch(addUser(modalData));
-    setModalVisible(false);
+    dispatch(addUser(modalData)); // Ajoute les données du barbier sélectionné à l'état global Redux
+    setModalVisible(false); // Ferme le modal
     if (hasFormula) {
-      navigation.navigate("Pay");
+      navigation.navigate("Pay"); // Si l'utilisateur a une formule d'abonnement, navigue vers l'écran de paiement
     } else {
-      navigation.navigate("Formules");
+      navigation.navigate("Formules"); // Sinon, navigue vers l'écran des formules d'abonnement
     }
   };
 
+  // useEffect pour récupérer les données des barbiers depuis le backend et vérifier l'abonnement de l'utilisateur
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND; // URL du backend récupérée depuis les variables d'environnement
     fetch(`${urlBackend}/userPros`)
-      .then((response) => response.json())
+      .then((response) => response.json()) // Convertit la réponse en JSON
       .then((data) => {
         if (data.result) {
-          const newUsers = [...dataUsers, ...data.users];
-          setDataUsers(newUsers);
+          const newUsers = [...dataUsers, ...data.users]; // Fusionne les données récupérées avec l'état local des utilisateurs
+          setDataUsers(newUsers); // Met à jour l'état des utilisateurs
         }
       });
     fetch(`${urlBackend}/users/${user.token}`)
-      .then((response) => response.json())
+      .then((response) => response.json()) // Convertit la réponse en JSON
       .then((data) => {
         if (data.result) {
           if (data.user.formule) {
-            setHasFormula(true);
+            setHasFormula(true); // Si l'utilisateur a une formule, met à jour l'état
           }
         }
       });
-  }, []);
+  }, []); // Le tableau de dépendances vide signifie que cet effet ne s'exécutera qu'une fois au montage du composant
 
+  // Génération de la liste des barbiers sous forme de cartes
   const barbers = dataUsers.map((data, i) => {
     return (
       <TouchableOpacity
         key={i}
         onPress={() => {
-          setModalData(data);
-          setModalVisible(true);
+          setModalData(data); // Stocke les données du barbier sélectionné
+          setModalVisible(true); // Ouvre le modal pour afficher les détails
         }}
       >
         <View style={styles.card}>
@@ -92,16 +101,17 @@ export default function ChooseBarberScreen({ navigation }) {
           <Octicons
             name="heart-fill"
             size={30}
-            color={isLiked ? "#C6AC8F" : "#22333B"}
-            onPress={() => setIsLiked(!isLiked)}
+            color={isLiked ? "#C6AC8F" : "#22333B"} // Change la couleur de l'icône "j'aime" en fonction de l'état
+            onPress={() => setIsLiked(!isLiked)} // Inverse l'état de "j'aime" lorsque l'utilisateur appuie
           />
         </View>
       </TouchableOpacity>
     );
   });
-  console.log(user);
+
   return (
     <View style={styles.container}>
+      {/* Modal pour afficher les détails du barbier */}
       <Modal visible={modalVisible} animationType="fade" transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -124,7 +134,7 @@ export default function ChooseBarberScreen({ navigation }) {
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => handleClose()}
+                onPress={() => handleClose()} // Ferme le modal
                 style={styles.button}
                 activeOpacity={0.8}
               >
@@ -146,6 +156,7 @@ export default function ChooseBarberScreen({ navigation }) {
                 </View>
               </View>
               {!hasFormula ? (
+                // Affiche le bouton pour découvrir les formules si l'utilisateur n'a pas encore de formule
                 <TouchableOpacity
                   style={styles.buttonToFormulas}
                   onPress={() => handleNavigation()}
@@ -155,6 +166,7 @@ export default function ChooseBarberScreen({ navigation }) {
                   </Text>
                 </TouchableOpacity>
               ) : (
+                // Affiche le bouton pour prendre rendez-vous si l'utilisateur a déjà une formule
                 <TouchableOpacity
                   style={styles.buttonToFormulas}
                   onPress={() => handleNavigation()}
@@ -168,6 +180,8 @@ export default function ChooseBarberScreen({ navigation }) {
           </View>
         </View>
       </Modal>
+
+      {/* Affiche le composant Header */}
       <Header
         title="INFINITE CUT"
         colorScissors={false}
@@ -175,6 +189,7 @@ export default function ChooseBarberScreen({ navigation }) {
         navigation={navigation}
       />
       <View style={styles.upperContainer}>
+        {/* Barre de recherche pour entrer le lieu souhaité */}
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -184,9 +199,11 @@ export default function ChooseBarberScreen({ navigation }) {
           />
           <Octicons name="search" size={24} color="#5E503F" />
         </View>
+        {/* Liste des barbiers sous forme de cartes */}
         <ScrollView>{barbers}</ScrollView>
       </View>
       <View style={styles.bottomContainer}>
+        {/* Carte pour afficher la localisation des barbiers */}
         <MapView
           style={styles.map}
           initialRegion={{
@@ -196,6 +213,7 @@ export default function ChooseBarberScreen({ navigation }) {
             longitudeDelta: 0.0421,
           }}
         >
+          {/* Affiche un marqueur pour chaque barbier */}
           {dataUsers.map((data, index) => (
             <Marker
               key={index}
@@ -213,6 +231,7 @@ export default function ChooseBarberScreen({ navigation }) {
   );
 }
 
+// Définition des styles pour le composant
 const styles = StyleSheet.create({
   container: {
     height: "80%",

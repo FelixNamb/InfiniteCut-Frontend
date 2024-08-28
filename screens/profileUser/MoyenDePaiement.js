@@ -8,44 +8,45 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  Platform
-} from "react-native";
-import { useState } from "react";
-import Header from "../../components/Header";
-import {
-  CreditCardInput,
-  LiteCreditCardInput,
-} from "react-native-credit-card-input";
-import SubHeaderProfile from "../../components/SubHeaderProfile";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import Entypo from "@expo/vector-icons/Entypo";
-import { StatusBar } from "expo-status-bar";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+  Platform,
+} from "react-native"; // Importation des composants de base de 'react-native'
+import { useState } from "react"; // Importation du hook useState pour gérer les états
+import Header from "../../components/Header"; // Importation du composant Header
+import SubHeaderProfile from "../../components/SubHeaderProfile"; // Importation du composant SubHeaderProfile
+import FontAwesome from "@expo/vector-icons/FontAwesome"; // Importation d'icônes FontAwesome
+import Entypo from "@expo/vector-icons/Entypo"; // Importation d'icônes Entypo
+import { StatusBar } from "expo-status-bar"; // Importation de StatusBar pour gérer la barre de statut
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // Importation d'icônes MaterialIcons
 
+// Définition du composant fonctionnel MoyenDePaiement
 export default function MoyenDePaiement({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalCardVisible, setModalCardVisible] = useState(false);
+  // Déclaration des états locaux pour les modaux
+  const [modalVisible, setModalVisible] = useState(false); // État pour la visibilité du modal de suppression de carte
+  const [modalCardVisible, setModalCardVisible] = useState(false); // État pour la visibilité du modal de confirmation de suppression de carte
   const [modalDeleteAccountVisible, setModalDeleteAccountVisible] =
-    useState(false);
+    useState(false); // État pour la visibilité du modal de suppression de compte
 
+  // Fonction pour fermer le modal de suppression de carte
   const handleClose = () => {
     setModalVisible(false);
   };
 
+  // Fonction pour gérer la suppression de la carte
   const handleDeleteCard = () => {
-    setModalVisible(false);
-    setModalCardVisible(true);
+    setModalVisible(false); // Ferme le modal de confirmation de suppression de carte
+    setModalCardVisible(true); // Ouvre le modal de confirmation de suppression de carte
     setTimeout(() => {
-      setModalCardVisible(false);
-      navigation.navigate("MoyenDePaiement");
+      setModalCardVisible(false); // Ferme le modal de confirmation après 3 secondes
+      navigation.navigate("MoyenDePaiement"); // Navigue vers la même page pour rafraîchir les données
     }, 3000);
   };
 
+  // Fonction pour gérer la suppression du compte
   const handleDeleteAccount = () => {
-    setModalDeleteAccountVisible(true);
+    setModalDeleteAccountVisible(true); // Ouvre le modal de confirmation de suppression de compte
     setTimeout(() => {
-      setModalDeleteAccountVisible(false);
-      navigation.navigate("Home");
+      setModalDeleteAccountVisible(false); // Ferme le modal de confirmation après 3 secondes
+      navigation.navigate("Home"); // Navigue vers la page d'accueil
     }, 3000);
   };
 
@@ -61,7 +62,7 @@ export default function MoyenDePaiement({ navigation }) {
         firstText="Mes RDV"
         secondText="Mon compte"
         styleSecondText="Montserrat_600SemiBold"
-        navigation= {navigation}
+        navigation={navigation}
       />
       <StatusBar style="light" />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -70,6 +71,7 @@ export default function MoyenDePaiement({ navigation }) {
             style={styles.container}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           ></KeyboardAvoidingView>
+          {/* Modal pour confirmer la suppression de la carte */}
           <Modal visible={modalVisible} animationType="fade" transparent>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
@@ -93,6 +95,7 @@ export default function MoyenDePaiement({ navigation }) {
               </View>
             </View>
           </Modal>
+          {/* Modal pour confirmer la suppression de la carte */}
           <Modal visible={modalCardVisible} animationType="fade" transparent>
             <View style={styles.centeredCardView}>
               <View style={styles.modalCardView}>
@@ -124,9 +127,10 @@ export default function MoyenDePaiement({ navigation }) {
                 style={styles.buttonAdd}
                 onPress={() => addCreditCard()}
               >
-                <Text style={styles.textButton}> Ajouter carte</Text>
+                <Text style={styles.textButton}>Ajouter carte</Text>
               </TouchableOpacity>
             </View>
+            {/* Modal pour confirmer la suppression du compte */}
             <Modal
               visible={modalDeleteAccountVisible}
               animationType="fade"
@@ -163,6 +167,7 @@ export default function MoyenDePaiement({ navigation }) {
   );
 }
 
+// Définition des styles pour le composant
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#EAE0D5",
@@ -185,7 +190,7 @@ const styles = StyleSheet.create({
   },
   creditCard: {
     backgroundColor: "white",
-    heigh: "15%",
+    height: "15%",
     margin: 15,
     flexDirection: "row",
     justifyContent: "space-between",

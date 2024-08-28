@@ -1,24 +1,30 @@
+// Importation des composants nécessaires de React Native et de bibliothèques tierces
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import RNDateTimePicker, {
   DateTimePickerAndroid,
-} from "@react-native-community/datetimepicker";
-import { useState, useEffect } from "react";
-import Header from "../../components/Header";
+} from "@react-native-community/datetimepicker"; // Importation du sélecteur de date/heure
+import { useState, useEffect } from "react"; // Importation des hooks useState et useEffect pour la gestion d'état et les effets de cycle de vie
+import Header from "../../components/Header"; // Importation d'un composant personnalisé Header
 import {
   addDateRdv,
   addPlageHoraireRdv,
   setUserStatus,
-} from "../../reducers/rdv";
-import { useDispatch, useSelector } from "react-redux";
+} from "../../reducers/rdv"; // Importation des actions Redux pour gérer les rendez-vous
+import { useDispatch, useSelector } from "react-redux"; // Importation des hooks useDispatch et useSelector pour l'utilisation de Redux
 
+// Composant principal de l'écran de sélection de date
 export default function DatePicker({ navigation }) {
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-  const rdv = useSelector((state) => state.rdv.value);
-  const [dateTaken, setDateTaken] = useState(null);
-  const [selectDatePicker, setSelectDatePicker] = useState(false);
-  const [morningButton, setMorningButton] = useState(false);
-  const [eveningButton, setEveningButton] = useState(false);
+  const user = useSelector((state) => state.user.value); // Sélection de l'utilisateur connecté depuis le store Redux
+  const dispatch = useDispatch(); // Obtention de la méthode dispatch pour déclencher des actions Redux
+  const rdv = useSelector((state) => state.rdv.value); // Sélection des informations de rendez-vous depuis le store Redux
+
+  // États locaux pour la gestion de la date et de la sélection des boutons
+  const [dateTaken, setDateTaken] = useState(null); // Stocke la date sélectionnée
+  const [selectDatePicker, setSelectDatePicker] = useState(false); // Détermine si le date picker doit être affiché
+  const [morningButton, setMorningButton] = useState(false); // État pour le bouton "Matin"
+  const [eveningButton, setEveningButton] = useState(false); // État pour le bouton "Après-midi"
+
+  // Styles dynamiques pour les boutons de demi-journée
   let styleButton = {
     backgroundColor: "white",
     justifyContent: "center",
@@ -34,11 +40,14 @@ export default function DatePicker({ navigation }) {
   let styleTextButton = {
     color: "#5E503F",
   };
-  console.log(rdv);
+
+  console.log(rdv); // Affiche les informations de rendez-vous dans la console pour le débogage
+
+  // Utilisation de useEffect pour récupérer les informations utilisateur lors du montage du composant
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-    fetch(`${urlBackend}/users/${user.token}`)
-      .then((response) => response.json())
+    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND; // URL du backend provenant des variables d'environnement
+    fetch(`${urlBackend}/users/${user.token}`) // Envoie une requête pour récupérer les détails de l'utilisateur
+      .then((response) => response.json()) // Convertit la réponse en JSON
       .then((data) => {
         if (data.result) {
           const newObj = {
@@ -46,13 +55,14 @@ export default function DatePicker({ navigation }) {
             mobile: data.user.mobile,
             formule: data.user.formule?.nom,
           };
-          dispatch(setUserStatus(newObj));
+          dispatch(setUserStatus(newObj)); // Met à jour le statut de l'utilisateur dans le store Redux
         }
       });
   }, []);
 
+  // Fonction appelée lors de la sélection d'une date
   const onChangeDate = (value) => {
-    setSelectDatePicker(false);
+    setSelectDatePicker(false); // Cache le sélecteur de date
     let options = {
       weekday: "long",
       year: "numeric",
@@ -60,25 +70,30 @@ export default function DatePicker({ navigation }) {
       day: "numeric",
     };
     setDateTaken(
-      new Date(value.nativeEvent.timestamp).toLocaleDateString("fr-FR", options)
+      new Date(value.nativeEvent.timestamp).toLocaleDateString("fr-FR", options) // Convertit et formate la date sélectionnée
     );
     dispatch(
       addDateRdv(
-        new Date(value.nativeEvent.timestamp).toISOString().split("T")[0]
+        new Date(value.nativeEvent.timestamp).toISOString().split("T")[0] // Ajoute la date du rendez-vous au store Redux
       )
     );
   };
+
+  // Gestion de l'appui sur le bouton "Matin"
   const handleMorningButton = () => {
-    setMorningButton(true);
-    setEveningButton(false);
-    dispatch(addPlageHoraireRdv("Matin"));
+    setMorningButton(true); // Active le bouton "Matin"
+    setEveningButton(false); // Désactive le bouton "Après-midi"
+    dispatch(addPlageHoraireRdv("Matin")); // Envoie une action pour définir la plage horaire "Matin"
   };
 
+  // Gestion de l'appui sur le bouton "Après-midi"
   const handleEveningButton = () => {
-    setMorningButton(false);
-    setEveningButton(true);
-    dispatch(addPlageHoraireRdv("Après-midi"));
+    setMorningButton(false); // Désactive le bouton "Matin"
+    setEveningButton(true); // Active le bouton "Après-midi"
+    dispatch(addPlageHoraireRdv("Après-midi")); // Envoie une action pour définir la plage horaire "Après-midi"
   };
+
+  // Rendu du composant
   return (
     <View style={styles.page}>
       <Header
@@ -88,41 +103,43 @@ export default function DatePicker({ navigation }) {
         navigation={navigation}
       />
       <View style={styles.container}>
+        {/* Affichage du sélecteur de date et des boutons de demi-journée */}
         <View style={styles.upperView}>
           <Text style={styles.title}>Votre {"\n"}rendez-vous</Text>
           <Text style={styles.subtitle}>Choisissez une date</Text>
           <TouchableOpacity
             style={styles.buttonDate}
-            onPress={() => setSelectDatePicker(true)}
+            onPress={() => setSelectDatePicker(true)} // Affiche le sélecteur de date lorsque le bouton est pressé
           >
             <Text style={styles.textDate}>
               {dateTaken ? dateTaken : "Sélectionner une date"}
             </Text>
           </TouchableOpacity>
-          {selectDatePicker && (
+          {selectDatePicker && ( // Affiche le sélecteur de date si selectDatePicker est vrai
             <RNDateTimePicker
               mode="date"
               display="default"
               value={new Date()}
               maximumDate={new Date(2030, 10, 20)}
-              onChange={(value) => onChangeDate(value)}
+              onChange={(value) => onChangeDate(value)} // Appelle onChangeDate lorsque la date est modifiée
             />
           )}
         </View>
         <View style={styles.bottomView}>
           <Text style={styles.subtitle}>Choisissez une demi journée</Text>
           <View style={styles.ButtonSection}>
+            {/* Boutons pour choisir "Matin" ou "Après-midi" */}
             <TouchableOpacity
-              style={morningButton ? styleButton : styles.button}
-              onPress={() => handleMorningButton()}
+              style={morningButton ? styleButton : styles.button} // Applique le style dynamique si le bouton "Matin" est actif
+              onPress={() => handleMorningButton()} // Appelle handleMorningButton lorsque pressé
             >
               <Text style={morningButton ? styleTextButton : styles.textButton}>
                 Matin
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={eveningButton ? styleButton : styles.button}
-              onPress={() => handleEveningButton()}
+              style={eveningButton ? styleButton : styles.button} // Applique le style dynamique si le bouton "Après-midi" est actif
+              onPress={() => handleEveningButton()} // Appelle handleEveningButton lorsque pressé
             >
               <Text style={eveningButton ? styleTextButton : styles.textButton}>
                 Après-midi
@@ -130,9 +147,10 @@ export default function DatePicker({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+        {/* Bouton de confirmation pour passer à l'étape suivante */}
         <TouchableOpacity
           style={styles.lastButton}
-          onPress={() => navigation.navigate("ChooseBarber")}
+          onPress={() => navigation.navigate("ChooseBarber")} // Navigation vers l'écran "ChooseBarber"
         >
           <Text style={styles.textLastButton}>Confirmer</Text>
         </TouchableOpacity>
@@ -141,6 +159,7 @@ export default function DatePicker({ navigation }) {
   );
 }
 
+// Définition des styles pour les composants de l'interface utilisateur
 const styles = StyleSheet.create({
   page: {
     flex: 1,

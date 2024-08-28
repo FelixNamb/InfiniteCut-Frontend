@@ -7,35 +7,40 @@ import {
   ImageBackground,
   TouchableOpacity,
   Modal,
-} from "react-native";
-import Entypo from "@expo/vector-icons/Entypo";
-import { useState } from "react";
-import Header from "../../components/Header";
-import SubHeaderProfile from "../../components/SubHeaderProfile";
-import { StatusBar } from "expo-status-bar";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+} from "react-native"; // Importation des composants de base de 'react-native'
+import Entypo from "@expo/vector-icons/Entypo"; // Importation d'icônes Entypo
+import { useState } from "react"; // Importation du hook useState pour gérer les états
+import Header from "../../components/Header"; // Importation du composant Header
+import SubHeaderProfile from "../../components/SubHeaderProfile"; // Importation du composant SubHeaderProfile
+import { StatusBar } from "expo-status-bar"; // Importation de StatusBar pour gérer la barre de statut
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // Importation d'icônes MaterialIcons
 
+// Définition du composant fonctionnel UserFormule
 export default function UserFormule({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
+  // Déclaration des états locaux pour les modaux
+  const [modalVisible, setModalVisible] = useState(false); // État pour la visibilité du modal de confirmation de suppression
   const [modalDeleteFormuleVisible, setModalDeleteFormuleVisible] =
-    useState(false);
+    useState(false); // État pour la visibilité du modal de succès de suppression de formule
 
+  // Fonction pour fermer le modal de confirmation de suppression
   const handleClose = () => {
     setModalVisible(false);
   };
 
+  // Fonction pour ouvrir le modal de confirmation de suppression
   const handleDeleteCard = () => {
     setModalVisible(true);
   };
 
+  // Fonction pour gérer la suppression de la formule
   const handleDeleteFormule = () => {
-    setModalVisible(false);
-    setModalDeleteFormuleVisible(true);
+    setModalVisible(false); // Ferme le modal de confirmation de suppression
+    setModalDeleteFormuleVisible(true); // Ouvre le modal de succès de suppression
     setTimeout(() => {
-      setModalDeleteFormuleVisible(false);
+      setModalDeleteFormuleVisible(false); // Ferme le modal de succès après 2.4 secondes
     }, 2400);
     setTimeout(() => {
-      navigation.navigate("DatePicker");
+      navigation.navigate("DatePicker"); // Navigue vers l'écran de sélection de date après 2.5 secondes
     }, 2500);
   };
 
@@ -90,6 +95,7 @@ export default function UserFormule({ navigation }) {
               <Text style={styles.textButton}>Changer d'abonnement</Text>
             </TouchableOpacity>
 
+            {/* Modal de confirmation de suppression */}
             <Modal visible={modalVisible} animationType="fade" transparent>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -113,6 +119,8 @@ export default function UserFormule({ navigation }) {
                 </View>
               </View>
             </Modal>
+
+            {/* Modal de succès de suppression */}
             <Modal
               visible={modalDeleteFormuleVisible}
               animationType="fade"
@@ -127,6 +135,7 @@ export default function UserFormule({ navigation }) {
                 </View>
               </View>
             </Modal>
+
             <TouchableOpacity
               style={styles.Button}
               onPress={() => handleDeleteCard()}
@@ -148,6 +157,7 @@ export default function UserFormule({ navigation }) {
   );
 }
 
+// Définition des styles pour le composant
 const styles = StyleSheet.create({
   container: {
     flex: 1,

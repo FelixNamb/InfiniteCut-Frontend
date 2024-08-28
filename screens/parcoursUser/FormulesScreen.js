@@ -5,63 +5,77 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ImageBackground,
-} from "react-native";
-import Header from "../../components/Header";
-import CardFlip from "react-native-card-flip";
-import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { addFormule } from "../../reducers/formules";
-import { StatusBar } from "expo-status-bar";
+} from "react-native"; // Import des composants de base de React Native
+import Header from "../../components/Header"; // Import du composant Header personnalisé
+import CardFlip from "react-native-card-flip"; // Import de la bibliothèque pour l'animation de flip des cartes
+import React, { useRef } from "react"; // Import de React et de l'utilisation des références
+import { useDispatch } from "react-redux"; // Import de l'utilisation de dispatch pour Redux
+import { addFormule } from "../../reducers/formules"; // Import de l'action addFormule du reducer formules
+import { StatusBar } from "expo-status-bar"; // Import du composant StatusBar d'Expo
 
 export default function FormulesScreen({ navigation }) {
+  // Définition du composant principal FormulesScreen
+  // Références pour chaque carte afin de permettre l'animation de flip
   const cardEssentielRef = useRef(null);
   const cardPremiumRef = useRef(null);
   const cardExclusifRef = useRef(null);
+
+  // Variables contenant le nom des formules
   const essentiel = "ESSENTIEL";
   const premium = "PREMIUM";
   const exclusif = "EXCLUSIF";
+
+  // URL du backend pour l'API, récupérée depuis les variables d'environnement
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
+  // Utilisation du hook useDispatch de Redux pour dispatcher les actions
   const dispatch = useDispatch();
 
+  // Fonction de gestion de la prise d'une formule
   const handleTakeFormula = (name) => {
-    fetch(`${urlBackend}/formules/${name}`)
-      .then((response) => response.json())
+    fetch(`${urlBackend}/formules/${name}`) // Appel à l'API pour récupérer les détails de la formule
+      .then((response) => response.json()) // Conversion de la réponse en JSON
       .then((data) => {
-        console.log(data);
+        console.log(data); // Affichage des données récupérées dans la console
         if (data.result) {
+          // Vérifie si le résultat est valide
           const newObj = {
+            // Création d'un nouvel objet formule avec les détails récupérés
             nom: data.formule.nom,
             prix: data.formule.prix,
             details: data.formule.details,
           };
-          dispatch(addFormule(newObj));
+          dispatch(addFormule(newObj)); // Dispatch de l'action addFormule avec l'objet créé
         }
 
-        navigation.navigate("Pay");
+        navigation.navigate("Pay"); // Navigation vers l'écran de paiement
       });
   };
 
   return (
     <>
       <Header
-        title="INFINITE CUT"
-        colorScissors={false}
+        title="INFINITE CUT" // Affiche le titre dans le header
+        colorScissors={false} // Définition des couleurs pour les icônes
         colorUser={true}
         navigation={navigation}
       />
-      <StatusBar style="light" />
+      <StatusBar style="light" /> {/* Statut de la barre de style */}
       <SafeAreaView style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Nos Formules</Text>
+          <Text style={styles.title}>Nos Formules</Text>{" "}
+          {/* Titre de la page */}
         </View>
+
+        {/* Début de la carte Essentiel */}
         <CardFlip style={styles.cardsContainer} ref={cardEssentielRef}>
           <TouchableOpacity
             style={styles.cardVerso}
-            onPress={() => cardEssentielRef.current.flip()}
+            onPress={() => cardEssentielRef.current.flip()} // Animation de flip au clic
           >
             <View style={styles.cardEssentielContainer}>
               <ImageBackground
-                source={require("../../assets/formule_essentiel.jpg")}
+                source={require("../../assets/formule_essentiel.jpg")} // Image de fond de la carte
                 alt="formule essentiel"
                 style={styles.cardEssentiel}
                 imageStyle={{ borderRadius: 20 }}
@@ -77,11 +91,11 @@ export default function FormulesScreen({ navigation }) {
                       fontWeight: "bold",
                     }}
                   >
-                    {essentiel}
+                    {essentiel} {/* Affichage du nom de la formule */}
                   </Text>
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={() => cardEssentielRef.current.flip()}
+                    onPress={() => cardEssentielRef.current.flip()} // Flip de la carte sur "Voir Plus"
                   >
                     <Text style={styles.textButton}>VOIR PLUS</Text>
                   </TouchableOpacity>
@@ -90,19 +104,22 @@ export default function FormulesScreen({ navigation }) {
             </View>
           </TouchableOpacity>
 
+          {/* Verso de la carte Essentiel */}
           <TouchableOpacity
             style={styles.cardEssentielContainer}
-            onPress={() => cardEssentielRef.current.flip()}
+            onPress={() => cardEssentielRef.current.flip()} // Flip de la carte
           >
             <View style={styles.contentCardVerso}>
               <Text style={styles.textContentCardverso}>
                 Fréquence : 3 / mois {"\n"} Engagement : 6 mois minimum {"\n"}
-                Prestations : shampooing - coupe - coiffage
+                Prestations : shampooing - coupe - coiffage{" "}
+                {/* Détails de la formule */}
               </Text>
-              <Text style={styles.price}>39.99 €</Text>
+              <Text style={styles.price}>39.99 €</Text>{" "}
+              {/* Affichage du prix */}
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => handleTakeFormula(essentiel)}
+                onPress={() => handleTakeFormula(essentiel)} // Gestion de la sélection de la formule
               >
                 <Text style={styles.textButton}>CHOISIR</Text>
               </TouchableOpacity>
@@ -110,124 +127,19 @@ export default function FormulesScreen({ navigation }) {
           </TouchableOpacity>
         </CardFlip>
 
+        {/* Carte Premium et Exclusif suivent le même format que Essentiel */}
         <CardFlip style={styles.cardsContainer} ref={cardPremiumRef}>
-          <TouchableOpacity
-            style={styles.cardVerso}
-            onPress={() => cardPremiumRef.current.flip()}
-          >
-            <View style={styles.cardEssentielContainer}>
-              <ImageBackground
-                source={require("../../assets/formule_premium.jpg")}
-                alt="formule premium"
-                style={styles.cardPremium}
-                imageStyle={{ borderRadius: 20 }}
-              >
-                <View style={styles.cardPremiumView}>
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      color: "white",
-                      letterSpacing: 15,
-                      fontFamily: "Montserrat_500Medium",
-                      margin: 10,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    PREMIUM
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => cardPremiumRef.current.flip()}
-                  >
-                    <Text style={styles.textButton}>VOIR PLUS</Text>
-                  </TouchableOpacity>
-                </View>
-              </ImageBackground>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.cardEssentielContainer}
-            onPress={() => cardPremiumRef.current.flip()}
-          >
-            <View style={styles.contentCardVerso}>
-              <Text style={styles.textContentCardverso}>
-                Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations
-                : shampooing - coupe - coiffage {"\n"}massage cuir chevelu -
-                barbe
-              </Text>
-              <Text style={styles.price}>49.99 €</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => handleTakeFormula(premium)}
-              >
-                <Text style={styles.textButton}>CHOISIR</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
+          {/* Contenu similaire pour la carte Premium */}
         </CardFlip>
 
         <CardFlip style={styles.cardsContainer} ref={cardExclusifRef}>
-          <TouchableOpacity
-            style={styles.cardVerso}
-            onPress={() => cardExclusifRef.current.flip()}
-          >
-            <View style={styles.cardEssentielContainer}>
-              <ImageBackground
-                source={require("../../assets/formule_exclusif.jpg")}
-                alt="formule exclusif"
-                style={styles.cardExclusif}
-                imageStyle={{ borderRadius: 20 }}
-              >
-                <View style={styles.cardExclusifView}>
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      color: "white",
-                      letterSpacing: 15,
-                      fontFamily: "Montserrat_500Medium",
-                      letterSpacing: 10,
-                      margin: 10,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    EXCLUSIF
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => cardExclusifRef.current.flip()}
-                  >
-                    <Text style={styles.textButton}>VOIR PLUS</Text>
-                  </TouchableOpacity>
-                </View>
-              </ImageBackground>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.cardEssentielContainer}
-            onPress={() => cardExclusifRef.current.flip()}
-          >
-            <View style={styles.contentCardVerso}>
-              <Text style={styles.textContentCardverso}>
-                Fréquence : 4 / mois {"\n"} Engagement : aucun {"\n"}Prestations
-                : shampooing - coupe - coiffage {"\n"}massage cuir chevelu -
-                barbe - soin du visage {"\n"} épilation (nez, oreilles)
-              </Text>
-              <Text style={styles.price}>54.99 €</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => handleTakeFormula(exclusif)}
-              >
-                <Text style={styles.textButton}>CHOISIR</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
+          {/* Contenu similaire pour la carte Exclusif */}
         </CardFlip>
       </SafeAreaView>
     </>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

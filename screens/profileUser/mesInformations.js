@@ -1,5 +1,5 @@
-import Header from "../../components/Header";
-import SubHeaderProfile from "../../components/SubHeaderProfile";
+import Header from "../../components/Header"; // Importation du composant Header
+import SubHeaderProfile from "../../components/SubHeaderProfile"; // Importation du composant SubHeaderProfile
 import {
   TextInput,
   View,
@@ -9,24 +9,30 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-} from "react-native";
-import { useState } from "react";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+} from "react-native"; // Importation des composants de base de 'react-native'
+import { useState } from "react"; // Importation du hook useState pour gérer les états
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // Importation d'icônes Material Icons
 
+// Expression régulière pour valider les adresses email
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+// Définition du composant fonctionnel MesInformations
 export default function MesInformations({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [isModified, setIsModified] = useState(false);
+  // Déclaration des états locaux pour gérer les champs de formulaire et les modifications
+  const [email, setEmail] = useState(""); // État pour l'email
+  const [adresse, setAdresse] = useState(""); // État pour l'adresse
+  const [mobile, setMobile] = useState(""); // État pour le numéro de mobile
+  const [isModified, setIsModified] = useState(false); // État pour savoir si le formulaire est en mode modification
 
+  // Fonction pour activer le mode modification
   const handleModifier = () => {
     setIsModified(true);
   };
 
+  // Fonction pour enregistrer les modifications
   const handleEnregister = () => {
+    // Si l'email est valide, on pourrait envoyer les données au serveur
     // if (EMAIL_REGEX.test(email)){
     //   fetch(`${URL_BACKEND}/users/data`, {
     //     method:'PUT',
@@ -43,9 +49,10 @@ export default function MesInformations({ navigation }) {
     //     }
     //   })
     // }
-    setIsModified(false);
+    setIsModified(false); // Réinitialisation du mode modification après l'enregistrement
   };
 
+  // Fonction pour annuler les modifications et réinitialiser les champs
   const handleAnnuler = () => {
     setAdresse("");
     setEmail("");
@@ -56,6 +63,7 @@ export default function MesInformations({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.total}>
+        {/* En-tête du composant */}
         <View style={styles.header}>
           <Header
             style={styles.header}
@@ -71,11 +79,13 @@ export default function MesInformations({ navigation }) {
             navigation={navigation}
           />
         </View>
+        {/* Éviter les problèmes de clavier avec KeyboardAvoidingView */}
         <KeyboardAvoidingView style={styles.keyboard}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Mon compte</Text>
           </View>
           {isModified ? (
+            // Affichage des champs de formulaire en mode modification
             <View style={styles.bottomContainer}>
               <View style={styles.globalInput}>
                 <Text style={styles.sousText}>Mes informations</Text>
@@ -120,6 +130,7 @@ export default function MesInformations({ navigation }) {
               </View>
             </View>
           ) : (
+            // Affichage des informations en mode lecture seule
             <View style={styles.bottomContainer}>
               <View style={styles.globalInput}>
                 <Text style={styles.sousText}>Mes informations</Text>
@@ -143,6 +154,7 @@ export default function MesInformations({ navigation }) {
               </View>
             </View>
           )}
+          {/* Icône pour naviguer vers une autre page */}
           <MaterialIcons
             name="read-more"
             size={24}
@@ -155,6 +167,8 @@ export default function MesInformations({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
+
+// Définition des styles pour le composant
 const styles = StyleSheet.create({
   total: {
     flex: 1,
@@ -167,13 +181,6 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-  },
-  AllInput: {
-    width: "80%",
-    height: "40%",
-    justifyContent: "space-evenly",
-    alignItems: "flex-start",
-    backgroundColor: "blue",
   },
   textContainer: {
     width: "100%",
@@ -261,9 +268,6 @@ const styles = StyleSheet.create({
     color: "#5E503F",
     alignSelf: "flex-start",
     fontFamily: "Montserrat_500Medium",
-  },
-  line: {
-    color: "#5E503F",
   },
   final: {
     color: "#5E503F",

@@ -1,3 +1,4 @@
+// Importation des composants nécessaires de React Native et de bibliothèques tierces
 import {
   View,
   Text,
@@ -9,40 +10,49 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
-} from "react-native";
+} from "react-native"; // Importation des composants pour créer l'interface utilisateur
 
-import Octicons from "@expo/vector-icons/Octicons";
-import { useState } from "react";
-import Header from "../../components/Header";
+import Octicons from "@expo/vector-icons/Octicons"; // Importation d'une bibliothèque pour les icônes
+import { useState } from "react"; // Importation du hook useState pour la gestion d'état
+import Header from "../../components/Header"; // Importation d'un composant personnalisé Header
 
+// Définition du composant principal pour l'écran de fin de rendez-vous
 export default function FinRDVScreen({ navigation }) {
-  const [commentaire, setCommentaire] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [formError, setFormError] = useState("");
+  const [commentaire, setCommentaire] = useState(null); // État local pour le commentaire utilisateur
+  const [modalVisible, setModalVisible] = useState(false); // État local pour la visibilité de la modal de confirmation
+  const [formError, setFormError] = useState(""); // État local pour les erreurs de formulaire
 
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = () => {
     if (commentaire !== null) {
-      setModalVisible(true);
+      // Vérifie que le commentaire n'est pas vide
+      setModalVisible(true); // Affiche la modal de confirmation
       setTimeout(() => {
+        // Cache la modal après 3 secondes et redirige vers l'écran de sélection de date
         setModalVisible(false);
         navigation.navigate("DatePicker");
       }, 3000);
     } else {
-      setFormError(true);
+      setFormError(true); // Affiche une erreur si le champ de commentaire est vide
     }
   };
 
+  // Génération des étoiles pour l'évaluation
   const stars = [];
   for (let i = 0; i < 5; i++) {
-    stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
+    stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />); // Ajoute 5 icônes d'étoiles remplies
   }
+
+  // Rendu du composant
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      {/* Permet de masquer le clavier lorsque l'utilisateur touche en dehors du clavier */}
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
       >
+        {/* Affichage de l'en-tête personnalisé */}
         <Header
           title="INFINITY CUT"
           colorScissors={false}
@@ -54,18 +64,23 @@ export default function FinRDVScreen({ navigation }) {
           <View style={styles.note}>
             <Text style={styles.textNote}>Note</Text>
             <View style={styles.star}>{stars}</View>
+            {/* Affiche les étoiles d'évaluation */}
           </View>
+          {/* Champ de texte pour que l'utilisateur entre son commentaire */}
           <TextInput
             style={styles.input}
             placeholder="Qu'en avez vous pensé ?"
             placeholderTextColor="#5E503F"
             autoCapitalize="none"
             onChangeText={(value) => setCommentaire(value)}
+            // Met à jour l'état du commentaire à chaque modification
             value={commentaire}
-            maxLength={280}
+            maxLength={280} // Limite le nombre de caractères à 280
           />
           {formError && <Text style={styles.error}>Le champ est vide.</Text>}
+          {/* Affiche un message d'erreur si le champ de commentaire est vide */}
 
+          {/* Modal de confirmation */}
           <Modal visible={modalVisible} animationType="fade" transparent>
             <View style={styles.centeredCardView}>
               <View style={styles.modalCardView}>
@@ -75,6 +90,7 @@ export default function FinRDVScreen({ navigation }) {
               </View>
             </View>
           </Modal>
+          {/* Bouton de soumission pour envoyer le commentaire */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => handleSubmit()}
@@ -87,6 +103,7 @@ export default function FinRDVScreen({ navigation }) {
   );
 }
 
+// Définition des styles pour les composants de l'interface utilisateur
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -188,7 +205,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 5, // Propriété spécifique à Android pour l'ombre
   },
   textCardModal: {
     color: "white",

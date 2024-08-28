@@ -7,7 +7,6 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const screenHeight = Dimensions.get("window").height;

@@ -1,3 +1,4 @@
+// Importations des modules et composants nécessaires depuis 'react-native' et d'autres packages
 import {
   View,
   Text,
@@ -7,29 +8,34 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import Header from "../../components/Header";
-import SubHeaderProfile from "../../components/SubHeaderProfile";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Octicons from "@expo/vector-icons/Octicons";
-import { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import Header from "../../components/Header"; // Importation du composant Header
+import SubHeaderProfile from "../../components/SubHeaderProfile"; // Importation du composant SubHeaderProfile
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // Importation d'icônes Material Icons
+import Octicons from "@expo/vector-icons/Octicons"; // Importation d'icônes Octicons
+import { useState } from "react"; // Importation du hook useState pour la gestion de l'état
+import { StatusBar } from "expo-status-bar"; // Importation du composant StatusBar d'Expo
 
+// Création d'un tableau d'étoiles remplis pour les évaluations
 const stars = [];
 for (let i = 0; i < 5; i++) {
   stars.push(<Octicons key={i} name="star-fill" size={18} color="#22333B" />);
 }
 
+// Définition du composant fonctionnel FavoriteBarber
 export default function FavoriteBarber({ navigation }) {
+  // Déclaration d'un état local pour savoir si un salon est aimé ou non
   const [isLiked, setIsLiked] = useState(true);
 
   return (
     <>
+      {/* En-tête du composant avec le titre et les icônes */}
       <Header
         title="INFINITE CUT"
         colorScissors={false}
         colorUser={true}
         navigation={navigation}
       />
+      {/* Sous-en-tête avec des boutons de navigation */}
       <SubHeaderProfile
         firstText="Mes RDV"
         secondText="Mon Compte"
@@ -40,6 +46,7 @@ export default function FavoriteBarber({ navigation }) {
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
+        {/* Barre de statut */}
         <StatusBar style="light" />
         <View style={styles.container}>
           <View style={styles.header}></View>
@@ -48,104 +55,32 @@ export default function FavoriteBarber({ navigation }) {
           </View>
           <View style={styles.scrollContainer}>
             <ScrollView>
-              <View style={styles.card}>
-                <View style={styles.leftCard}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo du salon de coiffure"
-                  />
-                  <View style={styles.nameAndNote}>
-                    <Text>Lucie Saint Clair</Text>
-                    <View style={styles.star}>{stars}</View>
+              {/* Carte représentant un salon favori */}
+              {[...Array(5)].map((_, index) => (
+                <View key={index} style={styles.card}>
+                  <View style={styles.leftCard}>
+                    <Image
+                      style={styles.img}
+                      source={require("../../assets/background_home.jpg")}
+                      alt="photo du salon de coiffure"
+                    />
+                    <View style={styles.nameAndNote}>
+                      <Text>Lucie Saint Clair</Text>
+                      <View style={styles.star}>{stars}</View>
+                    </View>
                   </View>
-                </View>
-                <Octicons
-                  name="heart-fill"
-                  size={30}
-                  color={isLiked ? "#C6AC8F" : "#22333B"}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              </View>
-              <View style={styles.card}>
-                <View style={styles.leftCard}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo du salon de coiffure"
+                  <Octicons
+                    name="heart-fill"
+                    size={30}
+                    color={isLiked ? "#C6AC8F" : "#22333B"}
+                    onPress={() => setIsLiked(!isLiked)} // Changement de l'état de l'icône coeur lors du clic
                   />
-                  <View style={styles.nameAndNote}>
-                    <Text>Lucie Saint Clair</Text>
-                    <View style={styles.star}>{stars}</View>
-                  </View>
                 </View>
-                <Octicons
-                  name="heart-fill"
-                  size={30}
-                  color={isLiked ? "#C6AC8F" : "#22333B"}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              </View>
-              <View style={styles.card}>
-                <View style={styles.leftCard}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo du salon de coiffure"
-                  />
-                  <View style={styles.nameAndNote}>
-                    <Text>Lucie Saint Clair</Text>
-                    <View style={styles.star}>{stars}</View>
-                  </View>
-                </View>
-                <Octicons
-                  name="heart-fill"
-                  size={30}
-                  color={isLiked ? "#C6AC8F" : "#22333B"}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              </View>
-              <View style={styles.card}>
-                <View style={styles.leftCard}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo du salon de coiffure"
-                  />
-                  <View style={styles.nameAndNote}>
-                    <Text>Lucie Saint Clair</Text>
-                    <View style={styles.star}>{stars}</View>
-                  </View>
-                </View>
-                <Octicons
-                  name="heart-fill"
-                  size={30}
-                  color={isLiked ? "#C6AC8F" : "#22333B"}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              </View>
-              <View style={styles.card}>
-                <View style={styles.leftCard}>
-                  <Image
-                    style={styles.img}
-                    source={require("../../assets/background_home.jpg")}
-                    alt="photo du salon de coiffure"
-                  />
-                  <View style={styles.nameAndNote}>
-                    <Text>Lucie Saint Clair</Text>
-                    <View style={styles.star}>{stars}</View>
-                  </View>
-                </View>
-                <Octicons
-                  name="heart-fill"
-                  size={30}
-                  color={isLiked ? "#C6AC8F" : "#22333B"}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              </View>
+              ))}
             </ScrollView>
           </View>
         </View>
+        {/* Icône en bas de l'écran pour naviguer vers une autre page */}
         <View style={styles.bottomIconContainer}>
           <MaterialIcons
             name="read-more"
@@ -159,18 +94,17 @@ export default function FavoriteBarber({ navigation }) {
   );
 }
 
+// Définition des styles pour le composant
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EAE0D5",
     flexDirection: "column",
   },
-
   titleContainer: {
     marginTop: 15,
     width: "100%",
   },
-
   title: {
     color: "#5E503F",
     fontSize: 40,
