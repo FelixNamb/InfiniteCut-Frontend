@@ -15,10 +15,12 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUserPro } from "../../reducers/userPro";
 
+//Grâce à ce Regex, on peut voir si l'email donné par l'utilisateur est bon ou pas
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export default function SignUpProScreen({ navigation }) {
+  //Mise en place de tous nos états pour la soumission au backend de l'inscription
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [prenom, setPrenom] = useState("");
@@ -29,8 +31,10 @@ export default function SignUpProScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
+  //Notre appel à notre .env car on a toujours une ip différente les uns des autres
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
 
+  //Cette fonction permet l'appel à la bdd pour enregistrer un nouvel userPro
   const handleSignUp = async () => {
     if (EMAIL_REGEX.test(email)) {
       await fetch(`${urlBackend}/userpros/signup`, {
@@ -57,7 +61,7 @@ export default function SignUpProScreen({ navigation }) {
             setModalVisible(true);
             setTimeout(() => {
               setModalVisible(false);
-              navigation.navigate("Home");
+              navigation.navigate("Home"); //Si tout fonctionne, on renvoie l'utilisateur vers la page HomeScreen.js
             }, 3000);
           }
         });

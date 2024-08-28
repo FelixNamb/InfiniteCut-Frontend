@@ -11,25 +11,31 @@ import { Agenda } from "react-native-calendars";
 import { useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+
+//MyAgenda est la page principale du userPro. Il y retrouve un agenda avec ses rendez-vous
+// Et différents boutons pour pouvoir modifier son agenda. 
 export default function MyAgenda({ navigation }) {
   const userPro = useSelector((state) => state.userPro.value);
-  const [rdv, setRdv] = useState({});
+  const [rdv, setRdv] = useState({});// On initialise un état rdv qui prend des objets
   const dispatch = useDispatch();
 
 
-
+  /*Le useEffect permet de remplir notre état rdv de date et de plage horaire */
   useEffect(() => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-    fetch(`${urlBackend}/userpros/${userPro.token}`)
+    fetch(`${urlBackend}/userpros/${userPro.token}`) // Ici on récupère les données du userPro
       .then(response => response.json())
       .then(data => {
         if (data.result) {
-          fetch(`${urlBackend}/rdv/${data.user._id}`)
+          fetch(`${urlBackend}/rdv/${data.user._id}`) //Si tout réussi, alors on récupère les rendez-vous affilier au pro
           .then(response => response.json())
           .then(finalData => {
             setRdv(finalData.data)
             let newObj = {};
             for(let elt of finalData.data){
+              // On split la date en deux tableaux, le premier qui récupère la date "brute" et le 'T' fais la séparation 
+              // Avec la deuxième partie de notre date. On ne récupère que la première partie, qui nous intéresse
+              // pour devenir la des objets
               const date = new Date(elt.date).toISOString().split("T")[0];
               if (!newObj[date]) {
                 newObj[date] = [];
@@ -40,7 +46,7 @@ export default function MyAgenda({ navigation }) {
                 description: "30 minutes"
               });
             }
-            setRdv(newObj);
+            setRdv(newObj);// On initialise l'état de rdv avec newObj
           })
         }
       });

@@ -28,8 +28,8 @@ export default function MesRDVScreen({ navigation }) {
   const [isLiked, setIsLiked] = useState(false);
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalDeleteRdvVisible, setModalDeleteRdvVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // État permettant d'afficher ou non une modale
+  const [modalDeleteRdvVisible, setModalDeleteRdvVisible] = useState(false); // État permettant d'afficher ou non la modale rdv
 
   const [rdvs, setRdvs] = useState([]);
   const [error, setError] = useState(null);
@@ -40,6 +40,7 @@ export default function MesRDVScreen({ navigation }) {
 
   let date = moment().format("DD MMMM YYYY, hh:mm");
 
+  //Ce useEffect permet l'affichage des rendez-vous dans le scrollView
   useEffect(() => {
     const fetchData = async () => {
       const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
@@ -66,6 +67,7 @@ export default function MesRDVScreen({ navigation }) {
   }, []);
 
   console.log(rdvs);
+  //Mise en place du mapping pour mettre le JSX en dynamique
   const rdvCard = rdvs.map((data, i) => {
     //formater la date recupérée
     const date = new Date(data.date).toISOString().split("T")[0];
@@ -156,9 +158,12 @@ export default function MesRDVScreen({ navigation }) {
     );
   });
 
+  //Permet de fermet la modale
   const handleClose = () => {
     setModalVisible(false);
   };
+
+  //Permet de supprimer un rendez-vous
   const handleDeleteRDV = (date, plageHoraire, id) => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/rdv`, {
@@ -176,7 +181,7 @@ export default function MesRDVScreen({ navigation }) {
       .then((data) => {
         console.log(data);
         if (data.result) {
-          dispatch(deleteRdv(data.rdvs));
+          dispatch(deleteRdv(data.rdvs)); //On delete le rendez-vous dans le reducer
         }
         setModalVisible(true);
       })
@@ -185,6 +190,9 @@ export default function MesRDVScreen({ navigation }) {
       });
   };
 
+  //Une fois le bouton confirmer cliqué, on se retrouve avec la fermeture de la modale principale
+  // puis l'ouverture avec un timeout de la modale nous confirmant la suppression.
+  // Enfin, MesRDVScreens pour bien mettre à jour notre écran
   const handleDeleteFormule = () => {
     setModalVisible(false);
     setModalDeleteRdvVisible(true);

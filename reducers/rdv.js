@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const rdvSlice = createSlice({
-  name: "formule",
+  name: "rdv",
   initialState,
   reducers: {
     addDateRdv: (state, action) => {

@@ -14,17 +14,27 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../reducers/user";
 
+//Grâce à ce Regex, on peut voir si l'email donné par l'utilisateur est bon ou pas
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
 export default function SignUpScreen({ navigation }) {
   const dispatch = useDispatch();
 
+  //Mise en place de tous nos états pour le bon fonctionnement de l'envoie de donnée vers le backend
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpMobile, setSignUpMobile] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
   const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+
+  //Cette fonction permet de faire la requête pour inscrire un nouvel utilisateur user
   const handleSignUp = () => {
-    if (signUpPassword === signUpConfirmPassword) {
+    //La condition de pouvoir continuer et de voir si les mdp sont les mêmes
+    //Ainsi que la partie email valide par le REGEX
+    if (signUpPassword === signUpConfirmPassword && EMAIL_REGEX.test(signUpEmail)) {
       fetch(`${urlBackend}/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +53,7 @@ export default function SignUpScreen({ navigation }) {
                 token: data.token,
               })
             );
-            navigation.navigate("DatePicker");
+            navigation.navigate("DatePicker"); //Si tout se passe bien, alors on envoie le nouvel utilisateur sur la page de réservation de date.
             setSignUpEmail("");
             setSignUpPassword("");
             setSignUpMobile("");

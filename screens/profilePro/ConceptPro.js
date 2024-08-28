@@ -30,11 +30,13 @@ export default function ConceptPro({ navigation }) {
             Simplifiez votre quotidien, maximisez vos revenus.
           </Text>
         </View>
+        {/* Mise en place d'un ScrollView horizontal pour montrer les différents screens de l'application
+        en tant que pro */}
         <ScrollView horizontal={true} style={styles.ScrollView}>
           <View style={styles.cardContainer}>
             <ImageBackground
               source={require("../../assets/capture d'écran agenda.png")}
-              alt="agenda"
+              alt="Écran de l'agenda des professionnels d'Infinite Cut"
               style={styles.card}
               resizeMode="contain"
             ></ImageBackground>
@@ -42,7 +44,7 @@ export default function ConceptPro({ navigation }) {
           <View style={styles.cardContainer}>
             <ImageBackground
               source={require("../../assets/capture d'écran mes informations.png")}
-              alt="agenda"
+              alt="Écran d'informations des professionnels d'Infinite Cut"
               style={styles.card}
               resizeMode="contain"
             ></ImageBackground>
@@ -50,7 +52,7 @@ export default function ConceptPro({ navigation }) {
           <View style={styles.cardContainer}>
             <ImageBackground
               source={require("../../assets/capture d'écran mes chiffres.png")}
-              alt="agenda"
+              alt="Écran des chiffres des professionnels d'Infinite Cut"
               style={styles.card}
               resizeMode="contain"
             ></ImageBackground>

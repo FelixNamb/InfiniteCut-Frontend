@@ -12,6 +12,7 @@ export default function MesChiffres({ navigation }) {
     { label: "Mois", value: "mois" },
   ]);
 
+  //Permet d'afficher notre page selon que l'on soit sur "semaine" ou bien sur "mois"
   function renderData() {
     if (value === "mois") {
       return (
@@ -81,8 +82,8 @@ export default function MesChiffres({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.container}>
-          <View style={styles.header}></View>
           <View style={styles.page}>
+            {/* Mise en place du DropDownPicker qui nous permet de sélectionner nos différents labels qui sont dans nos états*/}
             <View style={styles.DropDownPickerContainer}>
               <DropDownPicker
                 open={open}
