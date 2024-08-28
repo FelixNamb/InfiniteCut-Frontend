@@ -41,7 +41,7 @@ export default function MesInformationsPro({ navigation }) {
 
   //Le useEffect permet de récupérer les données du userPro à l'arrivée sur la page pour que l'on puisse les afficher correctement
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/userpros/${userPro.token}`)
     .then(response => response.json())
     .then(data => {
@@ -81,7 +81,7 @@ export default function MesInformationsPro({ navigation }) {
 
   //En cliquant sur le bouton Choisir
   const handleChoisirFormule = (name) => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/formules/${name}`) //On fetch sur le backend avec le nom de la formule
       .then((response) => response.json())
       .then((data) => {

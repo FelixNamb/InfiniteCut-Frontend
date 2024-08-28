@@ -32,7 +32,7 @@ export default function SignUpProScreen({ navigation }) {
   const dispatch = useDispatch();
 
   //Notre appel à notre .env car on a toujours une ip différente les uns des autres
-  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+  const urlBackend = "https://infinite-cut-backend.vercel.app/";
 
   //Cette fonction permet l'appel à la bdd pour enregistrer un nouvel userPro
   const handleSignUp = async () => {

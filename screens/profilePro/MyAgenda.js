@@ -22,7 +22,7 @@ export default function MyAgenda({ navigation }) {
 
   /*Le useEffect permet de remplir notre état rdv de date et de plage horaire */
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/userpros/${userPro.token}`) // Ici on récupère les données du userPro
       .then(response => response.json())
       .then(data => {

@@ -45,7 +45,7 @@ export default function DatePicker({ navigation }) {
 
   // Utilisation de useEffect pour récupérer les informations utilisateur lors du montage du composant
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND; // URL du backend provenant des variables d'environnement
+    const urlBackend = "https://infinite-cut-backend.vercel.app/"; // URL du backend provenant des variables d'environnement
     fetch(`${urlBackend}/users/${user.token}`) // Envoie une requête pour récupérer les détails de l'utilisateur
       .then((response) => response.json()) // Convertit la réponse en JSON
       .then((data) => {

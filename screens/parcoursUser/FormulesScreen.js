@@ -26,7 +26,7 @@ export default function FormulesScreen({ navigation }) {
   const exclusif = "EXCLUSIF";
 
   // URL du backend pour l'API, récupérée depuis les variables d'environnement
-  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+  const urlBackend = "https://infinite-cut-backend.vercel.app/";
 
   // Utilisation du hook useDispatch de Redux pour dispatcher les actions
   const dispatch = useDispatch();

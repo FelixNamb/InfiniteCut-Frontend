@@ -33,7 +33,7 @@ export default function ConnectionScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   // URL du backend récupérée des variables d'environnement
-  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+  const urlBackend = "https://infinite-cut-backend.vercel.app/";
 
   // Fonction pour gérer la tentative de connexion
   const handleSignIn = () => {

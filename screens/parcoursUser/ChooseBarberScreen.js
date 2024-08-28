@@ -56,7 +56,7 @@ export default function ChooseBarberScreen({ navigation }) {
 
   // useEffect pour récupérer les données des barbiers depuis le backend et vérifier l'abonnement de l'utilisateur
   useEffect(() => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND; // URL du backend récupérée depuis les variables d'environnement
+    const urlBackend = "https://infinite-cut-backend.vercel.app/"; // URL du backend récupérée depuis les variables d'environnement
     fetch(`${urlBackend}/userPros`)
       .then((response) => response.json()) // Convertit la réponse en JSON
       .then((data) => {

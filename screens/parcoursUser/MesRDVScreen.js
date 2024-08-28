@@ -43,7 +43,7 @@ export default function MesRDVScreen({ navigation }) {
   //Ce useEffect permet l'affichage des rendez-vous dans le scrollView
   useEffect(() => {
     const fetchData = async () => {
-      const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+      const urlBackend = "https://infinite-cut-backend.vercel.app/";
 
       const response = await fetch(`${urlBackend}/users/${user.token}`);
       const data = await response.json();
@@ -165,7 +165,7 @@ export default function MesRDVScreen({ navigation }) {
 
   //Permet de supprimer un rendez-vous
   const handleDeleteRDV = (date, plageHoraire, id) => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/rdv`, {
       method: "DELETE",
       headers: {

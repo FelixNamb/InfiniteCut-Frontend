@@ -51,7 +51,7 @@ export default function PayScreen({ navigation }) {
 
   //Fonction permettant de rajouter un rendez-vous dans la base de données
   const postRdv = () => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/rdv`, {
       method: "POST",
       headers: {
@@ -74,7 +74,7 @@ export default function PayScreen({ navigation }) {
 
   //Fonction qui met à jour les rendez-vous du userPro
   const putRdvUserPro = (newRdv) => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/userpros/rdv`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -95,7 +95,7 @@ export default function PayScreen({ navigation }) {
   //Cette fonction met à jour les rendez-vous de l'utilisateur
   const putRdvUser = (newRdv) => {
     console.log(newRdv._id);
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/users/rdv`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -116,7 +116,7 @@ export default function PayScreen({ navigation }) {
 
   //Cette fonction nous permet de mettre la carte dans le sous-document de la collection user
   const putMycardUser = () => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/users/myCard`, {
       method: "PUT",
       headers: {
@@ -140,7 +140,7 @@ export default function PayScreen({ navigation }) {
 
   //Cette fonction permet de rajouter la formule dans 
   const getFormuleNom = () => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
@@ -171,7 +171,7 @@ export default function PayScreen({ navigation }) {
 
   //Cette fonction permet de rajouter dans la collection user la formule sélectionné au préalable
   const putFormuleUser = (formule) => {
-    const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+    const urlBackend = "https://infinite-cut-backend.vercel.app/";
     fetch(`${urlBackend}/users/formule`, {
       method: "PUT",
       headers: {

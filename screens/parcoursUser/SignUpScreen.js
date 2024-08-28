@@ -28,7 +28,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
 
-  const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
+  const urlBackend = "https://infinite-cut-backend.vercel.app/";
 
   //Cette fonction permet de faire la requête pour inscrire un nouvel utilisateur user
   const handleSignUp = () => {
