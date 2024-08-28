@@ -18,13 +18,14 @@ import { useSelector } from "react-redux";
 
 export default function MesInformationsPro({ navigation }) {
   const userPro = useSelector((state) => state.userPro.value);
-  const [isModalVisible, setIsModalvisible] = useState(false);
-  const [infoUserPro, setInfoUserPro] = useState({});
+  const [isModalVisible, setIsModalvisible] = useState(false); //État permettant de savoir quand afficher une modale ou non
+  const [infoUserPro, setInfoUserPro] = useState({}); // État permettant d'avoir les informations du userPro et de mettre à jour dynamiquement notre site
 
   const essentiel = "ESSENTIEL";
   const premium = "PREMIUM";
   const exclusif = "EXCLUSIF";
 
+  //mise en place d'une structure qui prend du JSX en donnée que l'on va utiliser en brut dans l'application
   const stars = [];
   for (let i = 0; i < 5; i++) {
     if (i < 4) {
@@ -38,6 +39,7 @@ export default function MesInformationsPro({ navigation }) {
     }
   }
 
+  //Le useEffect permet de récupérer les données du userPro à l'arrivée sur la page pour que l'on puisse les afficher correctement
   useEffect(() => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/userpros/${userPro.token}`)
@@ -49,6 +51,7 @@ export default function MesInformationsPro({ navigation }) {
     })
   }, [])
 
+  //On fait un mapping de nos formules pour afficher ce qu'ont les pro comme formules disponible chez eux
   const formules = infoUserPro["formules"]?.map((data,i) => {
     if(data.nom === "ESSENTIEL"){
       return (
@@ -75,14 +78,16 @@ export default function MesInformationsPro({ navigation }) {
     setIsModalvisible(true);
   };
 
+
+  //En cliquant sur le bouton Choisir
   const handleChoisirFormule = (name) => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
-    fetch(`${urlBackend}/formules/${name}`)
+    fetch(`${urlBackend}/formules/${name}`) //On fetch sur le backend avec le nom de la formule
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         if (data.result) {
-          fetch(`${urlBackend}/userpros`, {
+          fetch(`${urlBackend}/userpros`, { //On met à jour les formules côté du pro
             method:'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -96,7 +101,7 @@ export default function MesInformationsPro({ navigation }) {
           })
         }
       });
-      setIsModalvisible(false);
+      setIsModalvisible(false); //On retire la modale une fois que la formule a été choisie
   }
 
   return (
@@ -106,7 +111,7 @@ export default function MesInformationsPro({ navigation }) {
           <View style={styles.modalView}>
             <View style={styles.cross}>
               <TouchableOpacity
-                onPress={() => setIsModalvisible(false)}
+                onPress={() => setIsModalvisible(false)} //En cliquant ici on peut sortir de la modale
                 activeOpacity={0.8}
               >
                 <Entypo name="squared-cross" size={30} color="#C6AC8F" />

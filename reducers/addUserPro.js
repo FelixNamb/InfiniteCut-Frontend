@@ -1,14 +1,15 @@
+//Ce reducer permet de prendre les données d'un userPro sélectionné par un user
 import { createSlice } from "@reduxjs/toolkit";
-
+//On initialise l'état à null, et on mettra le userPro à l'intérieur
 const initialState = {
   value: {userPro: null},
 };
 
 export const addUserProSlice = createSlice({
-  name: "formule",
+  name: "addUserPro",
   initialState,
   reducers: {
-    addUser: (state,action) => {
+    addUser: (state,action) => { //Rajoute un userPro dans le reducer
         state.value.userPro = action.payload;
     }
   },

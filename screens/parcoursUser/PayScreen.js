@@ -19,6 +19,8 @@ import { CreditCardInput } from "react-native-credit-card-input";
 // import Rdv from "../../../InfiniteCut-Backend/models/rdv";
 
 export default function PayScreen({ navigation }) {
+  //Tous les useSelector nécessaire pour lire les données des reducers
+
   const user = useSelector((state) => state.user.value);
   const rdv = useSelector((state) => state.rdv.value);
   const formule = useSelector((state) => state.formules.value);
@@ -26,6 +28,7 @@ export default function PayScreen({ navigation }) {
   const addUserPro = useSelector((state) => state.addUserPro.value);
   console.log("___________", addUserPro.userPro._id);
 
+  //Tous les états nécessaires au bon fonctionnement du screen et des envoies à la base de données
   const [creditCard, setCreditCard] = useState("**** **** **** ****");
   const [cvc, setCvc] = useState("CVC");
   const [expiration, setExpiration] = useState("MM/YY");
@@ -33,6 +36,8 @@ export default function PayScreen({ navigation }) {
   const [masterCard, setMasterCard] = useState(false);
   const [error, setError] = useState(false);
 
+  //Cette fonction permet de savoir quelle type de carte on affiche en haut à droite de la carte de crédit
+  //Nous avons pris eulment MasterCard et Visa 
   const whatIcon = () => {
     setVisa(false);
     setMasterCard(false);
@@ -44,6 +49,7 @@ export default function PayScreen({ navigation }) {
     }
   };
 
+  //Fonction permettant de rajouter un rendez-vous dans la base de données
   const postRdv = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/rdv`, {
@@ -61,11 +67,12 @@ export default function PayScreen({ navigation }) {
       .then((data) => {
         console.log("postRdv ===== ", data);
         if (data.result) {
-          putRdvUserPro(data.newRdv);
+          putRdvUserPro(data.newRdv); //Si tout fonctionne alors on met le rendez-vous dans la collection du userPro
         }
       });
   };
 
+  //Fonction qui met à jour les rendez-vous du userPro
   const putRdvUserPro = (newRdv) => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/userpros/rdv`, {
@@ -80,11 +87,12 @@ export default function PayScreen({ navigation }) {
       .then((data) => {
         console.log("putRdvUserPro ===== ", data);
         if (data.result) {
-          putRdvUser(newRdv);
+          putRdvUser(newRdv); //Si tout se passe bien alors on met le rendez-vous dans la collection user
         }
       });
   };
 
+  //Cette fonction met à jour les rendez-vous de l'utilisateur
   const putRdvUser = (newRdv) => {
     console.log(newRdv._id);
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
@@ -99,13 +107,14 @@ export default function PayScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          putMycardUser();
+          putMycardUser(); //Si tout se passe bien, alors on rajoute la carte dans la collection user
         } else {
-          setError(true);
+          setError(true); //Sinon il y a une erreur et on arrête toutes les autres fonctions
         }
       });
   };
 
+  //Cette fonction nous permet de mettre la carte dans le sous-document de la collection user
   const putMycardUser = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/users/myCard`, {
@@ -124,24 +133,26 @@ export default function PayScreen({ navigation }) {
       .then((data) => {
         console.log("putMyCardUser ===== ", data);
         if (data.result) {
-          getFormuleNom();
+          getFormuleNom(); //Si tout se passe bien alors on va récupérer le nom de la formule
         }
       });
   };
 
+  //Cette fonction permet de rajouter la formule dans 
   const getFormuleNom = () => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
+          //En commentant, le if else fait la même chose j'ai bien l'impression, cependant la route gère quand même
           if (data.user.formule?.nom) {
-            fetch(`${urlBackend}/formules/${data.user.formule.nom}`)
+            fetch(`${urlBackend}/formules/${data.user.formule.nom}`) //Ici on regarde si la formule existe dans la bdd
               .then((response) => response.json())
               .then((data) => {
                 console.log("getFormuleNom ===== ", data);
                 if (data.result) {
-                  putFormuleUser(data.formule);
+                  putFormuleUser(data.formule); //Si elle existe alors on peut la rajouter en tant que formule de l'utilisateur
                 }
               });
           } else {
@@ -150,7 +161,7 @@ export default function PayScreen({ navigation }) {
               .then((data) => {
                 console.log("getFormuleNom ===== ", data);
                 if (data.result) {
-                  putFormuleUser(data.formule);
+                  putFormuleUser(data.formule); //Si elle existe alors on peut la rajouter en tant que formule de l'utilisateur
                 }
               });
           }
@@ -158,6 +169,7 @@ export default function PayScreen({ navigation }) {
       });
   };
 
+  //Cette fonction permet de rajouter dans la collection user la formule sélectionné au préalable
   const putFormuleUser = (formule) => {
     const urlBackend = process.env.EXPO_PUBLIC_URL_BACKEND;
     fetch(`${urlBackend}/users/formule`, {
@@ -175,10 +187,11 @@ export default function PayScreen({ navigation }) {
         console.log("putFormuleUser ==== ", data);
         if (data.result) {
           console.log("Commande validée !");
-          navigation.navigate("RDVs");
+          //Si tout se passe bien alors on envoie l'utilisateur sur l'écran MesRDVScreen.js
+          navigation.navigate("RDVs"); 
         } else {
           console.log("Erreur lors de la commande");
-          setError(true);
+          setError(true); //On change l'état de l'erreur si jamais il y a un problème
         }
       })
       .catch((error) => {
@@ -187,6 +200,8 @@ export default function PayScreen({ navigation }) {
       });
   };
 
+  //C'est la première fonction qui est appelé, elle permet de confirmer les champs dans les inputs
+  // de faire les comparaisons et de valider le processus de requêtes au backend
   const handleNavigation = () => {
     if (
       (visa || masterCard) &&
@@ -199,6 +214,8 @@ export default function PayScreen({ navigation }) {
       postRdv();
     }
   };
+  
+  //Mise en place d'une sécurité, et surtout mise à jour de nos états
   const handleOnChange = async (form) => {
     setError(false);
     if (form.values.cvc !== "") {

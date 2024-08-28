@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
+//Permet d'avoir la hauteur de la fenêtre
 const screenHeight = Dimensions.get("window").height;
 
 export default function HomeScreen({ navigation }) {
